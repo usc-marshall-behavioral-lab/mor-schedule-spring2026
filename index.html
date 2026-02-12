@@ -236,23 +236,23 @@ thead th {
 }
 
 /* Sticky first column in calendar */
-#studies-calendar-view .table-scroll table thead th:first-child,
-#studies-calendar-view .table-scroll table tbody td:first-child {
+#calendar .table-scroll table thead th:first-child,
+#calendar .table-scroll table tbody td:first-child {
   position: sticky;
   left: 0;
   z-index: 2;
   background: #F7F7F5;
 }
-#studies-calendar-view .table-scroll table tbody td:first-child {
+#calendar .table-scroll table tbody td:first-child {
   background: var(--surface);
   box-shadow: 2px 0 4px rgba(0,0,0,0.04);
 }
 /* Calendar zebra + thicker week borders */
-#studies-calendar-view tbody tr { border-bottom: 2px solid var(--border); }
-#studies-calendar-view tbody tr:nth-child(even) td { background: #FAFAF8; }
-#studies-calendar-view tbody tr:nth-child(even) td:first-child { background: #FAFAF8; }
-#studies-calendar-view tbody tr:hover td { background: #F5F4F0; }
-#studies-calendar-view tbody tr:hover td:first-child { background: #F5F4F0; }
+#calendar tbody tr { border-bottom: 2px solid var(--border); }
+#calendar tbody tr:nth-child(even) td { background: #FAFAF8; }
+#calendar tbody tr:nth-child(even) td:first-child { background: #FAFAF8; }
+#calendar tbody tr:hover td { background: #F5F4F0; }
+#calendar tbody tr:hover td:first-child { background: #F5F4F0; }
 
 /* Week column styling */
 .cal-week-label {
@@ -284,7 +284,7 @@ thead th {
   font-size: 12px;
   line-height: 1.4;
 }
-#studies-calendar-view tbody tr:nth-child(even) .cal-study { background: white; }
+#calendar tbody tr:nth-child(even) .cal-study { background: white; }
 .cal-study strong { font-weight: 600; color: var(--text); }
 .cal-study-name { color: var(--text-secondary); }
 .cal-study.cal-online { border-left-color: #3B82F6; }
@@ -294,8 +294,8 @@ thead th {
 .cal-empty { padding: 4px 0; color: var(--text-muted); font-size: 12px; }
 
 /* Calendar cell padding */
-#studies-calendar-view tbody td { padding: 8px 10px; }
-#studies-calendar-view thead th { padding: 10px 10px; }
+#calendar tbody td { padding: 8px 10px; }
+#calendar thead th { padding: 10px 10px; }
 
 tbody td {
   padding: 8px 12px;
@@ -318,7 +318,7 @@ tbody tr.current-week-row td:first-child {
   background: var(--current-week-bg) !important;
   border-left: 3px solid var(--current-week-border);
 }
-#studies-calendar-view tbody tr.current-week-row:hover td { background: #E6F3E6 !important; }
+#calendar tbody tr.current-week-row:hover td { background: #E6F3E6 !important; }
 
 /* ═══ Badges ═══ */
 .badge {
@@ -905,11 +905,13 @@ tbody tr.current-week-row td:first-child {
   .studies-researcher-select { width: 100%; min-width: 0; font-size: 16px; }
 
   /* My Schedule picker */
-  .my-schedule-picker { padding: 20px; top: 40px; }
-  .my-schedule-picker select { font-size: 16px; padding: 14px 40px 14px 16px; } /* 16px prevents iOS zoom */
-  .picker-row { flex-direction: column; }
-  .picker-option { max-width: 100%; min-width: 0; }
-  .picker-divider { padding-top: 0; }
+  .my-schedule-picker { padding: 8px 10px; top: 40px; border-width: 1.5px; border-radius: 8px; position: relative; box-shadow: none; }
+  .my-schedule-picker .picker-label { font-size: 12px; margin-bottom: 6px; }
+  .my-schedule-picker select { font-size: 16px; padding: 7px 32px 7px 10px; border-width: 1px; border-radius: 6px; } /* 16px prevents iOS zoom */
+  .picker-option-label { font-size: 10px; margin-bottom: 2px; }
+  .picker-row { flex-direction: row; gap: 8px; align-items: flex-end; }
+  .picker-option { max-width: 100%; min-width: 0; flex: 1; }
+  .picker-divider { padding-top: 0; font-size: 11px; margin-bottom: 4px; flex-shrink: 0; }
 
   /* Facility suites stack */
   .fac-suites { flex-direction: column; }
@@ -1007,8 +1009,10 @@ tbody tr.current-week-row td:first-child {
 /* ═══ Extra-small screens (≤360px) ═══ */
 @media (max-width: 360px) {
   .nav-tab { padding: 8px 8px; font-size: 11px; }
-  .my-schedule-picker { padding: 12px; }
-  .my-schedule-picker .picker-label { font-size: 14px; }
+  .my-schedule-picker { padding: 6px 8px; }
+  .my-schedule-picker .picker-label { font-size: 11px; }
+  .picker-row { flex-direction: column; gap: 4px; }
+  .picker-divider { display: none; }
 }
 
 /* ═══ Facilities Tab ═══ */
@@ -1476,8 +1480,8 @@ tbody tr.current-week-row td:first-child {
 
 .home-intro-tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
   margin-bottom: 18px;
 }
 
@@ -1490,6 +1494,10 @@ tbody tr.current-week-row td:first-child {
   border-radius: 6px;
   border: 1px solid var(--border-light);
 }
+.home-intro-tab:hover {
+  border-color: var(--cardinal);
+  background: #FFFBFB;
+}
 .home-intro-tab strong {
   color: var(--text-secondary);
   font-size: 12.5px;
@@ -1498,20 +1506,27 @@ tbody tr.current-week-row td:first-child {
 .home-intro-badges {
   font-size: 11.5px;
   color: var(--text-muted);
-  line-height: 2.2;
   padding-top: 10px;
   border-top: 1px solid var(--border-light);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
 }
-.home-intro-badges .sep {
-  color: var(--border);
-  margin: 0 6px;
+.home-intro-badges .badge-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
+.home-intro-badges .sep { display: none; }
 .home-intro-badges .badge,
 .home-intro-badges .badge-cr,
 .home-intro-badges .badge-stackable,
+.home-intro-badges .badge-stacked,
 .home-intro-badges .badge-2part {
   vertical-align: middle;
-  margin-right: 3px;
+  margin-right: 0;
+  flex-shrink: 0;
 }
 
 @media (max-width: 900px) {
@@ -1522,6 +1537,7 @@ tbody tr.current-week-row td:first-child {
   .home-intro { padding: 16px 18px; }
   .home-intro-lead { font-size: 14px; }
   .home-intro-tab { font-size: 13px; }
+  .home-intro-badges { grid-template-columns: 1fr; gap: 5px; }
 }
 
 /* ═══ All Studies Controls ═══ */
@@ -1637,8 +1653,6 @@ tbody tr.current-week-row td:first-child {
 #studies-table tr.study-current { background: #FFFCF0; }
 .study-name-col { min-width: 180px; }
 .study-name-col .study-badges { margin-top: 2px; }
-.studies-view { transition: opacity 0.15s; }
-
 
 .filter-no-results {
   text-align: center;
@@ -2074,13 +2088,12 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
   body { background: white; font-size: 11px; }
   .header { position: static !important; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .nav, .back-to-top, .home-intro,
-  .cal-nav, .fac-week-picker, .my-schedule-picker, .studies-controls, .view-toggle,
-  .room-modal-overlay, .rc-map-toggle { display: none !important; }
+  .cal-nav, .fac-week-picker, .my-schedule-picker, .studies-controls, .studies-filter-row,
+  .room-modal-overlay, .rc-map-toggle, .stack-planner { display: none !important; }
   .main { padding: 12px; }
   .section { display: block !important; page-break-before: always; margin-bottom: 24px; }
   .section:first-child { page-break-before: auto; }
   #myschedule { display: none !important; }
-  .studies-view { display: block !important; }
   .table-wrap { box-shadow: none; border-color: #CCC; }
   .fac-suites { flex-direction: column; }
   .fac-suite { break-inside: avoid; }
@@ -2232,12 +2245,13 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
       <div class="subtitle">MOR Subject Pool · Marshall Behavioral Research Lab</div>
     </div>
     <div class="header-stats">
-      <span class="header-stat">27 Studies</span>
+      <span class="header-stat">1,517 Students</span>
+      <span class="header-stat">28 Studies</span>
       <span class="header-stat">16 Researchers</span>
       <span class="header-stat">~7K+ Participants</span>
     </div>
     <div class="header-badge">
-      <div class="updated" id="updated-date">Updated Feb 10, 2026</div>
+      <div class="updated" id="updated-date">Updated Feb 12, 2026</div>
     </div>
     <button class="header-reset" id="header-reset" title="Clear researcher selection">⟳ Reset</button>
   </div>
@@ -2254,7 +2268,8 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
 <nav class="nav" aria-label="Study schedule sections">
   <div class="nav-inner" role="tablist" aria-label="Schedule views">
     <button class="nav-tab active" data-tab="myschedule" role="tab" aria-selected="true" aria-controls="myschedule" id="tab-myschedule"><span class="tab-icon">👤</span>My Schedule<span class="tab-sub">Your studies, rooms &amp; credits</span></button>
-    <button class="nav-tab" data-tab="studies" role="tab" aria-selected="false" aria-controls="studies" id="tab-studies"><span class="tab-icon">📋</span>All Studies<span class="tab-count">27</span><span class="tab-sub">Full list with filters &amp; calendar</span></button>
+    <button class="nav-tab" data-tab="studies" role="tab" aria-selected="false" aria-controls="studies" id="tab-studies"><span class="tab-icon">📋</span>All Studies<span class="tab-count">28</span><span class="tab-sub">Full list with filters</span></button>
+    <button class="nav-tab" data-tab="calendar" role="tab" aria-selected="false" aria-controls="calendar" id="tab-calendar"><span class="tab-icon">📅</span>Calendar<span class="tab-sub">Week-by-week grid</span></button>
     <button class="nav-tab" data-tab="facilities" role="tab" aria-selected="false" aria-controls="facilities" id="tab-facilities"><span class="tab-icon">🗺️</span>Facilities<span class="tab-sub">Room maps &amp; weekly usage</span></button>
   </div>
 </nav>
@@ -2284,26 +2299,21 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
   </div>
 
   <div class="home-intro">
-    <p class="home-intro-lead">This is the central scheduling hub for the <strong>MOR Subject Pool</strong> at the Marshall Behavioral Research Lab. It covers all 26 studies running this semester across 16 researchers, with approximately 6,800–7,200 participant slots in online, in-person, and hybrid formats.</p>
+    <p class="home-intro-lead">This is the central scheduling hub for the <strong>MOR Subject Pool</strong> at the Marshall Behavioral Research Lab. It covers all 28 studies running this semester across 16 researchers, with approximately 6,900–7,300 participant slots in online, in-person, and hybrid formats.</p>
     <div class="home-intro-tabs">
-      <div class="home-intro-tab"><strong>My Schedule</strong> — Select your name to see your studies, timeline, room assignments, credits, and collaborators in one place.</div>
-      <div class="home-intro-tab"><strong>All Studies</strong> — Browse every study in a sortable table. Filter by format or researcher, or switch to calendar view for a week-by-week grid of what's running where.</div>
-      <div class="home-intro-tab"><strong>Facilities</strong> — Interactive floor plans of the LL-110 and LL-112 suites showing room assignments by week, color-coded by researcher.</div>
+      <div class="home-intro-tab" data-goto="myschedule" style="cursor:pointer"><strong>My Schedule</strong> — Select your name to see your studies, timeline, room assignments, credits, and collaborators in one place.</div>
+      <div class="home-intro-tab" data-goto="studies" style="cursor:pointer"><strong>All Studies</strong> — Browse every study in a sortable table. Filter by format or researcher.</div>
+      <div class="home-intro-tab" data-goto="calendar" style="cursor:pointer"><strong>Calendar</strong> — Week-by-week grid of what's running where, organized by facility.</div>
+      <div class="home-intro-tab" data-goto="facilities" style="cursor:pointer"><strong>Facilities</strong> — Interactive floor plans of the LL-110, LL-112, and LL102 suites showing room assignments by week.</div>
     </div>
     <div class="home-intro-badges">
-      <span class="badge badge-online">Online</span> Qualtrics survey
-      <span class="sep">·</span>
-      <span class="badge badge-inperson">In-Person</span> Lab visit
-      <span class="sep">·</span>
-      <span class="badge badge-hybrid">Hybrid</span> Online + lab
-      <span class="sep">·</span>
-      <span class="badge-cr">0.25</span> Credits
-      <span class="sep">·</span>
-      <span class="badge-stackable">Stackable</span> Can combine in proctored sessions
-      <span class="sep">·</span>
-      <span class="badge-stacked">📦 Pilot</span> Stacked lab session
-      <span class="sep">·</span>
-      <span class="badge-2part">2-Part</span> Multi-wave study
+      <span class="badge-legend-item"><span class="badge badge-online">Online</span> Qualtrics survey</span>
+      <span class="badge-legend-item"><span class="badge badge-inperson">In-Person</span> Lab visit</span>
+      <span class="badge-legend-item"><span class="badge badge-hybrid">Hybrid</span> Online + lab</span>
+      <span class="badge-legend-item"><span class="badge-cr">0.25</span> Credits</span>
+      <span class="badge-legend-item"><span class="badge-stackable">Stackable</span> Can combine in proctored sessions</span>
+      <span class="badge-legend-item"><span class="badge-stacked">📦 Pilot</span> Stacked lab session</span>
+      <span class="badge-legend-item"><span class="badge-2part">2-Part</span> Multi-wave study</span>
     </div>
   </div>
 
@@ -2319,9 +2329,6 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
 <!-- ═══════════════ ALL STUDIES ═══════════════ -->
 <div class="section" id="studies" role="tabpanel" aria-labelledby="tab-studies">
 
-  <!-- Stacked Session Callout -->
-  <div id="stack-callout-all-studies"></div>
-
   <div class="studies-filter-row">
     <label class="studies-filter-label" for="researcher-select">Filter by Researcher</label>
     <select id="researcher-select" class="studies-researcher-select" aria-label="Filter by researcher">
@@ -2331,22 +2338,17 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
 
   <div class="studies-controls">
     <div class="format-chips" id="format-chips" role="tablist" aria-label="Filter by format">
-      <button class="format-chip active" data-format="all" role="tab" aria-selected="true">All <span class="chip-count" id="chip-all">27</span></button>
-      <button class="format-chip" data-format="Online" role="tab" aria-selected="false">Online <span class="chip-count" id="chip-online">15</span></button>
+      <button class="format-chip active" data-format="all" role="tab" aria-selected="true">All <span class="chip-count" id="chip-all">28</span></button>
+      <button class="format-chip" data-format="Online" role="tab" aria-selected="false">Online <span class="chip-count" id="chip-online">16</span></button>
       <button class="format-chip" data-format="In-Person" role="tab" aria-selected="false">In-Person <span class="chip-count" id="chip-inperson">7</span></button>
       <button class="format-chip" data-format="Hybrid" role="tab" aria-selected="false">Hybrid <span class="chip-count" id="chip-hybrid">5</span></button>
-    </div>
-    <div class="view-toggle" role="tablist" aria-label="View mode">
-      <button class="view-btn active" data-view="list" aria-selected="true" title="List view">☰ List</button>
-      <button class="view-btn" data-view="calendar" aria-selected="false" title="Calendar view">📅 Calendar</button>
     </div>
   </div>
 
   <div class="studies-result-count" id="filter-result-count"></div>
 
   <!-- LIST VIEW -->
-  <div class="studies-view" id="studies-list-view">
-    <div class="table-wrap">
+  <div class="table-wrap">
       <div class="table-scroll">
         <table id="studies-table">
           <thead>
@@ -2365,28 +2367,6 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
         </table>
       </div>
     </div>
-  </div>
-
-  <!-- CALENDAR VIEW -->
-  <div class="studies-view" id="studies-calendar-view" style="display:none">
-    <div class="cal-nav" id="cal-nav">
-      <button class="cal-nav-btn" id="cal-prev" title="Previous week">← Prev</button>
-      <span class="cal-nav-label" id="cal-nav-label">All Weeks</span>
-      <button class="cal-nav-btn" id="cal-next" title="Next week">Next →</button>
-      <button class="cal-nav-btn" id="cal-show-all" title="Show all weeks">Show All</button>
-    </div>
-
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr><th style="width:160px">Week</th><th>Online Studies</th><th>LL102 (In-Person)</th><th>LL-110 (In-Person)</th><th>LL-112 (In-Person)</th></tr>
-          </thead>
-          <tbody id="cal-body"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 
   <!-- No results -->
   <div class="filter-no-results" id="studies-no-results">
@@ -2419,6 +2399,34 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
       </div>
       <div id="stack-planner-content"></div>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CALENDAR ═══════════════ -->
+<div class="section" id="calendar" role="tabpanel" aria-labelledby="tab-calendar">
+  <p class="section-intro">Week-by-week view of all studies, organized by facility</p>
+
+  <div class="cal-nav" id="cal-nav">
+    <button class="cal-nav-btn" id="cal-prev" title="Previous week">← Prev</button>
+    <span class="cal-nav-label" id="cal-nav-label">All Weeks</span>
+    <button class="cal-nav-btn" id="cal-next" title="Next week">Next →</button>
+    <button class="cal-nav-btn" id="cal-today" title="Jump to current week" style="color:var(--cardinal);border-color:var(--cardinal)">⦿ Today</button>
+    <button class="cal-nav-btn" id="cal-show-all" title="Show all weeks">Show All</button>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:160px">Week</th><th>Online Studies</th><th>LL102 (In-Person)</th><th>LL-110 (In-Person)</th><th>LL-112 (In-Person)</th></tr>
+        </thead>
+        <tbody id="cal-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note-bar" style="margin-top:16px">
+    <strong>Lab location:</strong> Verna &amp; Peter Dauterive Hall (VPD), Lower Level · 635 Downey Way · Rooms: LL102 (Computer Lab), LL-110 (Suite), LL-112 (Suite)
   </div>
 </div>
 
@@ -2462,7 +2470,7 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
           <div class="fac-room-study"></div>
           <div class="fac-room-tooltip"></div>
         </div>
-        <div class="fac-corr-cell" rowspan="6"></div>
+        <div class="fac-corr-cell"></div>
         <div class="fac-room fac-backstage" data-room="112-bs">
           <div class="fac-room-id">Backstage</div>
           <div class="fac-room-label">Prep Area</div>
@@ -2639,11 +2647,33 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
   </div>
 
   <div class="note-bar">
-    <strong>Lab location:</strong> Verna & Peter Dauterive Hall (VPD), Lower Level · 635 Downey Way · All facilities shown above are in the Lower Level.
+    <strong>Lab location:</strong> Verna &amp; Peter Dauterive Hall (VPD), Lower Level · 635 Downey Way · All facilities shown above are in the Lower Level.
   </div>
 </div>
 
 </div>
+
+<footer class="footer-enhanced">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Location</h4>
+      <p>Verna &amp; Peter Dauterive Hall (VPD), Lower Level</p>
+      <p>635 Downey Way, Los Angeles, CA 90089</p>
+      <p>Rooms: LL102 · LL-110 · LL-112</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Marshall Behavioral Research Lab</p>
+      <a href="mailto:morbrl@marshall.usc.edu">morbrl@marshall.usc.edu</a>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="https://marshall.usc.edu" target="_blank" rel="noopener">USC Marshall</a>
+      <a href="https://usc.sona-systems.com" target="_blank" rel="noopener">SONA Systems</a>
+    </div>
+  </div>
+  <div class="footer-credit">Spring 2026 · MOR Subject Pool · Marshall Behavioral Research Lab · University of Southern California</div>
+</footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
@@ -2661,8 +2691,8 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
 // ═══════════════════════════════════════════════
 // 1. CONSTANTS & DOM REFERENCES
 // ═══════════════════════════════════════════════
-var TODAY = new Date().toISOString().split('T')[0];
-var TODAY_DISPLAY = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+var TODAY = '2026-02-12';
+var TODAY_DISPLAY = 'Feb 12';
 
 var mySelect = document.getElementById('my-researcher-select');
 var myStudySelect = document.getElementById('my-study-select');
@@ -2677,7 +2707,7 @@ var facWeekSelect = document.getElementById('fac-week-select');
 // ═══════════════════════════════════════════════
 var calData = [
   {wk:"Feb 8",dates:"Feb 8–14",weekStart:"2026-02-08",weekEnd:"2026-02-14",note:"Before prescreening deadline",
-    online:"—",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (starts)",ll112:"—"},
+    online:"Martinez, Sammy: Pilot",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (starts)",ll112:"—"},
   {wk:"Feb 15",dates:"Feb 15–21",weekStart:"2026-02-15",weekEnd:"2026-02-21",note:"",
     online:"—",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner",ll112:"—"},
   {wk:"Feb 22",dates:"Feb 22–28",weekStart:"2026-02-22",weekEnd:"2026-02-28",note:"Online invites begin",
@@ -2708,6 +2738,7 @@ var calData = [
 ];
 
 var allStudies = [
+  {researcher:"Martinez, Sammy", study:"Pilot", week:"Feb 8", dateSort:"2026-02-08", dateLabel:"Week of Feb 8", n:"100", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null},
   {researcher:"Berry, Zachariah", study:"Hierarchy and Corruption", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"200", dur:"6 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true},
   {researcher:"Martinez, Sammy", study:"Broker 1", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null},
   {researcher:"Brouwers, Jeslyn", study:"Achievement and Ambition in the Age of AI", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"300", dur:"30 min", format:"Online", cr:"0.50", facility:null, notes:null},
@@ -2978,7 +3009,7 @@ function getResearcherLastName(fullName) {
 
 function getTabFromHash() {
   var hash = window.location.hash.replace('#', '');
-  var validTabs = ['myschedule','studies','facilities'];
+  var validTabs = ['myschedule','studies','calendar','facilities'];
   return validTabs.includes(hash) ? hash : null;
 }
 
@@ -3005,6 +3036,14 @@ function switchTab(tabId, updateHash) {
       researcherSelect.classList.add('has-selection');
     }
     runStudiesFilter();
+  }
+
+  // Auto-scroll to current week in Calendar
+  if (tabId === 'calendar') {
+    setTimeout(function() {
+      var currentRow = document.querySelector('#cal-body tr.current-week-row');
+      if (currentRow) currentRow.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }, 100);
   }
 }
 
@@ -3257,7 +3296,6 @@ function renderMySchedule() {
   weekGroups.forEach(function(wg) {
     // Insert "Today" marker between past and current/upcoming
     if (!insertedNow && (wg.status === 'current' || wg.status === 'upcoming')) {
-      html += '<div class="rc-now-marker">Today — ' + TODAY_DISPLAY + '</div>';
       insertedNow = true;
     }
 
@@ -3266,13 +3304,11 @@ function renderMySchedule() {
     if (wg.status === 'current') weekCls += ' rc-week-current';
     html += '<div class="' + weekCls + '">';
 
-    // Week header
-    var weekTitle = wg.calWk ? 'Week of ' + wg.calWk : wg.dateLabel;
-    var weekDates = wg.calDates || '';
+    // Week header — show just date range, not redundant "Week of X" + dates
+    var weekTitle = wg.calDates || wg.dateLabel;
     html += '<div class="rc-week-header">';
     html += '<div class="rc-week-header-left">';
     html += '<span class="rc-week-title">' + weekTitle + '</span>';
-    if (weekDates) html += '<span class="rc-week-dates">' + weekDates + '</span>';
     html += '</div>';
     html += '<div class="rc-week-header-right">';
     html += '<span class="rc-week-stat"><strong>' + wg.studies.length + '</strong> ' + (wg.studies.length === 1 ? 'study' : 'studies') + '</span>';
@@ -3285,7 +3321,14 @@ function renderMySchedule() {
     var formatClass = s.format === 'Online' ? 'badge-online' : s.format === 'In-Person' ? 'badge-inperson' : 'badge-hybrid';
     
     var deepStudy = s.study.replace(/'/g, "\\'");
-    html += '<div class="rc-study"><div class="rc-date">' + s.dateLabel;
+    // Don't repeat the week date if it matches the group header — show date range only for multi-week in-person/hybrid studies
+    var showDate = '';
+    if (s.format === 'Online') {
+      showDate = '<span style="font-size:11px;color:var(--text-muted);font-weight:400">Online</span>';
+    } else if (s.dateLabel.includes('–')) {
+      showDate = '<span style="font-size:11px">' + s.dateLabel + '</span>';
+    }
+    html += '<div class="rc-study"><div class="rc-date">' + showDate;
     if (s.facility) html += '<div class="rc-date-sub">' + s.facility + '</div>';
     html += '</div><div class="rc-study-info"><div class="rc-study-name"><a href="#" class="rc-study-link" data-tab="studies" data-study="' + deepStudy + '" title="View in All Studies tab">' + s.study + '</a>';
     if (s.tag) html += ' <span class="badge-2part">' + s.tag + '</span>';
@@ -3376,7 +3419,6 @@ function renderMySchedule() {
 
     html += '</div>'; // close rc-week-group
   }); // end weekGroups
-  if (!insertedNow) html += '<div class="rc-now-marker">Today — ' + TODAY_DISPLAY + '</div>';
   html += '</div></div>';
   myContent.innerHTML = html;
 }
@@ -3385,8 +3427,6 @@ function renderMySchedule() {
 // ALL STUDIES: Build table, filter, view toggle
 // ═══════════════════════════════════════════════
 var activeFormat = 'all';
-var studiesListView = document.getElementById('studies-list-view');
-var studiesCalView = document.getElementById('studies-calendar-view');
 
 function buildStudiesTable() {
   var tbody = document.getElementById('studies-tbody');
@@ -3416,7 +3456,7 @@ function buildStudiesTable() {
         var startStr = parts[0].trim() + ', 2026';
         var startD = new Date(startStr), endD = new Date(endStr);
         if (endD < new Date(TODAY)) { rowClass += ' study-past'; statusDot = '<span class="status-dot ended"></span>'; }
-        else if (startD <= new Date() && endD >= new Date()) { rowClass += ' study-current'; statusDot = '<span class="status-dot active"></span>'; }
+        else if (startD <= new Date(TODAY) && endD >= new Date(TODAY)) { rowClass += ' study-current'; statusDot = '<span class="status-dot active"></span>'; }
         else { statusDot = '<span class="status-dot upcoming"></span>'; }
       }
     }
@@ -3806,9 +3846,6 @@ function buildFullStackedCallout() {
   return html;
 }
 
-// 1. All Studies callout
-document.getElementById('stack-callout-all-studies').innerHTML = buildFullStackedCallout();
-
 // Build co-PI lookup by study name
 var studyCoPIMap = {};
 allStudies.forEach(function(s) {
@@ -3948,21 +3985,6 @@ document.querySelectorAll('.format-chip').forEach(function(chip) {
   });
 });
 
-// View toggle handlers
-document.querySelectorAll('.view-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.view-btn').forEach(function(b) {
-      b.classList.remove('active');
-      b.setAttribute('aria-selected', 'false');
-    });
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-    var view = btn.dataset.view;
-    studiesListView.style.display = view === 'list' ? '' : 'none';
-    studiesCalView.style.display = view === 'calendar' ? '' : 'none';
-  });
-});
-
 // Clear filters button
 document.getElementById('studies-clear-filters').addEventListener('click', function() {
   researcherSelect.value = '';
@@ -4056,6 +4078,21 @@ document.getElementById('cal-show-all').addEventListener('click', function() {
   calWeekIdx = -1;
   updateCalNav();
 });
+document.getElementById('cal-today').addEventListener('click', function() {
+  // Find the current week index
+  for (var i = 0; i < calRows.length; i++) {
+    if (calRows[i].dataset.weekStart && TODAY >= calRows[i].dataset.weekStart && TODAY <= calRows[i].dataset.weekEnd) {
+      calWeekIdx = i;
+      updateCalNav();
+      return;
+    }
+  }
+  // Fallback: show all and scroll
+  calWeekIdx = -1;
+  updateCalNav();
+  var currentRow = document.querySelector('#cal-body tr.current-week-row');
+  if (currentRow) currentRow.scrollIntoView({behavior: 'smooth', block: 'center'});
+});
 
 // --- Auto-select current week in Facilities ---
 function autoSelectFacWeek() {
@@ -4123,7 +4160,6 @@ renderFacilities = function() {
   origRenderFac();
   attachRoomClicks();
 };
-facWeekSelect.removeEventListener('change', origRenderFac);
 facWeekSelect.addEventListener('change', renderFacilities);
 
 // --- Enhance renderMySchedule: welcome dismiss + progress bar + minimap toggle + download btn ---
@@ -4322,7 +4358,7 @@ headerResetBtn.addEventListener('click', function() {
     });
 
     // Render
-    var html = '<div class="sp-weeks">';
+    html += '<div class="sp-weeks">';
 
     weeks.forEach(function(wk, i) {
       var isBest = i === bestIdx && wk.studies.length >= 2;
@@ -4391,6 +4427,14 @@ headerResetBtn.addEventListener('click', function() {
 })();
 
 
+// --- Clickable intro tab cards ---
+document.querySelectorAll('.home-intro-tab[data-goto]').forEach(function(card) {
+  card.addEventListener('click', function() {
+    switchTab(card.dataset.goto);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+});
+
 // --- Badge legend tap support for mobile ---
 document.querySelectorAll('.badge-legend-trigger').forEach(function(trigger) {
   trigger.addEventListener('click', function(e) {
@@ -4416,7 +4460,7 @@ autoSelectFacWeek();
 (function() {
   var semStart = new Date('2026-02-08');
   var semEnd = new Date('2026-05-01');
-  var now = new Date();
+  var now = new Date(TODAY);
   var pct = Math.max(0, Math.min(100, (now - semStart) / (semEnd - semStart) * 100));
   document.getElementById('semester-progress-bar').style.setProperty('--progress', pct.toFixed(1) + '%');
   document.getElementById('semester-progress-pct').textContent = Math.round(pct) + '% complete';
