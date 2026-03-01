@@ -574,6 +574,37 @@ tbody tr.current-week-row td:first-child {
   letter-spacing: 0.3px;
 }
 
+.badge-paused {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #F3E5F5;
+  color: #7B1FA2;
+  border: 1px solid #CE93D8;
+  margin-left: 4px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.badge-pending {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #FFF8E1;
+  color: #F57F17;
+  border: 1px solid #FFE082;
+  margin-left: 4px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5A4B00; }
+
 .badge-stackable {
   display: inline-block;
   padding: 1px 6px;
@@ -2084,6 +2115,38 @@ body.dark #studies-tbody mark { background: #5A4B00; color: #FFE082; }
   background: rgba(153,0,0,0.12);
   border-color: var(--cardinal);
 }
+
+.study-page-link {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(40,53,147,0.08);
+  border: 1px solid rgba(40,53,147,0.2);
+  color: #283593;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  vertical-align: middle;
+  margin-left: 4px;
+  font-family: inherit;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+.study-page-link:hover {
+  background: rgba(40,53,147,0.15);
+  border-color: rgba(40,53,147,0.4);
+}
+body.dark .study-page-link {
+  background: rgba(130,150,255,0.1);
+  border-color: rgba(130,150,255,0.25);
+  color: #90CAF9;
+}
+body.dark .study-page-link:hover {
+  background: rgba(130,150,255,0.2);
+}
+
 #studies-table td { vertical-align: top; padding: 8px 10px; }
 #studies-table .study-facility { font-size: 11px; color: var(--text-secondary); }
 #studies-table .study-notes-cell { font-size: 11px; color: var(--text-secondary); max-width: 200px; }
@@ -2745,6 +2808,187 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
   margin-top: 2px;
 }
 
+/* ═══════════════════════════════════════════════
+   AI STUDY RA SCHEDULE TAB
+   ═══════════════════════════════════════════════ */
+:root {
+  --ra-mayank: #1a6b8a;
+  --ra-mayank-bg: #e8f4f8;
+  --ra-steve: #6b4c8a;
+  --ra-steve-bg: #f0e8f8;
+  --ra-jake: #7a6520;
+  --ra-jake-bg: #faf5e4;
+}
+body.dark {
+  --ra-mayank: #5ab8d8;
+  --ra-mayank-bg: #1a2e34;
+  --ra-steve: #b89cdc;
+  --ra-steve-bg: #2a1e3a;
+  --ra-jake: #d4b85a;
+  --ra-jake-bg: #2e2a14;
+}
+
+.ra-sched-header-card {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); flex-wrap: wrap;
+}
+.ra-sched-title { font-size: 17px; font-weight: 700; color: var(--cardinal); }
+.ra-sched-meta { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.ra-sched-week-select-wrap { display: flex; align-items: center; gap: 8px; }
+.ra-sched-week-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.ra-sched-week-select {
+  font-family: inherit; font-size: 13px; font-weight: 600; padding: 6px 12px;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text);
+  cursor: pointer;
+}
+
+.ra-sched-layout { display: grid; grid-template-columns: 1fr 280px; gap: 20px; align-items: start; }
+
+/* Day Tabs */
+.ra-sched-day-tabs {
+  display: flex; gap: 2px; margin-bottom: 16px; background: var(--border);
+  border-radius: 8px; padding: 3px; width: fit-content;
+}
+.ra-sched-day-tab {
+  padding: 8px 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+  border: none; background: transparent; color: var(--text-secondary); cursor: pointer;
+  border-radius: 6px; transition: all 0.2s ease; font-family: inherit; position: relative;
+}
+.ra-sched-day-tab:hover { color: var(--text); background: rgba(255,255,255,0.6); }
+body.dark .ra-sched-day-tab:hover { background: rgba(255,255,255,0.08); }
+.ra-sched-day-tab.active { background: var(--surface); color: var(--cardinal); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.ra-sched-tab-date { display: block; font-size: 10px; font-weight: 400; color: var(--text-muted); margin-top: 1px; }
+.ra-sched-day-tab.active .ra-sched-tab-date { color: var(--cardinal); opacity: 0.7; }
+
+/* RA Legend */
+.ra-sched-legend { display: flex; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+.ra-sched-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+.ra-sched-dot { width: 10px; height: 10px; border-radius: 50%; }
+.ra-sched-dot-mayank { background: var(--ra-mayank); }
+.ra-sched-dot-steve { background: var(--ra-steve); }
+.ra-sched-dot-jake { background: var(--ra-jake); }
+
+/* Timeline */
+.ra-sched-time-block { margin-bottom: 4px; animation: raFadeIn 0.3s ease both; }
+.ra-sched-time-block:nth-child(1) { animation-delay: 0.02s; }
+.ra-sched-time-block:nth-child(2) { animation-delay: 0.04s; }
+.ra-sched-time-block:nth-child(3) { animation-delay: 0.06s; }
+.ra-sched-time-block:nth-child(4) { animation-delay: 0.08s; }
+.ra-sched-time-block:nth-child(5) { animation-delay: 0.10s; }
+.ra-sched-time-block:nth-child(6) { animation-delay: 0.12s; }
+.ra-sched-time-block:nth-child(7) { animation-delay: 0.14s; }
+.ra-sched-time-block:nth-child(8) { animation-delay: 0.16s; }
+.ra-sched-time-block:nth-child(9) { animation-delay: 0.18s; }
+.ra-sched-time-block:nth-child(10) { animation-delay: 0.20s; }
+@keyframes raFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.ra-sched-pair {
+  display: grid; grid-template-columns: 72px 1fr 1fr; gap: 6px; align-items: stretch;
+}
+.ra-sched-time-label {
+  font-size: 12px; font-weight: 600; color: var(--text-secondary); padding-top: 12px;
+  text-align: right; padding-right: 12px; line-height: 1.2; white-space: nowrap;
+}
+.ra-sched-time-end { font-size: 10px; font-weight: 400; color: var(--text-muted); display: block; }
+
+.ra-sched-session {
+  background: var(--surface); border-radius: 8px; padding: 10px 14px;
+  border-left: 4px solid var(--border); position: relative; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.ra-sched-session:hover { transform: translateY(-1px); box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+.ra-sched-session.ra-sched-ra-mayank { border-left-color: var(--ra-mayank); background: var(--ra-mayank-bg); }
+.ra-sched-session.ra-sched-ra-steve { border-left-color: var(--ra-steve); background: var(--ra-steve-bg); }
+.ra-sched-session.ra-sched-ra-jake { border-left-color: var(--ra-jake); background: var(--ra-jake-bg); }
+
+.ra-sched-session-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.ra-sched-session-num { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+.ra-sched-session-group { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 10px; background: rgba(0,0,0,0.06); color: var(--text-secondary); }
+body.dark .ra-sched-session-group { background: rgba(255,255,255,0.08); }
+.ra-sched-session-room { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.ra-sched-session-room .ra-sched-room-prefix { font-weight: 400; color: var(--text-secondary); font-size: 12px; }
+.ra-sched-session-ra { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+
+/* Setup rows */
+.ra-sched-setup-row { display: grid; grid-template-columns: 72px 1fr; gap: 6px; align-items: center; }
+.ra-sched-setup-card {
+  background: var(--surface); border: 1px dashed var(--border); border-radius: 6px;
+  padding: 6px 14px; display: flex; align-items: center; gap: 8px;
+}
+.ra-sched-setup-icon { font-size: 12px; }
+.ra-sched-setup-text { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.ra-sched-setup-note { font-size: 10px; color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: normal; margin-left: auto; }
+
+/* Sidebar cards */
+.ra-sched-sidebar { position: sticky; top: calc(var(--header-h, 90px) + var(--nav-h, 42px) + 16px); }
+.ra-sched-card {
+  background: var(--surface); border-radius: var(--radius); padding: 16px;
+  border: 1px solid var(--border); margin-bottom: 12px; box-shadow: var(--shadow-sm);
+}
+.ra-sched-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; }
+
+/* Mini floorplan */
+.ra-sched-mini-fp { display: grid; grid-template-columns: 1fr 20px 1fr; grid-template-rows: repeat(6, 38px); gap: 2px; font-size: 10px; }
+.ra-fp-room { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 600; color: var(--text-secondary); font-size: 9px; transition: all 0.4s ease; position: relative; }
+.ra-fp-label { font-size: 7px; font-weight: 400; color: var(--text-muted); margin-top: 1px; }
+.ra-fp-room.ra-fp-active { background: #fef2f2; border-color: var(--cardinal); color: var(--cardinal); box-shadow: 0 0 0 2px rgba(153,0,0,0.12); }
+body.dark .ra-fp-room.ra-fp-active { background: #3a1a1a; }
+.ra-fp-room.ra-fp-active .ra-fp-label { color: var(--cardinal); opacity: 0.7; }
+.ra-fp-room.ra-fp-active::after { content: ''; position: absolute; top: 3px; right: 3px; width: 5px; height: 5px; border-radius: 50%; background: var(--cardinal); animation: raPulse 2s ease infinite; }
+@keyframes raPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.7); } }
+.ra-fp-corridor { background: var(--border-light); border-radius: 2px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; font-size: 6px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+.ra-fp-storage { grid-column: 1 / 4; background: #2c2c2c; color: rgba(255,255,255,0.7); font-size: 7px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+.ra-fp-backstage { background: #fffbeb; border: 1px dashed #d4c47a; font-size: 7px; color: #a89540; display: flex; align-items: center; justify-content: center; border-radius: 3px; }
+body.dark .ra-fp-backstage { background: #2a2510; border-color: #5a4b10; color: #b8a050; }
+.ra-fp-reception { background: #f0f7fc; border: 1px dashed #a3c8dd; font-size: 7px; color: #5a9ab8; display: flex; align-items: center; justify-content: center; border-radius: 3px; }
+body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: #64b5f6; }
+.ra-fp-e { grid-column: 1; grid-row: 2; }
+.ra-fp-d { grid-column: 1; grid-row: 3; }
+.ra-fp-c { grid-column: 1; grid-row: 4; }
+.ra-fp-b { grid-column: 1; grid-row: 5; }
+.ra-fp-a { grid-column: 1; grid-row: 6; }
+.ra-fp-corr { grid-column: 2; grid-row: 2 / 7; }
+.ra-fp-back { grid-column: 3; grid-row: 2; }
+.ra-fp-f { grid-column: 3; grid-row: 3; }
+.ra-fp-g { grid-column: 3; grid-row: 4; }
+.ra-fp-h { grid-column: 3; grid-row: 5; }
+.ra-fp-rec { grid-column: 3; grid-row: 6; }
+.ra-fp-stor { grid-column: 1 / 4; grid-row: 1; }
+
+/* Stat rows */
+.ra-sched-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border-light); }
+.ra-sched-stat-row:last-child { border-bottom: none; }
+.ra-sched-stat-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+.ra-sched-stat-value { font-size: 13px; font-weight: 700; color: var(--text); }
+
+/* RA summary */
+.ra-sched-ra-summary { }
+.ra-sched-ra-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+.ra-sched-ra-row:last-child { border-bottom: none; }
+.ra-sched-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+.ra-sched-avatar-mayank { background: var(--ra-mayank); }
+.ra-sched-avatar-steve { background: var(--ra-steve); }
+.ra-sched-avatar-jake { background: var(--ra-jake); }
+.ra-sched-ra-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.ra-sched-ra-detail { font-size: 11px; color: var(--text-muted); }
+
+/* Day header */
+.ra-sched-day-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.ra-sched-day-header h2 { font-size: 20px; font-weight: 700; color: var(--text); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ra-sched-layout { grid-template-columns: 1fr; }
+  .ra-sched-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+@media (max-width: 600px) {
+  .ra-sched-sidebar { grid-template-columns: 1fr; }
+  .ra-sched-pair { grid-template-columns: 1fr; gap: 4px; }
+  .ra-sched-time-label { text-align: left; padding-right: 0; padding-top: 6px; }
+  .ra-sched-setup-row { grid-template-columns: 1fr; }
+  .ra-sched-day-tab { padding: 6px 12px; font-size: 12px; }
+}
+
 
 </style>
 </head>
@@ -2760,7 +3004,7 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
     </div>
     <div class="header-stats">
       <span class="header-stat">1,517 Students</span>
-      <span class="header-stat">28 Studies</span>
+      <span class="header-stat">29 Studies</span>
       <span class="header-stat hide-mobile">16 Researchers</span>
       <span class="header-stat hide-mobile">~7K+ Participants</span>
     </div>
@@ -2776,7 +3020,7 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
         <div class="changelog-entry">
           <div class="changelog-entry-date">Feb 16, 2026</div>
           <ul class="changelog-entry-items">
-            <li>Added Martinez "Pilot" study (Online, Feb 8, 0.25 CR)</li>
+            <li>Added Martinez "I Can Introduce You to Someone... (Pilot)" study (Online, Feb 8, 0.25 CR)</li>
             <li>Updated completion tracking: Pilot 90/100, Brainstorming 103/150</li>
             <li>SONA sign-up links added for Pilot and Brainstorming</li>
           </ul>
@@ -2807,9 +3051,10 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
 <nav class="nav" aria-label="Study schedule sections">
   <div class="nav-inner" role="tablist" aria-label="Schedule views">
     <button class="nav-tab active" data-tab="myschedule" role="tab" aria-selected="true" aria-controls="myschedule" id="tab-myschedule"><span class="tab-icon">👤</span>My Schedule<span class="tab-sub">Your studies, rooms &amp; credits</span></button>
-    <button class="nav-tab" data-tab="studies" role="tab" aria-selected="false" aria-controls="studies" id="tab-studies"><span class="tab-icon">📋</span>All Studies<span class="tab-count">28</span><span class="tab-sub">Full list with filters</span></button>
+    <button class="nav-tab" data-tab="studies" role="tab" aria-selected="false" aria-controls="studies" id="tab-studies"><span class="tab-icon">📋</span>All Studies<span class="tab-count">29</span><span class="tab-sub">Full list with filters</span></button>
     <button class="nav-tab" data-tab="calendar" role="tab" aria-selected="false" aria-controls="calendar" id="tab-calendar"><span class="tab-icon">📅</span>Calendar<span class="tab-sub">Week-by-week grid</span></button>
     <button class="nav-tab" data-tab="facilities" role="tab" aria-selected="false" aria-controls="facilities" id="tab-facilities"><span class="tab-icon">🗺️</span>Facilities<span class="tab-sub">Room maps &amp; weekly usage</span></button>
+    <button class="nav-tab" data-tab="rasched" role="tab" aria-selected="false" aria-controls="rasched" id="tab-rasched"><span class="tab-icon">🤖</span>AI-Assisted Negotiation<span class="tab-sub">RA schedule &amp; sessions</span></button>
   </div>
 </nav>
 
@@ -2844,6 +3089,7 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
       <div class="home-intro-tab" data-goto="studies" style="cursor:pointer"><strong>All Studies</strong> — Browse every study in a sortable table. Filter by format or researcher.</div>
       <div class="home-intro-tab" data-goto="calendar" style="cursor:pointer"><strong>Calendar</strong> — Week-by-week grid of what's running where, organized by facility.</div>
       <div class="home-intro-tab" data-goto="facilities" style="cursor:pointer"><strong>Facilities</strong> — Interactive floor plans of the LL-110, LL-112, and LL102 suites showing room assignments by week.</div>
+      <div class="home-intro-tab" data-goto="rasched" style="cursor:pointer"><strong>AI Study</strong> — RA schedule for the AI-Assisted Negotiation Study (Kwon & Lee). Day-by-day timelines, room assignments, and session stats.</div>
     </div>
     <div class="home-intro-badges">
       <span class="badge-legend-item"><span class="badge badge-online">Online</span> Qualtrics survey</span>
@@ -3199,6 +3445,107 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
   </div>
 </div>
 
+<!-- ═══════════════ AI STUDY RA SCHEDULE ═══════════════ -->
+<div class="section" id="rasched" role="tabpanel" aria-labelledby="tab-rasched">
+
+  <div class="ra-sched-header-card">
+    <div class="ra-sched-header-left">
+      <div class="ra-sched-title">AI-Assisted Negotiation Study</div>
+      <div class="ra-sched-meta">Researcher: Brian Kwon &amp; Elena Lee · VPD Lower Level, Suite LL-112</div>
+    </div>
+    <div class="ra-sched-week-select-wrap">
+      <label class="ra-sched-week-label" for="ra-week-select">Week</label>
+      <select id="ra-week-select" class="ra-sched-week-select">
+        <option value="1" selected>Week 1 · Mar 2–6</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="ra-sched-layout">
+    <div class="ra-sched-main">
+      <!-- Day Tabs -->
+      <div class="ra-sched-day-tabs" id="raDayTabs">
+        <button class="ra-sched-day-tab active" data-day="monday">Mon<span class="ra-sched-tab-date">Mar 2</span></button>
+        <button class="ra-sched-day-tab" data-day="tuesday">Tue<span class="ra-sched-tab-date">Mar 3</span></button>
+        <button class="ra-sched-day-tab" data-day="wednesday">Wed<span class="ra-sched-tab-date">Mar 4</span></button>
+        <button class="ra-sched-day-tab" data-day="thursday">Thu<span class="ra-sched-tab-date">Mar 5</span></button>
+        <button class="ra-sched-day-tab" data-day="friday">Fri<span class="ra-sched-tab-date">Mar 6</span></button>
+      </div>
+
+      <!-- RA Legend -->
+      <div class="ra-sched-legend">
+        <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-mayank"></div>Mayank</div>
+        <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-steve"></div>Steve</div>
+        <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-jake"></div>Jake</div>
+      </div>
+
+      <!-- Schedule Content -->
+      <div id="raSchedContent"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="ra-sched-sidebar">
+      <!-- Mini Floorplan -->
+      <div class="ra-sched-card">
+        <div class="ra-sched-card-title">LL-112 Floorplan</div>
+        <div class="ra-sched-mini-fp" id="raMiniFloorplan">
+          <div class="ra-fp-room ra-fp-storage ra-fp-stor">Storage</div>
+          <div class="ra-fp-room ra-fp-e">E<div class="ra-fp-label">Std Lab</div></div>
+          <div class="ra-fp-room ra-fp-d">D<div class="ra-fp-label">Std Lab</div></div>
+          <div class="ra-fp-room ra-fp-c" id="ra-fp-c">C<div class="ra-fp-label">NOLDUS</div></div>
+          <div class="ra-fp-room ra-fp-b" id="ra-fp-b">B<div class="ra-fp-label">NOLDUS</div></div>
+          <div class="ra-fp-room ra-fp-a">A<div class="ra-fp-label">Conf.</div></div>
+          <div class="ra-fp-corridor ra-fp-corr">Corridor</div>
+          <div class="ra-fp-room ra-fp-backstage ra-fp-back">Backstage</div>
+          <div class="ra-fp-room ra-fp-f" id="ra-fp-f">F<div class="ra-fp-label">NOLDUS</div></div>
+          <div class="ra-fp-room ra-fp-g" id="ra-fp-g">G<div class="ra-fp-label">NOLDUS</div></div>
+          <div class="ra-fp-room ra-fp-h">H<div class="ra-fp-label">Control</div></div>
+          <div class="ra-fp-room ra-fp-reception ra-fp-rec">Reception</div>
+        </div>
+        <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--text-muted);">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--cardinal);"></div>
+          Active session rooms
+        </div>
+      </div>
+
+      <!-- Day Stats -->
+      <div class="ra-sched-card">
+        <div class="ra-sched-card-title">Day Summary</div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Sessions</span><span class="ra-sched-stat-value" id="raStatSessions">—</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Participants</span><span class="ra-sched-stat-value" id="raStatParticipants">—</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credits</span><span class="ra-sched-stat-value" id="raStatCredits">—</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">RA on duty</span><span class="ra-sched-stat-value" id="raStatRA">—</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">First session</span><span class="ra-sched-stat-value" id="raStatFirst">—</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Last session</span><span class="ra-sched-stat-value" id="raStatLast">—</span></div>
+      </div>
+
+      <!-- Weekly Overview -->
+      <div class="ra-sched-card">
+        <div class="ra-sched-card-title">Weekly Overview</div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Sessions</span><span class="ra-sched-stat-value">58</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Per Session</span><span class="ra-sched-stat-value">2 participants</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Participants</span><span class="ra-sched-stat-value">116</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credit / Participant</span><span class="ra-sched-stat-value">1.0</span></div>
+        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Credits</span><span class="ra-sched-stat-value" style="color: var(--cardinal); font-size: 15px;">116.0</span></div>
+      </div>
+
+      <!-- RA Weekly Totals -->
+      <div class="ra-sched-card">
+        <div class="ra-sched-card-title">RA Weekly Totals</div>
+        <div class="ra-sched-ra-summary">
+          <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-mayank">M</div><div><div class="ra-sched-ra-name">Mayank</div><div class="ra-sched-ra-detail">26 sessions · 52 participants</div></div></div>
+          <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-steve">S</div><div><div class="ra-sched-ra-name">Steve</div><div class="ra-sched-ra-detail">12 sessions · 24 participants</div></div></div>
+          <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-jake">J</div><div><div class="ra-sched-ra-name">Jake</div><div class="ra-sched-ra-detail">20 sessions · 40 participants</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-bar">
+    <strong>Study contact:</strong> Brian Kwon · 213-821-9746 · Week 1 of data collection · Rooms LL-112-B, C, F, G
+  </div>
+</div>
+
 </div>
 
 <footer class="footer-enhanced">
@@ -3212,7 +3559,7 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
     <div class="footer-col">
       <h4>Contact</h4>
       <p>Brian N. Huh, Lab Manager</p>
-      <a href="mailto:huhb@marshall.usc.edu">huhb@marshall.usc.edu</a>
+      <a href="/cdn-cgi/l/email-protection#caa2bfa2a88aa7abb8b9a2aba6a6e4bfb9a9e4afaebf"><span class="__cf_email__" data-cfemail="ec8499848eac818d9e9f848d8080c2999f8fc2898899">[email&#160;protected]</span></a>
       <p>213-821-8746</p>
     </div>
     <div class="footer-col">
@@ -3237,12 +3584,39 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════════════════════════════
 // 1. CONSTANTS & DOM REFERENCES
 // ═══════════════════════════════════════════════
 var TODAY = new Date().toISOString().split('T')[0];
 var TODAY_DISPLAY = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+// Study page link helper — builds lookup from allStudies and generates link HTML
+var studyPageMap = {}; // populated after allStudies is defined
+function buildStudyPageMap() {
+  allStudies.forEach(function(s) {
+    if (s.page) studyPageMap[s.study] = s.page;
+  });
+}
+function studyPageLinkHTML(studyName, label) {
+  var page = studyPageMap[studyName];
+  if (!page) return '';
+  label = label || 'Study Page ↗';
+  if (page.charAt(0) === '#') {
+    // Internal tab link
+    var tab = page.substring(1);
+    return ' <a href="' + page + '" class="study-page-link" data-page-tab="' + tab + '" title="View study page">' + label + '</a>';
+  }
+  return ' <a href="' + page + '" target="_blank" rel="noopener" class="study-page-link" title="View study page">' + label + '</a>';
+}
+// Match study names in calendar/facilities text to page links
+function studyPageLinkForText(text) {
+  var keys = Object.keys(studyPageMap);
+  for (var i = 0; i < keys.length; i++) {
+    if (text.includes(keys[i])) return studyPageLinkHTML(keys[i]);
+  }
+  return '';
+}
 
 // Measure fixed header+nav heights and set CSS variables
 function updateFixedOffsets() {
@@ -3268,26 +3642,26 @@ var facWeekSelect = document.getElementById('fac-week-select');
 // ═══════════════════════════════════════════════
 var calData = [
   {wk:"Feb 8",dates:"Feb 8–14",weekStart:"2026-02-08",weekEnd:"2026-02-14",note:"Before prescreening deadline",
-    online:"Martinez, Sammy: Pilot",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (starts)",ll112:"—"},
+    online:"Martinez, Sammy: I Can Introduce You to Someone... (Pilot)",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (starts)",ll112:"—"},
   {wk:"Feb 15",dates:"Feb 15–21",weekStart:"2026-02-15",weekEnd:"2026-02-21",note:"",
-    online:"—",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner",ll112:"—"},
+    online:"Martinez, Sammy: Making Introductions",ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner",ll112:"—"},
   {wk:"Feb 22",dates:"Feb 22–28",weekStart:"2026-02-22",weekEnd:"2026-02-28",note:"Online invites begin",
-    online:"Berry, Zachariah: Hierarchy and Corruption\nBrouwers, Jeslyn: Achievement and Ambition in the Age of AI\nMartinez, Sammy: Broker 1",
-    ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner",ll112:"Berry, Zachariah: Org Change (starts)\nLee, Elena & Kwon, Brian: AI-Assisted Negotiation Study (starts)"},
+    online:"⏳ Berry, Zachariah: Hierarchy and Corruption (pending)\n⏳ Brouwers, Jeslyn: Achievement and Ambition in the Age of AI (pending)\n⏳ Martinez, Sammy: Broker 1 (pending)",
+    ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (paused this week)",ll112:"—"},
   {wk:"Mar 1",dates:"Mar 1–7",weekStart:"2026-03-01",weekEnd:"2026-03-07",note:"",
     online:"Berry, Zachariah: TED Judges\nHale, James: KODISV – Collecting Dyadic Videos of Disputes\nWakslak, Cheryl: Thinking About Others\nWiltermuth, Scott: Sammy Dissertation Study 1",
-    ll102:"Ferragamo, Alys: AI Task (starts)\n📦 Stacked Lab Session (Pilot): TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner",ll112:"Berry, Zachariah: Org Change\nLee, Elena & Kwon, Brian: AI-Assisted Negotiation Study"},
+    ll102:"Ferragamo, Alys: AI Task (starts)\n📦 Stacked Lab Session (Pilot): Mar 5–6 · TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner",ll112:"Berry, Zachariah: Org Change (starts)\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (starts)"},
   {wk:"Mar 8",dates:"Mar 8–14",weekStart:"2026-03-08",weekEnd:"2026-03-14",note:"",
     online:"Anicich, Eric: Work Recovery Perceptions Pt 1 (2-part)\nMartinez, Sammy: Broker 2\nWakslak, Cheryl: Organizational Statements\nWiltermuth, Scott: Sammy Dissertation Study 2",
-    ll102:"Ferragamo, Alys: AI Task",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (final)",ll112:"Berry, Zachariah: Org Change\nLee, Elena & Kwon, Brian: AI-Assisted Negotiation Study (final)"},
+    ll102:"Ferragamo, Alys: AI Task\n📦 Stacked Lab Session (Pilot): Mar 12–13 · TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (final)",ll112:"Berry, Zachariah: Org Change\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study"},
   {wk:"Mar 15",dates:"Mar 15–21",weekStart:"2026-03-15",weekEnd:"2026-03-21",note:"Spring Recess — online only",
     online:"Lee, Elena: Strategic Decision with AI",ll102:"—",ll110:"—",ll112:"—"},
   {wk:"Mar 22",dates:"Mar 22–28",weekStart:"2026-03-22",weekEnd:"2026-03-28",note:"",
     online:"Anicich, Eric: Work Recovery Perceptions Pt 2 (2-part)\nMartinez, Sammy: Broker 3",
-    ll102:"Ferragamo, Alys: AI Task (final)\nLee, Elena: AI Interaction for Persuasion (starts)",ll110:"Martinez, Sammy: Broker – In-Person Option TBD (starts)",ll112:"Berry, Zachariah: Org Change (final)\nFerragamo, Alys: AI Interviews (starts)"},
+    ll102:"Ferragamo, Alys: AI Task (final)\nLee, Elena: AI Interaction for Persuasion (starts)",ll110:"Martinez, Sammy: Broker – In-Person Option TBD (starts)",ll112:"Berry, Zachariah: Org Change\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (final)\nFerragamo, Alys: AI Interviews (starts)"},
   {wk:"Mar 29",dates:"Mar 29–Apr 4",weekStart:"2026-03-29",weekEnd:"2026-04-04",note:"",
     online:"Berry, Zachariah: MAC 1",
-    ll102:"Dittmann, Andrea: Survey About Your USC Marshall Experiences T1 (2-wave)\nLee, Elena: AI Interaction for Persuasion",ll110:"Martinez, Sammy: Broker – In-Person Option TBD",ll112:"Berry, Zachariah: Intrapersonal Loyalty Effect (starts)\nFerragamo, Alys: AI Interviews"},
+    ll102:"Dittmann, Andrea: Survey About Your USC Marshall Experiences T1 (2-wave)\nLee, Elena: AI Interaction for Persuasion",ll110:"Martinez, Sammy: Broker – In-Person Option TBD",ll112:"Berry, Zachariah: Org Change (final)\nBerry, Zachariah: Intrapersonal Loyalty Effect (starts)\nFerragamo, Alys: AI Interviews"},
   {wk:"Apr 5",dates:"Apr 5–11",weekStart:"2026-04-05",weekEnd:"2026-04-11",note:"",
     online:"—",ll102:"Lee, Elena: AI Interaction for Persuasion",ll110:"Martinez, Sammy: Broker – In-Person Option TBD\nBerry, Zachariah: Intrapersonal Loyalty Effect",ll112:"Berry, Zachariah: Intrapersonal Loyalty Effect\nFast, Nate & Yu, Siyu: Team AI Use and Leadership Emergence (starts)\nFerragamo, Alys: AI Interviews"},
   {wk:"Apr 12",dates:"Apr 12–18",weekStart:"2026-04-12",weekEnd:"2026-04-18",note:"",
@@ -3299,15 +3673,16 @@ var calData = [
 ];
 
 var allStudies = [
-  {researcher:"Martinez, Sammy", study:"Pilot", week:"Feb 8", dateSort:"2026-02-08", dateLabel:"Week of Feb 8", n:"100", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, completed:90, link:"https://marshall-mor.sona-systems.com/default.aspx?p_return_experiment_id=1016", irb:null},
-  {researcher:"Berry, Zachariah", study:"Hierarchy and Corruption", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"200", dur:"6 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, irb:null},
-  {researcher:"Martinez, Sammy", study:"Broker 1", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
-  {researcher:"Brouwers, Jeslyn", study:"Achievement and Ambition in the Age of AI", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"300", dur:"30 min", format:"Online", cr:"0.50", facility:null, notes:null, irb:null},
+  {researcher:"Martinez, Sammy", study:"I Can Introduce You to Someone... (Pilot)", week:"Feb 8", dateSort:"2026-02-08", dateLabel:"Week of Feb 8", n:"100", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, completed:100, link:"https://marshall-mor.sona-systems.com/default.aspx?p_return_experiment_id=1016", irb:null},
+  {researcher:"Martinez, Sammy", study:"Making Introductions", week:"Feb 15", dateSort:"2026-02-15", dateLabel:"Week of Feb 15", n:"100", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, completed:100, irb:null},
+  {researcher:"Berry, Zachariah", study:"Hierarchy and Corruption", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"200", dur:"6 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, completed:0, pending:true, irb:null},
+  {researcher:"Martinez, Sammy", study:"Broker 1", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, completed:0, pending:true, irb:null},
+  {researcher:"Brouwers, Jeslyn", study:"Achievement and Ambition in the Age of AI", week:"Feb 22", dateSort:"2026-02-22", dateLabel:"Week of Feb 22", n:"300", dur:"30 min", format:"Online", cr:"0.50", facility:null, notes:null, completed:0, pending:true, irb:null},
   {researcher:"Hale, James", study:"KODISV – Collecting Dyadic Videos of Disputes", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"200", dur:"30 min", format:"Online", cr:"0.50", facility:null, notes:null, coPIs:["Kim, Peter","Gratch, Jonathan"], irb:null},
   {researcher:"Berry, Zachariah", study:"TED Judges", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, stacked:"mar1", irb:null},
   {researcher:"Wiltermuth, Scott", study:"Sammy Dissertation Study 1", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"250", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", stacked:"mar1", irb:null},
   {researcher:"Wakslak, Cheryl", study:"Thinking About Others", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"400", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", stacked:"mar1", irb:null},
-  {researcher:"Stacked Session (Pilot)", study:"Stacked Lab Session — Week of Mar 1", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"16/slot", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL102", notes:"Pilot: Berry TED Judges (5m) + Wiltermuth Dissertation Study 1 (15m) + Wakslak Thinking About Others (10m) · Online option TBD", isStackedSession:true, stackedComponents:["TED Judges","Sammy Dissertation Study 1","Thinking About Others"], stackedResearchers:["Berry, Zachariah","Wiltermuth, Scott","Wakslak, Cheryl"], irb:null},
+  {researcher:"Stacked Session (Pilot)", study:"Stacked Lab Session — Mar 5, 6, 12, 13", week:"Mar 1", dateSort:"2026-03-05", dateLabel:"Mar 5, 6, 12, 13", n:"16/slot", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL102", notes:"Pilot: Berry TED Judges (5m) + Wiltermuth Dissertation Study 1 (15m) + Wakslak Thinking About Others (10m) · Sessions on Wed/Thu of Mar 1 & Mar 8 weeks", isStackedSession:true, stackedComponents:["TED Judges","Sammy Dissertation Study 1","Thinking About Others"], stackedResearchers:["Berry, Zachariah","Wiltermuth, Scott","Wakslak, Cheryl"], irb:null},
   {researcher:"Martinez, Sammy", study:"Broker 2", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
   {researcher:"Wiltermuth, Scott", study:"Sammy Dissertation Study 2", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"200", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:"Depends on Sammy Dissertation Study 1", stackable:"maybe", irb:null},
   {researcher:"Wakslak, Cheryl", study:"Organizational Statements", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"500", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", irb:null},
@@ -3316,11 +3691,11 @@ var allStudies = [
   {researcher:"Martinez, Sammy", study:"Broker 3", week:"Mar 22", dateSort:"2026-03-22", dateLabel:"Week of Mar 22", n:"400", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
   {researcher:"Anicich, Eric", study:"Work Recovery Perceptions — Part 2", week:"Mar 22", dateSort:"2026-03-22", dateLabel:"Week of Mar 22", n:"200–400", dur:"2-part", format:"Online", cr:"0.50", facility:null, notes:"2-part study: Part 2 after Spring Recess", tag:"2-Part", irb:null},
   {researcher:"Berry, Zachariah", study:"MAC 1", week:"Mar 29", dateSort:"2026-03-29", dateLabel:"Week of Mar 29", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, irb:null},
-  {researcher:"Ferragamo, Alys", study:"In-Person Study – Brainstorming with a Partner", dateSort:"2026-02-10", dateLabel:"Feb 10 – Mar 14", n:"150", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-110", notes:null, completed:103, link:"https://marshall-mor.sona-systems.com/exp_info.aspx?experiment_id=1014", irb:null},
-  {researcher:"Berry, Zachariah", study:"Org Change", dateSort:"2026-02-22", dateLabel:"Feb 22 – Mar 28", n:"200", dur:"10 min", format:"In-Person", cr:"0.25", facility:"LL-112", notes:null, irb:null},
+  {researcher:"Ferragamo, Alys", study:"In-Person Study – Brainstorming with a Partner", dateSort:"2026-02-10", dateLabel:"Feb 10 – Mar 14", n:"150", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-110", notes:"Paused week of Feb 22", completed:191, link:"https://marshall-mor.sona-systems.com/exp_info.aspx?experiment_id=1014", irb:null},
+  {researcher:"Berry, Zachariah", study:"Org Change", dateSort:"2026-03-01", dateLabel:"Mar 1 – Apr 4", n:"200", dur:"10 min", format:"In-Person", cr:"0.25", facility:"LL-112", notes:null, irb:null},
   {researcher:"Ferragamo, Alys", study:"AI Task", dateSort:"2026-03-01", dateLabel:"Mar 1 – Mar 28", n:"400", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL102", notes:null, irb:null},
   {researcher:"Lee, Elena", study:"AI Interaction for Persuasion", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 18", n:"300", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL102", notes:null, irb:null},
-  {researcher:"Lee, Elena", study:"AI-Assisted Negotiation Study", dateSort:"2026-02-22", dateLabel:"Feb 22 – Mar 14", n:"300", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-112", notes:null, coPIs:["Kwon, Brian","Kim, Peter"], irb:null},
+  {researcher:"Kwon, Brian", study:"AI-Assisted Negotiation Study", dateSort:"2026-03-01", dateLabel:"Mar 1 – Mar 21", n:"300", dur:"60 min", format:"In-Person", cr:"1.00", facility:"LL-112", notes:null, coPIs:["Lee, Elena","Kim, Peter"], irb:null, page:"#rasched"},
   {researcher:"Ferragamo, Alys", study:"AI Interviews", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 18", n:"50", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL-112", notes:null, irb:null},
   {researcher:"Martinez, Sammy", study:"Broker – In-Person Option (TBD)", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 25", n:"300", dur:"15 min", format:"In-Person", cr:"0.25", facility:"LL-110", notes:"TBD status", irb:null},
   {researcher:"Dittmann, Andrea", study:"Survey About Your USC Marshall Experiences — T1", dateSort:"2026-03-29", dateLabel:"Mar 29 – Apr 4", n:"100+", dur:"10 min", format:"Hybrid", cr:"0.25", facility:"LL102", notes:null, tag:"2-Wave", coPIs:["Truong, Mindy"], irb:null},
@@ -3328,15 +3703,18 @@ var allStudies = [
   {researcher:"Fast, Nate", study:"Team AI Use and Leadership Emergence", dateSort:"2026-04-05", dateLabel:"Apr 5 – May 1", n:"800", dur:"60–90 min", format:"In-Person", cr:"1.00", facility:"LL-112", notes:null, coPIs:["Yu, Siyu"], irb:null},
   {researcher:"Dittmann, Andrea", study:"Survey About Your USC Marshall Experiences — T2", dateSort:"2026-04-19", dateLabel:"Apr 19 – Apr 25", n:"100+", dur:"7 min", format:"Hybrid", cr:"0.25", facility:"LL102", notes:null, tag:"2-Wave", coPIs:["Truong, Mindy"], irb:null},
 ];
+buildStudyPageMap();
 
 var RC = {
-  'Berry':     {bg:'#FFF0F0', bd:'#D44', tx:'#A22'},
-  'Ferragamo': {bg:'#EEF0FF', bd:'#55C', tx:'#339'},
-  'Martinez':  {bg:'#FFF7E8', bd:'#C90', tx:'#864'},
-  'Fast':      {bg:'#EEFAEE', bd:'#393', tx:'#262'},
-  'Dittmann':  {bg:'#F8EEFF', bd:'#93C', tx:'#628'},
-  'Lee':       {bg:'#EEFAFA', bd:'#2AA', tx:'#166'},
-  'Hale':      {bg:'#FBF5EE', bd:'#A62', tx:'#741'},
+  'Berry':     {bg:'#FEECEC', bd:'#C0392B', tx:'#922B21'},
+  'Ferragamo': {bg:'#E1F5FE', bd:'#0288D1', tx:'#01579B'},
+  'Martinez':  {bg:'#FEF5E0', bd:'#CC8800', tx:'#8A5C00'},
+  'Fast':      {bg:'#E8F8EE', bd:'#1E8449', tx:'#145A32'},
+  'Dittmann':  {bg:'#F3E8FD', bd:'#8E44AD', tx:'#6C3483'},
+  'Lee':       {bg:'#E0F5F2', bd:'#00897B', tx:'#00695C'},
+  'Hale':      {bg:'#FAF0E6', bd:'#A0522D', tx:'#6E3A1F'},
+  'Kwon':      {bg:'#E8EAF6', bd:'#283593', tx:'#1A237E'},
+  'Berry / Wiltermuth / Wakslak': {bg:'#F0E8FD', bd:'#6C3483', tx:'#4A235A'},
 };
 
 var facilityUsage = {
@@ -3349,31 +3727,32 @@ var facilityUsage = {
     '112': []
   },
   feb22: {
-    '110': [{study:'In-Person Study – Brainstorming with a Partner', researcher:'Ferragamo', rooms:['110-b','110-c','110-d']}],
-    '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e'], badge:'start'},
-            {study:'AI-Assisted Negotiation Study', researcher:'Lee', rooms:['112-b','112-c','112-f','112-g'], badge:'start'}]
+    '110': [{study:'In-Person Study – Brainstorming with a Partner', researcher:'Ferragamo', rooms:['110-b','110-c','110-d'], badge:'paused'}],
+    '112': []
   },
   mar1: {
     '110': [{study:'In-Person Study – Brainstorming with a Partner', researcher:'Ferragamo', rooms:['110-b','110-c','110-d']}],
-    '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e']},
-            {study:'AI-Assisted Negotiation Study', researcher:'Lee', rooms:['112-b','112-c','112-f','112-g']}],
-    '102': [{study:'AI Task', researcher:'Ferragamo', badge:'start'}, {study:'Stacked Lab Session (Pilot)', researcher:'Berry / Wiltermuth / Wakslak', badge:'pilot'}]
+    '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e'], badge:'start'},
+            {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g'], badge:'start'}],
+    '102': [{study:'AI Task', researcher:'Ferragamo', badge:'start'}, {study:'Stacked Lab Session (Pilot) · Mar 5–6', researcher:'Berry / Wiltermuth / Wakslak', badge:'pilot'}]
   },
   mar8: {
     '110': [{study:'In-Person Study – Brainstorming with a Partner', researcher:'Ferragamo', rooms:['110-b','110-c','110-d'], badge:'end'}],
     '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e']},
-            {study:'AI-Assisted Negotiation Study', researcher:'Lee', rooms:['112-b','112-c','112-f','112-g'], badge:'end'}],
-    '102': [{study:'AI Task', researcher:'Ferragamo'}]
+            {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g']}],
+    '102': [{study:'AI Task', researcher:'Ferragamo'}, {study:'Stacked Lab Session (Pilot) · Mar 12–13', researcher:'Berry / Wiltermuth / Wakslak', badge:'pilot'}]
   },
   mar22: {
     '110': [{study:'Broker – In-Person Option (TBD)', researcher:'Martinez', rooms:['110-b','110-c','110-d','110-e','110-f','110-g'], badge:'start'}],
-    '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-b','112-c','112-d','112-e'], badge:'end'},
+    '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e']},
+            {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g'], badge:'end'},
             {study:'AI Interviews', researcher:'Ferragamo', rooms:['112-f','112-g'], badge:'start'}],
     '102': [{study:'AI Task', researcher:'Ferragamo', badge:'end'}, {study:'AI Interaction for Persuasion', researcher:'Lee', badge:'start'}]
   },
   mar29: {
     '110': [{study:'Broker – In-Person Option (TBD)', researcher:'Martinez', rooms:['110-b','110-c','110-d','110-e','110-f','110-g']}],
-    '112': [{study:'Intrapersonal Loyalty Effect', researcher:'Berry', rooms:['112-a','112-b','112-c','112-d','112-e'], badge:'start'},
+    '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e'], badge:'end'},
+            {study:'Intrapersonal Loyalty Effect', researcher:'Berry', rooms:['112-b','112-c'], badge:'start'},
             {study:'AI Interviews', researcher:'Ferragamo', rooms:['112-f','112-g']}],
     '102': [{study:'Survey About Your USC Marshall Experiences — T1', researcher:'Dittmann'}, {study:'AI Interaction for Persuasion', researcher:'Lee'}]
   },
@@ -3708,9 +4087,147 @@ function parseCreditAllocation(cr, nStr) {
   return {low: 0, high: null, label: '—'};
 }
 
+// RA schedule data for My Schedule view
+var raShiftData = {
+  monday: {label:"Monday, March 2", blocks:[
+    {type:"setup",ra:"Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
+    {type:"setup",ra:"Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
+    {type:"pair",ra:"Steve",start:"3:30 PM",end:"5:30 PM",count:4}
+  ]},
+  tuesday: {label:"Tuesday, March 3", blocks:[
+    {type:"setup",ra:"Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Steve",start:"9:00 AM",end:"10:00 AM",count:2},
+    {type:"setup",ra:"Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Jake",start:"2:00 PM",end:"5:00 PM",count:6}
+  ]},
+  wednesday: {label:"Wednesday, March 4", blocks:[
+    {type:"setup",ra:"Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
+    {type:"setup",ra:"Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
+    {type:"pair",ra:"Steve",start:"3:30 PM",end:"5:30 PM",count:4}
+  ]},
+  thursday: {label:"Thursday, March 5", blocks:[
+    {type:"setup",ra:"Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Steve",start:"9:00 AM",end:"10:00 AM",count:2},
+    {type:"setup",ra:"Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Jake",start:"2:00 PM",end:"5:00 PM",count:6}
+  ]},
+  friday: {label:"Friday, March 6", blocks:[
+    {type:"setup",ra:"Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Mayank",start:"9:00 AM",end:"12:00 PM",count:6},
+    {type:"setup",ra:"Jake",start:"12:00 PM",end:"12:30 PM",note:"Handoff — 30 min Setup"},
+    {type:"pair",ra:"Jake",start:"12:30 PM",end:"2:30 PM",count:4},
+    {type:"setup",ra:"Jake",start:"3:00 PM",end:"3:30 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Jake",start:"3:30 PM",end:"5:30 PM",count:4}
+  ]}
+};
+var raWeeklyTotals = {Mayank: {sessions:26, participants:52}, Steve: {sessions:12, participants:24}, Jake: {sessions:20, participants:40}};
+
+function renderRAMySchedule(raName) {
+  var html = '';
+
+  // Gather this RA's shifts
+  var shifts = [];
+  var totalSessions = 0;
+  var daysWorking = [];
+  Object.keys(raShiftData).forEach(function(dayKey) {
+    var day = raShiftData[dayKey];
+    var dayShifts = [];
+    day.blocks.forEach(function(b) {
+      if (b.ra === raName) dayShifts.push(b);
+    });
+    if (dayShifts.length > 0) {
+      var daySessions = 0;
+      dayShifts.forEach(function(b) { if (b.type === 'pair') daySessions += b.count; });
+      totalSessions += daySessions;
+      daysWorking.push(dayKey);
+      shifts.push({dayKey: dayKey, label: day.label, blocks: dayShifts, sessions: daySessions});
+    }
+  });
+
+  var totals = raWeeklyTotals[raName] || {sessions: totalSessions, participants: totalSessions * 2};
+  var raColors = {Mayank: '#1a6b8a', Steve: '#6b4c8a', Jake: '#7a6520'};
+  var raColorsBg = {Mayank: '#e8f4f8', Steve: '#f0e8f8', Jake: '#faf5e4'};
+  var color = raColors[raName] || 'var(--cardinal)';
+  var bgColor = raColorsBg[raName] || '#fef2f2';
+
+  // Header card
+  html += '<div class="researcher-card"><div class="researcher-card-header" style="background:linear-gradient(135deg, ' + color + ', ' + color + 'dd)">';
+  html += '<div class="rc-header-top"><span class="rc-name">' + raName + ' <span style="font-size:13px;font-weight:400;opacity:0.8">(Research Assistant)</span></span>';
+  html += '<div class="rc-meta"><span>AI-Assisted Negotiation Study</span><span>Week 1</span></div></div></div>';
+
+  // Stats row
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 20px;border-bottom:1px solid var(--border-light)">';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + color + '">' + totals.sessions + '</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Sessions</div></div>';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + color + '">' + totals.participants + '</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Participants</div></div>';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + color + '">' + daysWorking.length + '</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Days</div></div>';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + color + '">LL-112</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Facility</div></div>';
+  html += '</div>';
+
+  // Study info
+  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:12px">';
+  html += '<span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Study</span>';
+  html += '<span style="font-size:14px;font-weight:600;color:var(--text)">AI-Assisted Negotiation Study</span>';
+  html += '<span class="badge badge-inperson" style="font-size:11px">In-Person</span>';
+  html += '<span style="font-size:12px;color:var(--text-muted)">Kwon, Brian &amp; Lee, Elena · Rooms B, C, F, G</span>';
+  html += '</div>';
+
+  // Shift schedule
+  html += '<div style="padding:16px 20px">';
+  html += '<div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">Week 1 Shift Schedule · Mar 2–6, 2026</div>';
+
+  shifts.forEach(function(shift) {
+    var dayLabel = shift.label.split(',')[0]; // e.g. "Monday"
+    var dateLabel = shift.label.split(', ')[1] || ''; // e.g. "March 2"
+    html += '<div style="margin-bottom:12px">';
+    html += '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">';
+    html += '<span style="font-size:14px;font-weight:700;color:var(--text)">' + dayLabel + '</span>';
+    html += '<span style="font-size:12px;color:var(--text-muted)">' + dateLabel + '</span>';
+    html += '<span style="font-size:12px;font-weight:600;color:' + color + ';margin-left:auto">' + shift.sessions + ' sessions</span>';
+    html += '</div>';
+
+    shift.blocks.forEach(function(b) {
+      if (b.type === 'setup') {
+        html += '<div style="display:flex;align-items:center;gap:8px;padding:5px 12px;background:var(--surface);border:1px dashed var(--border);border-radius:6px;margin-bottom:3px;font-size:11px;color:var(--text-muted)">';
+        html += '<span>⚙️</span><span style="font-weight:600;text-transform:uppercase;letter-spacing:0.3px">Setup</span><span>' + b.start + ' – ' + b.end + '</span><span style="margin-left:auto;font-size:10px">' + b.note + '</span></div>';
+      } else {
+        html += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:' + bgColor + ';border-left:4px solid ' + color + ';border-radius:6px;margin-bottom:3px">';
+        html += '<span style="font-size:12px;font-weight:600;color:var(--text-secondary)">' + b.start + ' – ' + b.end + '</span>';
+        html += '<span style="font-size:13px;font-weight:700;color:var(--text)">' + b.count + ' sessions</span>';
+        html += '<span style="font-size:11px;color:var(--text-muted)">' + (b.count * 2) + ' participants · Rooms B &amp; C, F &amp; G</span>';
+        html += '</div>';
+      }
+    });
+    html += '</div>';
+  });
+
+  html += '</div>';
+
+  // Link to AI Study tab
+  html += '<div style="padding:12px 20px;border-top:1px solid var(--border-light);text-align:center">';
+  html += '<button onclick="switchTab(\'rasched\')" style="background:none;border:1px solid ' + color + ';color:' + color + ';padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s">View Full RA Schedule →</button>';
+  html += '</div>';
+
+  html += '</div>';
+
+  myContent.innerHTML = html;
+}
+
 function renderMySchedule() {
   var name = mySelect.value;
   if (!name) { myContent.style.display = 'none'; myEmpty.style.display = 'block'; return; }
+
+  // --- RA mode ---
+  if (name.indexOf('RA:') === 0) {
+    myEmpty.style.display = 'none';
+    myContent.style.display = 'block';
+    var intro = document.querySelector('.home-intro');
+    if (intro) intro.style.display = 'none';
+    renderRAMySchedule(name.replace('RA:', ''));
+    return;
+  }
+
   myEmpty.style.display = 'none';
   myContent.style.display = 'block';
 
@@ -3946,12 +4463,14 @@ function renderMySchedule() {
     html += '<div class="rc-study"><div class="rc-date">' + showDate;
     if (s.facility) html += '<div class="rc-date-sub">' + s.facility + '</div>';
     var sonaLink = s.link ? ' <a href="' + s.link + '" target="_blank" rel="noopener" class="study-sona-link" title="Open in SONA">SONA ↗</a>' : '';
-    html += '</div><div class="rc-study-info"><div class="rc-study-name"><a href="#" class="rc-study-link" data-tab="studies" data-study="' + deepStudy + '" title="View in All Studies tab">' + s.study + '</a>' + sonaLink;
+    var pageLink = studyPageLinkHTML(s.study);
+    html += '</div><div class="rc-study-info"><div class="rc-study-name"><a href="#" class="rc-study-link" data-tab="studies" data-study="' + deepStudy + '" title="View in All Studies tab">' + s.study + '</a>' + sonaLink + pageLink;
     if (s.tag) html += ' <span class="badge-2part">' + s.tag + '</span>';
     if (s.isStackedSession) html += ' <span class="badge-stacked">📦 Pilot</span>';
     else if (s.stacked) html += ' <span class="badge-in-stacked">In Stacked Session</span>';
     if (s.stackable === true && !s.stacked) html += ' <span class="badge-stackable">Stackable</span>';
     if (s.stackable === 'maybe' && !s.stacked) html += ' <span class="badge-stackable-maybe">Stackable?</span>';
+    if (s.pending) html += ' <span class="badge-pending">Pending Start</span>';
     var studyAlloc = parseCreditAllocation(s.cr, s.n);
     var nLabel = s.n + ' N';
     if (s.completed != null) {
@@ -3980,7 +4499,7 @@ function renderMySchedule() {
     if (s.facility) {
       var sLastName = getResearcherLastName(s.researcher);
       var rooms = getStudyRooms(sLastName);
-      var rColor = RC[sLastName] || {bg:'#FFF5F5', bd:'#D44', tx:'#A22'};
+      var rColor = RC[sLastName] || {bg:'#F5F5F5', bd:'#777777', tx:'#555555'};
       var facilities = s.facility.split(' + ').map(function(f) { return f.trim(); });
       var hasMultiple = facilities.length > 1 || (facilities[0] !== 'LL102' && rooms.some(function(r) { return r.startsWith('110'); }) && rooms.some(function(r) { return r.startsWith('112'); }));
 
@@ -4083,6 +4602,12 @@ function buildStudiesTable() {
       }
     }
 
+    // Override status for pending studies
+    if (s.pending) {
+      rowClass = rowClass.replace(/study-past|study-current/, '');
+      statusDot = '<span class="status-dot upcoming" title="Pending start"></span>';
+    }
+
     // Badges
     var badges = '';
     if (s.tag) badges += ' <span class="badge-2part">' + s.tag + '</span>';
@@ -4090,6 +4615,7 @@ function buildStudiesTable() {
     else if (s.stacked) badges += ' <span class="badge-in-stacked">In Stacked Session</span>';
     if (s.stackable === true && !s.stacked) badges += ' <span class="badge-stackable">Stackable</span>';
     if (s.stackable === 'maybe' && !s.stacked) badges += ' <span class="badge-stackable-maybe">Stackable?</span>';
+    if (s.pending) badges += ' <span class="badge-pending">Pending Start</span>';
 
     // Credit allocation
     var alloc = parseCreditAllocation(s.cr, s.n);
@@ -4116,6 +4642,7 @@ function buildStudiesTable() {
     html += '<td>' + statusDot + '<strong>' + s.researcher + '</strong>' + collabDisplay + '</td>';
     var studyNameHtml = s.study;
     if (s.link) studyNameHtml += ' <a href="' + s.link + '" target="_blank" rel="noopener" class="study-sona-link" title="Open in SONA">SONA ↗</a>';
+    studyNameHtml += studyPageLinkHTML(s.study);
     html += '<td class="study-name-col">' + studyNameHtml + (badges ? '<div class="study-badges">' + badges + '</div>' : '') + '</td>';
     html += '<td>' + s.dateLabel + '</td>';
     html += '<td><span class="badge ' + formatClass + '">' + s.format + '</span></td>';
@@ -4278,10 +4805,11 @@ function renderFacilities() {
 
     var statusEl = document.getElementById('fac-' + suite + '-status');
     statusEl.innerHTML = studies.map(function(s) {
-      var c = RC[s.researcher] || {bd:'#990000',tx:'#333'};
-      var line = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + c.bd + ';margin-right:6px;vertical-align:middle"></span><strong>' + s.researcher + '</strong>: ' + s.study;
+      var c = RC[s.researcher] || {bd:'#777777',tx:'#555555'};
+      var line = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + c.bd + ';margin-right:6px;vertical-align:middle"></span><strong>' + s.researcher + '</strong>: ' + s.study + studyPageLinkHTML(s.study);
       if (s.badge === 'start') line += ' <span class="badge-start">Start</span>';
       if (s.badge === 'end') line += ' <span class="badge-end">End</span>';
+      if (s.badge === 'paused') line += ' <span class="badge-paused">Paused</span>';
       return line;
     }).join('<br>');
     statusEl.className = 'fac-suite-status has-study';
@@ -4296,7 +4824,7 @@ function renderFacilities() {
       var room = document.querySelector('[data-room="' + rid + '"]');
       if (!room) return;
       var primary = roomMap[rid][0];
-      var c = RC[primary.researcher] || {bg:'#FFF5F5',bd:'#990000',tx:'#990000'};
+      var c = RC[primary.researcher] || {bg:'#F5F5F5',bd:'#777777',tx:'#555555'};
 
       room.classList.add('fac-active');
       room.setAttribute('tabindex', '0');
@@ -4318,12 +4846,12 @@ function renderFacilities() {
         var roomLabel = room.querySelector('.fac-room-label');
         var roomEquip = room.querySelector('.fac-room-equip');
         tipEl.innerHTML = roomMap[rid].map(function(s) {
-          return '<div style="margin-bottom:4px"><strong style="color:' + (RC[s.researcher]||{bd:'#fff'}).bd + '">' + s.researcher + '</strong><br>' + s.study + (s.badge ? ' (' + s.badge + ')' : '') + '</div>';
+          return '<div style="margin-bottom:4px"><strong style="color:' + (RC[s.researcher]||{bd:'#777777'}).bd + '">' + s.researcher + '</strong><br>' + s.study + studyPageLinkHTML(s.study) + (s.badge ? ' (' + s.badge + ')' : '') + '</div>';
         }).join('') + '<div style="font-size:10px;opacity:0.7;margin-top:4px">' + (roomLabel ? roomLabel.textContent : '') + (roomEquip ? ' · ' + roomEquip.textContent : '') + '</div>';
       }
 
       mobileHtml += '<div class="fac-mobile-room" style="border-left:3px solid ' + c.bd + '"><div class="fac-mobile-room-id" style="color:' + c.tx + '">' + rid.toUpperCase().replace('-',' ') + '</div>';
-      mobileHtml += roomMap[rid].map(function(s) { return '<div class="fac-mobile-room-study">' + s.researcher + ': ' + s.study + '</div>'; }).join('') + '</div>';
+      mobileHtml += roomMap[rid].map(function(s) { return '<div class="fac-mobile-room-study">' + s.researcher + ': ' + s.study + studyPageLinkHTML(s.study) + '</div>'; }).join('') + '</div>';
     });
     mobileEl.innerHTML = mobileHtml;
   });
@@ -4332,21 +4860,22 @@ function renderFacilities() {
   if (studies102.length > 0) {
     var statusEl102 = document.getElementById('fac-102-status');
     statusEl102.innerHTML = studies102.map(function(s) {
-      var c = RC[s.researcher] || {bd:'#990000',tx:'#333'};
+      var c = RC[s.researcher] || {bd:'#777777',tx:'#555555'};
       var line = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + c.bd + ';margin-right:6px;vertical-align:middle"></span><strong>' + s.researcher + '</strong>: ' + s.study;
       if (s.badge === 'start') line += ' <span class="badge-start">Start</span>';
       if (s.badge === 'end') line += ' <span class="badge-end">End</span>';
+      if (s.badge === 'paused') line += ' <span class="badge-paused">Paused</span>';
       return line;
     }).join('<br>');
     statusEl102.className = 'fac-suite-status has-study';
 
     var cubicles = document.querySelectorAll('.lab102-cubicle');
     if (studies102.length === 1) {
-      var clr = RC[studies102[0].researcher] || {bg:'#FFF5F5',bd:'#990000'};
+      var clr = RC[studies102[0].researcher] || {bg:'#F5F5F5',bd:'#777777'};
       cubicles.forEach(function(c) { c.classList.add('lab102-active'); c.style.background = clr.bg; c.style.borderColor = clr.bd; });
     } else {
-      var c1 = RC[studies102[0].researcher] || {bg:'#FFF5F5',bd:'#990000'};
-      var c2 = RC[studies102[1].researcher] || {bg:'#FFF5F5',bd:'#990000'};
+      var c1 = RC[studies102[0].researcher] || {bg:'#F5F5F5',bd:'#777777'};
+      var c2 = RC[studies102[1].researcher] || {bg:'#F5F5F5',bd:'#777777'};
       cubicles.forEach(function(c, idx) {
         c.classList.add('lab102-active');
         if (idx % 2 === 0) { c.style.background = c1.bg; c.style.borderColor = c1.bd; }
@@ -4407,7 +4936,7 @@ function updateFacLegend(wk) {
   var activeResearchers = {};
   ['110','112','102'].forEach(function(suite) {
     (usage[suite] || []).forEach(function(s) {
-      if (!activeResearchers[s.researcher]) activeResearchers[s.researcher] = RC[s.researcher] || {bd:'#990000'};
+      if (!activeResearchers[s.researcher]) activeResearchers[s.researcher] = RC[s.researcher] || {bd:'#777777'};
     });
   });
   legendEl.innerHTML = Object.keys(activeResearchers).map(function(name) {
@@ -4427,10 +4956,26 @@ allStudies.forEach(function(s) {
 researcherNames.sort(function(a,b) {
   return (a.split(',')[0] || a.split(' ').pop()).localeCompare(b.split(',')[0] || b.split(' ').pop());
 });
+var researcherOptgroup = document.createElement('optgroup');
+researcherOptgroup.label = 'Researchers';
 researcherNames.forEach(function(name) {
-  var o1 = document.createElement('option'); o1.value = name; o1.textContent = name; mySelect.appendChild(o1);
+  var o1 = document.createElement('option'); o1.value = name; o1.textContent = name; researcherOptgroup.appendChild(o1);
   var o2 = document.createElement('option'); o2.value = name; o2.textContent = name; researcherSelect.appendChild(o2);
 });
+mySelect.appendChild(researcherOptgroup);
+
+// Add RAs to My Schedule dropdown
+var raOptgroup = document.createElement('optgroup');
+raOptgroup.label = 'Research Assistants';
+var raNames = [
+  {value: 'RA:Jake', label: 'Jake (RA)'},
+  {value: 'RA:Mayank', label: 'Mayank (RA)'},
+  {value: 'RA:Steve', label: 'Steve (RA)'}
+];
+raNames.forEach(function(ra) {
+  var o = document.createElement('option'); o.value = ra.value; o.textContent = ra.label; raOptgroup.appendChild(o);
+});
+mySelect.appendChild(raOptgroup);
 
 // Build study dropdown (filter bar + my schedule picker)
 var studyNames = []; var seenStudy = {}; var studyToResearcher = {};
@@ -4458,7 +5003,7 @@ function getRoomLabel(rid) { return rid.split('-').pop().toUpperCase(); }
 
 // ═══ Shared Stacked Session Bar Builder ═══
 var STACKED_PILOT = {
-  title: 'Stacked Lab Session — Week of Mar 1',
+  title: 'Stacked Lab Session — Mar 5, 6, 12, 13',
   subtitle: 'Pilot · LL102 · 16 stations · Online option TBD',
   cap: 60,
   studies: [
@@ -4593,7 +5138,7 @@ document.getElementById('cal-body').innerHTML = calData.map(function(f) {
         var missing = coPIs.filter(function(c) { return !l.includes(c.split(',')[0]); });
         if (missing.length) copiStr = '<div class="cal-rooms">with ' + missing.join(', ') + '</div>';
       }
-      return '<div class="' + cls + '">' + html.trim() + roomStr + copiStr + '</div>';
+      return '<div class="' + cls + '">' + html.trim() + studyPageLinkForText(l) + roomStr + copiStr + '</div>';
     }).join('');
   };
   var fmtOnline = function(v) {
@@ -4612,7 +5157,7 @@ document.getElementById('cal-body').innerHTML = calData.map(function(f) {
         var missing = coPIs.filter(function(c) { return !l.includes(c.split(',')[0]); });
         if (missing.length) copiStr = '<div class="cal-rooms">with ' + missing.join(', ') + '</div>';
       }
-      return '<div class="' + cls + '">' + html.trim() + copiStr + '</div>';
+      return '<div class="' + cls + '">' + html.trim() + studyPageLinkForText(l) + copiStr + '</div>';
     }).join('');
   };
   var noteHtml = f.note ? '<div class="cal-week-note">' + f.note + '</div>' : '';
@@ -5158,6 +5703,16 @@ document.addEventListener('click', function() {
   document.querySelectorAll('.badge-legend-popup').forEach(function(p) { p.style.display = ''; });
 });
 
+// --- Study page link handler (internal tab navigation) ---
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('.study-page-link[data-page-tab]');
+  if (!link) return;
+  e.preventDefault();
+  e.stopPropagation();
+  switchTab(link.dataset.pageTab);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
 // --- Final initialization ---
 buildStudiesTable();
 initCalNav();
@@ -5357,13 +5912,264 @@ mySelect.addEventListener('change', function() {
   updateUrlParam('researcher', mySelect.value || null);
 });
 
-// Handle initial tab from URL hash
-var initialTab = getTabFromHash();
-if (initialTab) { switchTab(initialTab, false); handleStudyDeepLink(); }
+// ═══════════════════════════════════════════════
+// AI STUDY RA SCHEDULE
+// ═══════════════════════════════════════════════
+(function() {
+  var raSchedule = {
+    monday: {
+      label: "Monday, March 2",
+      blocks: [
+        { type: "setup", ra: "Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+          { num: 1, group: "G1", rooms: "B & C" },
+          { num: 2, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+          { num: 3, group: "G3", rooms: "B & C" },
+          { num: 4, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
+          { num: 5, group: "G5", rooms: "B & C" },
+          { num: 6, group: "G6", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
+          { num: 7, group: "G1", rooms: "B & C" },
+          { num: 8, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
+          { num: 9, group: "G3", rooms: "B & C" },
+          { num: 10, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
+        { type: "pair", ra: "Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
+          { num: 11, group: "G1", rooms: "B & C" },
+          { num: 12, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
+          { num: 13, group: "G3", rooms: "B & C" },
+          { num: 14, group: "G4", rooms: "F & G" }
+        ]}
+      ]
+    },
+    tuesday: {
+      label: "Tuesday, March 3",
+      blocks: [
+        { type: "setup", ra: "Steve", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Steve", start: "9:00 AM", end: "10:00 AM", sessions: [
+          { num: 1, group: "G1", rooms: "B & C" },
+          { num: 2, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Jake", start: "1:30 PM", end: "2:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Jake", start: "2:00 PM", end: "3:00 PM", sessions: [
+          { num: 3, group: "G1", rooms: "B & C" },
+          { num: 4, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Jake", start: "3:00 PM", end: "4:00 PM", sessions: [
+          { num: 5, group: "G3", rooms: "B & C" },
+          { num: 6, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Jake", start: "4:00 PM", end: "5:00 PM", sessions: [
+          { num: 7, group: "G5", rooms: "B & C" },
+          { num: 8, group: "G6", rooms: "F & G" }
+        ]}
+      ]
+    },
+    wednesday: {
+      label: "Wednesday, March 4",
+      blocks: [
+        { type: "setup", ra: "Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+          { num: 1, group: "G1", rooms: "B & C" },
+          { num: 2, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+          { num: 3, group: "G3", rooms: "B & C" },
+          { num: 4, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
+          { num: 5, group: "G5", rooms: "B & C" },
+          { num: 6, group: "G6", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
+          { num: 7, group: "G1", rooms: "B & C" },
+          { num: 8, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
+          { num: 9, group: "G3", rooms: "B & C" },
+          { num: 10, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
+        { type: "pair", ra: "Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
+          { num: 11, group: "G1", rooms: "B & C" },
+          { num: 12, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
+          { num: 13, group: "G3", rooms: "B & C" },
+          { num: 14, group: "G4", rooms: "F & G" }
+        ]}
+      ]
+    },
+    thursday: {
+      label: "Thursday, March 5",
+      blocks: [
+        { type: "setup", ra: "Steve", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Steve", start: "9:00 AM", end: "10:00 AM", sessions: [
+          { num: 1, group: "G1", rooms: "B & C" },
+          { num: 2, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Jake", start: "1:30 PM", end: "2:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Jake", start: "2:00 PM", end: "3:00 PM", sessions: [
+          { num: 3, group: "G1", rooms: "B & C" },
+          { num: 4, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Jake", start: "3:00 PM", end: "4:00 PM", sessions: [
+          { num: 5, group: "G3", rooms: "B & C" },
+          { num: 6, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Jake", start: "4:00 PM", end: "5:00 PM", sessions: [
+          { num: 7, group: "G5", rooms: "B & C" },
+          { num: 8, group: "G6", rooms: "F & G" }
+        ]}
+      ]
+    },
+    friday: {
+      label: "Friday, March 6",
+      blocks: [
+        { type: "setup", ra: "Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+          { num: 1, group: "G1", rooms: "B & C" },
+          { num: 2, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+          { num: 3, group: "G3", rooms: "B & C" },
+          { num: 4, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
+          { num: 5, group: "G5", rooms: "B & C" },
+          { num: 6, group: "G6", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Jake", start: "12:00 PM", end: "12:30 PM", note: "Handoff — 30 min Setup" },
+        { type: "pair", ra: "Jake", start: "12:30 PM", end: "1:30 PM", sessions: [
+          { num: 7, group: "G1", rooms: "B & C" },
+          { num: 8, group: "G2", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Jake", start: "1:30 PM", end: "2:30 PM", sessions: [
+          { num: 9, group: "G3", rooms: "B & C" },
+          { num: 10, group: "G4", rooms: "F & G" }
+        ]},
+        { type: "setup", ra: "Jake", start: "3:00 PM", end: "3:30 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Jake", start: "3:30 PM", end: "4:30 PM", sessions: [
+          { num: 11, group: "G5", rooms: "B & C" },
+          { num: 12, group: "G6", rooms: "F & G" }
+        ]},
+        { type: "pair", ra: "Jake", start: "4:30 PM", end: "5:30 PM", sessions: [
+          { num: 13, group: "G7", rooms: "B & C" },
+          { num: 14, group: "G8", rooms: "F & G" }
+        ]}
+      ]
+    }
+  };
 
-// Show reset button if researcher pre-selected via URL
-updateResetBtn();
+  var raCurrentDay = 'monday';
 
+  function raRaClass(name) {
+    return 'ra-sched-ra-' + name.toLowerCase();
+  }
+
+  function raRenderDay(dayKey) {
+    var day = raSchedule[dayKey];
+    var container = document.getElementById('raSchedContent');
+    if (!container || !day) return;
+
+    var html = '<div class="ra-sched-day-header"><h2>' + day.label + '</h2></div>';
+    html += '<div class="ra-sched-timeline">';
+
+    var sessionCount = 0;
+    var ras = {};
+    var firstTime = null, lastTime = null;
+
+    day.blocks.forEach(function(block) {
+      if (block.type === 'setup') {
+        ras[block.ra] = true;
+        html += '<div class="ra-sched-time-block">' +
+          '<div class="ra-sched-setup-row">' +
+            '<div class="ra-sched-time-label">' + block.start + '<span class="ra-sched-time-end">' + block.end + '</span></div>' +
+            '<div class="ra-sched-setup-card">' +
+              '<span class="ra-sched-setup-icon">⚙️</span>' +
+              '<span class="ra-sched-setup-text">Setup — ' + block.ra + '</span>' +
+              '<span class="ra-sched-setup-note">' + block.note + '</span>' +
+            '</div>' +
+          '</div></div>';
+      } else if (block.type === 'pair') {
+        ras[block.ra] = true;
+        sessionCount += block.sessions.length;
+        if (!firstTime) firstTime = block.start;
+        lastTime = block.end;
+
+        html += '<div class="ra-sched-time-block"><div class="ra-sched-pair">' +
+          '<div class="ra-sched-time-label">' + block.start + '<span class="ra-sched-time-end">' + block.end + '</span></div>';
+
+        block.sessions.forEach(function(sess) {
+          html += '<div class="ra-sched-session ' + raRaClass(block.ra) + '">' +
+            '<div class="ra-sched-session-top">' +
+              '<span class="ra-sched-session-num">Session ' + sess.num + '</span>' +
+              '<span class="ra-sched-session-group">' + sess.group + '</span>' +
+            '</div>' +
+            '<div class="ra-sched-session-room"><span class="ra-sched-room-prefix">LL-112-</span>' + sess.rooms + '</div>' +
+            '<div class="ra-sched-session-ra">RA: ' + block.ra + '</div>' +
+          '</div>';
+        });
+
+        html += '</div></div>';
+      }
+    });
+
+    html += '</div>';
+    container.innerHTML = html;
+
+    // Update stats
+    var el = function(id) { return document.getElementById(id); };
+    if (el('raStatSessions')) el('raStatSessions').textContent = sessionCount;
+    if (el('raStatParticipants')) el('raStatParticipants').textContent = sessionCount * 2;
+    if (el('raStatCredits')) el('raStatCredits').textContent = (sessionCount * 2).toFixed(1);
+    if (el('raStatRA')) el('raStatRA').textContent = Object.keys(ras).join(', ');
+    if (el('raStatFirst')) el('raStatFirst').textContent = firstTime || '—';
+    if (el('raStatLast')) el('raStatLast').textContent = lastTime || '—';
+
+    // Highlight active rooms on mini floorplan
+    ['ra-fp-b', 'ra-fp-c', 'ra-fp-f', 'ra-fp-g'].forEach(function(id) {
+      var room = document.getElementById(id);
+      if (room) room.classList.add('ra-fp-active');
+    });
+  }
+
+  function raSwitchDay(dayKey) {
+    raCurrentDay = dayKey;
+    document.querySelectorAll('.ra-sched-day-tab').forEach(function(t) { t.classList.remove('active'); });
+    var active = document.querySelector('.ra-sched-day-tab[data-day="' + dayKey + '"]');
+    if (active) active.classList.add('active');
+    raRenderDay(dayKey);
+  }
+
+  // Wire up day tab clicks
+  document.querySelectorAll('.ra-sched-day-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      raSwitchDay(tab.dataset.day);
+    });
+  });
+
+  // Auto-select today's day if within the week
+  var dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  var todayDay = dayNames[new Date().getDay()];
+  if (raSchedule[todayDay]) {
+    raSwitchDay(todayDay);
+  } else {
+    raRenderDay('monday');
+  }
+})();
 </script>
 </body>
 </html>
