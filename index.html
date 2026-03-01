@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spring 2026 Study Schedule — MOR Subject Pool</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700;8..60,900&display=swap" rel="stylesheet">
 <style>
 :root {
   --cardinal: #990000;
   --cardinal-dark: #6B0000;
+  --gold: #FFCC00;
   --bg: #FAFAF8;
   --surface: #FFFFFF;
   --text: #1A1A1A;
@@ -28,16 +29,16 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
   --radius: 8px;
   --current-week-bg: #FFF9F0;
-  --current-week-border: #F5C542;
+  --current-week-border: var(--gold);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* Dark mode toggle */
 .dark-mode-toggle {
-  background: rgba(255,255,255,0.15);
-  border: 1.5px solid rgba(255,255,255,0.3);
-  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
   color: white;
   font-size: 14px;
   width: 34px;
@@ -67,7 +68,7 @@
   gap: 4px;
   background: rgba(255,215,0,0.15);
   border: 1px solid rgba(255,215,0,0.3);
-  border-radius: 14px;
+  border-radius: 4px;
   padding: 3px 10px 3px 8px;
   font-size: 11px;
   font-weight: 600;
@@ -198,8 +199,8 @@ body.dark .home-intro-tab:hover { background: #2E1A1A; border-color: var(--cardi
 body.dark .researcher-card-header { background: linear-gradient(135deg, #5A0000, #3A0000); }
 body.dark .rc-week-header { background: #2A2A2A; border-color: #3A3A3A; }
 body.dark .rc-study { border-color: #3A3A3A; }
-body.dark .footer-enhanced { background: #1A1A1A; border-color: #3A3A3A; color: #A0A0A0; }
-body.dark .footer-enhanced a { color: #FF8A80; }
+body.dark .footer-enhanced { background: #1A0000; border-color: #3A3A3A; color: rgba(255,255,255,0.7); }
+body.dark .footer-enhanced a { color: var(--gold); }
 body.dark .back-to-top { background: #3A3A3A; color: #E8E8E8; border-color: #4A4A4A; }
 body.dark .fac-room { background: #2A2A2A; border-color: #3A3A3A; }
 body.dark .room-modal { background: #242424; }
@@ -251,15 +252,27 @@ body {
 .header-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 10px 24px;
+  padding: 12px 24px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
 }
 
-.header-title h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; }
-.header-title .subtitle { font-size: 13px; font-weight: 400; opacity: 0.8; }
+.header-eyebrow {
+  font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3px;
+}
+.header-title h1 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 20px; font-weight: 900; letter-spacing: 0.2px; line-height: 1.15; margin: 0;
+}
+.header-title .subtitle { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.8); margin-top: 1px; }
+
+.header-gold-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
+}
 
 .header-stats {
   display: flex;
@@ -267,26 +280,29 @@ body {
   align-items: center;
 }
 .header-stat {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.12);
   padding: 3px 10px;
   border-radius: 12px;
   white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .header-badge .updated {
-  background: rgba(255,255,255,0.15);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+  background: rgba(0,0,0,0.25);
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255,255,255,0.15);
 }
 
 .header-reset {
   padding: 5px 14px;
-  border: 1.5px solid rgba(255,255,255,0.4);
-  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
   background: transparent;
   color: rgba(255,255,255,0.8);
   font-family: inherit;
@@ -299,8 +315,8 @@ body {
 }
 .header-reset.visible { display: inline-block; }
 .header-reset:hover {
-  background: rgba(255,255,255,0.2);
-  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5);
   color: white;
 }
 
@@ -379,7 +395,7 @@ body {
 
 .nav-tab:hover { color: var(--cardinal); }
 .nav-tab:focus-visible { color: var(--cardinal); box-shadow: inset 0 -2px 0 var(--cardinal), 0 0 0 2px rgba(153,0,0,0.2); border-radius: 2px 2px 0 0; }
-.nav-tab.active { color: var(--cardinal); border-bottom-color: var(--cardinal); }
+.nav-tab.active { color: var(--cardinal); border-bottom-color: var(--gold); font-weight: 700; }
 
 .main { max-width: 1200px; margin: 0 auto; padding: 20px 24px; padding-top: calc(var(--header-h, 90px) + var(--nav-h, 42px) + 20px); }
 .section { display: none; }
@@ -391,7 +407,7 @@ body {
   margin-bottom: 16px;
   line-height: 1.6;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 2px solid var(--gold);
 }
 
 /* ═══ Tables ═══ */
@@ -410,14 +426,14 @@ table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 thead th {
   background: #F7F7F5;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   color: var(--text-secondary);
-  padding: 8px 12px;
+  padding: 10px 12px;
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   white-space: nowrap;
 }
 
@@ -442,8 +458,9 @@ thead th {
 
 /* Week column styling */
 .cal-week-label {
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--cardinal);
   line-height: 1.3;
 }
@@ -510,7 +527,7 @@ tbody tr.current-week-row td:first-child {
 .badge {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
@@ -525,14 +542,14 @@ tbody tr.current-week-row td:first-child {
   color: white;
   font-weight: 700;
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: 11px;
 }
 
 .badge-2part {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #F3E5F5;
@@ -547,7 +564,7 @@ tbody tr.current-week-row td:first-child {
 .badge-start {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #E8F5E9;
@@ -562,7 +579,7 @@ tbody tr.current-week-row td:first-child {
 .badge-end {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #FFF3E0;
@@ -577,7 +594,7 @@ tbody tr.current-week-row td:first-child {
 .badge-paused {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #F3E5F5;
@@ -592,7 +609,7 @@ tbody tr.current-week-row td:first-child {
 .badge-pending {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #FFF8E1;
@@ -608,7 +625,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .badge-stackable {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #FFF8E1;
@@ -623,7 +640,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .badge-stackable-maybe {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #F5F5F5;
@@ -638,7 +655,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .badge-stacked {
   display: inline-block;
   padding: 1px 7px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #EDE9FE;
@@ -652,7 +669,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .badge-in-stacked {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 600;
   background: #F5F3FF;
@@ -675,7 +692,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .stack-callout {
   background: white;
   border: 2px solid #7C3AED;
-  border-radius: 12px;
+  border-radius: var(--radius);
   overflow: hidden;
   margin-bottom: 16px;
 }
@@ -704,7 +721,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   font-size: 11px;
   font-weight: 600;
   padding: 3px 10px;
-  border-radius: 12px;
+  border-radius: 4px;
   background: #EDE9FE;
   color: #6D28D9;
 }
@@ -801,7 +818,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .badge-current-week {
   display: inline-block;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
   background: #FFF9F0;
@@ -910,7 +927,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 
 .week-header:hover { background: #F0F0EE; }
 .week-header:focus-visible { outline: 2px solid var(--cardinal); outline-offset: -2px; }
-.week-header .week-label { font-weight: 700; font-size: 14px; color: var(--cardinal); }
+.week-header .week-label { font-family: 'Source Serif 4', Georgia, serif; font-weight: 900; font-size: 14px; color: var(--cardinal); }
 .week-header .week-dates { font-size: 13px; color: var(--text-secondary); }
 .week-header .week-count { margin-left: auto; font-size: 12px; color: var(--text-muted); }
 .week-header .chevron { font-size: 12px; color: var(--text-muted); transition: transform 0.2s; }
@@ -964,7 +981,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 .note-bar {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--cardinal);
+  border-left: 3px solid var(--gold);
   border-radius: var(--radius);
   padding: 10px 14px;
   margin-bottom: 14px;
@@ -1053,7 +1070,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   color: var(--cardinal);
   background: #FEF0F0;
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 3px;
 }
 .sp-week-studies { padding: 10px 14px; }
 .sp-study {
@@ -1071,7 +1088,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   font-size: 10px;
   font-weight: 600;
   padding: 1px 7px;
-  border-radius: 10px;
+  border-radius: 3px;
 }
 .sp-study-status.confirmed { background: #ECFDF5; color: #065F46; }
 .sp-study-status.maybe { background: #FFFBEB; color: #92400E; }
@@ -1375,10 +1392,11 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
-.fac-suite-header-112 { background: #333; }
-.fac-suite-header-110 { background: #333; }
+.fac-suite-header-112 { background: var(--cardinal); }
+.fac-suite-header-110 { background: var(--cardinal); }
+.fac-suite-gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%); }
 
-.fac-suite-title { font-size: 15px; font-weight: 700; }
+.fac-suite-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 900; }
 .fac-suite-sub { font-size: 11px; opacity: 0.7; }
 
 .fac-suite-status {
@@ -1546,7 +1564,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
+  background: #2A0A0A;
   color: white;
   padding: 10px 14px;
   border-radius: 6px;
@@ -1564,7 +1582,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-top-color: #333;
+  border-top-color: #2A0A0A;
 }
 .fac-room.fac-active:hover .fac-room-tooltip,
 .fac-room.fac-active:focus .fac-room-tooltip {
@@ -1573,7 +1591,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 
 /* ═══ LL102 Computer Lab ═══ */
 .fac-suite-102 { margin-top: 16px; }
-.fac-suite-header-102 { background: #002B5C; }
+.fac-suite-header-102 { background: var(--cardinal); }
 
 .lab102-floor { padding: 16px; }
 
@@ -1704,7 +1722,7 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  background: #333;
+  background: var(--cardinal);
   color: white;
   font-size: 11px;
   font-weight: 600;
@@ -1725,14 +1743,15 @@ body.dark .badge-pending { background: #3A3000; color: #FFE082; border-color: #5
 }
 
 .rc-minimap-102 .rc-minimap-header {
-  background: #002B5C;
+  background: var(--cardinal);
   padding: 14px 18px;
   gap: 12px;
   border-radius: 7px 7px 0 0;
 }
 .rc-minimap-102 .rc-minimap-header .rc-minimap-title {
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 900;
   opacity: 1;
 }
 .rc-minimap-102 .rc-minimap-header .rc-minimap-sub {
@@ -1838,10 +1857,10 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
   gap: 12px;
   border-radius: 7px 7px 0 0;
 }
-.rc-minimap-suite .rc-minimap-header .rc-minimap-title { font-size: 15px; font-weight: 700; opacity: 1; }
+.rc-minimap-suite .rc-minimap-header .rc-minimap-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; font-weight: 900; opacity: 1; }
 .rc-minimap-suite .rc-minimap-header .rc-minimap-sub { font-size: 11px; font-weight: 400; opacity: 0.7; }
-.rc-minimap-112 .rc-minimap-header { background: #333; }
-.rc-minimap-110 .rc-minimap-header { background: #333; }
+.rc-minimap-112 .rc-minimap-header { background: var(--cardinal); }
+.rc-minimap-110 .rc-minimap-header { background: var(--cardinal); }
 
 .rc-minimap-multi {
   display: flex;
@@ -1863,6 +1882,7 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
   padding: 16px 20px;
   background: #FAFAF9;
   border: 1px solid var(--border-light);
+  border-top: 3px solid var(--gold);
   border-radius: var(--radius);
 }
 
@@ -2019,7 +2039,7 @@ body.dark #studies-tbody mark { background: #5A4B00; color: #FFE082; }
 .format-chip {
   padding: 6px 14px;
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 4px;
   background: var(--surface);
   font-family: inherit;
   font-size: 12px;
@@ -2183,7 +2203,8 @@ body.dark .study-page-link:hover {
   margin-bottom: 24px;
   background: var(--surface);
   border: 2px solid var(--cardinal);
-  border-radius: 14px;
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
   padding: 14px 24px;
   box-shadow: 0 2px 12px rgba(153,0,0,0.08);
   position: sticky;
@@ -2193,7 +2214,7 @@ body.dark .study-page-link:hover {
 }
 .my-schedule-picker.picker-stuck {
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 
 .my-schedule-picker .picker-label {
@@ -2237,7 +2258,7 @@ body.dark .study-page-link:hover {
 .my-schedule-picker select {
   padding: 10px 36px 10px 14px;
   border: 2px solid var(--border);
-  border-radius: 10px;
+  border-radius: 6px;
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
@@ -2265,7 +2286,7 @@ body.dark .study-page-link:hover {
 .researcher-nav-btn {
   background: var(--surface);
   border: 1.5px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
   width: 32px;
   height: 32px;
   display: flex;
@@ -2309,10 +2330,15 @@ body.dark .researcher-nav-btn:hover:not(:disabled) { background: #3A1A1A; border
 .researcher-card-header {
   background: var(--cardinal);
   color: white;
-  padding: 14px 18px;
+  padding: 16px 18px 14px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.researcher-card-gold-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
 }
 
 .rc-header-top {
@@ -2322,7 +2348,7 @@ body.dark .researcher-nav-btn:hover:not(:disabled) { background: #3A1A1A; border
   gap: 8px;
 }
 
-.researcher-card-header .rc-name { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+.researcher-card-header .rc-name { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 900; letter-spacing: 0.01em; }
 
 .researcher-card-header .rc-meta {
   display: flex;
@@ -2332,10 +2358,11 @@ body.dark .researcher-nav-btn:hover:not(:disabled) { background: #3A1A1A; border
 }
 
 .researcher-card-header .rc-meta span {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.12);
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 3px;
   white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .rc-credit-row {
@@ -2369,8 +2396,9 @@ body.dark .researcher-nav-btn:hover:not(:disabled) { background: #3A1A1A; border
   gap: 8px;
 }
 .rc-week-title {
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--cardinal);
 }
 .rc-week-dates {
@@ -2388,7 +2416,7 @@ body.dark .researcher-nav-btn:hover:not(:disabled) { background: #3A1A1A; border
   padding: 2px 8px;
   background: white;
   border: 1px solid var(--border-light);
-  border-radius: 10px;
+  border-radius: 3px;
 }
 .rc-week-stat strong { font-weight: 700; }
 .rc-week-group.rc-week-past .rc-week-header { opacity: 0.5; }
@@ -2564,7 +2592,7 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
 }
 .room-modal-overlay.active { display: flex; }
 .room-modal {
-  background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  background: white; border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,0.25);
   max-width: 360px; width: 100%; overflow: hidden;
   animation: modalIn 0.2s ease;
 }
@@ -2572,10 +2600,11 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
 .room-modal-header {
   padding: 16px 20px; color: white; font-size: 14px; font-weight: 700;
   display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Source Serif 4', Georgia, serif;
 }
 .room-modal-close {
   background: rgba(255,255,255,0.2); border: none; color: white;
-  width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+  width: 28px; height: 28px; border-radius: 4px; cursor: pointer;
   font-size: 16px; display: flex; align-items: center; justify-content: center;
 }
 .room-modal-body { padding: 16px 20px; font-size: 13px; line-height: 1.6; }
@@ -2615,25 +2644,31 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
 
 /* ═══ Footer enhanced ═══ */
 .footer-enhanced {
-  border-top: 1px solid var(--border); padding: 24px;
-  max-width: 1280px; margin: 0 auto; font-size: 12px; color: var(--text-secondary);
+  background: var(--cardinal); padding: 24px 24px 20px;
+  max-width: 100%; margin: 0; font-size: 12px; color: rgba(255,255,255,0.85);
+}
+.footer-enhanced .footer-gold-bar {
+  height: 3px; background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
+  margin: 0 0 20px; border-radius: 2px;
 }
 .footer-grid {
   display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 16px;
+  max-width: 1280px; margin-left: auto; margin-right: auto; margin-bottom: 16px;
 }
 .footer-col h4 {
-  font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 8px;
 }
 .footer-col a {
-  display: block; color: var(--cardinal); text-decoration: none;
+  display: block; color: var(--gold); text-decoration: none;
   padding: 2px 0; font-weight: 500;
 }
-.footer-col a:hover { text-decoration: underline; }
+.footer-col a:hover { text-decoration: underline; color: #fff; }
 .footer-col p { margin-bottom: 4px; line-height: 1.5; }
 .footer-credit {
-  text-align: center; font-size: 11px; color: var(--text-muted);
-  padding-top: 16px; border-top: 1px solid var(--border-light);
+  text-align: center; font-size: 10px; color: rgba(255,255,255,0.45);
+  padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12);
+  max-width: 1280px; margin: 0 auto; letter-spacing: 0.5px;
 }
 
 /* ═══ Enhanced print stylesheet ═══ */
@@ -2695,8 +2730,9 @@ body.dark .cal-researcher-filter { background: #2A2A2A; border-color: #3A3A3A; c
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-  font-weight: 700;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 13px;
+  font-weight: 900;
   color: #8B6914;
 }
 .twb-empty .this-week-banner-header { margin-bottom: 0; }
@@ -2828,20 +2864,60 @@ body.dark {
   --ra-jake-bg: #2e2a14;
 }
 
+/* Study Pages Picker */
+.study-pages-picker {
+  display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.study-pages-btn {
+  flex: 1; min-width: 240px; display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; background: var(--surface); border: 2px solid var(--border-light);
+  border-radius: 10px; cursor: pointer; font-family: inherit; text-align: left;
+  transition: all 0.2s ease;
+}
+.study-pages-btn:hover { border-color: #ccc; background: #fff; }
+.study-pages-btn.active { border-color: var(--cardinal); background: #FEF5F5; box-shadow: 0 2px 8px rgba(153,0,0,0.08); }
+body.dark .study-pages-btn { background: #1e1e1e; border-color: #333; }
+body.dark .study-pages-btn:hover { border-color: #555; }
+body.dark .study-pages-btn.active { border-color: var(--cardinal); background: #2a1a1a; }
+.spb-icon { font-size: 20px; flex-shrink: 0; }
+.spb-title { font-size: 14px; font-weight: 700; color: var(--text); display: block; }
+.spb-meta { font-size: 11px; color: var(--text-muted); display: block; margin-top: 1px; }
+.study-page-content { animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
 .ra-sched-header-card {
-  display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); flex-wrap: wrap;
+  background: var(--cardinal); padding: 20px 24px 22px; margin-bottom: 0; position: relative;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
-.ra-sched-title { font-size: 17px; font-weight: 700; color: var(--cardinal); }
-.ra-sched-meta { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-.ra-sched-week-select-wrap { display: flex; align-items: center; gap: 8px; }
-.ra-sched-week-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.ra-sched-header-eyebrow {
+  color: rgba(255,255,255,0.65); font-size: 10px; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 6px;
+}
+.ra-sched-title {
+  color: #fff; font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 24px; font-weight: 900; letter-spacing: 0.3px; line-height: 1.15; margin: 0 0 4px;
+}
+.ra-sched-meta { font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 2px; }
+.ra-sched-meta a { color: var(--gold); text-decoration: none; }
+.ra-sched-meta a:hover { text-decoration: underline; }
+.ra-sched-header-badge {
+  position: absolute; top: 20px; right: 24px;
+  background: rgba(0,0,0,0.25); color: #fff; font-size: 9px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 3px;
+}
+.ra-sched-gold-bar {
+  height: 4px; background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
+  margin-bottom: 16px; border-radius: 0 0 2px 2px;
+}
+.ra-sched-week-select-wrap { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.ra-sched-week-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; }
 .ra-sched-week-select {
-  font-family: inherit; font-size: 13px; font-weight: 600; padding: 6px 12px;
-  border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text);
-  cursor: pointer;
+  font-family: inherit; font-size: 12px; font-weight: 600; padding: 5px 10px;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 5px;
+  background: rgba(255,255,255,0.12); color: #fff; cursor: pointer;
 }
+.ra-sched-week-select option { color: #333; background: #fff; }
 
 .ra-sched-layout { display: grid; grid-template-columns: 1fr 280px; gap: 20px; align-items: start; }
 
@@ -2999,8 +3075,9 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 <div class="header">
   <div class="header-inner">
     <div class="header-title">
+      <div class="header-eyebrow">Marshall Behavioral Research Lab</div>
       <h1>Spring 2026 Study Schedule</h1>
-      <div class="subtitle">MOR Subject Pool · Marshall Behavioral Research Lab</div>
+      <div class="subtitle">MOR Subject Pool · Verna &amp; Peter Dauterive Hall (VPD), Lower Level</div>
     </div>
     <div class="header-stats">
       <span class="header-stat">1,517 Students</span>
@@ -3009,13 +3086,23 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <span class="header-stat hide-mobile">~7K+ Participants</span>
     </div>
     <div class="header-badge" style="position:relative">
-      <div class="updated" id="updated-date" data-date="2026-02-16">Updated Feb 16, 2026</div>
+      <div class="updated" id="updated-date" data-date="2026-02-28">Updated Feb 28, 2026</div>
       <span class="whats-new-dot" id="whats-new-dot" title="Schedule updated since your last visit" style="display:none">●</span>
       <button class="changelog-trigger" id="changelog-trigger"><span class="cl-dot"></span> What's New</button>
       <div class="changelog-panel" id="changelog-panel">
         <div class="changelog-panel-header">
           <span>What's Changed</span>
           <button class="changelog-dismiss" id="changelog-dismiss">Dismiss</button>
+        </div>
+        <div class="changelog-entry">
+          <div class="changelog-entry-date">Feb 28, 2026</div>
+          <ul class="changelog-entry-items">
+            <li>Added Ferragamo "Brainstorming with a Partner" RA schedule (LL-110, 2 weeks)</li>
+            <li>Study Pages tab now covers both Kwon and Ferragamo studies</li>
+            <li>All RA names updated to Last, First format</li>
+            <li>Merged Steve Ren across both studies</li>
+            <li>Site header redesigned to match USC Marshall brand</li>
+          </ul>
         </div>
         <div class="changelog-entry">
           <div class="changelog-entry-date">Feb 16, 2026</div>
@@ -3038,6 +3125,7 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
     <button class="header-reset" id="header-reset" title="Clear researcher selection">⟳ Reset</button>
     <button class="dark-mode-toggle" id="dark-mode-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
   </div>
+  <div class="header-gold-bar"></div>
   <div class="semester-progress" id="semester-progress">
     <div class="semester-progress-bar" id="semester-progress-bar"></div>
     <div class="semester-progress-labels">
@@ -3054,7 +3142,7 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
     <button class="nav-tab" data-tab="studies" role="tab" aria-selected="false" aria-controls="studies" id="tab-studies"><span class="tab-icon">📋</span>All Studies<span class="tab-count">29</span><span class="tab-sub">Full list with filters</span></button>
     <button class="nav-tab" data-tab="calendar" role="tab" aria-selected="false" aria-controls="calendar" id="tab-calendar"><span class="tab-icon">📅</span>Calendar<span class="tab-sub">Week-by-week grid</span></button>
     <button class="nav-tab" data-tab="facilities" role="tab" aria-selected="false" aria-controls="facilities" id="tab-facilities"><span class="tab-icon">🗺️</span>Facilities<span class="tab-sub">Room maps &amp; weekly usage</span></button>
-    <button class="nav-tab" data-tab="rasched" role="tab" aria-selected="false" aria-controls="rasched" id="tab-rasched"><span class="tab-icon">🤖</span>AI-Assisted Negotiation<span class="tab-sub">RA schedule &amp; sessions</span></button>
+    <button class="nav-tab" data-tab="rasched" role="tab" aria-selected="false" aria-controls="rasched" id="tab-rasched"><span class="tab-icon">📋</span>Study Pages<span class="tab-sub">RA schedules &amp; sessions</span></button>
   </div>
 </nav>
 
@@ -3089,7 +3177,7 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <div class="home-intro-tab" data-goto="studies" style="cursor:pointer"><strong>All Studies</strong> — Browse every study in a sortable table. Filter by format or researcher.</div>
       <div class="home-intro-tab" data-goto="calendar" style="cursor:pointer"><strong>Calendar</strong> — Week-by-week grid of what's running where, organized by facility.</div>
       <div class="home-intro-tab" data-goto="facilities" style="cursor:pointer"><strong>Facilities</strong> — Interactive floor plans of the LL-110, LL-112, and LL102 suites showing room assignments by week.</div>
-      <div class="home-intro-tab" data-goto="rasched" style="cursor:pointer"><strong>AI Study</strong> — RA schedule for the AI-Assisted Negotiation Study (Kwon & Lee). Day-by-day timelines, room assignments, and session stats.</div>
+      <div class="home-intro-tab" data-goto="rasched" style="cursor:pointer"><strong>Study Pages</strong> — RA schedules and session details for in-person studies. Currently: AI-Assisted Negotiation (Kwon &amp; Lee) and Brainstorming with a Partner (Ferragamo).</div>
     </div>
     <div class="home-intro-badges">
       <span class="badge-legend-item"><span class="badge badge-online">Online</span> Qualtrics survey</span>
@@ -3255,6 +3343,7 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         <span class="fac-suite-title">LL-112 Suite</span>
         <span class="fac-suite-sub">Audio/Video Recording · NOLDUS</span>
       </div>
+      <div class="fac-suite-gold-bar"></div>
       <div class="fac-suite-status" id="fac-112-status"></div>
       <div class="fac-grid fac-grid-112">
         <div class="fac-room" data-room="112-e" id="fac-112-e" tabindex="-1">
@@ -3333,6 +3422,7 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         <span class="fac-suite-title">LL-110 Suite</span>
         <span class="fac-suite-sub">Eye-Tracking · TOBII · BIOPAC</span>
       </div>
+      <div class="fac-suite-gold-bar"></div>
       <div class="fac-suite-status" id="fac-110-status"></div>
       <div class="fac-grid fac-grid-110">
         <div class="fac-room fac-backstage" data-room="110-bs">
@@ -3445,110 +3535,183 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
   </div>
 </div>
 
-<!-- ═══════════════ AI STUDY RA SCHEDULE ═══════════════ -->
+<!-- ═══════════════ STUDY PAGES ═══════════════ -->
 <div class="section" id="rasched" role="tabpanel" aria-labelledby="tab-rasched">
 
-  <div class="ra-sched-header-card">
-    <div class="ra-sched-header-left">
-      <div class="ra-sched-title">AI-Assisted Negotiation Study</div>
-      <div class="ra-sched-meta">Researcher: Brian Kwon &amp; Elena Lee · VPD Lower Level, Suite LL-112</div>
+  <!-- Study Picker -->
+  <div class="study-pages-picker">
+    <button class="study-pages-btn active" data-study-page="kwon" onclick="switchStudyPage('kwon')">
+      <span class="spb-icon">🤖</span>
+      <span class="spb-title">AI-Assisted Negotiation Study</span>
+      <span class="spb-meta">Kwon &amp; Lee · LL-112 · Mar 2–21</span>
+    </button>
+    <button class="study-pages-btn" data-study-page="ferragamo" onclick="switchStudyPage('ferragamo')">
+      <span class="spb-icon">🧠</span>
+      <span class="spb-title">Brainstorming with a Partner</span>
+      <span class="spb-meta">Ferragamo · LL-110 · Feb 10 – Mar 14</span>
+    </button>
+  </div>
+
+  <!-- ═══ KWON STUDY PAGE ═══ -->
+  <div id="studyPage-kwon" class="study-page-content">
+    <div class="ra-sched-header-card">
+      <div class="ra-sched-header-eyebrow">Marshall Behavioral Research Lab</div>
+      <div class="ra-sched-title">AI-Assisted Negotiation Study — RA Schedule</div>
+      <div class="ra-sched-meta">Researcher: Brian Kwon · <a href="mailto:deuksink@marshall.usc.edu">deuksink@marshall.usc.edu</a> · Elena Lee &amp; Peter Kim (co-PIs)<br>VPD Lower Level, Suite LL-112</div>
+      <div class="ra-sched-header-badge" id="kwonWeekBadge">Week 1</div>
+      <div class="ra-sched-week-select-wrap">
+        <label class="ra-sched-week-label" for="ra-week-select">Week</label>
+        <select id="ra-week-select" class="ra-sched-week-select">
+          <option value="1" selected>Week 1 · Mar 2–6</option>
+        </select>
+      </div>
     </div>
-    <div class="ra-sched-week-select-wrap">
-      <label class="ra-sched-week-label" for="ra-week-select">Week</label>
-      <select id="ra-week-select" class="ra-sched-week-select">
-        <option value="1" selected>Week 1 · Mar 2–6</option>
-      </select>
+    <div class="ra-sched-gold-bar"></div>
+
+    <div class="ra-sched-layout">
+      <div class="ra-sched-main">
+        <div class="ra-sched-day-tabs" id="raDayTabs">
+          <button class="ra-sched-day-tab active" data-day="monday">Mon<span class="ra-sched-tab-date">Mar 2</span></button>
+          <button class="ra-sched-day-tab" data-day="tuesday">Tue<span class="ra-sched-tab-date">Mar 3</span></button>
+          <button class="ra-sched-day-tab" data-day="wednesday">Wed<span class="ra-sched-tab-date">Mar 4</span></button>
+          <button class="ra-sched-day-tab" data-day="thursday">Thu<span class="ra-sched-tab-date">Mar 5</span></button>
+          <button class="ra-sched-day-tab" data-day="friday">Fri<span class="ra-sched-tab-date">Mar 6</span></button>
+        </div>
+        <div class="ra-sched-legend">
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-mayank"></div>Joshi, Mayank</div>
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-steve"></div>Ren, Steve</div>
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-jake"></div>Mariani, Jake</div>
+        </div>
+        <div id="raSchedContent"></div>
+      </div>
+      <div class="ra-sched-sidebar">
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">LL-112 Floorplan</div>
+          <div class="ra-sched-mini-fp" id="raMiniFloorplan">
+            <div class="ra-fp-room ra-fp-storage ra-fp-stor">Storage</div>
+            <div class="ra-fp-room ra-fp-e">E<div class="ra-fp-label">Std Lab</div></div>
+            <div class="ra-fp-room ra-fp-d">D<div class="ra-fp-label">Std Lab</div></div>
+            <div class="ra-fp-room ra-fp-c" id="ra-fp-c">C<div class="ra-fp-label">NOLDUS</div></div>
+            <div class="ra-fp-room ra-fp-b" id="ra-fp-b">B<div class="ra-fp-label">NOLDUS</div></div>
+            <div class="ra-fp-room ra-fp-a">A<div class="ra-fp-label">Conf.</div></div>
+            <div class="ra-fp-corridor ra-fp-corr">Corridor</div>
+            <div class="ra-fp-room ra-fp-backstage ra-fp-back">Backstage</div>
+            <div class="ra-fp-room ra-fp-f" id="ra-fp-f">F<div class="ra-fp-label">NOLDUS</div></div>
+            <div class="ra-fp-room ra-fp-g" id="ra-fp-g">G<div class="ra-fp-label">NOLDUS</div></div>
+            <div class="ra-fp-room ra-fp-h">H<div class="ra-fp-label">Control</div></div>
+            <div class="ra-fp-room ra-fp-reception ra-fp-rec">Reception</div>
+          </div>
+          <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--text-muted);">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--cardinal);"></div>
+            Active session rooms
+          </div>
+        </div>
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">Day Summary</div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Sessions</span><span class="ra-sched-stat-value" id="raStatSessions">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Participants</span><span class="ra-sched-stat-value" id="raStatParticipants">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credits</span><span class="ra-sched-stat-value" id="raStatCredits">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">RA on duty</span><span class="ra-sched-stat-value" id="raStatRA">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">First session</span><span class="ra-sched-stat-value" id="raStatFirst">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Last session</span><span class="ra-sched-stat-value" id="raStatLast">—</span></div>
+        </div>
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">Weekly Overview</div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Sessions</span><span class="ra-sched-stat-value">58</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Per Session</span><span class="ra-sched-stat-value">2 participants</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Participants</span><span class="ra-sched-stat-value">116</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credit / Participant</span><span class="ra-sched-stat-value">1.0</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Credits</span><span class="ra-sched-stat-value" style="color: var(--cardinal); font-size: 15px;">116.0</span></div>
+        </div>
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">RA Weekly Totals</div>
+          <div class="ra-sched-ra-summary">
+            <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-mayank">MJ</div><div><div class="ra-sched-ra-name">Joshi, Mayank</div><div class="ra-sched-ra-detail">26 sessions · 52 participants</div></div></div>
+            <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-steve">SR</div><div><div class="ra-sched-ra-name">Ren, Steve</div><div class="ra-sched-ra-detail">12 sessions · 24 participants</div></div></div>
+            <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-jake">JM</div><div><div class="ra-sched-ra-name">Mariani, Jake</div><div class="ra-sched-ra-detail">20 sessions · 40 participants</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note-bar">
+      <strong>Study contact:</strong> Brian Kwon · 213-821-9746 · Week 1 of data collection · Rooms LL-112-B, C, F, G
     </div>
   </div>
 
-  <div class="ra-sched-layout">
-    <div class="ra-sched-main">
-      <!-- Day Tabs -->
-      <div class="ra-sched-day-tabs" id="raDayTabs">
-        <button class="ra-sched-day-tab active" data-day="monday">Mon<span class="ra-sched-tab-date">Mar 2</span></button>
-        <button class="ra-sched-day-tab" data-day="tuesday">Tue<span class="ra-sched-tab-date">Mar 3</span></button>
-        <button class="ra-sched-day-tab" data-day="wednesday">Wed<span class="ra-sched-tab-date">Mar 4</span></button>
-        <button class="ra-sched-day-tab" data-day="thursday">Thu<span class="ra-sched-tab-date">Mar 5</span></button>
-        <button class="ra-sched-day-tab" data-day="friday">Fri<span class="ra-sched-tab-date">Mar 6</span></button>
+  <!-- ═══ FERRAGAMO STUDY PAGE ═══ -->
+  <div id="studyPage-ferragamo" class="study-page-content" style="display:none">
+    <div class="ra-sched-header-card">
+      <div class="ra-sched-header-eyebrow">Marshall Behavioral Research Lab</div>
+      <div class="ra-sched-title">Brainstorming with a Partner — RA Schedule</div>
+      <div class="ra-sched-meta">Researcher: Alys Ferragamo · <a href="mailto:huhb@marshall.usc.edu">huhb@marshall.usc.edu</a> · 213-821-9746<br>VPD Lower Level, Suite LL-110</div>
+      <div class="ra-sched-header-badge" id="ferraWeekBadge">Week 1</div>
+      <div class="ra-sched-week-select-wrap">
+        <label class="ra-sched-week-label" for="ferra-week-select">Week</label>
+        <select id="ferra-week-select" class="ra-sched-week-select" onchange="ferraWeekChange(this.value)">
+          <option value="week1" selected>Week 1 · Feb 10–13</option>
+          <option value="week2">Week 2 · Feb 17–20</option>
+        </select>
       </div>
-
-      <!-- RA Legend -->
-      <div class="ra-sched-legend">
-        <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-mayank"></div>Mayank</div>
-        <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-steve"></div>Steve</div>
-        <div class="ra-sched-legend-item"><div class="ra-sched-dot ra-sched-dot-jake"></div>Jake</div>
-      </div>
-
-      <!-- Schedule Content -->
-      <div id="raSchedContent"></div>
     </div>
+    <div class="ra-sched-gold-bar"></div>
 
-    <!-- Sidebar -->
-    <div class="ra-sched-sidebar">
-      <!-- Mini Floorplan -->
-      <div class="ra-sched-card">
-        <div class="ra-sched-card-title">LL-112 Floorplan</div>
-        <div class="ra-sched-mini-fp" id="raMiniFloorplan">
-          <div class="ra-fp-room ra-fp-storage ra-fp-stor">Storage</div>
-          <div class="ra-fp-room ra-fp-e">E<div class="ra-fp-label">Std Lab</div></div>
-          <div class="ra-fp-room ra-fp-d">D<div class="ra-fp-label">Std Lab</div></div>
-          <div class="ra-fp-room ra-fp-c" id="ra-fp-c">C<div class="ra-fp-label">NOLDUS</div></div>
-          <div class="ra-fp-room ra-fp-b" id="ra-fp-b">B<div class="ra-fp-label">NOLDUS</div></div>
-          <div class="ra-fp-room ra-fp-a">A<div class="ra-fp-label">Conf.</div></div>
-          <div class="ra-fp-corridor ra-fp-corr">Corridor</div>
-          <div class="ra-fp-room ra-fp-backstage ra-fp-back">Backstage</div>
-          <div class="ra-fp-room ra-fp-f" id="ra-fp-f">F<div class="ra-fp-label">NOLDUS</div></div>
-          <div class="ra-fp-room ra-fp-g" id="ra-fp-g">G<div class="ra-fp-label">NOLDUS</div></div>
-          <div class="ra-fp-room ra-fp-h">H<div class="ra-fp-label">Control</div></div>
-          <div class="ra-fp-room ra-fp-reception ra-fp-rec">Reception</div>
+    <div class="ra-sched-layout">
+      <div class="ra-sched-main">
+        <div class="ra-sched-day-tabs" id="ferraDayTabs"></div>
+        <div class="ra-sched-legend" id="ferraLegend">
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot" style="background:#1a6b8a"></div>Ketan, Saumya</div>
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot" style="background:#6b4c8a"></div>Ren, Steve</div>
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot" style="background:#8a6b1a"></div>Yen, Leia</div>
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot" style="background:#1a8a5c"></div>Solomon, Joseph</div>
+          <div class="ra-sched-legend-item"><div class="ra-sched-dot" style="background:#8a2e1a"></div>Fredrickson, Lissa</div>
         </div>
-        <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--text-muted);">
-          <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--cardinal);"></div>
-          Active session rooms
+        <div id="ferraSchedContent"></div>
+      </div>
+      <div class="ra-sched-sidebar">
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">LL-110 Floorplan</div>
+          <div class="ra-sched-mini-fp" id="ferraMiniFloorplan" style="grid-template-columns: 1fr 20px 1fr; grid-template-rows: repeat(6, 34px);">
+            <div class="ra-fp-room ra-fp-storage" style="grid-column:1/4;grid-row:1">Storage</div>
+            <div class="ra-fp-room ra-fp-backstage" style="grid-column:1;grid-row:2">Backstage</div>
+            <div class="ra-fp-room" style="grid-column:1;grid-row:3" id="ferra-fp-f">F<div class="ra-fp-label">BIOPAC</div></div>
+            <div class="ra-fp-room" style="grid-column:1;grid-row:4" id="ferra-fp-g">G<div class="ra-fp-label">BIOPAC</div></div>
+            <div class="ra-fp-room" style="grid-column:1;grid-row:5">H<div class="ra-fp-label">Control</div></div>
+            <div class="ra-fp-room ra-fp-reception" style="grid-column:1;grid-row:6">Recep.</div>
+            <div class="ra-fp-corridor" style="grid-column:2;grid-row:2/7">C</div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:2">E<div class="ra-fp-label">Std Lab</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:3" id="ferra-fp-d">D<div class="ra-fp-label">TOBII</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:4" id="ferra-fp-c">C<div class="ra-fp-label">TOBII</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:5" id="ferra-fp-b">B<div class="ra-fp-label">TOBII</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:6">A<div class="ra-fp-label">Office</div></div>
+          </div>
+          <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--text-muted);">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--cardinal);"></div>
+            Active session rooms
+          </div>
         </div>
-      </div>
-
-      <!-- Day Stats -->
-      <div class="ra-sched-card">
-        <div class="ra-sched-card-title">Day Summary</div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Sessions</span><span class="ra-sched-stat-value" id="raStatSessions">—</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Participants</span><span class="ra-sched-stat-value" id="raStatParticipants">—</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credits</span><span class="ra-sched-stat-value" id="raStatCredits">—</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">RA on duty</span><span class="ra-sched-stat-value" id="raStatRA">—</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">First session</span><span class="ra-sched-stat-value" id="raStatFirst">—</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Last session</span><span class="ra-sched-stat-value" id="raStatLast">—</span></div>
-      </div>
-
-      <!-- Weekly Overview -->
-      <div class="ra-sched-card">
-        <div class="ra-sched-card-title">Weekly Overview</div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Sessions</span><span class="ra-sched-stat-value">58</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Per Session</span><span class="ra-sched-stat-value">2 participants</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Participants</span><span class="ra-sched-stat-value">116</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credit / Participant</span><span class="ra-sched-stat-value">1.0</span></div>
-        <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Credits</span><span class="ra-sched-stat-value" style="color: var(--cardinal); font-size: 15px;">116.0</span></div>
-      </div>
-
-      <!-- RA Weekly Totals -->
-      <div class="ra-sched-card">
-        <div class="ra-sched-card-title">RA Weekly Totals</div>
-        <div class="ra-sched-ra-summary">
-          <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-mayank">M</div><div><div class="ra-sched-ra-name">Mayank</div><div class="ra-sched-ra-detail">26 sessions · 52 participants</div></div></div>
-          <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-steve">S</div><div><div class="ra-sched-ra-name">Steve</div><div class="ra-sched-ra-detail">12 sessions · 24 participants</div></div></div>
-          <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-jake">J</div><div><div class="ra-sched-ra-name">Jake</div><div class="ra-sched-ra-detail">20 sessions · 40 participants</div></div></div>
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">Day Summary</div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Sessions</span><span class="ra-sched-stat-value" id="ferraStatSessions">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Groups</span><span class="ra-sched-stat-value" id="ferraStatGroups">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">RA(s) on duty</span><span class="ra-sched-stat-value" id="ferraStatRA">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">First session</span><span class="ra-sched-stat-value" id="ferraStatFirst">—</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Last session</span><span class="ra-sched-stat-value" id="ferraStatLast">—</span></div>
         </div>
+        <div class="ra-sched-card" id="ferraWeeklyOverview"></div>
+        <div class="ra-sched-card" id="ferraRACard"></div>
       </div>
+    </div>
+    <div class="note-bar">
+      <strong>Study contact:</strong> Alys Ferragamo · Rooms LL-110-B, C, D · 3 groups per session, 15-min staggered arrivals, 30-min sessions
     </div>
   </div>
 
-  <div class="note-bar">
-    <strong>Study contact:</strong> Brian Kwon · 213-821-9746 · Week 1 of data collection · Rooms LL-112-B, C, F, G
-  </div>
 </div>
 
 </div>
 
 <footer class="footer-enhanced">
+  <div class="footer-gold-bar"></div>
   <div class="footer-grid">
     <div class="footer-col">
       <h4>Location</h4>
@@ -3603,9 +3766,13 @@ function studyPageLinkHTML(studyName, label) {
   if (!page) return '';
   label = label || 'Study Page ↗';
   if (page.charAt(0) === '#') {
-    // Internal tab link
-    var tab = page.substring(1);
-    return ' <a href="' + page + '" class="study-page-link" data-page-tab="' + tab + '" title="View study page">' + label + '</a>';
+    // Internal tab link, possibly with subpage: #rasched-ferragamo → tab=rasched, subpage=ferragamo
+    var parts = page.substring(1).split('-');
+    var tab = parts[0];
+    var subpage = parts.length > 1 ? parts.slice(1).join('-') : '';
+    var attrs = 'data-page-tab="' + tab + '"';
+    if (subpage) attrs += ' data-page-study="' + subpage + '"';
+    return ' <a href="' + page + '" class="study-page-link" ' + attrs + ' title="View study page">' + label + '</a>';
   }
   return ' <a href="' + page + '" target="_blank" rel="noopener" class="study-page-link" title="View study page">' + label + '</a>';
 }
@@ -3691,11 +3858,11 @@ var allStudies = [
   {researcher:"Martinez, Sammy", study:"Broker 3", week:"Mar 22", dateSort:"2026-03-22", dateLabel:"Week of Mar 22", n:"400", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
   {researcher:"Anicich, Eric", study:"Work Recovery Perceptions — Part 2", week:"Mar 22", dateSort:"2026-03-22", dateLabel:"Week of Mar 22", n:"200–400", dur:"2-part", format:"Online", cr:"0.50", facility:null, notes:"2-part study: Part 2 after Spring Recess", tag:"2-Part", irb:null},
   {researcher:"Berry, Zachariah", study:"MAC 1", week:"Mar 29", dateSort:"2026-03-29", dateLabel:"Week of Mar 29", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, irb:null},
-  {researcher:"Ferragamo, Alys", study:"In-Person Study – Brainstorming with a Partner", dateSort:"2026-02-10", dateLabel:"Feb 10 – Mar 14", n:"150", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-110", notes:"Paused week of Feb 22", completed:191, link:"https://marshall-mor.sona-systems.com/exp_info.aspx?experiment_id=1014", irb:null},
+  {researcher:"Ferragamo, Alys", study:"In-Person Study – Brainstorming with a Partner", dateSort:"2026-02-10", dateLabel:"Feb 10 – Mar 14", n:"150", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-110", notes:"Paused week of Feb 22", completed:191, link:"https://marshall-mor.sona-systems.com/exp_info.aspx?experiment_id=1014", irb:null, page:"#rasched-ferragamo"},
   {researcher:"Berry, Zachariah", study:"Org Change", dateSort:"2026-03-01", dateLabel:"Mar 1 – Apr 4", n:"200", dur:"10 min", format:"In-Person", cr:"0.25", facility:"LL-112", notes:null, irb:null},
   {researcher:"Ferragamo, Alys", study:"AI Task", dateSort:"2026-03-01", dateLabel:"Mar 1 – Mar 28", n:"400", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL102", notes:null, irb:null},
   {researcher:"Lee, Elena", study:"AI Interaction for Persuasion", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 18", n:"300", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL102", notes:null, irb:null},
-  {researcher:"Kwon, Brian", study:"AI-Assisted Negotiation Study", dateSort:"2026-03-01", dateLabel:"Mar 1 – Mar 21", n:"300", dur:"60 min", format:"In-Person", cr:"1.00", facility:"LL-112", notes:null, coPIs:["Lee, Elena","Kim, Peter"], irb:null, page:"#rasched"},
+  {researcher:"Kwon, Brian", study:"AI-Assisted Negotiation Study", dateSort:"2026-03-01", dateLabel:"Mar 1 – Mar 21", n:"300", dur:"60 min", format:"In-Person", cr:"1.00", facility:"LL-112", notes:null, coPIs:["Lee, Elena","Kim, Peter"], irb:null, page:"#rasched-kwon"},
   {researcher:"Ferragamo, Alys", study:"AI Interviews", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 18", n:"50", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL-112", notes:null, irb:null},
   {researcher:"Martinez, Sammy", study:"Broker – In-Person Option (TBD)", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 25", n:"300", dur:"15 min", format:"In-Person", cr:"0.25", facility:"LL-110", notes:"TBD status", irb:null},
   {researcher:"Dittmann, Andrea", study:"Survey About Your USC Marshall Experiences — T1", dateSort:"2026-03-29", dateLabel:"Mar 29 – Apr 4", n:"100+", dur:"10 min", format:"Hybrid", cr:"0.25", facility:"LL102", notes:null, tag:"2-Wave", coPIs:["Truong, Mindy"], irb:null},
@@ -4090,39 +4257,39 @@ function parseCreditAllocation(cr, nStr) {
 // RA schedule data for My Schedule view
 var raShiftData = {
   monday: {label:"Monday, March 2", blocks:[
-    {type:"setup",ra:"Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
-    {type:"setup",ra:"Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
-    {type:"pair",ra:"Steve",start:"3:30 PM",end:"5:30 PM",count:4}
+    {type:"setup",ra:"Joshi, Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
+    {type:"setup",ra:"Ren, Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
+    {type:"pair",ra:"Ren, Steve",start:"3:30 PM",end:"5:30 PM",count:4}
   ]},
   tuesday: {label:"Tuesday, March 3", blocks:[
-    {type:"setup",ra:"Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Steve",start:"9:00 AM",end:"10:00 AM",count:2},
-    {type:"setup",ra:"Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
-    {type:"pair",ra:"Jake",start:"2:00 PM",end:"5:00 PM",count:6}
+    {type:"setup",ra:"Ren, Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Ren, Steve",start:"9:00 AM",end:"10:00 AM",count:2},
+    {type:"setup",ra:"Mariani, Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Mariani, Jake",start:"2:00 PM",end:"5:00 PM",count:6}
   ]},
   wednesday: {label:"Wednesday, March 4", blocks:[
-    {type:"setup",ra:"Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
-    {type:"setup",ra:"Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
-    {type:"pair",ra:"Steve",start:"3:30 PM",end:"5:30 PM",count:4}
+    {type:"setup",ra:"Joshi, Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
+    {type:"setup",ra:"Ren, Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
+    {type:"pair",ra:"Ren, Steve",start:"3:30 PM",end:"5:30 PM",count:4}
   ]},
   thursday: {label:"Thursday, March 5", blocks:[
-    {type:"setup",ra:"Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Steve",start:"9:00 AM",end:"10:00 AM",count:2},
-    {type:"setup",ra:"Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
-    {type:"pair",ra:"Jake",start:"2:00 PM",end:"5:00 PM",count:6}
+    {type:"setup",ra:"Ren, Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Ren, Steve",start:"9:00 AM",end:"10:00 AM",count:2},
+    {type:"setup",ra:"Mariani, Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Mariani, Jake",start:"2:00 PM",end:"5:00 PM",count:6}
   ]},
   friday: {label:"Friday, March 6", blocks:[
-    {type:"setup",ra:"Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Mayank",start:"9:00 AM",end:"12:00 PM",count:6},
-    {type:"setup",ra:"Jake",start:"12:00 PM",end:"12:30 PM",note:"Handoff — 30 min Setup"},
-    {type:"pair",ra:"Jake",start:"12:30 PM",end:"2:30 PM",count:4},
-    {type:"setup",ra:"Jake",start:"3:00 PM",end:"3:30 PM",note:"30 min Setup"},
-    {type:"pair",ra:"Jake",start:"3:30 PM",end:"5:30 PM",count:4}
+    {type:"setup",ra:"Joshi, Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
+    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"12:00 PM",count:6},
+    {type:"setup",ra:"Mariani, Jake",start:"12:00 PM",end:"12:30 PM",note:"Handoff — 30 min Setup"},
+    {type:"pair",ra:"Mariani, Jake",start:"12:30 PM",end:"2:30 PM",count:4},
+    {type:"setup",ra:"Mariani, Jake",start:"3:00 PM",end:"3:30 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Mariani, Jake",start:"3:30 PM",end:"5:30 PM",count:4}
   ]}
 };
-var raWeeklyTotals = {Mayank: {sessions:26, participants:52}, Steve: {sessions:12, participants:24}, Jake: {sessions:20, participants:40}};
+var raWeeklyTotals = {"Joshi, Mayank": {sessions:26, participants:52}, "Ren, Steve": {sessions:12, participants:24}, "Mariani, Jake": {sessions:20, participants:40}};
 
 function renderRAMySchedule(raName) {
   var html = '';
@@ -4147,8 +4314,8 @@ function renderRAMySchedule(raName) {
   });
 
   var totals = raWeeklyTotals[raName] || {sessions: totalSessions, participants: totalSessions * 2};
-  var raColors = {Mayank: '#1a6b8a', Steve: '#6b4c8a', Jake: '#7a6520'};
-  var raColorsBg = {Mayank: '#e8f4f8', Steve: '#f0e8f8', Jake: '#faf5e4'};
+  var raColors = {'Joshi, Mayank': '#1a6b8a', 'Ren, Steve': '#6b4c8a', 'Mariani, Jake': '#7a6520'};
+  var raColorsBg = {'Joshi, Mayank': '#e8f4f8', 'Ren, Steve': '#f0e8f8', 'Mariani, Jake': '#faf5e4'};
   var color = raColors[raName] || 'var(--cardinal)';
   var bgColor = raColorsBg[raName] || '#fef2f2';
 
@@ -4166,12 +4333,23 @@ function renderRAMySchedule(raName) {
   html += '</div>';
 
   // Study info
-  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:12px">';
+  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
   html += '<span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Study</span>';
   html += '<span style="font-size:14px;font-weight:600;color:var(--text)">AI-Assisted Negotiation Study</span>';
   html += '<span class="badge badge-inperson" style="font-size:11px">In-Person</span>';
   html += '<span style="font-size:12px;color:var(--text-muted)">Kwon, Brian &amp; Lee, Elena · Rooms B, C, F, G</span>';
   html += '</div>';
+
+  // If Ren, Steve, show second study note
+  if (raName === 'Ren, Steve') {
+    html += '<div style="padding:10px 20px;border-bottom:1px solid var(--border-light);background:#f0f7fc;display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
+    html += '<span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Also</span>';
+    html += '<span style="font-size:14px;font-weight:600;color:var(--text)">Brainstorming with a Partner</span>';
+    html += '<span class="badge badge-inperson" style="font-size:11px">In-Person</span>';
+    html += '<span style="font-size:12px;color:var(--text-muted)">Ferragamo · LL-110 · Rooms B, C, D</span>';
+    html += '<a href="#" class="study-page-link" data-page-tab="rasched" data-page-study="ferragamo" title="View study page" style="font-size:10px">Study Page ↗</a>';
+    html += '</div>';
+  }
 
   // Shift schedule
   html += '<div style="padding:16px 20px">';
@@ -4206,10 +4384,110 @@ function renderRAMySchedule(raName) {
 
   // Link to AI Study tab
   html += '<div style="padding:12px 20px;border-top:1px solid var(--border-light);text-align:center">';
-  html += '<button onclick="switchTab(\'rasched\')" style="background:none;border:1px solid ' + color + ';color:' + color + ';padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s">View Full RA Schedule →</button>';
+  html += '<button onclick="switchTab(\'rasched\');switchStudyPage(\'kwon\')" style="background:none;border:1px solid ' + color + ';color:' + color + ';padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s">View Full RA Schedule →</button>';
   html += '</div>';
 
   html += '</div>';
+
+  myContent.innerHTML = html;
+}
+
+function renderFerraRAMySchedule(raKey) {
+  // Map dropdown keys to full names used in ferraWeeks data
+  var nameMap = {Saumya:'Ketan, Saumya', Leia:'Yen, Leia', Joseph:'Solomon, Joseph', Lissa:'Fredrickson, Lissa'};
+  var fullName = nameMap[raKey] || raKey;
+  var colorMap = {
+    'Ketan, Saumya': {color:'#1a6b8a',bg:'#e8f4f8'},
+    'Ren, Steve':    {color:'#6b4c8a',bg:'#f0e8f8'},
+    'Yen, Leia':     {color:'#8a6b1a',bg:'#faf5e4'},
+    'Solomon, Joseph':{color:'#1a8a5c',bg:'#e4faf2'},
+    'Fredrickson, Lissa':{color:'#8a2e1a',bg:'#fae8e4'}
+  };
+  var rc = colorMap[fullName] || {color:'var(--cardinal)',bg:'#fef2f2'};
+
+  // Access ferraWeeks from the IIFE — we need to make it accessible. Use week1 as display.
+  // We'll scan both weeks and pick week1 for display
+  var ferraWeeksLocal = window._ferraWeeksRef;
+  if (!ferraWeeksLocal) { myContent.innerHTML = '<div style="padding:20px;color:var(--text-muted)">Ferragamo RA data not available.</div>'; return; }
+
+  var html = '';
+  // Header
+  html += '<div class="researcher-card"><div class="researcher-card-header" style="background:linear-gradient(135deg, ' + rc.color + ', ' + rc.color + 'dd)">';
+  html += '<div class="rc-header-top"><span class="rc-name">' + fullName + ' <span style="font-size:13px;font-weight:400;opacity:0.8">(Research Assistant)</span></span>';
+  html += '<div class="rc-meta"><span>Brainstorming with a Partner</span><span>Ferragamo</span></div></div></div>';
+
+  // Collect shifts across both weeks
+  var weekKeys = Object.keys(ferraWeeksLocal);
+  var allShifts = [];
+  weekKeys.forEach(function(wk) {
+    var week = ferraWeeksLocal[wk];
+    var dayKeys = Object.keys(week.days);
+    dayKeys.forEach(function(dk) {
+      var day = week.days[dk];
+      var myBlocks = day.blocks.filter(function(b) { return b.ra === fullName; });
+      if (myBlocks.length) {
+        var sessions = myBlocks.filter(function(b) { return b.type === 'session'; }).length;
+        allShifts.push({weekLabel: week.label, dayLabel: day.label, blocks: myBlocks, sessions: sessions});
+      }
+    });
+  });
+
+  var totalSessions = allShifts.reduce(function(s,x) { return s+x.sessions; }, 0);
+  var totalGroups = totalSessions * 3;
+  var daysWorking = allShifts.length;
+
+  // Stats row
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 20px;border-bottom:1px solid var(--border-light)">';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + rc.color + '">' + totalSessions + '</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Sessions</div></div>';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + rc.color + '">' + totalGroups + '</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Groups</div></div>';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + rc.color + '">' + daysWorking + '</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Days (2 wks)</div></div>';
+  html += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:' + rc.color + '">LL-110</div><div style="font-size:11px;color:var(--text-muted);font-weight:500">Facility</div></div>';
+  html += '</div>';
+
+  // Study info
+  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
+  html += '<span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Study</span>';
+  html += '<span style="font-size:14px;font-weight:600;color:var(--text)">Brainstorming with a Partner</span>';
+  html += '<span class="badge badge-inperson" style="font-size:11px">In-Person</span>';
+  html += '<span style="font-size:12px;color:var(--text-muted)">Ferragamo, Alys · Rooms B, C, D · 3 groups/session</span>';
+  html += '</div>';
+
+  // Shift schedule by week
+  html += '<div style="padding:16px 20px">';
+  var currentWeekLabel = '';
+  allShifts.forEach(function(shift) {
+    if (shift.weekLabel !== currentWeekLabel) {
+      currentWeekLabel = shift.weekLabel;
+      html += '<div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;margin-top:' + (currentWeekLabel === allShifts[0].weekLabel ? '0' : '16px') + '">' + currentWeekLabel + '</div>';
+    }
+    var dayLabel = shift.dayLabel.split(',')[0];
+    var dateLabel = shift.dayLabel.split(', ').slice(1).join(', ');
+    html += '<div style="margin-bottom:12px">';
+    html += '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">';
+    html += '<span style="font-size:14px;font-weight:700;color:var(--text)">' + dayLabel + '</span>';
+    html += '<span style="font-size:12px;color:var(--text-muted)">' + dateLabel + '</span>';
+    html += '<span style="font-size:12px;font-weight:600;color:' + rc.color + ';margin-left:auto">' + shift.sessions + ' sessions</span>';
+    html += '</div>';
+    shift.blocks.forEach(function(b) {
+      if (b.type === 'setup') {
+        html += '<div style="display:flex;align-items:center;gap:8px;padding:5px 12px;background:var(--surface);border:1px dashed var(--border);border-radius:6px;margin-bottom:3px;font-size:11px;color:var(--text-muted)">';
+        html += '<span>⚙️</span><span style="font-weight:600;text-transform:uppercase;letter-spacing:0.3px">Setup</span><span>' + b.start + ' – ' + b.end + '</span><span style="margin-left:auto;font-size:10px">' + b.note + '</span></div>';
+      } else {
+        html += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:' + rc.bg + ';border-left:4px solid ' + rc.color + ';border-radius:6px;margin-bottom:3px">';
+        html += '<span style="font-size:12px;font-weight:600;color:var(--text-secondary)">' + b.start + ' – ' + b.end + '</span>';
+        html += '<span style="font-size:13px;font-weight:700;color:var(--text)">Session ' + b.num + '</span>';
+        html += '<span style="font-size:11px;color:var(--text-muted)">3 groups · Rooms B, C, D</span>';
+        html += '</div>';
+      }
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Link to Study Page
+  html += '<div style="padding:12px 20px;border-top:1px solid var(--border-light);text-align:center">';
+  html += '<button onclick="switchTab(\'rasched\');switchStudyPage(\'ferragamo\')" style="background:none;border:1px solid ' + rc.color + ';color:' + rc.color + ';padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s">View Full RA Schedule →</button>';
+  html += '</div></div>';
 
   myContent.innerHTML = html;
 }
@@ -4219,12 +4497,23 @@ function renderMySchedule() {
   if (!name) { myContent.style.display = 'none'; myEmpty.style.display = 'block'; return; }
 
   // --- RA mode ---
+  var ferraOnlyRAs = ['Saumya','Leia','Joseph','Lissa'];
+  var kwonOnlyRAs = ['Joshi, Mayank','Mariani, Jake'];
+  var sharedRAs = ['Ren, Steve'];
   if (name.indexOf('RA:') === 0) {
     myEmpty.style.display = 'none';
     myContent.style.display = 'block';
     var intro = document.querySelector('.home-intro');
     if (intro) intro.style.display = 'none';
-    renderRAMySchedule(name.replace('RA:', ''));
+    var raKey = name.replace('RA:', '');
+    if (ferraOnlyRAs.indexOf(raKey) !== -1) {
+      renderFerraRAMySchedule(raKey);
+    } else if (sharedRAs.indexOf(raKey) !== -1) {
+      // Ren, Steve works both studies — show Kwon view (primary) with note
+      renderRAMySchedule(raKey);
+    } else {
+      renderRAMySchedule(raKey);
+    }
     return;
   }
 
@@ -4968,9 +5257,13 @@ mySelect.appendChild(researcherOptgroup);
 var raOptgroup = document.createElement('optgroup');
 raOptgroup.label = 'Research Assistants';
 var raNames = [
-  {value: 'RA:Jake', label: 'Jake (RA)'},
-  {value: 'RA:Mayank', label: 'Mayank (RA)'},
-  {value: 'RA:Steve', label: 'Steve (RA)'}
+  {value: 'RA:Mariani, Jake', label: 'Mariani, Jake (RA – Kwon)'},
+  {value: 'RA:Joshi, Mayank', label: 'Joshi, Mayank (RA – Kwon)'},
+  {value: 'RA:Ren, Steve', label: 'Ren, Steve (RA – Kwon & Ferragamo)'},
+  {value: 'RA:Saumya', label: 'Ketan, Saumya (RA – Ferragamo)'},
+  {value: 'RA:Leia', label: 'Yen, Leia (RA – Ferragamo)'},
+  {value: 'RA:Joseph', label: 'Solomon, Joseph (RA – Ferragamo)'},
+  {value: 'RA:Lissa', label: 'Fredrickson, Lissa (RA – Ferragamo)'}
 ];
 raNames.forEach(function(ra) {
   var o = document.createElement('option'); o.value = ra.value; o.textContent = ra.label; raOptgroup.appendChild(o);
@@ -5709,7 +6002,10 @@ document.addEventListener('click', function(e) {
   if (!link) return;
   e.preventDefault();
   e.stopPropagation();
-  switchTab(link.dataset.pageTab);
+  var tab = link.dataset.pageTab;
+  var subpage = link.dataset.pageStudy || null;
+  switchTab(tab);
+  if (subpage && typeof switchStudyPage === 'function') switchStudyPage(subpage);
   window.scrollTo({top: 0, behavior: 'smooth'});
 });
 
@@ -5870,7 +6166,7 @@ updateResearcherNav();
   else if (diffDays < 7) relText = diffDays + ' days ago';
   else if (diffDays < 14) relText = '1 week ago';
   else relText = Math.floor(diffDays / 7) + ' weeks ago';
-  updEl.textContent = 'Updated Feb 16, 2026 · ' + relText;
+  updEl.textContent = 'Updated Feb 28, 2026 · ' + relText;
 })();
 
 // #4: URL parameter for researcher pre-selection
@@ -5920,34 +6216,34 @@ mySelect.addEventListener('change', function() {
     monday: {
       label: "Monday, March 2",
       blocks: [
-        { type: "setup", ra: "Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
-        { type: "pair", ra: "Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+        { type: "setup", ra: "Joshi, Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Joshi, Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
           { num: 1, group: "G1", rooms: "B & C" },
           { num: 2, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
           { num: 3, group: "G3", rooms: "B & C" },
           { num: 4, group: "G4", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
           { num: 5, group: "G5", rooms: "B & C" },
           { num: 6, group: "G6", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
-        { type: "pair", ra: "Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
+        { type: "setup", ra: "Joshi, Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Joshi, Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
           { num: 7, group: "G1", rooms: "B & C" },
           { num: 8, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
           { num: 9, group: "G3", rooms: "B & C" },
           { num: 10, group: "G4", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
-        { type: "pair", ra: "Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
+        { type: "setup", ra: "Ren, Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
+        { type: "pair", ra: "Ren, Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
           { num: 11, group: "G1", rooms: "B & C" },
           { num: 12, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
+        { type: "pair", ra: "Ren, Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
           { num: 13, group: "G3", rooms: "B & C" },
           { num: 14, group: "G4", rooms: "F & G" }
         ]}
@@ -5956,21 +6252,21 @@ mySelect.addEventListener('change', function() {
     tuesday: {
       label: "Tuesday, March 3",
       blocks: [
-        { type: "setup", ra: "Steve", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
-        { type: "pair", ra: "Steve", start: "9:00 AM", end: "10:00 AM", sessions: [
+        { type: "setup", ra: "Ren, Steve", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Ren, Steve", start: "9:00 AM", end: "10:00 AM", sessions: [
           { num: 1, group: "G1", rooms: "B & C" },
           { num: 2, group: "G2", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Jake", start: "1:30 PM", end: "2:00 PM", note: "30 min Setup" },
-        { type: "pair", ra: "Jake", start: "2:00 PM", end: "3:00 PM", sessions: [
+        { type: "setup", ra: "Mariani, Jake", start: "1:30 PM", end: "2:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Mariani, Jake", start: "2:00 PM", end: "3:00 PM", sessions: [
           { num: 3, group: "G1", rooms: "B & C" },
           { num: 4, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Jake", start: "3:00 PM", end: "4:00 PM", sessions: [
+        { type: "pair", ra: "Mariani, Jake", start: "3:00 PM", end: "4:00 PM", sessions: [
           { num: 5, group: "G3", rooms: "B & C" },
           { num: 6, group: "G4", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Jake", start: "4:00 PM", end: "5:00 PM", sessions: [
+        { type: "pair", ra: "Mariani, Jake", start: "4:00 PM", end: "5:00 PM", sessions: [
           { num: 7, group: "G5", rooms: "B & C" },
           { num: 8, group: "G6", rooms: "F & G" }
         ]}
@@ -5979,34 +6275,34 @@ mySelect.addEventListener('change', function() {
     wednesday: {
       label: "Wednesday, March 4",
       blocks: [
-        { type: "setup", ra: "Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
-        { type: "pair", ra: "Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+        { type: "setup", ra: "Joshi, Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Joshi, Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
           { num: 1, group: "G1", rooms: "B & C" },
           { num: 2, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
           { num: 3, group: "G3", rooms: "B & C" },
           { num: 4, group: "G4", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
           { num: 5, group: "G5", rooms: "B & C" },
           { num: 6, group: "G6", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
-        { type: "pair", ra: "Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
+        { type: "setup", ra: "Joshi, Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Joshi, Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
           { num: 7, group: "G1", rooms: "B & C" },
           { num: 8, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
           { num: 9, group: "G3", rooms: "B & C" },
           { num: 10, group: "G4", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
-        { type: "pair", ra: "Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
+        { type: "setup", ra: "Ren, Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
+        { type: "pair", ra: "Ren, Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
           { num: 11, group: "G1", rooms: "B & C" },
           { num: 12, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
+        { type: "pair", ra: "Ren, Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
           { num: 13, group: "G3", rooms: "B & C" },
           { num: 14, group: "G4", rooms: "F & G" }
         ]}
@@ -6015,21 +6311,21 @@ mySelect.addEventListener('change', function() {
     thursday: {
       label: "Thursday, March 5",
       blocks: [
-        { type: "setup", ra: "Steve", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
-        { type: "pair", ra: "Steve", start: "9:00 AM", end: "10:00 AM", sessions: [
+        { type: "setup", ra: "Ren, Steve", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Ren, Steve", start: "9:00 AM", end: "10:00 AM", sessions: [
           { num: 1, group: "G1", rooms: "B & C" },
           { num: 2, group: "G2", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Jake", start: "1:30 PM", end: "2:00 PM", note: "30 min Setup" },
-        { type: "pair", ra: "Jake", start: "2:00 PM", end: "3:00 PM", sessions: [
+        { type: "setup", ra: "Mariani, Jake", start: "1:30 PM", end: "2:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Mariani, Jake", start: "2:00 PM", end: "3:00 PM", sessions: [
           { num: 3, group: "G1", rooms: "B & C" },
           { num: 4, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Jake", start: "3:00 PM", end: "4:00 PM", sessions: [
+        { type: "pair", ra: "Mariani, Jake", start: "3:00 PM", end: "4:00 PM", sessions: [
           { num: 5, group: "G3", rooms: "B & C" },
           { num: 6, group: "G4", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Jake", start: "4:00 PM", end: "5:00 PM", sessions: [
+        { type: "pair", ra: "Mariani, Jake", start: "4:00 PM", end: "5:00 PM", sessions: [
           { num: 7, group: "G5", rooms: "B & C" },
           { num: 8, group: "G6", rooms: "F & G" }
         ]}
@@ -6038,34 +6334,34 @@ mySelect.addEventListener('change', function() {
     friday: {
       label: "Friday, March 6",
       blocks: [
-        { type: "setup", ra: "Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
-        { type: "pair", ra: "Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+        { type: "setup", ra: "Joshi, Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
+        { type: "pair", ra: "Joshi, Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
           { num: 1, group: "G1", rooms: "B & C" },
           { num: 2, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
           { num: 3, group: "G3", rooms: "B & C" },
           { num: 4, group: "G4", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
           { num: 5, group: "G5", rooms: "B & C" },
           { num: 6, group: "G6", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Jake", start: "12:00 PM", end: "12:30 PM", note: "Handoff — 30 min Setup" },
-        { type: "pair", ra: "Jake", start: "12:30 PM", end: "1:30 PM", sessions: [
+        { type: "setup", ra: "Mariani, Jake", start: "12:00 PM", end: "12:30 PM", note: "Handoff — 30 min Setup" },
+        { type: "pair", ra: "Mariani, Jake", start: "12:30 PM", end: "1:30 PM", sessions: [
           { num: 7, group: "G1", rooms: "B & C" },
           { num: 8, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Jake", start: "1:30 PM", end: "2:30 PM", sessions: [
+        { type: "pair", ra: "Mariani, Jake", start: "1:30 PM", end: "2:30 PM", sessions: [
           { num: 9, group: "G3", rooms: "B & C" },
           { num: 10, group: "G4", rooms: "F & G" }
         ]},
-        { type: "setup", ra: "Jake", start: "3:00 PM", end: "3:30 PM", note: "30 min Setup" },
-        { type: "pair", ra: "Jake", start: "3:30 PM", end: "4:30 PM", sessions: [
+        { type: "setup", ra: "Mariani, Jake", start: "3:00 PM", end: "3:30 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Mariani, Jake", start: "3:30 PM", end: "4:30 PM", sessions: [
           { num: 11, group: "G5", rooms: "B & C" },
           { num: 12, group: "G6", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Jake", start: "4:30 PM", end: "5:30 PM", sessions: [
+        { type: "pair", ra: "Mariani, Jake", start: "4:30 PM", end: "5:30 PM", sessions: [
           { num: 13, group: "G7", rooms: "B & C" },
           { num: 14, group: "G8", rooms: "F & G" }
         ]}
@@ -6076,7 +6372,8 @@ mySelect.addEventListener('change', function() {
   var raCurrentDay = 'monday';
 
   function raRaClass(name) {
-    return 'ra-sched-ra-' + name.toLowerCase();
+    var map = {'Joshi, Mayank':'mayank','Ren, Steve':'steve','Mariani, Jake':'jake'};
+    return 'ra-sched-ra-' + (map[name] || name.toLowerCase().replace(/\s+/g, '-'));
   }
 
   function raRenderDay(dayKey) {
@@ -6170,6 +6467,251 @@ mySelect.addEventListener('change', function() {
     raRenderDay('monday');
   }
 })();
+
+// ═══════════════════════════════════════════════
+// FERRAGAMO STUDY — Brainstorming with a Partner
+// ═══════════════════════════════════════════════
+(function() {
+  var ferraRAColors = {
+    'Ketan, Saumya':  {cls:'saumya',  bg:'#e8f4f8', bd:'#1a6b8a', init:'SK'},
+    'Ren, Steve':     {cls:'steve',   bg:'#f0e8f8', bd:'#6b4c8a', init:'SR'},
+    'Yen, Leia':      {cls:'leia',    bg:'#faf5e4', bd:'#8a6b1a', init:'LY'},
+    'Solomon, Joseph':{cls:'joseph',  bg:'#e4faf2', bd:'#1a8a5c', init:'JS'},
+    'Fredrickson, Lissa':{cls:'lissa',bg:'#fae8e4', bd:'#8a2e1a', init:'LF'}
+  };
+
+  function S(num,ra,start,end,g1t,g2t,g3t) {
+    return {type:'session',num:num,ra:ra,start:start,end:end,groups:[
+      {name:'G1',time:g1t,room:'B'},{name:'G2',time:g2t,room:'C'},{name:'G3',time:g3t,room:'D'}
+    ]};
+  }
+  function Setup(ra,start,end,note) { return {type:'setup',ra:ra,start:start,end:end,note:note}; }
+
+  var ferraWeeks = {
+    week1: {
+      label:'Week 1', dateRange:'February 10\u201313, 2026', holiday:null,
+      days: {
+        tuesday: {tabLabel:'Tue',tabDate:'Feb 10',label:'Tuesday, February 10',blocks:[
+          Setup('Ketan, Saumya','9:30 AM','10:00 AM','30 min Setup'),
+          S(1,'Ketan, Saumya','10:00 AM','11:00 AM','10:00\u201310:30 AM','10:15\u201310:45 AM','10:30\u201311:00 AM'),
+          S(2,'Ketan, Saumya','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
+          S(3,'Ketan, Saumya','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
+          S(4,'Ketan, Saumya','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          S(5,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
+          S(6,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
+          S(7,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
+        ]},
+        wednesday: {tabLabel:'Wed',tabDate:'Feb 11',label:'Wednesday, February 11',blocks:[
+          Setup('Yen, Leia','9:00 AM','9:30 AM','30 min Setup'),
+          S(8,'Yen, Leia','9:30 AM','10:30 AM','9:30\u201310:00 AM','9:45\u201310:15 AM','10:00\u201310:30 AM'),
+          S(9,'Yen, Leia','10:30 AM','11:30 AM','10:30\u201311:00 AM','10:45\u201311:15 AM','11:00\u201311:30 AM'),
+          S(10,'Yen, Leia','11:30 AM','12:30 PM','11:30\u201312:00 PM','11:45\u201312:15 PM','12:00\u201312:30 PM')
+        ]},
+        thursday: {tabLabel:'Thu',tabDate:'Feb 12',label:'Thursday, February 12',blocks:[
+          Setup('Solomon, Joseph','9:30 AM','10:00 AM','30 min Setup'),
+          S(11,'Solomon, Joseph','10:00 AM','11:00 AM','10:00\u201310:30 AM','10:15\u201310:45 AM','10:30\u201311:00 AM'),
+          S(12,'Solomon, Joseph','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
+          S(13,'Solomon, Joseph','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
+          S(14,'Solomon, Joseph','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          S(15,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
+          S(16,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
+          S(17,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
+        ]},
+        friday: {tabLabel:'Fri',tabDate:'Feb 13',label:'Friday, February 13',blocks:[
+          Setup('Fredrickson, Lissa','10:30 AM','11:00 AM','30 min Setup'),
+          S(18,'Fredrickson, Lissa','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
+          S(19,'Fredrickson, Lissa','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
+          S(20,'Fredrickson, Lissa','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
+          S(21,'Fredrickson, Lissa','2:00 PM','3:00 PM','2:00\u20132:30 PM','2:15\u20132:45 PM','2:30\u20133:00 PM')
+        ]}
+      },
+      raSummary:[
+        {name:'Ketan, Saumya',init:'SK',cls:'saumya',sessions:4,detail:'Tue AM'},
+        {name:'Ren, Steve',init:'SR',cls:'steve',sessions:6,detail:'Tue PM, Thu PM'},
+        {name:'Yen, Leia',init:'LY',cls:'leia',sessions:3,detail:'Wed'},
+        {name:'Solomon, Joseph',init:'JS',cls:'joseph',sessions:4,detail:'Thu AM'},
+        {name:'Fredrickson, Lissa',init:'LF',cls:'lissa',sessions:4,detail:'Fri'}
+      ]
+    },
+    week2: {
+      label:'Week 2', dateRange:'February 17\u201320, 2026',
+      holiday:'No studies Monday, Feb 16 \u2014 President\u2019s Day',
+      days: {
+        tuesday: {tabLabel:'Tue',tabDate:'Feb 17',label:'Tuesday, February 17',blocks:[
+          Setup('Solomon, Joseph','9:30 AM','10:00 AM','30 min Setup'),
+          S(1,'Solomon, Joseph','10:00 AM','11:00 AM','10:00\u201310:30 AM','10:15\u201310:45 AM','10:30\u201311:00 AM'),
+          S(2,'Solomon, Joseph','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
+          S(3,'Solomon, Joseph','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
+          S(4,'Solomon, Joseph','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          S(5,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
+          S(6,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
+          S(7,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
+        ]},
+        wednesday: {tabLabel:'Wed',tabDate:'Feb 18',label:'Wednesday, February 18',blocks:[
+          Setup('Yen, Leia','9:00 AM','9:30 AM','30 min Setup'),
+          S(8,'Yen, Leia','9:30 AM','10:30 AM','9:30\u201310:00 AM','9:45\u201310:15 AM','10:00\u201310:30 AM'),
+          S(9,'Yen, Leia','10:30 AM','11:30 AM','10:30\u201311:00 AM','10:45\u201311:15 AM','11:00\u201311:30 AM'),
+          S(10,'Yen, Leia','11:30 AM','12:30 PM','11:30\u201312:00 PM','11:45\u201312:15 PM','12:00\u201312:30 PM')
+        ]},
+        thursday: {tabLabel:'Thu',tabDate:'Feb 19',label:'Thursday, February 19',blocks:[
+          Setup('Ketan, Saumya','9:30 AM','10:00 AM','30 min Setup'),
+          S(11,'Ketan, Saumya','10:00 AM','11:00 AM','10:00\u201310:30 AM','10:15\u201310:45 AM','10:30\u201311:00 AM'),
+          S(12,'Ketan, Saumya','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
+          S(13,'Ketan, Saumya','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
+          S(14,'Ketan, Saumya','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          S(15,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
+          S(16,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
+          S(17,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
+        ]},
+        friday: {tabLabel:'Fri',tabDate:'Feb 20',label:'Friday, February 20',blocks:[
+          Setup('Fredrickson, Lissa','10:30 AM','11:00 AM','30 min Setup'),
+          S(18,'Fredrickson, Lissa','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
+          S(19,'Fredrickson, Lissa','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
+          S(20,'Fredrickson, Lissa','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
+          S(21,'Fredrickson, Lissa','2:00 PM','3:00 PM','2:00\u20132:30 PM','2:15\u20132:45 PM','2:30\u20133:00 PM')
+        ]}
+      },
+      raSummary:[
+        {name:'Solomon, Joseph',init:'JS',cls:'joseph',sessions:4,detail:'Tue AM'},
+        {name:'Ren, Steve',init:'SR',cls:'steve',sessions:6,detail:'Tue PM, Thu PM'},
+        {name:'Yen, Leia',init:'LY',cls:'leia',sessions:3,detail:'Wed'},
+        {name:'Ketan, Saumya',init:'SK',cls:'saumya',sessions:4,detail:'Thu AM'},
+        {name:'Fredrickson, Lissa',init:'LF',cls:'lissa',sessions:4,detail:'Fri'}
+      ]
+    }
+  };
+
+  var ferraCurrentWeek = 'week1';
+  window._ferraWeeksRef = ferraWeeks;
+  var ferraCurrentDay = 'tuesday';
+
+  function ferraRenderDayTabs(weekKey) {
+    var week = ferraWeeks[weekKey];
+    var el = document.getElementById('ferraDayTabs');
+    var dayKeys = Object.keys(week.days);
+    el.innerHTML = dayKeys.map(function(dk, i) {
+      var d = week.days[dk];
+      return '<button class="ra-sched-day-tab' + (i===0?' active':'') + '" data-day="' + dk + '">' + d.tabLabel + '<span class="ra-sched-tab-date">' + d.tabDate + '</span></button>';
+    }).join('');
+    el.querySelectorAll('.ra-sched-day-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() { ferraSwitchDay(tab.dataset.day); });
+    });
+    ferraCurrentDay = dayKeys[0];
+  }
+
+  function ferraRenderDay(dayKey) {
+    var week = ferraWeeks[ferraCurrentWeek];
+    var day = week.days[dayKey];
+    if (!day) return;
+    var c = document.getElementById('ferraSchedContent');
+    var html = '';
+    if (week.holiday) html += '<div style="background:#fff4cc;border:1px solid #e6b800;border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);font-weight:500"><span style="font-size:16px">🏛️</span>' + week.holiday + '</div>';
+    html += '<div class="ra-sched-day-title">' + day.label + '</div>';
+
+    var sc = 0, gc = 0, ras = {}, ft = null, lt = null;
+    day.blocks.forEach(function(b) {
+      if (b.type === 'setup') {
+        ras[b.ra] = true;
+        html += '<div class="ra-sched-block"><div class="ra-sched-time">' + b.start + '<span class="ra-sched-time-end">' + b.end + '</span></div>';
+        html += '<div class="ra-sched-setup"><span>⚙️</span><span class="ra-sched-setup-label">Setup — ' + b.ra + '</span><span class="ra-sched-setup-note">' + b.note + '</span></div></div>';
+      } else {
+        ras[b.ra] = true; sc++; gc += b.groups.length;
+        if (!ft) ft = b.start; lt = b.end;
+        var rc = ferraRAColors[b.ra] || {bg:'#f5f5f5',bd:'#999'};
+        html += '<div class="ra-sched-block"><div class="ra-sched-time">' + b.start + '<span class="ra-sched-time-end">' + b.end + '</span></div>';
+        html += '<div class="ra-sched-session" style="border-left-color:' + rc.bd + ';background:' + rc.bg + '">';
+        html += '<div class="ra-sched-session-header"><span class="ra-sched-session-num">Session ' + b.num + '</span><span class="ra-sched-session-ra">RA: ' + b.ra + '</span></div>';
+        html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">';
+        b.groups.forEach(function(g) {
+          html += '<div style="background:rgba(255,255,255,0.7);border-radius:6px;padding:8px 10px;border:1px solid rgba(0,0,0,0.06)">';
+          html += '<div style="font-size:11px;font-weight:700;color:var(--text-mid);margin-bottom:2px">' + g.name + '</div>';
+          html += '<div style="font-size:10px;color:var(--text-secondary)">' + g.time + '</div>';
+          html += '<div style="font-size:10px;color:var(--text-muted);margin-top:2px"><span style="font-weight:400">LL-110-</span><span style="font-weight:700;color:var(--text-mid)">' + g.room + '</span></div></div>';
+        });
+        html += '</div>';
+        html += '<div style="display:flex;align-items:center;gap:4px;margin-top:8px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.05)">';
+        html += '<div style="width:4px;height:4px;border-radius:50%;background:var(--text-muted);opacity:0.4"></div>';
+        html += '<div style="width:4px;height:4px;border-radius:50%;background:var(--text-muted);opacity:0.4"></div>';
+        html += '<div style="width:4px;height:4px;border-radius:50%;background:var(--text-muted);opacity:0.4"></div>';
+        html += '<span style="font-size:9px;color:var(--text-muted);letter-spacing:0.3px">15-min staggered arrivals · 30-min sessions</span></div>';
+        html += '</div></div>';
+      }
+    });
+    c.innerHTML = html;
+
+    document.getElementById('ferraStatSessions').textContent = sc;
+    document.getElementById('ferraStatGroups').textContent = gc;
+    document.getElementById('ferraStatRA').textContent = Object.keys(ras).join(', ');
+    document.getElementById('ferraStatFirst').textContent = ft || '—';
+    document.getElementById('ferraStatLast').textContent = lt || '—';
+
+    // Highlight active rooms
+    ['ferra-fp-b','ferra-fp-c','ferra-fp-d'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.className = el.className.replace(' ra-fp-active','') + ' ra-fp-active';
+    });
+  }
+
+  function ferraRenderWeeklySidebar(weekKey) {
+    var week = ferraWeeks[weekKey];
+    var ts = 0;
+    Object.keys(week.days).forEach(function(dk) {
+      week.days[dk].blocks.forEach(function(b) { if (b.type==='session') ts++; });
+    });
+    var ov = document.getElementById('ferraWeeklyOverview');
+    ov.innerHTML = '<div class="ra-sched-card-title">Weekly Overview</div>' +
+      '<div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Sessions</span><span class="ra-sched-stat-value">' + ts + '</span></div>' +
+      '<div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Groups per Session</span><span class="ra-sched-stat-value">3</span></div>' +
+      '<div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Group Slots</span><span class="ra-sched-stat-value">' + (ts*3) + '</span></div>' +
+      '<div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Stagger Interval</span><span class="ra-sched-stat-value">15 min</span></div>' +
+      '<div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Session Duration</span><span class="ra-sched-stat-value">30 min/group</span></div>';
+
+    var rc = document.getElementById('ferraRACard');
+    var rh = '<div class="ra-sched-card-title">RA Weekly Totals</div><div class="ra-sched-ra-summary">';
+    week.raSummary.forEach(function(ra) {
+      var c = ferraRAColors[ra.name] || {bd:'#999'};
+      rh += '<div class="ra-sched-ra-row"><div class="ra-sched-avatar" style="background:' + c.bd + '">' + ra.init + '</div><div><div class="ra-sched-ra-name">' + ra.name + '</div><div class="ra-sched-ra-detail">' + ra.sessions + ' sessions · ' + ra.detail + '</div></div></div>';
+    });
+    rh += '</div>';
+    rc.innerHTML = rh;
+  }
+
+  function ferraSwitchDay(dk) {
+    ferraCurrentDay = dk;
+    document.querySelectorAll('#ferraDayTabs .ra-sched-day-tab').forEach(function(t) { t.classList.remove('active'); });
+    var active = document.querySelector('#ferraDayTabs [data-day="' + dk + '"]');
+    if (active) active.classList.add('active');
+    ferraRenderDay(dk);
+  }
+
+  window.ferraWeekChange = function(wk) {
+    ferraCurrentWeek = wk;
+    var badge = document.getElementById('ferraWeekBadge');
+    if (badge) badge.textContent = ferraWeeks[wk].label;
+    ferraRenderDayTabs(wk);
+    ferraRenderWeeklySidebar(wk);
+    ferraRenderDay(ferraCurrentDay);
+  };
+
+  // Initial render
+  ferraRenderDayTabs('week1');
+  ferraRenderWeeklySidebar('week1');
+  ferraRenderDay('tuesday');
+})();
+
+// ═══════════════════════════════════════════════
+// STUDY PAGE SWITCHER
+// ═══════════════════════════════════════════════
+function switchStudyPage(page) {
+  document.querySelectorAll('.study-pages-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.studyPage === page); });
+  document.querySelectorAll('.study-page-content').forEach(function(c) { c.style.display = 'none'; });
+  var el = document.getElementById('studyPage-' + page);
+  if (el) el.style.display = '';
+}
 </script>
 </body>
 </html>
