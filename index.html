@@ -193,7 +193,13 @@ body.dark .studies-researcher-select { background: #1A1A1A; color: #E8E8E8; bord
 body.dark .table-wrap { background: #242424; border-color: #3A3A3A; }
 body.dark table th { background: #2A2A2A; color: #C0C0C0; }
 body.dark table td { border-color: #3A3A3A; }
-body.dark table tbody tr:hover td { background: #2E2E2E; }
+body.dark table tbody tr:hover td { background: #2E2E2E; border-left-color: transparent; }
+body.dark table tbody tr:hover td:first-child { border-left-color: var(--cardinal); }
+body.dark table tbody tr:nth-child(even) td { background: #1E1E1E; }
+body.dark .studies-toolbar.stuck { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+body.dark .section-breadcrumb { background: #242424; border-color: #3A3A3A; }
+body.dark .section-breadcrumb-label { color: #A0A0A0; }
+body.dark .section-breadcrumb-name { color: #E8E8E8; }
 body.dark .format-chip { background: #2A2A2A; border-color: #3A3A3A; color: #A0A0A0; }
 body.dark .format-chip.active { background: var(--cardinal); color: white; }
 body.dark .badge-cr { background: #3A1A1A; color: #FF8A80; border-color: #5A2A2A; }
@@ -204,8 +210,7 @@ body.dark .home-intro-tab:hover { background: #2E1A1A; border-color: var(--cardi
 body.dark .researcher-card-header { background: linear-gradient(135deg, #5A0000, #3A0000); }
 body.dark .rc-week-header { background: #2A2A2A; border-color: #3A3A3A; }
 body.dark .rc-study { border-color: #3A3A3A; }
-body.dark .footer-enhanced { background: #1A0000; border-color: #3A3A3A; color: rgba(255,255,255,0.7); }
-body.dark .footer-enhanced a { color: var(--gold); }
+body.dark .footer-enhanced { background: var(--bg); border-color: #3A3A3A; }
 body.dark .back-to-top { background: #3A3A3A; color: #E8E8E8; border-color: #4A4A4A; }
 body.dark .fac-room { background: #2A2A2A; border-color: #3A3A3A; }
 body.dark .room-modal { background: #242424; }
@@ -255,9 +260,7 @@ body {
 }
 
 .header-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 22px 32px 20px;
+  padding: 22px 32px 20px 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -273,16 +276,6 @@ body {
   font-size: 32px; font-weight: 900; letter-spacing: 0.2px; line-height: 1.15; margin: 0;
 }
 .header-title .subtitle { font-size: 14.5px; font-weight: 400; color: rgba(255,255,255,0.8); margin-top: 4px; }
-.header-beta {
-  text-align: right;
-  max-width: 1280px;
-  margin: -2px auto 0;
-  padding: 0 32px 4px;
-  font-size: 9.5px; font-weight: 600; letter-spacing: 0.3px;
-  color: var(--gold);
-  opacity: 0.5;
-}
-
 .header-gold-bar {
   height: 4px;
   background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
@@ -334,74 +327,102 @@ body {
   color: white;
 }
 
-.semester-progress {
-  padding: 6px 32px 22px;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-.sem-weeks {
+/* Semester Ticker */
+.sem-ticker {
+  padding: 0 32px 0 22px;
   display: flex;
-  gap: 2px;
-  align-items: flex-end;
+  align-items: center;
+  gap: 14px;
+  height: 32px;
+  background: rgba(0,0,0,0.2);
 }
-.sem-week {
-  flex: 1 1 0;
-  min-width: 0;
-  height: 14px;
-  background: rgba(255,255,255,0.25);
-  border-radius: 2px;
+.sem-ticker-current {
+  font-size: 11px; font-weight: 700; color: var(--gold);
+  white-space: nowrap; flex-shrink: 0;
+  letter-spacing: 0.3px;
+}
+.sem-ticker-track-wrap {
+  flex: 1; display: flex; align-items: center; gap: 0;
   position: relative;
-  cursor: default;
-  transition: background 0.15s;
-  border: 1px solid rgba(255,255,255,0.1);
 }
-.sem-week.past { background: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15); }
-.sem-week.current {
-  background: var(--gold);
-  border-color: var(--gold);
-  box-shadow: 0 0 8px rgba(255,204,0,0.5);
-  height: 18px;
+.sem-ticker-start, .sem-ticker-end {
+  font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.3);
+  letter-spacing: 0.3px; flex-shrink: 0;
+  text-transform: uppercase;
 }
-.sem-week.break {
-  background: rgba(255,255,255,0.08);
-  border-style: dashed;
-  border-color: rgba(255,255,255,0.2);
+.sem-ticker-segments {
+  flex: 1; display: flex; gap: 2px; padding: 0 8px;
+  height: 14px; align-items: center;
 }
-.sem-week.break.past {
+.sem-ticker-seg {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.sem-ticker-seg:hover {
   background: rgba(255,255,255,0.2);
-  border-style: dashed;
-  border-color: rgba(255,255,255,0.25);
+  transform: scaleY(1.4);
 }
-.sem-week-label {
-  position: absolute;
-  top: calc(100% + 3px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 9.5px;
-  color: rgba(255,255,255,0.5);
-  white-space: nowrap;
-  pointer-events: none;
+.sem-ticker-seg.seg-past {
+  background: rgba(255,255,255,0.25);
 }
-.sem-week.current .sem-week-label { color: var(--gold); font-weight: 700; }
-.sem-week:first-child .sem-week-label { left: 0; transform: none; }
-.sem-week:last-child .sem-week-label { left: auto; right: 0; transform: none; }
-.sem-week-tooltip {
+.sem-ticker-seg.seg-current {
+  background: var(--gold);
+  box-shadow: 0 0 6px rgba(255,204,0,0.4);
+  height: 8px;
+  border-radius: 4px;
+}
+.sem-ticker-seg.seg-break {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.08) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+.sem-ticker-seg.seg-break.seg-past {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.18) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+.sem-ticker-seg.seg-current:hover { transform: scaleY(1.2); }
+.sem-ticker-seg.viewing {
+  background: rgba(255,255,255,0.5);
+  height: 8px;
+  box-shadow: 0 0 4px rgba(255,255,255,0.3);
+}
+.sem-ticker-seg .seg-tooltip {
   display: none;
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  font-size: 11px;
+  background: #1a1a1a;
+  color: white;
+  font-size: 10px;
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
   white-space: nowrap;
   pointer-events: none;
   z-index: 10;
 }
-.sem-week:hover .sem-week-tooltip { display: block; }
+.sem-ticker-seg:hover .seg-tooltip { display: block; }
+.sem-ticker-beta {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.3px;
+  color: rgba(255,255,255,0.25);
+  white-space: nowrap; flex-shrink: 0;
+}
+body.dark .sem-ticker { background: rgba(0,0,0,0.35); }
+body.dark .sem-ticker-seg.seg-current { background: #B8960B; box-shadow: 0 0 6px rgba(184,150,11,0.3); }
+
 
 /* ═══ Sidebar Navigation ═══ */
 .nav {
@@ -467,6 +488,7 @@ body {
   font-weight: 700;
   background: #FEF5F5;
   border-left-color: var(--gold);
+  box-shadow: inset 0 0 0 1px rgba(153,0,0,0.03);
 }
 
 /* Sidebar submenu */
@@ -501,6 +523,7 @@ body {
 }
 .nav-submenu-item:hover { color: var(--cardinal); background: #FEF5F5; }
 .nav-submenu-item.active { color: var(--cardinal); font-weight: 600; border-left-color: var(--cardinal); background: #FEF5F5; }
+.nav-submenu-item.nav-sub-break { font-style: italic; opacity: 0.6; }
 
 .nav-tab-chevron {
   margin-left: auto;
@@ -548,7 +571,75 @@ body {
 
 .main { max-width: 1200px; margin: 0 auto; padding: 28px 32px; padding-top: calc(var(--header-h, 110px) + 28px); margin-left: 260px; }
 .section { display: none; }
-.section.active { display: block; }
+.section.active { display: block; animation: sectionFadeIn 0.25s ease-out; }
+@keyframes sectionFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ Section Header ═══ */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--gold);
+}
+.section-header-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.section-header-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.2;
+}
+.section-header-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+  align-self: center;
+}
+.section-header-desc {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+@media (max-width: 768px) {
+  .section-header { flex-wrap: wrap; gap: 6px; }
+  .section-header-title { font-size: 18px; }
+  .section-header-sep { display: none; }
+  .section-header-desc { flex-basis: 100%; }
+}
+body.dark .section-header { border-bottom-color: #B8860B; }
+
+/* ═══ Section Breadcrumb ═══ */
+.section-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  margin-bottom: 16px;
+  background: #F8F7F5;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 13px;
+  animation: sectionFadeIn 0.25s ease-out;
+}
+.section-breadcrumb-crumb {
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.section-breadcrumb-crumb:hover { color: var(--cardinal); }
+.section-breadcrumb-sep { color: var(--text-muted); font-size: 10px; }
+.section-breadcrumb-name { color: var(--text); font-weight: 600; }
 
 .section-intro {
   font-size: 16px;
@@ -567,6 +658,10 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   margin-bottom: 24px;
+  transition: box-shadow 0.2s;
+}
+.table-wrap:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 .table-scroll { overflow-x: auto; }
@@ -645,6 +740,221 @@ thead th {
 .cal-study.cal-ongoing { opacity: 0.6; border-style: dashed; }
 .cal-empty { padding: 4px 0; color: var(--text-muted); font-size: 13px; }
 
+/* ═══ Calendar Day Grid ═══ */
+.cal-week-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.cal-week-block.current-week-block {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+.cal-week-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--cardinal);
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+.cal-week-header:hover { background: #7A0000; }
+.cal-week-toggle {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+.cal-week-block.collapsed .cal-week-toggle { transform: rotate(-90deg); }
+.cal-week-block.collapsed .cal-grid { display: none; }
+.cal-week-block.collapsed {
+  opacity: 0.65;
+}
+.cal-week-block.collapsed:hover { opacity: 0.85; }
+.cal-week-block.collapsed .cal-week-header {
+  background: #5A0000;
+  padding: 7px 16px;
+}
+.cal-week-header-summary {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  margin-left: 12px;
+  font-weight: 400;
+}
+body.dark .cal-week-block.collapsed .cal-week-header { background: #2A1515; }
+body.dark .cal-week-header:hover { background: #3A1A1A; }
+.cal-week-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cal-week-header-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  font-weight: 900;
+}
+.cal-week-header-dates {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+}
+.cal-week-header-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+}
+.cal-week-header .badge-current-week {
+  background: rgba(255,204,0,0.25);
+  border-color: rgba(255,204,0,0.5);
+  color: var(--gold);
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  min-width: 0;
+}
+.cal-grid-head {
+  display: contents;
+}
+.cal-grid-head-cell {
+  padding: 8px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  text-align: center;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.cal-grid-head-cell:first-child {
+  text-align: left;
+  padding-left: 14px;
+}
+.cal-grid-row {
+  display: contents;
+}
+.cal-grid-fac {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--cardinal);
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  align-items: flex-start;
+  background: var(--surface);
+}
+.cal-grid-fac.fac-online { color: #1565C0; }
+.cal-grid-fac.fac-ll102 { color: var(--cardinal); }
+.cal-grid-fac.fac-ll110 { color: #E65100; }
+.cal-grid-fac.fac-ll112 { color: #2E7D32; }
+.cal-grid-day {
+  padding: 6px 5px;
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  min-height: 48px;
+  position: relative;
+}
+.cal-grid-day:last-child { border-right: none; }
+.cal-grid-row:last-child .cal-grid-fac,
+.cal-grid-row:last-child .cal-grid-day { border-bottom: none; }
+
+/* Study chips in grid cells */
+.cal-chip {
+  display: block;
+  padding: 4px 7px;
+  margin-bottom: 3px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  border-left: 3px solid transparent;
+}
+.cal-chip:last-child { margin-bottom: 0; }
+.cal-chip:hover { opacity: 0.8; }
+.cal-chip strong { font-weight: 700; font-size: 10.5px; }
+.cal-chip-online {
+  background: #EBF5FB;
+  border-left-color: #3B82F6;
+  color: #1565C0;
+}
+.cal-chip-inperson {
+  background: #FDF2F2;
+  border-left-color: var(--cardinal);
+  color: #7A0000;
+}
+.cal-chip-hybrid {
+  background: #EBF1FE;
+  border-left-color: #5C6BC0;
+  color: #283593;
+}
+.cal-chip-stacked {
+  background: #F5F3FF;
+  border-left-color: #7C3AED;
+  color: #5B21B6;
+}
+.cal-chip-pending { opacity: 0.5; border-left-style: dashed; }
+.cal-chip-paused { opacity: 0.4; text-decoration: line-through; }
+.cal-chip .badge-start, .cal-chip .badge-end, .cal-chip .badge-2part {
+  font-size: 8px;
+  padding: 0 4px;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+/* Online study spanning bar */
+.cal-grid-online-span {
+  grid-column: 2 / 7;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+.cal-grid-row:last-child .cal-grid-online-span { border-bottom: none; }
+
+/* Empty day state */
+.cal-day-empty {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  padding-top: 12px;
+}
+
+/* Dark mode */
+body.dark .cal-week-block { background: #242424; border-color: #3A3A3A; }
+body.dark .cal-week-block.current-week-block { border-color: #8A7A20; box-shadow: 0 0 0 1px #8A7A20; }
+body.dark .cal-grid-head-cell { background: #1e1e1e; border-color: #3A3A3A; }
+body.dark .cal-grid-fac { border-color: #2E2E2E; background: #242424; }
+body.dark .cal-grid-day { border-color: #2E2E2E; }
+body.dark .cal-chip-online { background: #1A2A3A; color: #90CAF9; }
+body.dark .cal-chip-inperson { background: #2A1A1A; color: #FFAB91; }
+body.dark .cal-chip-hybrid { background: #1A1A2A; color: #9FA8DA; }
+body.dark .cal-chip-stacked { background: #1A102A; color: #CE93D8; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cal-grid { grid-template-columns: 80px repeat(5, 1fr); }
+  .cal-chip { font-size: 10px; padding: 3px 5px; }
+  .cal-grid-fac { font-size: 10px; padding: 8px 8px; }
+}
+@media (max-width: 600px) {
+  .cal-grid { grid-template-columns: 60px repeat(5, 1fr); overflow-x: auto; }
+  .cal-grid-head-cell { font-size: 9px; padding: 6px 3px; }
+  .cal-chip { font-size: 9px; }
+}
+
 /* Calendar cell padding */
 #calendar tbody td { padding: 8px 10px; }
 #calendar thead th { padding: 10px 10px; }
@@ -654,9 +964,17 @@ tbody td {
   border-bottom: 1px solid var(--border-light);
   vertical-align: top;
   font-size: 15px;
+  transition: background 0.12s, padding-left 0.15s;
 }
 
-tbody tr:hover { background: #FAFAF8; }
+tbody tr:nth-child(even) td { background: #FCFCFA; }
+tbody tr:hover td {
+  background: #FEF5F0;
+}
+tbody tr:hover td:first-child {
+  border-left: 2px solid var(--cardinal);
+  padding-left: 10px;
+}
 tbody tr:last-child td { border-bottom: none; }
 
 /* Current week row highlight in calendar */
@@ -1158,7 +1476,7 @@ body.dark .badge-tentative { background: #1A237E; color: #9FA8DA; border-color: 
 
 .note-bar strong { color: var(--text); }
 
-/* ═══ Stacking Planner ═══ */
+/* ═══ Stacked Sessions ═══ */
 .stack-planner {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -1200,36 +1518,40 @@ body.dark .badge-tentative { background: #1A237E; color: #9FA8DA; border-color: 
   border-bottom: 1px solid var(--border-light);
 }
 
-/* Week cards */
-.sp-weeks { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+/* Week cards — grid overview */
+.sp-weeks { padding: 16px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
 .sp-week {
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
   overflow: hidden;
-  transition: border-color 0.15s;
+  transition: all 0.15s;
+  cursor: pointer;
+  position: relative;
 }
+.sp-week:hover { border-color: var(--cardinal); box-shadow: 0 2px 8px rgba(153,0,0,0.08); transform: translateY(-1px); }
 .sp-week.sp-best { border-color: var(--cardinal); border-width: 2px; }
+.sp-week.sp-active { border-color: var(--cardinal); border-width: 2px; box-shadow: 0 3px 12px rgba(153,0,0,0.12); }
 .sp-week-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
+  padding: 12px 14px 10px;
   background: #FAFAF8;
-  gap: 12px;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 .sp-week.sp-best .sp-week-header { background: #FEF5F5; }
+.sp-week.sp-active .sp-week-header { background: #FEF5F5; }
+.sp-week-top { display: flex; justify-content: space-between; align-items: center; }
 .sp-week-date { font-family: 'Source Serif 4', Georgia, serif; font-weight: 900; font-size: 15px; color: var(--text); }
 .sp-week-stats {
   display: flex;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--text-secondary);
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
 }
 .sp-week-stat { white-space: nowrap; }
 .sp-week-stat strong { color: var(--text); }
 .sp-best-tag {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1238,50 +1560,127 @@ body.dark .badge-tentative { background: #1A237E; color: #9FA8DA; border-color: 
   padding: 2px 8px;
   border-radius: 3px;
 }
-.sp-week-studies { padding: 10px 14px; }
-.sp-study {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  font-size: 15px;
+
+/* Mini duration bar in card */
+.sp-mini-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 2px; background: var(--border-light); }
+.sp-mini-bar-seg { height: 100%; }
+
+/* Study pills in card */
+.sp-card-studies { padding: 8px 14px 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+.sp-card-pill {
+  font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 10px;
+  background: #F3F4F6; color: var(--text-secondary); white-space: nowrap;
 }
-.sp-study:not(:last-child) { border-bottom: 1px solid var(--border-light); }
-.sp-study-name { flex: 1; font-weight: 500; color: var(--text); }
-.sp-study-researcher { color: var(--text-muted); font-size: 14px; }
-.sp-study-dur { color: var(--text-secondary); font-size: 14px; white-space: nowrap; }
-.sp-study-status {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 1px 7px;
-  border-radius: 3px;
-}
-.sp-study-status.confirmed { background: #ECFDF5; color: #065F46; }
-.sp-study-status.maybe { background: #FFFBEB; color: #92400E; }
-.sp-ll102 {
-  padding: 8px 14px;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-light);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.sp-card-pill.confirmed { background: #ECFDF5; color: #065F46; }
+.sp-card-pill.maybe { background: #FFFBEB; color: #92400E; }
+
+/* LL102 status in card */
+.sp-card-ll102 {
+  padding: 6px 14px; font-size: 11px; color: var(--text-muted);
+  border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 5px;
 }
 .sp-ll102-dot {
-  width: 8px; height: 8px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 .sp-ll102-free { background: #22C55E; }
 .sp-ll102-busy { background: #EF4444; }
 
-/* No-stack week (only 1 study) */
-.sp-week-slim .sp-week-header { opacity: 0.6; }
-.sp-week-slim .sp-week-studies { display: none; }
+/* Slim (insufficient) cards */
+.sp-week-slim { opacity: 0.5; }
+.sp-week-slim:hover { opacity: 0.8; }
+.sp-week-slim .sp-card-studies { display: none; }
+.sp-week-slim .sp-mini-bar { display: none; }
+
+/* Detail panel — expanded view below grid */
+.sp-detail {
+  margin: 0 16px 16px; padding: 0;
+  border: 2px solid var(--cardinal); border-radius: 8px;
+  overflow: hidden; background: var(--surface);
+  animation: spDetailIn 0.2s ease;
+}
+@keyframes spDetailIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.sp-detail-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; background: #FEF5F5;
+  border-bottom: 1px solid var(--border-light);
+}
+.sp-detail-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 900; font-size: 18px; color: var(--text); }
+.sp-detail-close {
+  background: none; border: 1px solid var(--border); border-radius: 4px;
+  padding: 4px 12px; font-size: 12px; cursor: pointer; color: var(--text-muted);
+  font-family: inherit; transition: all 0.15s;
+}
+.sp-detail-close:hover { border-color: var(--cardinal); color: var(--cardinal); }
+
+/* Day tabs in detail view */
+.sp-detail-days { display: flex; gap: 2px; padding: 12px 18px 0; border-bottom: 1px solid var(--border-light); }
+.sp-detail-day-tab {
+  padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer;
+  border: 1px solid transparent; border-bottom: none; border-radius: 6px 6px 0 0;
+  background: transparent; color: var(--text-muted); font-family: inherit; transition: all 0.15s;
+  margin-bottom: -1px;
+}
+.sp-detail-day-tab:hover { background: #FAFAF8; color: var(--text); }
+.sp-detail-day-tab.active { background: var(--surface); border-color: var(--border-light); color: var(--cardinal); font-weight: 700; }
+
+/* Day content */
+.sp-detail-content { padding: 16px 18px; }
+
+/* Timeline bar in detail */
+.sp-detail-bar { display: flex; height: 36px; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.sp-detail-bar-seg {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: white; padding: 0 8px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sp-detail-bar-buffer { background: var(--border-light); color: var(--text-muted); font-weight: 400; font-size: 10px; }
+.sp-detail-bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 16px; }
+
+/* Study rows in detail */
+.sp-detail-study {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; font-size: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+.sp-detail-study:last-child { border-bottom: none; }
+.sp-study-status {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.sp-study-status.confirmed { background: #ECFDF5; color: #065F46; }
+.sp-study-status.maybe { background: #FFFBEB; color: #92400E; }
+.sp-study-name { flex: 1; font-weight: 500; color: var(--text); }
+.sp-study-researcher { color: var(--text-muted); font-size: 13px; }
+.sp-study-dur { color: var(--text-secondary); font-size: 13px; white-space: nowrap; }
+
+/* LL102 in detail */
+.sp-detail-ll102 {
+  margin-top: 12px; padding: 10px 14px; border-radius: 6px;
+  font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;
+  background: #FAFAF8; border: 1px solid var(--border-light);
+}
+
+/* Dark mode */
+body.dark .sp-week-header { background: #2a2a2a; }
+body.dark .sp-week.sp-best .sp-week-header, body.dark .sp-week.sp-active .sp-week-header { background: #2a1a1a; }
+body.dark .sp-week:hover { border-color: var(--cardinal); box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+body.dark .sp-card-pill { background: #2a2a2a; color: #A0A0A0; }
+body.dark .sp-card-pill.confirmed { background: #1a2a1a; color: #6EE7B7; }
+body.dark .sp-card-pill.maybe { background: #2a2510; color: #FCD34D; }
+body.dark .sp-detail { border-color: var(--cardinal); background: #1e1e1e; }
+body.dark .sp-detail-header { background: #2a1a1a; }
+body.dark .sp-detail-day-tab.active { background: #1e1e1e; border-color: #3A3A3A; }
+body.dark .sp-detail-ll102 { background: #242424; border-color: #3A3A3A; }
 
 @media (max-width: 768px) {
-  .sp-week-header { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .sp-study { flex-wrap: wrap; gap: 6px; }
+  .sp-weeks { grid-template-columns: 1fr; }
+  .sp-detail-days { overflow-x: auto; }
+  .sp-detail-study { flex-wrap: wrap; gap: 6px; }
 }
 
 .footer {
@@ -1315,21 +1714,21 @@ body.dark .badge-tentative { background: #1A237E; color: #9FA8DA; border-color: 
   .changelog-trigger { font-size: 10.5px !important; padding: 2px 8px !important; }
   .header-reset { order: 3; padding: 3px 10px; font-size: 11px; }
   .dark-mode-toggle { width: 30px; height: 30px; font-size: 12px; order: 4; }
-  .semester-progress { padding: 4px 16px 20px; }
-  .sem-week { height: 12px; border-width: 0.5px; }
-  .sem-week.current { height: 16px; }
-  .sem-weeks { gap: 1.5px; }
-  .sem-week-label { font-size: 8px; top: calc(100% + 2px); }
-  .header-beta { font-size: 8px; padding: 0 16px 2px; }
+  .sem-ticker { padding: 0 16px; height: 28px; gap: 8px; }
+  .sem-ticker-current { font-size: 10px; }
+  .sem-ticker-beta { font-size: 8px; }
 
   .main { margin-left: 0; padding: 12px 16px; padding-top: calc(var(--header-h, 70px) + 12px); }
   .footer-enhanced { margin-left: 0; }
 
   /* Studies controls responsive */
-  .studies-controls { flex-direction: column; align-items: stretch; }
+  .studies-toolbar-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .studies-toolbar-filters { margin-left: 0; flex-wrap: wrap; }
+  .studies-search-input { width: 100%; }
+  .studies-search-input:focus { width: 100%; }
   .studies-researcher-select { width: 100%; min-width: 0; font-size: 16px; }
   .studies-search-input { font-size: 16px; } /* prevent iOS zoom */
-  .studies-filter-group { min-width: 0; }
+  .studies-researcher-select { min-width: 0; width: 100%; }
 
   /* My Schedule picker */
   .my-schedule-picker { padding: 8px 10px; top: 40px; border-width: 1.5px; border-radius: 0; position: sticky; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 0 -16px 12px; z-index: 50; }
@@ -1472,10 +1871,12 @@ body.dark .badge-tentative { background: #1A237E; color: #9FA8DA; border-color: 
   }
 
   /* Section intro no bottom border on mobile (saves space) */
-  .section-intro { border-bottom: none; padding-bottom: 0; margin-bottom: 12px; }
+  .section-intro, .section-header { border-bottom: none; padding-bottom: 0; margin-bottom: 12px; }
 
   /* Footer stacks */
-  .footer-grid { flex-direction: column; gap: 20px; }
+  .footer-inner { flex-direction: column; gap: 10px; padding: 16px 18px 14px; text-align: center; }
+  .footer-col-links { justify-content: center; }
+  .footer-col-contact { text-align: center; }
 }
 
 /* ═══ Extra-small screens (≤360px) ═══ */
@@ -2068,6 +2469,115 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
   border-top: 3px solid var(--gold);
   border-radius: var(--radius);
 }
+.home-intro-pickers {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-light);
+}
+.home-intro-picker { flex: 1; max-width: 320px; }
+.home-intro-picker-label {
+  display: block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--text-muted); margin-bottom: 5px;
+}
+.home-intro-picker-select {
+  width: 100%; padding: 9px 32px 9px 12px;
+  border: 1.5px solid var(--border); border-radius: 6px;
+  font-family: inherit; font-size: 14px; color: var(--text);
+  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%238C8C8C' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center;
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  transition: all 0.15s;
+}
+.home-intro-picker-select:hover { border-color: var(--cardinal); }
+.home-intro-picker-select:focus { border-color: var(--cardinal); outline: none; box-shadow: 0 0 0 3px rgba(153,0,0,0.1); }
+.home-intro-picker-divider {
+  font-size: 13px; color: var(--text-muted);
+  padding-bottom: 10px; flex-shrink: 0;
+}
+body.dark .home-intro-picker-select { background-color: #2A2A2A; border-color: #3A3A3A; color: var(--text); }
+body.dark .home-intro-picker-select:hover { border-color: #FF8A80; }
+body.dark .home-intro-pickers { border-bottom-color: #3A3A3A; }
+@media (max-width: 768px) {
+  .home-intro-pickers { flex-direction: column; gap: 8px; }
+  .home-intro-picker { max-width: 100%; }
+  .home-intro-picker-divider { display: none; }
+}
+/* Hero Quick-Find */
+.home-hero {
+  background: linear-gradient(135deg, #7A0000 0%, #990000 40%, #B71C1C 100%);
+  border-radius: var(--radius);
+  padding: 28px 32px 22px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::before {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(255,204,0,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.home-hero-greeting {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 22px; font-weight: 900; color: white;
+  margin-bottom: 4px; position: relative;
+}
+.home-hero-sub {
+  font-size: 14px; color: rgba(255,255,255,0.7);
+  margin-bottom: 18px; position: relative;
+}
+.home-hero-pickers {
+  display: flex; align-items: flex-end; gap: 14px;
+  margin-bottom: 16px; position: relative;
+}
+.home-hero-picker { flex: 1; max-width: 320px; }
+.home-hero-picker-label {
+  display: block; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.55); margin-bottom: 5px;
+}
+.home-hero-select {
+  width: 100%; padding: 9px 32px 9px 12px;
+  border: 1.5px solid rgba(255,255,255,0.25); border-radius: 6px;
+  font-family: inherit; font-size: 14px; color: white;
+  background: rgba(255,255,255,0.1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center;
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  transition: all 0.15s;
+}
+.home-hero-select:hover { border-color: rgba(255,255,255,0.4); background-color: rgba(255,255,255,0.15); }
+.home-hero-select:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(255,204,0,0.2); }
+.home-hero-select option { color: #1a1a1a; background: white; }
+.home-hero-divider {
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  padding-bottom: 10px; flex-shrink: 0;
+}
+.home-hero-chips {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; position: relative;
+}
+.home-hero-chip {
+  font-size: 11.5px; font-weight: 600; padding: 3px 10px;
+  border-radius: 20px; background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7); white-space: nowrap;
+}
+.home-hero-chip.chip-online { background: rgba(46,125,50,0.3); color: rgba(255,255,255,0.85); }
+.home-hero-chip.chip-inperson { background: rgba(230,81,0,0.3); color: rgba(255,255,255,0.85); }
+.home-hero-chip.chip-hybrid { background: rgba(21,101,192,0.3); color: rgba(255,255,255,0.85); }
+.home-hero-cal {
+  margin-left: auto; font-size: 13px; font-weight: 600;
+  color: var(--gold); cursor: pointer; white-space: nowrap;
+}
+.home-hero-cal:hover { text-decoration: underline; }
+body.dark .home-hero { background: linear-gradient(135deg, #4A0000 0%, #6B0000 40%, #8B0000 100%); }
+@media (max-width: 768px) {
+  .home-hero { padding: 20px 18px 16px; }
+  .home-hero-greeting { font-size: 18px; }
+  .home-hero-pickers { flex-direction: column; gap: 8px; }
+  .home-hero-picker { max-width: 100%; }
+  .home-hero-divider { display: none; }
+  .home-hero-chips { gap: 5px; }
+}
 
 .home-intro-lead {
   font-size: 16.5px;
@@ -2090,15 +2600,22 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
   color: var(--text-secondary);
   padding: 14px 18px;
   background: white;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid var(--border-light);
   border-left: 3px solid transparent;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 .home-intro-tab:hover {
   border-color: var(--border);
   border-left-color: var(--gold);
   background: #FFFDF8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+}
+.home-intro-tab:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 .home-intro-tab strong {
   font-family: 'Source Serif 4', Georgia, serif;
@@ -2146,12 +2663,35 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
 
 /* ═══ Home Dashboard ═══ */
 .home-dashboard {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .home-dash-card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
 }
+.home-dash-card:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.home-dash-tabs {
+  display: flex; background: var(--cardinal);
+}
+.home-dash-tab {
+  flex: 1; padding: 10px 16px; font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px; font-weight: 900; color: rgba(255,255,255,0.55);
+  cursor: pointer; border: none; background: none; text-align: left;
+  display: flex; align-items: center; gap: 8px; transition: all 0.15s;
+  border-bottom: 3px solid transparent; position: relative;
+}
+.home-dash-tab:hover { color: rgba(255,255,255,0.8); }
+.home-dash-tab.active { color: white; border-bottom-color: var(--gold); }
+.home-dash-tab .dash-icon { font-size: 16px; }
+.home-dash-tab-count {
+  font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.2);
+  padding: 1px 7px; border-radius: 10px; margin-left: 4px;
+}
+.home-dash-tab.active .home-dash-tab-count { background: rgba(255,255,255,0.3); }
 .home-dash-card-header {
   background: var(--cardinal); color: white; padding: 10px 16px;
   font-family: 'Source Serif 4', Georgia, serif; font-size: 15px;
@@ -2159,6 +2699,45 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
 }
 .home-dash-card-header .dash-icon { font-size: 16px; }
 .home-dash-card-body { padding: 14px 16px; }
+.home-dash-pane { display: none; }
+.home-dash-pane.active { display: block; }
+/* Two-column This Week */
+.home-tw-cols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.home-tw-col { padding: 0; }
+.home-tw-col:first-child { border-right: 1px solid var(--border-light); padding-right: 16px; }
+.home-tw-col:last-child { padding-left: 16px; }
+.home-tw-col-header {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 8px; margin-bottom: 4px;
+  border-bottom: 1px solid var(--border-light);
+}
+.home-tw-col-count { font-size: 12px; color: var(--text-muted); }
+.home-tw-fac {
+  font-size: 11px; font-weight: 700; color: var(--cardinal);
+  text-transform: uppercase; letter-spacing: 0.3px;
+  padding: 6px 0 2px;
+}
+.home-tw-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid var(--border-light);
+  font-size: 13.5px; cursor: pointer; transition: background 0.12s;
+  margin: 0 -4px; padding-left: 4px; padding-right: 4px; border-radius: 3px;
+}
+.home-tw-item:last-child { border-bottom: none; }
+.home-tw-item:hover { background: var(--border-light); }
+.home-tw-name { font-weight: 600; color: var(--text); }
+.home-tw-who { font-size: 12.5px; color: var(--text-muted); flex-shrink: 0; margin-left: 8px; }
+.home-tw-lab { border-left: 3px solid var(--cardinal); padding-left: 8px; margin-left: 0; }
+.home-tw-none { font-size: 13px; color: var(--text-muted); font-style: italic; padding: 12px 0; }
+body.dark .home-tw-col:first-child { border-right-color: #3A3A3A; }
+body.dark .home-tw-item:hover { background: #2A2A2A; }
+@media (max-width: 768px) {
+  .home-tw-cols { grid-template-columns: 1fr; }
+  .home-tw-col:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border-light); padding-bottom: 8px; margin-bottom: 8px; }
+  .home-tw-col:last-child { padding-left: 0; }
+}
 .home-dash-gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%); }
 .home-dash-study {
   display: flex; align-items: center; gap: 10px; padding: 8px 0;
@@ -2181,6 +2760,21 @@ body.dark .rc-minimap-suite .fac-room-office { background: #1E2E1E; border-color
 .home-dash-event-date { font-weight: 700; color: var(--cardinal); font-size: 13px; white-space: nowrap; min-width: 70px; }
 .home-dash-event-text { color: var(--text-secondary); flex: 1; }
 .home-dash-event-text strong { color: var(--text); }
+.home-dash-group { margin-bottom: 6px; }
+.home-dash-group:last-child { margin-bottom: 0; }
+.home-dash-group-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+  color: var(--text-muted); padding: 6px 0 2px; border-bottom: 1px solid var(--border-light);
+  margin-bottom: 2px;
+}
+.home-dash-group-lab { color: var(--cardinal); }
+.home-dash-wk-group { margin-bottom: 4px; }
+.home-dash-wk-group:last-child { margin-bottom: 0; }
+.home-dash-wk-label {
+  font-size: 12px; font-weight: 700; color: var(--cardinal);
+  padding: 8px 0 3px; border-bottom: 1px solid var(--border-light); margin-bottom: 2px;
+}
+.home-dash-wk-group .home-dash-event { padding-left: 4px; }
 .home-quick-access { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
 .home-quick-card {
   background: var(--surface); border: 1px solid var(--border);
@@ -2199,66 +2793,123 @@ body.dark .home-quick-card { background: #242424; border-color: #3A3A3A; }
 body.dark .home-quick-card:hover { background: #2A2A2A; }
 body.dark .crosslink { color: #FF8A80; }
 @media (max-width: 768px) {
-  .home-dashboard { grid-template-columns: 1fr; }
+  .home-dashboard { /* already single column */ }
   .home-quick-access { grid-template-columns: 1fr; }
   .home-quick-card { padding: 16px 14px; }
 }
 
 /* ═══ All Studies Controls ═══ */
-.studies-filter-row {
+/* ═══ Studies Toolbar ═══ */
+.studies-toolbar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: visible;
+  position: sticky;
+  top: calc(var(--header-h, 110px) + 8px);
+  z-index: 20;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+.studies-toolbar.stuck {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.studies-toolbar-row {
   display: flex;
+  align-items: center;
   gap: 12px;
-  align-items: flex-end;
-  margin-bottom: 14px;
+  padding: 10px 14px;
   flex-wrap: wrap;
 }
-.studies-filter-group { flex: 1; min-width: 200px; }
-.studies-filter-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 7px;
+.studies-toolbar-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
 }
 .studies-researcher-select {
-  padding: 10px 36px 10px 14px;
+  padding: 7px 30px 7px 10px;
   border: 1.5px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 6px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  background: var(--surface);
+  background: var(--bg);
   outline: none;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235C5C5C' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%235C5C5C' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-position: right 10px center;
   transition: border-color 0.15s;
-  min-width: 240px;
+  min-width: 170px;
 }
 .studies-researcher-select:focus { border-color: var(--cardinal); }
 .studies-researcher-select.has-selection { color: var(--cardinal); font-weight: 600; border-color: var(--cardinal); }
-
+.studies-search-wrap { position: relative; }
 .studies-search-input {
-  width: 100%;
-  padding: 10px 14px 10px 36px;
+  padding: 7px 10px 7px 30px;
   border: 1.5px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 6px;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
-  background: var(--surface);
+  background: var(--bg);
   outline: none;
   transition: border-color 0.15s;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238C8C8C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  width: 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%238C8C8C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: 12px center;
+  background-position: 9px center;
 }
-.studies-search-input:focus { border-color: var(--cardinal); }
+.studies-search-input:focus { border-color: var(--cardinal); width: 240px; }
 .studies-search-input::placeholder { color: var(--text-muted); font-weight: 400; }
+.studies-legend-btn {
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.studies-legend-btn:hover { border-color: var(--cardinal); color: var(--cardinal); }
+.studies-legend-btn.active { background: var(--cardinal); color: white; border-color: var(--cardinal); }
+.studies-legend-panel {
+  display: none;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg);
+  font-size: 12px;
+  color: var(--text-secondary);
+  gap: 4px 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.studies-legend-panel.open { display: grid; }
+.studies-legend-panel .badge-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 2px 0;
+}
+.studies-legend-panel .badge,
+.studies-legend-panel .badge-cr,
+.studies-legend-panel .badge-stackable,
+.studies-legend-panel .badge-stacked,
+.studies-legend-panel .badge-2part {
+  flex-shrink: 0;
+}
 /* Search match highlighting */
 #studies-tbody mark {
   background: #FFF3CD;
@@ -2268,6 +2919,11 @@ body.dark .crosslink { color: #FF8A80; }
   font-weight: inherit;
 }
 body.dark #studies-tbody mark { background: #5A4B00; color: #FFE082; }
+body.dark .studies-toolbar { background: #242424; border-color: #3A3A3A; }
+body.dark .studies-legend-panel { background: #1e1e1e; border-color: #3A3A3A; }
+body.dark .studies-researcher-select { background: #1e1e1e; border-color: #3A3A3A; color: #A0A0A0; }
+body.dark .studies-search-input { background: #1e1e1e; border-color: #3A3A3A; color: #A0A0A0; }
+body.dark .studies-legend-btn { background: #1e1e1e; border-color: #3A3A3A; color: #707070; }
 
 .studies-controls {
   display: flex;
@@ -2724,8 +3380,16 @@ body.dark .ms-tile:hover { border-color: var(--cardinal); background: #2A1A1A; }
   border-radius: 3px;
 }
 .rc-week-stat strong { font-weight: 700; }
-.rc-week-group.rc-week-past .rc-week-header { opacity: 0.5; }
+.rc-week-group.rc-week-past .rc-week-header { opacity: 0.5; cursor: pointer; user-select: none; }
+.rc-week-group.rc-week-past .rc-week-header:hover { opacity: 0.7; }
 .rc-week-group.rc-week-past .rc-study { opacity: 0.5; }
+.rc-week-group.rc-week-past .rc-week-toggle { display: inline-block; font-size: 9px; margin-left: 6px; transition: transform 0.2s; }
+.rc-week-group.rc-week-past:not(.rc-week-expanded) .rc-study,
+.rc-week-group.rc-week-past:not(.rc-week-expanded) .rc-minimap,
+.rc-week-group.rc-week-past:not(.rc-week-expanded) .rc-minimap-multi,
+.rc-week-group.rc-week-past:not(.rc-week-expanded) .rc-room-breakdown,
+.rc-week-group.rc-week-past:not(.rc-week-expanded) .rc-conflicts { display: none; }
+.rc-week-group.rc-week-past.rc-week-expanded .rc-week-toggle { transform: rotate(90deg); }
 .rc-week-group.rc-week-current .rc-week-header {
   background: var(--current-week-bg);
   border-left: 3px solid var(--current-week-border);
@@ -2791,6 +3455,7 @@ body.dark .ms-tile:hover { border-color: var(--cardinal); background: #2A1A1A; }
 
 .study-row.filter-hidden,
 .week-group.filter-hidden,
+.cal-week-block.filter-hidden,
 tbody tr.filter-hidden { display: none !important; }
 
 .week-group.filter-partial .week-body { max-height: 2000px !important; opacity: 1 !important; border-color: var(--border) !important; }
@@ -2822,12 +3487,13 @@ tbody tr.filter-hidden { display: none !important; }
   width: 42px; height: 42px; border-radius: 6px;
   background: var(--cardinal); color: white; border: none;
   box-shadow: 0 3px 12px rgba(153,0,0,0.35);
-  cursor: pointer; font-size: 18px; display: none;
-  align-items: center; justify-content: center;
-  transition: all 0.2s; font-family: inherit;
+  cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s ease; font-family: inherit;
+  opacity: 0; pointer-events: none; transform: translateY(8px);
 }
 .back-to-top:hover { transform: translateY(-2px); box-shadow: 0 5px 16px rgba(153,0,0,0.45); }
-.back-to-top.visible { display: flex; }
+.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
 /* ═══ Collapse/expand all ═══ */
 /* ═══ Week group past dimming ═══ */
@@ -2858,13 +3524,21 @@ th.sortable.sort-desc::after { content: '▼'; opacity: 0.7; }
 /* ═══ Calendar Week Sub-Menu ═══ */
 .cal-week-menu {
   display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px;
-  padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
+  padding: 0; background: var(--surface); border: 1px solid var(--border);
   border-top: 3px solid var(--gold); border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
 }
 .cal-week-menu-label {
   font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1.5px; color: var(--text-muted); width: 100%; margin-bottom: 8px;
+  letter-spacing: 1.5px; color: var(--text-muted); width: 100%; margin-bottom: 0;
+  padding: 10px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.15s;
 }
+.cal-week-menu-label:hover { background: var(--border-light); }
+.cal-week-menu-label .cal-toggle-arrow { font-size: 10px; transition: transform 0.2s; }
+.cal-week-menu.collapsed .cal-toggle-arrow { transform: rotate(-90deg); }
+.cal-week-menu-pills { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 14px 12px; width: 100%; }
+.cal-week-menu.collapsed .cal-week-menu-pills { display: none; }
 .cal-week-pill {
   padding: 6px 12px; font-size: 13px; font-weight: 600;
   border: 1.5px solid var(--border); border-radius: 4px;
@@ -3028,6 +3702,35 @@ body.dark .hb-card-header { background: #2A2A2A; }
 .hb-card-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 900; color: var(--text); }
 .hb-card-sub { font-size: 12.5px; color: var(--text-muted); margin-top: 1px; }
 .hb-card-body { padding: 16px 18px; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.hb-checklist { list-style: none; margin: 0; padding: 0; }
+.hb-checklist li {
+  display: flex; gap: 10px; padding: 7px 0; font-size: 14px; line-height: 1.5; color: var(--text-secondary);
+}
+.hb-checklist li + li { border-top: 1px solid var(--border-light); }
+.hb-checklist li::before {
+  content: ''; flex-shrink: 0; width: 16px; height: 16px; margin-top: 2px;
+  border: 1.5px solid #bbb; border-radius: 3px; background: white;
+}
+body.dark .hb-checklist li::before { border-color: #555; background: #2a2a2a; }
+.hb-checklist li strong { color: var(--cardinal); font-weight: 600; }
+.hb-phase-label {
+  display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.4px; padding: 2px 8px; border-radius: 3px; color: white; margin-bottom: 8px;
+}
+.hb-phase-blue { background: #1565C0; }
+.hb-phase-green { background: #2E7D32; }
+.hb-phase-orange { background: #E65100; }
+.hb-phase-purple { background: #6A1B9A; }
+.hb-esc-box {
+  border: 2px solid var(--cardinal); border-radius: 6px; padding: 12px 16px; font-size: 13.5px; line-height: 1.5;
+}
+.hb-esc-title { font-weight: 900; color: var(--cardinal); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; font-size: 13px; }
+.hb-contacts { display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-light); }
+.hb-contacts strong { color: var(--text); }
+body.dark .hb-esc-box { border-color: #9C2727; }
+@media print {
+  .hb-checklist li::before { border-color: #aaa; }
+}
 .hb-placeholder {
   display: flex; align-items: flex-start; gap: 12px;
   padding: 20px 18px; background: #FFFDF5; border-left: 3px solid var(--gold);
@@ -3139,39 +3842,54 @@ body.dark .dir-email-btn { background: #2A2A2A; border-color: #3A3A3A; }
 
 /* ═══ Footer enhanced ═══ */
 .footer-enhanced {
-  background: var(--cardinal); padding: 28px 32px 24px;
-  max-width: 100%; margin: 0; margin-left: 260px; font-size: 14.5px; color: rgba(255,255,255,0.85);
+  background: var(--bg); padding: 0; margin: 0; margin-left: 260px;
+  font-size: 13px; color: var(--text-secondary);
+  border-top: 1px solid var(--border);
 }
 .footer-enhanced .footer-gold-bar {
-  height: 4px; background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
-  margin: 0 0 24px; border-radius: 2px;
+  height: 3px; background: linear-gradient(90deg, var(--gold) 0%, #e6b800 100%);
+  margin: 0;
 }
-.footer-grid {
-  display: flex; gap: 48px; flex-wrap: wrap; margin-bottom: 20px;
-  max-width: 1280px; margin-left: auto; margin-right: auto; margin-bottom: 20px;
+.footer-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 20px 32px 18px;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
 }
-.footer-col h4 {
-  font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 10px;
+.footer-col-loc {
+  font-size: 12.5px; line-height: 1.6; color: var(--text-muted);
 }
-.footer-col a {
-  display: block; color: var(--gold); text-decoration: none;
-  padding: 2px 0; font-weight: 500;
+.footer-col-loc strong { color: var(--text-secondary); font-weight: 600; }
+.footer-col-contact {
+  font-size: 12.5px; line-height: 1.6; color: var(--text-muted); text-align: center;
 }
-.footer-col a:hover { text-decoration: underline; color: #fff; }
-.footer-col p { margin-bottom: 5px; line-height: 1.5; }
+.footer-col-contact a { color: var(--cardinal); text-decoration: none; font-weight: 500; }
+.footer-col-contact a:hover { text-decoration: underline; }
+.footer-col-links {
+  display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+}
+.footer-col-links a {
+  font-size: 12px; color: var(--cardinal); text-decoration: none; font-weight: 600;
+  white-space: nowrap;
+}
+.footer-col-links a:hover { text-decoration: underline; }
+.footer-col-links .foot-sep { color: var(--border); font-size: 10px; }
 .footer-credit {
-  text-align: center; font-size: 11px; color: rgba(255,255,255,0.45);
-  padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12);
-  max-width: 1280px; margin: 0 auto; letter-spacing: 0.5px;
+  text-align: center; font-size: 10.5px; color: var(--text-muted);
+  padding: 10px 32px 14px; border-top: 1px solid var(--border-light);
+  max-width: 1280px; margin: 0 auto; letter-spacing: 0.3px;
 }
+body.dark .footer-enhanced { background: var(--bg); border-top-color: #3A3A3A; }
+body.dark .footer-col-contact a { color: #FF8A80; }
+body.dark .footer-col-links a { color: #FF8A80; }
+body.dark .footer-credit { border-top-color: #2E2E2E; }
 
 /* ═══ Enhanced print stylesheet ═══ */
 @media print {
   body { background: white; font-size: 11px; }
   .header { position: static !important; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .nav, .back-to-top, .home-intro,
-  .cal-nav, .fac-week-picker, .studies-controls, .studies-filter-row,
+  .cal-nav, .fac-week-picker, .studies-controls, .studies-toolbar,
   .room-modal-overlay, .rc-map-toggle, .stack-planner,
   .my-schedule-picker, .my-schedule-empty,
   .studies-search-input, .header-reset,
@@ -3548,6 +4266,16 @@ body.dark .ra-fp-room.ra-fp-active { background: #3a1a1a; }
 body.dark .ra-fp-backstage { background: #2a2510; border-color: #5a4b10; color: #b8a050; }
 .ra-fp-reception { background: #f0f7fc; border: 1px dashed #a3c8dd; font-size: 7px; color: #5a9ab8; display: flex; align-items: center; justify-content: center; border-radius: 3px; }
 body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: #64b5f6; }
+
+/* Dark mode — Week meter */
+/* Semester ticker dark mode handled by base styles */
+
+/* Dark mode — Berry Org Change floorplan purple rooms */
+body.dark .ra-sched-mini-fp [style*="F3E5F5"] { background: #2a1a2e !important; }
+body.dark .ra-sched-mini-fp [style*="7B1FA2"] { border-color: #9C27B0 !important; color: #CE93D8 !important; }
+
+/* Dark mode — Reserved day cards */
+body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #3949AB !important; }
 .ra-fp-e { grid-column: 1; grid-row: 2; }
 .ra-fp-d { grid-column: 1; grid-row: 3; }
 .ra-fp-c { grid-column: 1; grid-row: 4; }
@@ -3609,20 +4337,26 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <h1>Spring 2026 Study Schedule</h1>
       <div class="subtitle">MOR Subject Pool · Verna &amp; Peter Dauterive Hall (VPD), Lower Level</div>
     </div>
-    <div class="header-stats">
-      <span class="header-stat">1,517 Students</span>
-      <span class="header-stat">30 Studies</span>
-      <span class="header-stat hide-mobile">17 Researchers</span>
-      <span class="header-stat hide-mobile">~7K+ Participants</span>
+    <div class="header-stats" style="display:none">
     </div>
     <div class="header-badge" style="position:relative">
-      <div class="updated" id="updated-date" data-date="2026-02-28">Updated Feb 28, 2026</div>
+      <div class="updated" id="updated-date" data-date="2026-03-01">Updated Mar 1, 2026</div>
       <span class="whats-new-dot" id="whats-new-dot" title="Schedule updated since your last visit" style="display:none">●</span>
       <button class="changelog-trigger" id="changelog-trigger"><span class="cl-dot"></span> What's New</button>
       <div class="changelog-panel" id="changelog-panel">
         <div class="changelog-panel-header">
           <span>What's Changed</span>
           <button class="changelog-dismiss" id="changelog-dismiss">Dismiss</button>
+        </div>
+        <div class="changelog-entry">
+          <div class="changelog-entry-date">Mar 1, 2026</div>
+          <ul class="changelog-entry-items">
+            <li>Added Berry "Org Change" study page with full RA schedule (LL-110, Week 1)</li>
+            <li>Diana Carpio added as RA — assigned Tue + Fri, Thu/Fri reserved (RA TBA)</li>
+            <li>Interactive semester week meter in header — click any week to jump to Calendar</li>
+            <li>Floorplans on study pages updated to match architectural layout</li>
+            <li>RA dropdown alphabetized by last name</li>
+          </ul>
         </div>
         <div class="changelog-entry">
           <div class="changelog-entry-date">Feb 28, 2026</div>
@@ -3638,7 +4372,7 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
           <div class="changelog-entry-date">Feb 16, 2026</div>
           <ul class="changelog-entry-items">
             <li>Added Martinez "I Can Introduce You to Someone... (Pilot)" study (Online, Feb 8, 0.25 CR)</li>
-            <li>Updated completion tracking: Pilot 90/100, Brainstorming 103/150</li>
+            <li>Updated completion tracking: Pilot 100/100 (complete), Brainstorming 191/150 (on hold as of Mar 1)</li>
             <li>SONA sign-up links added for Pilot and Brainstorming</li>
           </ul>
         </div>
@@ -3655,10 +4389,15 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
     <button class="header-reset" id="header-reset" title="Clear researcher selection">⟳ Reset</button>
     <button class="dark-mode-toggle" id="dark-mode-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
   </div>
-  <div class="header-beta">BETA — notice an issue? let Brian know</div>
   <div class="header-gold-bar"></div>
-  <div class="semester-progress" id="semester-progress">
-    <div class="sem-weeks" id="sem-weeks"></div>
+  <div class="sem-ticker" id="sem-ticker">
+    <span class="sem-ticker-current" id="sem-ticker-label"></span>
+    <div class="sem-ticker-track-wrap">
+      <span class="sem-ticker-start">Feb 8</span>
+      <div class="sem-ticker-segments" id="sem-ticker-segments"></div>
+      <span class="sem-ticker-end">May 1</span>
+    </div>
+    <span class="sem-ticker-beta">BETA</span>
   </div>
 </div>
 
@@ -3673,9 +4412,28 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <span class="tab-icon">🏠</span>Home
     </button>
 
-    <button class="nav-tab" data-tab="myschedule" role="tab" aria-selected="false" aria-controls="myschedule" id="tab-myschedule">
-      <span class="tab-icon">👤</span>My Schedule
-    </button>
+    <div class="nav-tab-group" data-group="calendar">
+      <button class="nav-tab" data-tab="calendar" role="tab" aria-selected="false" aria-controls="calendar" id="tab-calendar">
+        <span class="tab-icon">📅</span>Calendar
+        <span class="nav-tab-chevron">▶</span>
+      </button>
+      <div class="nav-submenu">
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(-1)">All Weeks</button>
+        <button class="nav-submenu-item" data-parent="calendar" data-scroll="current-week">⦿ Current Week</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(0)">Wk 1 · Feb 8–14</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(1)">Wk 2 · Feb 15–21</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(2)">Wk 3 · Feb 22–28</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(3)">Wk 4 · Mar 1–7</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(4)">Wk 5 · Mar 8–14</button>
+        <button class="nav-submenu-item nav-sub-break" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(5)">Spring Recess · Mar 15–21</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(6)">Wk 7 · Mar 22–28</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(7)">Wk 8 · Mar 29–Apr 4</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(8)">Wk 9 · Apr 5–11</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(9)">Wk 10 · Apr 12–18</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(10)">Wk 11 · Apr 19–25</button>
+        <button class="nav-submenu-item" data-parent="calendar" onclick="switchTab('calendar');calJumpTo(11)">Wk 12 · Apr 26–May 1</button>
+      </div>
+    </div>
 
     <div class="nav-tab-group" data-group="studies">
       <button class="nav-tab" data-tab="studies" role="tab" aria-selected="false" aria-controls="studies" id="tab-studies">
@@ -3689,20 +4447,17 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       </div>
     </div>
 
-    <button class="nav-tab" data-tab="stacking" role="tab" aria-selected="false" aria-controls="stacking" id="tab-stacking">
-      <span class="tab-icon">📦</span>Stacking Planner
-    </button>
-
-    <div class="nav-tab-group" data-group="calendar">
-      <button class="nav-tab" data-tab="calendar" role="tab" aria-selected="false" aria-controls="calendar" id="tab-calendar">
-        <span class="tab-icon">📅</span>Calendar
+    <div class="nav-tab-group" data-group="stacking">
+      <button class="nav-tab" data-tab="stacking" role="tab" aria-selected="false" aria-controls="stacking" id="tab-stacking">
+        <span class="tab-icon">📦</span>Stacked Sessions
         <span class="nav-tab-chevron">▶</span>
       </button>
       <div class="nav-submenu">
-        <button class="nav-submenu-item" data-sub="cal-today" data-parent="calendar" data-scroll="current-week">Current Week</button>
-        <button class="nav-submenu-item" data-sub="cal-pre-break" data-parent="calendar" data-scroll="pre-spring">Feb 8 – Mar 14</button>
-        <button class="nav-submenu-item" data-sub="cal-recess" data-parent="calendar" data-scroll="spring-recess">Spring Recess</button>
-        <button class="nav-submenu-item" data-sub="cal-post-break" data-parent="calendar" data-scroll="post-spring">Mar 22 – May 1</button>
+        <button class="nav-submenu-item" data-sub="stack-overview" data-parent="stacking" onclick="switchTab('stacking')">Overview &amp; Planner</button>
+        <button class="nav-submenu-item" data-sub="stack-pilot" data-parent="stacking" onclick="switchTab('rasched');switchStudyPage('stacked')">📦 Pilot · Mar 5, 6, 12, 13</button>
+        <button class="nav-submenu-item" data-sub="stack-ted" data-parent="stacking" onclick="switchTab('stacking')">TED Judges — Berry</button>
+        <button class="nav-submenu-item" data-sub="stack-diss" data-parent="stacking" onclick="switchTab('stacking')">Dissertation Study 1 — Wiltermuth</button>
+        <button class="nav-submenu-item" data-sub="stack-think" data-parent="stacking" onclick="switchTab('stacking')">Thinking About Others — Wakslak</button>
       </div>
     </div>
 
@@ -3712,18 +4467,22 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         <span class="nav-tab-chevron">▶</span>
       </button>
       <div class="nav-submenu">
-        <button class="nav-submenu-item" data-sub="fac-112" data-parent="facilities" data-scroll-to="fac-suite-112">LL-112 · NOLDUS</button>
-        <button class="nav-submenu-item" data-sub="fac-110" data-parent="facilities" data-scroll-to="fac-suite-110">LL-110 · Eyetracking Psychophysio</button>
-        <button class="nav-submenu-item" data-sub="fac-102" data-parent="facilities" data-scroll-to="fac-suite-102">LL102 · Computer Lab</button>
+        <button class="nav-submenu-item" data-sub="fac-112" data-parent="facilities" data-scroll-to="fac-suite-112">LL-112</button>
+        <button class="nav-submenu-item" data-sub="fac-110" data-parent="facilities" data-scroll-to="fac-suite-110">LL-110</button>
+        <button class="nav-submenu-item" data-sub="fac-102" data-parent="facilities" data-scroll-to="fac-suite-102">LL102</button>
       </div>
     </div>
+
+    <button class="nav-tab" data-tab="myschedule" role="tab" aria-selected="false" aria-controls="myschedule" id="tab-myschedule">
+      <span class="tab-icon">👤</span>My Schedule
+    </button>
 
     <button class="nav-tab" data-tab="directory" role="tab" aria-selected="false" aria-controls="directory" id="tab-directory">
       <span class="tab-icon">📇</span>Directory
     </button>
 
     <button class="nav-tab" data-tab="handbook" role="tab" aria-selected="false" aria-controls="handbook" id="tab-handbook">
-      <span class="tab-icon">📋</span>RA Handbook
+      <span class="tab-icon">📋</span>RA Checklists
     </button>
 
     <div class="nav-separator"></div>
@@ -3735,14 +4494,14 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         <span class="nav-tab-chevron">▶</span>
       </button>
       <div class="nav-submenu">
-        <button class="nav-submenu-item" data-sub="kwon" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('kwon')">Kwon — AI Negotiation</button>
-        <button class="nav-submenu-item" data-sub="ferragamo" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('ferragamo')">Ferragamo — Brainstorming</button>
-        <button class="nav-submenu-item" data-sub="berry-org" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('berry-org')">Berry — Org Change</button>
-        <button class="nav-submenu-item" data-sub="berry-loyalty" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('berry-loyalty')">Berry — Loyalty Effect</button>
-        <button class="nav-submenu-item" data-sub="fast" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('fast')">Fast — Team AI &amp; Leadership</button>
-        <button class="nav-submenu-item" data-sub="fox" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('fox')">Fox — TBD</button>
-        <button class="nav-submenu-item" data-sub="martinez" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('martinez')">Martinez — Broker</button>
+        <button class="nav-submenu-item" data-sub="kwon" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('kwon')">AI Negotiation — Kwon</button>
+        <button class="nav-submenu-item" data-sub="ferragamo" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('ferragamo')">Brainstorming — Ferragamo (on hold)</button>
+        <button class="nav-submenu-item" data-sub="martinez" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('martinez')">Broker — Martinez</button>
+        <button class="nav-submenu-item" data-sub="berry-loyalty" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('berry-loyalty')">Loyalty Effect — Berry</button>
+        <button class="nav-submenu-item" data-sub="berry-org" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('berry-org')">Org Change — Berry</button>
         <button class="nav-submenu-item" data-sub="stacked" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('stacked')">Stacked Session (Pilot)</button>
+        <button class="nav-submenu-item" data-sub="fox" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('fox')">TBD — Fox</button>
+        <button class="nav-submenu-item" data-sub="fast" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('fast')">Team AI &amp; Leadership — Fast</button>
       </div>
     </div>
   </div>
@@ -3750,51 +4509,58 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
 <div class="main" id="main-content">
 
+<div class="section-breadcrumb" id="section-breadcrumb" style="display:none">
+  <span class="section-breadcrumb-crumb" onclick="switchTab('home')">Home</span>
+  <span class="section-breadcrumb-sep">▸</span>
+  <span class="section-breadcrumb-name" id="breadcrumb-name"></span>
+</div>
+
 <!-- ═══════════════ HOME ═══════════════ -->
 <div class="section active" id="home" role="tabpanel" aria-labelledby="tab-home">
 
   <div class="home-intro">
-    <p class="home-intro-lead">This is the central scheduling hub for the <strong>MOR Subject Pool</strong> at the Marshall Behavioral Research Lab. It covers all 29 studies running this semester across 17 researchers, with approximately 6,900–7,300 participant slots in online, in-person, and hybrid formats.</p>
+    <p class="home-intro-lead">This is the central scheduling hub for the <strong>MOR Subject Pool</strong> at the Marshall Behavioral Research Lab. It covers all 30 studies running this semester across 17 researchers, with approximately 6,900–7,300 participant slots in online, in-person, and hybrid formats.</p>
+
+    <div class="home-intro-pickers">
+      <div class="home-intro-picker">
+        <label class="home-intro-picker-label">By Researcher</label>
+        <select id="home-find-select" class="home-intro-picker-select" aria-label="Select a researcher">
+          <option value="">Select a researcher or RA…</option>
+        </select>
+      </div>
+      <span class="home-intro-picker-divider">or</span>
+      <div class="home-intro-picker">
+        <label class="home-intro-picker-label">By Study</label>
+        <select id="home-find-study" class="home-intro-picker-select" aria-label="Find a study">
+          <option value="">Select a study…</option>
+        </select>
+      </div>
+    </div>
+
     <div class="home-intro-tabs">
-      <div class="home-intro-tab" data-goto="myschedule" style="cursor:pointer"><strong>My Schedule</strong> — Select your name to see your studies, timeline, room assignments, credits, and collaborators in one place.</div>
-      <div class="home-intro-tab" data-goto="studies" style="cursor:pointer"><strong>All Studies</strong> — Browse every study in a sortable table. Filter by format or researcher.</div>
-      <div class="home-intro-tab" data-goto="stacking" style="cursor:pointer"><strong>Stacking Planner</strong> — Plan combined proctored lab sessions in LL102 by grouping short online studies together.</div>
-      <div class="home-intro-tab" data-goto="calendar" style="cursor:pointer"><strong>Calendar</strong> — Week-by-week grid of what's running where, organized by facility.</div>
-      <div class="home-intro-tab" data-goto="facilities" style="cursor:pointer"><strong>Facilities</strong> — Interactive floor plans of the LL-110, LL-112, and LL102 suites showing room assignments by week.</div>
-      <div class="home-intro-tab" data-goto="rasched" style="cursor:pointer"><strong>Study Pages</strong> — RA schedules and session details for in-person studies. Currently: AI-Assisted Negotiation (Kwon &amp; Lee) and Brainstorming with a Partner (Ferragamo).</div>
-    </div>
-    <div class="home-intro-badges">
-      <span class="badge-legend-item"><span class="badge badge-online">Online</span> Qualtrics survey</span>
-      <span class="badge-legend-item"><span class="badge badge-inperson">In-Person</span> Lab visit</span>
-      <span class="badge-legend-item"><span class="badge badge-hybrid">Hybrid</span> Online + lab</span>
-      <span class="badge-legend-item"><span class="badge-cr">0.25</span> Credits</span>
-      <span class="badge-legend-item"><span class="badge-stackable">Stackable</span> Can combine in proctored sessions</span>
-      <span class="badge-legend-item"><span class="badge-stacked">📦 Pilot</span> Stacked lab session</span>
-      <span class="badge-legend-item"><span class="badge-2part">2-Part</span> Multi-wave study</span>
+      <div class="home-intro-tab" onclick="switchTab('myschedule')" style="cursor:pointer;">
+        <strong>My Schedule</strong> — Select your name to see your studies, timeline, room assignments, credits, and collaborators in one place.
+      </div>
+      <div class="home-intro-tab" onclick="switchTab('studies')" style="cursor:pointer;">
+        <strong>All Studies</strong> — Browse every study in a sortable table. Filter by format or researcher.
+      </div>
+      <div class="home-intro-tab" onclick="switchTab('stacking')" style="cursor:pointer;">
+        <strong>Stacked Sessions</strong> — Plan combined proctored lab sessions in LL102 by grouping short online studies together.
+      </div>
+      <div class="home-intro-tab" onclick="switchTab('calendar')" style="cursor:pointer;">
+        <strong>Calendar</strong> — Week-by-week grid of what's running where, organized by facility.
+      </div>
+      <div class="home-intro-tab" onclick="switchTab('facilities')" style="cursor:pointer;">
+        <strong>Facilities</strong> — Interactive floor plans of the LL-110, LL-112, and LL102 suites showing room assignments by week.
+      </div>
+      <div class="home-intro-tab" onclick="switchTab('rasched')" style="cursor:pointer;">
+        <strong>Study Pages</strong> — RA schedules and session details for in-person studies. Currently: AI-Assisted Negotiation (Kwon &amp; Lee), Brainstorming with a Partner (Ferragamo), and Org Change (Berry).
+      </div>
     </div>
   </div>
 
-  <!-- This Week Dashboard -->
+  <!-- This Week + Coming Up Dashboard -->
   <div class="home-dashboard" id="home-dashboard"></div>
-
-  <!-- Quick Access -->
-  <div class="home-quick-access">
-    <div class="home-quick-card" onclick="switchTab('myschedule')">
-      <div class="home-quick-icon">👤</div>
-      <div class="home-quick-title">Find Your Schedule</div>
-      <div class="home-quick-desc">Select a researcher or study to view personalized timeline</div>
-    </div>
-    <div class="home-quick-card" onclick="switchTab('studies')">
-      <div class="home-quick-icon">📋</div>
-      <div class="home-quick-title">Browse All 29 Studies</div>
-      <div class="home-quick-desc">Sortable table with format, credits, and SONA links</div>
-    </div>
-    <div class="home-quick-card" onclick="switchTab('facilities')">
-      <div class="home-quick-icon">🗺️</div>
-      <div class="home-quick-title">Lab Floor Plans</div>
-      <div class="home-quick-desc">Interactive room maps for LL-110, LL-112, and LL102</div>
-    </div>
-  </div>
 
 </div>
 
@@ -3851,25 +4617,39 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 <!-- ═══════════════ ALL STUDIES ═══════════════ -->
 <div class="section" id="studies" role="tabpanel" aria-labelledby="tab-studies">
 
-  <div class="studies-filter-row">
-    <div class="studies-filter-group">
-      <label class="studies-filter-label" for="researcher-select">Filter by Researcher</label>
-      <select id="researcher-select" class="studies-researcher-select" aria-label="Filter by researcher">
-        <option value="">All Researchers</option>
-      </select>
-    </div>
-    <div class="studies-filter-group">
-      <label class="studies-filter-label" for="studies-search">Search Studies</label>
-      <input type="search" id="studies-search" class="studies-search-input" placeholder="Search by name, researcher, notes…" aria-label="Search studies">
-    </div>
+  <div class="section-header">
+    <span class="section-header-icon">📊</span>
+    <span class="section-header-title">All Studies</span>
+    <span class="section-header-sep"></span>
+    <span class="section-header-desc">Browse every study in a sortable table — filter by format, researcher, or search</span>
   </div>
 
-  <div class="studies-controls">
-    <div class="format-chips" id="format-chips" role="tablist" aria-label="Filter by format">
-      <button class="format-chip active" data-format="all" role="tab" aria-selected="true">All <span class="chip-count" id="chip-all">28</span></button>
-      <button class="format-chip" data-format="Online" role="tab" aria-selected="false">Online <span class="chip-count" id="chip-online">16</span></button>
-      <button class="format-chip" data-format="In-Person" role="tab" aria-selected="false">In-Person <span class="chip-count" id="chip-inperson">7</span></button>
-      <button class="format-chip" data-format="Hybrid" role="tab" aria-selected="false">Hybrid <span class="chip-count" id="chip-hybrid">5</span></button>
+  <div class="studies-toolbar">
+    <div class="studies-toolbar-row">
+      <div class="format-chips" id="format-chips" role="tablist" aria-label="Filter by format">
+        <button class="format-chip active" data-format="all" role="tab" aria-selected="true">All <span class="chip-count" id="chip-all">28</span></button>
+        <button class="format-chip" data-format="Online" role="tab" aria-selected="false">Online <span class="chip-count" id="chip-online">16</span></button>
+        <button class="format-chip" data-format="In-Person" role="tab" aria-selected="false">In-Person <span class="chip-count" id="chip-inperson">7</span></button>
+        <button class="format-chip" data-format="Hybrid" role="tab" aria-selected="false">Hybrid <span class="chip-count" id="chip-hybrid">5</span></button>
+      </div>
+      <div class="studies-toolbar-filters">
+        <select id="researcher-select" class="studies-researcher-select" aria-label="Filter by researcher">
+          <option value="">All Researchers</option>
+        </select>
+        <div class="studies-search-wrap">
+          <input type="search" id="studies-search" class="studies-search-input" placeholder="Search studies…" aria-label="Search studies">
+        </div>
+        <button class="studies-legend-btn" id="studies-legend-btn" title="Badge legend" aria-label="Badge legend">?</button>
+      </div>
+    </div>
+    <div class="studies-legend-panel" id="studies-legend-panel">
+      <span class="badge-legend-item"><span class="badge badge-online">Online</span> Qualtrics survey</span>
+      <span class="badge-legend-item"><span class="badge badge-inperson">In-Person</span> Lab visit</span>
+      <span class="badge-legend-item"><span class="badge badge-hybrid">Hybrid</span> Online + lab</span>
+      <span class="badge-legend-item"><span class="badge-cr">0.25</span> Credits</span>
+      <span class="badge-legend-item"><span class="badge-stackable">Stackable</span> Can combine in proctored sessions</span>
+      <span class="badge-legend-item"><span class="badge-stacked">📦 Pilot</span> Stacked lab session</span>
+      <span class="badge-legend-item"><span class="badge-2part">2-Part</span> Multi-wave study</span>
     </div>
   </div>
 
@@ -3910,33 +4690,30 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
 </div>
 
-<!-- ═══════════════ STACKING PLANNER ═══════════════ -->
+<!-- ═══════════════ STACKED SESSIONS ═══════════════ -->
 <div class="section" id="stacking" role="tabpanel" aria-labelledby="tab-stacking">
-  <p class="section-intro">Find the best weeks to combine short online studies into proctored lab sessions in LL102</p>
-
-  <div class="stack-planner open" id="stack-planner" style="margin:0;border:none;border-radius:0">
-    <div class="stack-planner-body" id="stack-planner-body" style="max-height:none;padding:0">
-      <div class="stack-planner-legend">
-        <span class="badge-stackable">Stackable</span> = researcher interested
-        <span style="margin:0 4px">·</span>
-        <span class="badge-stackable-maybe">Stackable?</span> = open to it
-        <span style="margin:0 4px">·</span>
-        <span class="badge-stacked">📦 Pilot</span> = confirmed stacked session
-        <span style="margin:0 4px">·</span>
-        LL102 has 16 computer stations
-      </div>
-      <div id="stack-planner-content"></div>
-    </div>
+  <div class="section-header">
+    <span class="section-header-icon">📦</span>
+    <span class="section-header-title">Stacked Sessions</span>
+    <span class="section-header-sep"></span>
+    <span class="section-header-desc">Combined proctored lab sessions in LL102 — multiple short online studies back-to-back</span>
   </div>
 
-  <div class="note-bar" style="margin-top:16px">
-    <strong>How stacking works:</strong> Short online studies (≤15 min each) are combined into a single proctored lab session in LL102. Participants complete multiple studies back-to-back, earning credits for each. Maximum 60 minutes per stacked session.
+  <div style="text-align:center;padding:60px 20px;background:var(--surface);border:2px dashed var(--border);border-radius:var(--radius)">
+    <div style="font-size:48px;margin-bottom:12px">🚧</div>
+    <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:6px">Under Construction</div>
+    <div style="font-size:15px;color:var(--text-muted);max-width:420px;margin:0 auto;line-height:1.6">This section is being built out. Stacked session schedules, component studies, and LL102 assignments will appear here soon.</div>
   </div>
 </div>
 
 <!-- ═══════════════ CALENDAR ═══════════════ -->
 <div class="section" id="calendar" role="tabpanel" aria-labelledby="tab-calendar">
-  <p class="section-intro">Week-by-week view of all studies, organized by facility</p>
+  <div class="section-header">
+    <span class="section-header-icon">📅</span>
+    <span class="section-header-title">Calendar</span>
+    <span class="section-header-sep"></span>
+    <span class="section-header-desc">Week-by-week view of all studies, organized by facility and day</span>
+  </div>
 
   <div class="cal-week-menu" id="cal-week-menu">
     <div class="cal-week-menu-label">Jump to Week</div>
@@ -3948,21 +4725,13 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
     <button class="cal-nav-btn" id="cal-next" title="Next week">Next →</button>
     <button class="cal-nav-btn" id="cal-today" title="Jump to current week" style="color:var(--cardinal);border-color:var(--cardinal)">⦿ Today</button>
     <button class="cal-nav-btn" id="cal-show-all" title="Show all weeks">Show All</button>
+    <button class="cal-nav-btn" id="cal-toggle-past" title="Expand or collapse past weeks" onclick="togglePastWeeks()">Expand Past</button>
     <select id="cal-researcher-filter" class="cal-researcher-filter" aria-label="Highlight researcher">
       <option value="">All Researchers</option>
     </select>
   </div>
 
-  <div class="table-wrap">
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:160px">Week</th><th>Online Studies</th><th>LL102 (In-Person)</th><th>LL-110 (In-Person)</th><th>LL-112 (In-Person)</th></tr>
-        </thead>
-        <tbody id="cal-body"></tbody>
-      </table>
-    </div>
-  </div>
+  <div id="cal-grid-container"></div>
 
   <div class="note-bar" style="margin-top:16px">
     <strong>Lab location:</strong> Verna &amp; Peter Dauterive Hall (VPD), Lower Level · 635 Downey Way · Rooms: LL102 (Computer Lab), LL-110 (Suite), LL-112 (Suite) · <a href="https://usc-marshall-behavioral-lab.github.io/directions/" target="_blank" rel="noopener" style="color:var(--cardinal);font-weight:600">📍 Directions</a>
@@ -3971,7 +4740,12 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
 <!-- ═══════════════ FACILITIES ═══════════════ -->
 <div class="section" id="facilities" role="tabpanel" aria-labelledby="tab-facilities">
-  <p class="section-intro">Interactive floor plan of LL-110 and LL-112 suites · Select a week to see facility usage</p>
+  <div class="section-header">
+    <span class="section-header-icon">🏢</span>
+    <span class="section-header-title">Facilities</span>
+    <span class="section-header-sep"></span>
+    <span class="section-header-desc">Interactive floor plan of LL-110 and LL-112 suites · Select a week to see facility usage</span>
+  </div>
 
   <div class="fac-week-picker">
     <label for="fac-week-select">Week:</label>
@@ -4022,8 +4796,8 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
   <div class="fac-suites">
     <div class="fac-suite" id="fac-suite-112">
       <div class="fac-suite-header fac-suite-header-112">
-        <span class="fac-suite-title">LL-112 Suite</span>
-        <span class="fac-suite-sub">Audio/Video Recording · NOLDUS</span>
+        <span class="fac-suite-title">LL-112</span>
+        
       </div>
       <div class="fac-suite-gold-bar"></div>
       <div class="fac-suite-status" id="fac-112-status"></div>
@@ -4100,8 +4874,8 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
     <div class="fac-suite" id="fac-suite-110">
       <div class="fac-suite-header fac-suite-header-110">
-        <span class="fac-suite-title">LL-110 Eyetracking Psychophysio</span>
-        <span class="fac-suite-sub">TOBII · BIOPAC · NOLDUS</span>
+        <span class="fac-suite-title">LL-110</span>
+        
       </div>
       <div class="fac-suite-gold-bar"></div>
       <div class="fac-suite-status" id="fac-110-status"></div>
@@ -4180,8 +4954,8 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
   <!-- LL102 Computer Lab -->
   <div class="fac-suite fac-suite-102" id="fac-suite-102">
     <div class="fac-suite-header fac-suite-header-102">
-      <span class="fac-suite-title">LL102 Computer Lab</span>
-      <span class="fac-suite-sub">16 Stations · Proctored Studies · Stacked Sessions</span>
+      <span class="fac-suite-title">LL102</span>
+      
     </div>
     <div class="fac-suite-status" id="fac-102-status"></div>
     <div class="lab102-floor">
@@ -4218,7 +4992,12 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
 <!-- ═══════════════ DIRECTORY ═══════════════ -->
 <div class="section" id="directory" role="tabpanel" aria-labelledby="tab-directory">
-  <p class="section-intro">Contact directory for all researchers, collaborators, research assistants, and lab staff</p>
+  <div class="section-header">
+    <span class="section-header-icon">👥</span>
+    <span class="section-header-title">Directory</span>
+    <span class="section-header-sep"></span>
+    <span class="section-header-desc">Contact directory for all researchers, collaborators, research assistants, and lab staff</span>
+  </div>
 
   <div class="dir-search-wrap">
     <input type="search" id="dir-search" class="dir-search-input" placeholder="Search by name, role, or study…" aria-label="Search directory">
@@ -4247,7 +5026,12 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
 <!-- ═══════════════ RA HANDBOOK ═══════════════ -->
 <div class="section" id="handbook" role="tabpanel" aria-labelledby="tab-handbook">
-  <p class="section-intro">General setup procedures, policies, and checklists for all research assistants running in-person studies</p>
+  <div class="section-header">
+    <span class="section-header-icon">📋</span>
+    <span class="section-header-title">RA Handbook</span>
+    <span class="section-header-sep"></span>
+    <span class="section-header-desc">General setup procedures, policies, and checklists for all research assistants running in-person studies</span>
+  </div>
 
   <!-- Pre-Session Checklist -->
   <div class="hb-card">
@@ -4255,27 +5039,45 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <span class="hb-card-icon">✅</span>
       <div>
         <div class="hb-card-title">Pre-Session Checklist</div>
-        <div class="hb-card-sub">Complete before participants arrive</div>
+        <div class="hb-card-sub">Arrive 15 minutes before session start</div>
       </div>
     </div>
-    <div class="hb-card-body hb-placeholder">
-      <div class="hb-placeholder-icon">📝</div>
-      <div class="hb-placeholder-text">Checklist content will be added here — room setup, computer login, SONA verification, consent forms, materials prep, etc.</div>
+    <div class="hb-card-body">
+      <div class="hb-phase-label hb-phase-blue">① Pre-Session</div>
+      <ul class="hb-checklist">
+        <li>Inspect room, power on equipment, and <strong>test the survey link or software</strong></li>
+        <li>Log into <strong>SONA</strong> (review participant list) and open the <strong>session log spreadsheet</strong></li>
+        <li>Prepare consent forms and all required study materials</li>
+      </ul>
     </div>
   </div>
 
-  <!-- During Session -->
+  <!-- Check-In & During Session -->
   <div class="hb-card">
     <div class="hb-card-header">
       <span class="hb-card-icon">▶️</span>
       <div>
-        <div class="hb-card-title">During Session Procedures</div>
-        <div class="hb-card-sub">Participant check-in, session flow, and troubleshooting</div>
+        <div class="hb-card-title">Check-In &amp; During Session</div>
+        <div class="hb-card-sub">Participant verification, session flow, and monitoring</div>
       </div>
     </div>
-    <div class="hb-card-body hb-placeholder">
-      <div class="hb-placeholder-icon">📝</div>
-      <div class="hb-placeholder-text">Procedure content will be added here — greeting participants, verifying SONA enrollment, consent administration, session monitoring, handling no-shows and late arrivals, etc.</div>
+    <div class="hb-card-body">
+      <div class="hb-phase-label hb-phase-green">② Check-In</div>
+      <ul class="hb-checklist">
+        <li><strong>Verify participant identity</strong> against the SONA sign-up list</li>
+        <li><strong>Confirm correct study</strong> — ask which study they are present for, or request their SONA confirmation email</li>
+        <li><strong>Administer consent form before any study procedures begin</strong></li>
+        <li>Ask participants to silence or turn off their phones</li>
+        <li>Late arrivals beyond the study's cutoff window are not to be admitted</li>
+      </ul>
+      <div class="hb-phase-label hb-phase-orange" style="margin-top:14px">③ During Session</div>
+      <ul class="hb-checklist">
+        <li><strong>Maintain a quiet environment</strong> and follow the study protocol exactly as trained</li>
+        <li>Do not disclose the study purpose or hypotheses to participants</li>
+        <li>Keep completed participants separated from those still waiting to prevent discussion</li>
+        <li>Participants may not photograph or record study materials</li>
+        <li>Document any issues, anomalies, or deviations; <strong>record actual completion times</strong></li>
+      </ul>
     </div>
   </div>
 
@@ -4285,12 +5087,17 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <span class="hb-card-icon">🏁</span>
       <div>
         <div class="hb-card-title">Post-Session &amp; Cleanup</div>
-        <div class="hb-card-sub">Wrap-up, credit granting, and room reset</div>
+        <div class="hb-card-sub">Complete before departing the lab</div>
       </div>
     </div>
-    <div class="hb-card-body hb-placeholder">
-      <div class="hb-placeholder-icon">📝</div>
-      <div class="hb-placeholder-text">Cleanup content will be added here — granting SONA credit, debriefing, logging session data, resetting room for next session, reporting issues, etc.</div>
+    <div class="hb-card-body">
+      <div class="hb-phase-label hb-phase-purple">④ Post-Session</div>
+      <ul class="hb-checklist">
+        <li><strong>Grant SONA credit immediately</strong> — do not leave participants in "awaiting action" status</li>
+        <li>Mark no-shows in SONA after 10–15 minutes per study protocol</li>
+        <li><strong>Update session log spreadsheet</strong> with any issues or notes</li>
+        <li>Reset the room — close surveys, clear browser data, restore arrangement</li>
+      </ul>
     </div>
   </div>
 
@@ -4333,9 +5140,16 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         <div class="hb-card-sub">Who to contact when something goes wrong</div>
       </div>
     </div>
-    <div class="hb-card-body hb-placeholder">
-      <div class="hb-placeholder-icon">📝</div>
-      <div class="hb-placeholder-text">Emergency contact content will be added here — lab manager contact, researcher escalation, USC DPS, building maintenance, IT support, after-hours procedures, etc.</div>
+    <div class="hb-card-body">
+      <div class="hb-esc-box">
+        <div class="hb-esc-title">⚡ Contact Lab Manager via Teams immediately for:</div>
+        Safety concerns or emergencies · Equipment failures · Participant complaints · Protocol deviations · Any faculty or staff communications (forward without responding)
+      </div>
+      <div class="hb-contacts">
+        <span><strong>Lab Manager:</strong> Brian Huh</span>
+        <span><strong>Administrative Lead:</strong> Deborah Soumekh</span>
+        <span><strong>Technical Lead:</strong> Derek Weng</span>
+      </div>
     </div>
   </div>
 
@@ -4349,7 +5163,12 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
   <!-- Study Pages Home -->
   <div id="studyPages-home">
-    <p class="section-intro">In-person study pages with schedules, room assignments, and RA details</p>
+    <div class="section-header">
+      <span class="section-header-icon">📄</span>
+      <span class="section-header-title">Study Pages</span>
+      <span class="section-header-sep"></span>
+      <span class="section-header-desc">In-person study pages with schedules, room assignments, and RA details</span>
+    </div>
 
     <div class="sp-home-grid">
       <button class="sp-tile" onclick="switchStudyPage('kwon')">
@@ -4535,16 +5354,16 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         </div>
         <div class="ra-sched-card">
           <div class="ra-sched-card-title">Weekly Overview</div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Sessions</span><span class="ra-sched-stat-value">58</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Sessions</span><span class="ra-sched-stat-value">52</span></div>
           <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Per Session</span><span class="ra-sched-stat-value">2 participants</span></div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Participants</span><span class="ra-sched-stat-value">116</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Participants</span><span class="ra-sched-stat-value">104</span></div>
           <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Credit / Participant</span><span class="ra-sched-stat-value">1.0</span></div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Credits</span><span class="ra-sched-stat-value" style="color: var(--cardinal); font-size: 15px;">116.0</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Credits</span><span class="ra-sched-stat-value" style="color: var(--cardinal); font-size: 15px;">104.0</span></div>
         </div>
         <div class="ra-sched-card">
           <div class="ra-sched-card-title">RA Weekly Totals</div>
           <div class="ra-sched-ra-summary">
-            <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-mayank">MJ</div><div><div class="ra-sched-ra-name">Joshi, Mayank</div><div class="ra-sched-ra-detail">26 sessions · 52 participants</div></div></div>
+            <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-mayank">MJ</div><div><div class="ra-sched-ra-name">Joshi, Mayank</div><div class="ra-sched-ra-detail">20 sessions · 40 participants</div></div></div>
             <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-steve">SR</div><div><div class="ra-sched-ra-name">Ren, Steve</div><div class="ra-sched-ra-detail">12 sessions · 24 participants</div></div></div>
             <div class="ra-sched-ra-row"><div class="ra-sched-avatar ra-sched-avatar-jake">JM</div><div><div class="ra-sched-ra-name">Mariani, Jake</div><div class="ra-sched-ra-detail">20 sessions · 40 participants</div></div></div>
           </div>
@@ -4765,21 +5584,26 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
           <span style="font-size:20px">📋</span>
           <div><strong>Additional RA coverage needed:</strong><br>
           • <strong>Tuesday morning</strong> (9:00 AM – 3:30 PM) — second RA for 6-room morning shift<br>
-          • <strong>Wednesday &amp; Thursday</strong> — full-day RA coverage (rooms reserved, RA to be assigned)</div>
+          • <strong>Thursday &amp; Friday</strong> — full-day RA coverage (rooms reserved, RA to be assigned)</div>
         </div>
       </div>
 
       <div class="ra-sched-sidebar">
         <div class="ra-sched-card">
           <div class="ra-sched-card-title">LL-110 Floorplan</div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;font-size:11px;font-weight:600;text-align:center">
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:8px;color:var(--text-muted)">A<div style="font-size:9px;font-weight:400">Reception</div></div>
-            <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:4px;padding:8px;color:#7B1FA2">B<div style="font-size:9px;font-weight:400">Standard</div></div>
-            <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:4px;padding:8px;color:#7B1FA2">C<div style="font-size:9px;font-weight:400">Standard</div></div>
-            <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:4px;padding:8px;color:#7B1FA2">D<div style="font-size:9px;font-weight:400">Standard</div></div>
-            <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:4px;padding:8px;color:#7B1FA2">E<div style="font-size:9px;font-weight:400">Standard</div></div>
-            <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:4px;padding:8px;color:#7B1FA2">F<div style="font-size:9px;font-weight:400">BIOPAC</div><div style="font-size:8px;font-weight:400;color:#E65100">Tue only</div></div>
-            <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:4px;padding:8px;color:#7B1FA2">G<div style="font-size:9px;font-weight:400">BIOPAC</div><div style="font-size:8px;font-weight:400;color:#E65100">Tue only</div></div>
+          <div class="ra-sched-mini-fp" id="berryMiniFloorplan" style="grid-template-columns:1fr 20px 1fr;grid-template-rows:auto repeat(5,38px) auto">
+            <div class="ra-fp-room ra-fp-storage" style="grid-column:1/4;grid-row:1">Storage</div>
+            <div class="ra-fp-room ra-fp-backstage" style="grid-column:1;grid-row:2">Backstage</div>
+            <div class="ra-fp-room" style="grid-column:1;grid-row:3;background:#F3E5F5;border:2px solid #7B1FA2;color:#7B1FA2;padding:2px 0">F<div class="ra-fp-label" style="color:#7B1FA2;margin:0">BIOPAC</div><div style="font-size:6.5px;color:#E65100;font-weight:600;margin-top:-1px">Tue only</div></div>
+            <div class="ra-fp-room" style="grid-column:1;grid-row:4;background:#F3E5F5;border:2px solid #7B1FA2;color:#7B1FA2;padding:2px 0">G<div class="ra-fp-label" style="color:#7B1FA2;margin:0">BIOPAC</div><div style="font-size:6.5px;color:#E65100;font-weight:600;margin-top:-1px">Tue only</div></div>
+            <div class="ra-fp-room" style="grid-column:1;grid-row:5">H<div class="ra-fp-label">Control</div></div>
+            <div class="ra-fp-room ra-fp-reception" style="grid-column:1;grid-row:6">Recep.</div>
+            <div class="ra-fp-corridor" style="grid-column:2;grid-row:2/7">C</div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:2;background:#F3E5F5;border:2px solid #7B1FA2;color:#7B1FA2">E<div class="ra-fp-label" style="color:#7B1FA2">Std Lab</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:3;background:#F3E5F5;border:2px solid #7B1FA2;color:#7B1FA2">D<div class="ra-fp-label" style="color:#7B1FA2">TOBII</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:4;background:#F3E5F5;border:2px solid #7B1FA2;color:#7B1FA2">C<div class="ra-fp-label" style="color:#7B1FA2">TOBII</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:5;background:#F3E5F5;border:2px solid #7B1FA2;color:#7B1FA2">B<div class="ra-fp-label" style="color:#7B1FA2">TOBII</div></div>
+            <div class="ra-fp-room" style="grid-column:3;grid-row:6">A<div class="ra-fp-label">Office</div></div>
           </div>
           <div style="margin-top:10px;display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-muted)"><div style="width:8px;height:8px;border-radius:50%;background:#7B1FA2"></div>Active rooms · Tue: B–G (6) · Wed–Fri: B–E (4)</div>
         </div>
@@ -5107,12 +5931,12 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
       <div class="ra-sched-main">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:14px">
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Session Dates</span>Mar 5, 6, 12, 13 (Wed/Thu of Weeks 5 &amp; 6)</div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Session Dates</span>Mar 5, 6, 12, 13 (Thu/Fri of Weeks 5 &amp; 6)</div>
             <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Format</span><span style="background:var(--inperson);color:var(--inperson-text);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600">In-Person</span></div>
             <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Participants / Slot</span>16</div>
             <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Session Duration</span>30 min</div>
             <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Credits</span>0.50</div>
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Facility</span>LL102 Computer Lab</div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Facility</span>LL102</div>
           </div>
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
@@ -5125,12 +5949,12 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
         </div>
         <div style="background:#FFF9E6;border:1px solid #E6B800;border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary)">
           <span style="font-size:20px">🧪</span>
-          <div><strong>Pilot sessions.</strong> This is a pilot run to test the stacked session format in LL102. Sessions run on Wed/Thu of the weeks of Mar 1 and Mar 8.</div>
+          <div><strong>Pilot sessions.</strong> This is a pilot run to test the stacked session format in LL102. Sessions run on Thu/Fri of the weeks of Mar 1 and Mar 8.</div>
         </div>
       </div>
       <div class="ra-sched-sidebar">
         <div class="ra-sched-card">
-          <div class="ra-sched-card-title">LL102 Computer Lab</div>
+          <div class="ra-sched-card-title">LL102</div>
           <div style="background:var(--bg);border-radius:6px;padding:12px;font-size:12px">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px">
               <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 1</div>
@@ -5167,29 +5991,22 @@ body.dark .ra-fp-reception { background: #10202e; border-color: #1a3a5a; color: 
 
 <footer class="footer-enhanced">
   <div class="footer-gold-bar"></div>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>Location</h4>
-      <p>Verna &amp; Peter Dauterive Hall (VPD), Lower Level</p>
-      <p>635 Downey Way, Los Angeles, CA 90089</p>
-      <p>Rooms: LL102 · LL-110 · LL-112</p>
-      <a href="https://usc-marshall-behavioral-lab.github.io/directions/" target="_blank" rel="noopener">📍 Directions to Lab</a>
+  <div class="footer-inner">
+    <div class="footer-col-loc">
+      <strong>MOR Subject Pool</strong> · Verna &amp; Peter Dauterive Hall (VPD), Lower Level · 635 Downey Way, Los Angeles, CA 90089
     </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <p>Brian N. Huh, Lab Manager</p>
-      <a href="/cdn-cgi/l/email-protection#caa2bfa2a88aa7abb8b9a2aba6a6e4bfb9a9e4afaebf"><span class="__cf_email__" data-cfemail="ec8499848eac818d9e9f848d8080c2999f8fc2898899">[email&#160;protected]</span></a>
-      <p>213-821-8746</p>
+    <div class="footer-col-contact">
+      Brian N. Huh, Lab Manager · <a href="mailto:huhb@marshall.usc.edu">huhb@marshall.usc.edu</a> · 213-821-8746
     </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <a href="https://usc-marshall-behavioral-lab.github.io/directions/" target="_blank" rel="noopener">Directions to Lab</a>
-      <a href="https://marshall.usc.edu" target="_blank" rel="noopener">USC Marshall</a>
-      <a href="https://marshall-mor.sona-systems.com/" target="_blank" rel="noopener">SONA Systems</a>
-      <a href="https://usc-marshall-behavioral-lab.github.io/researchparticipation-buad-304-497-spring26/" target="_blank" rel="noopener">Research Participation Info (Students)</a>
+    <div class="footer-col-links">
+      <a href="https://usc-marshall-behavioral-lab.github.io/directions/" target="_blank" rel="noopener">Directions</a>
+      <span class="foot-sep">·</span>
+      <a href="https://marshall-mor.sona-systems.com/" target="_blank" rel="noopener">SONA</a>
+      <span class="foot-sep">·</span>
+      <a href="https://usc-marshall-behavioral-lab.github.io/researchparticipation-buad-304-497-spring26/" target="_blank" rel="noopener">Student Info</a>
     </div>
   </div>
-  <div class="footer-credit">Spring 2026 · MOR Subject Pool · Marshall Behavioral Research Lab · University of Southern California</div>
+  <div class="footer-credit">Spring 2026 · Marshall Behavioral Research Lab · University of Southern California</div>
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
@@ -5273,10 +6090,10 @@ var calData = [
     ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (paused this week)",ll112:"—"},
   {wk:"Mar 1",dates:"Mar 1–7",weekStart:"2026-03-01",weekEnd:"2026-03-07",note:"",
     online:"Berry, Zachariah: TED Judges\nHale, James: KODISV – Collecting Dyadic Videos of Disputes\nWakslak, Cheryl: Thinking About Others\nWiltermuth, Scott: Sammy Dissertation Study 1",
-    ll102:"Ferragamo, Alys: AI Task (starts)\n📦 Stacked Lab Session (Pilot): Mar 5–6 · TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner\nBerry, Zachariah: Org Change (starts)\nFox, Glenn: TBD (tentative, Wed–Fri)",ll112:"Berry, Zachariah: Org Change (starts)\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (starts)"},
+    ll102:"Ferragamo, Alys: AI Task (starts)\n📦 Stacked Lab Session (Pilot): Mar 5–6 · TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Berry, Zachariah: Org Change (starts)\nFox, Glenn: TBD (tentative, Wed–Fri)",ll112:"Berry, Zachariah: Org Change (starts)\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (starts)"},
   {wk:"Mar 8",dates:"Mar 8–14",weekStart:"2026-03-08",weekEnd:"2026-03-14",note:"",
     online:"Anicich, Eric: Work Recovery Perceptions Pt 1 (2-part)\nMartinez, Sammy: Broker 2\nWakslak, Cheryl: Organizational Statements\nWiltermuth, Scott: Sammy Dissertation Study 2",
-    ll102:"Ferragamo, Alys: AI Task\n📦 Stacked Lab Session (Pilot): Mar 12–13 · TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (final)\nFox, Glenn: TBD (tentative)",ll112:"Berry, Zachariah: Org Change\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study"},
+    ll102:"Ferragamo, Alys: AI Task\n📦 Stacked Lab Session (Pilot): Mar 12–13 · TED Judges + Dissertation Study 1 + Thinking About Others",ll110:"Fox, Glenn: TBD (tentative)",ll112:"Berry, Zachariah: Org Change\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study"},
   {wk:"Mar 15",dates:"Mar 15–21",weekStart:"2026-03-15",weekEnd:"2026-03-21",note:"Spring Recess — online only",
     online:"Lee, Elena: Strategic Decision with AI",ll102:"—",ll110:"—",ll112:"—"},
   {wk:"Mar 22",dates:"Mar 22–28",weekStart:"2026-03-22",weekEnd:"2026-03-28",note:"",
@@ -5305,7 +6122,7 @@ var allStudies = [
   {researcher:"Berry, Zachariah", study:"TED Judges", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, stacked:"mar1", irb:null},
   {researcher:"Wiltermuth, Scott", study:"Sammy Dissertation Study 1", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"250", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", stacked:"mar1", irb:null},
   {researcher:"Wakslak, Cheryl", study:"Thinking About Others", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"400", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", stacked:"mar1", irb:null},
-  {researcher:"Stacked Session (Pilot)", study:"Stacked Lab Session — Mar 5, 6, 12, 13", week:"Mar 1", dateSort:"2026-03-05", dateLabel:"Mar 5, 6, 12, 13", n:"16/slot", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL102", notes:"Pilot: Berry TED Judges (5m) + Wiltermuth Dissertation Study 1 (15m) + Wakslak Thinking About Others (10m) · Sessions on Wed/Thu of Mar 1 & Mar 8 weeks", isStackedSession:true, stackedComponents:["TED Judges","Sammy Dissertation Study 1","Thinking About Others"], stackedResearchers:["Berry, Zachariah","Wiltermuth, Scott","Wakslak, Cheryl"], irb:null, page:"#rasched-stacked"},
+  {researcher:"Stacked Session (Pilot)", study:"Stacked Lab Session — Mar 5, 6, 12, 13", week:"Mar 1", dateSort:"2026-03-05", dateLabel:"Mar 5, 6, 12, 13", n:"16/slot", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL102", notes:"Pilot: Berry TED Judges (5m) + Wiltermuth Dissertation Study 1 (15m) + Wakslak Thinking About Others (10m) · Sessions on Thu/Fri of Mar 1 & Mar 8 weeks", isStackedSession:true, stackedComponents:["TED Judges","Sammy Dissertation Study 1","Thinking About Others"], stackedResearchers:["Berry, Zachariah","Wiltermuth, Scott","Wakslak, Cheryl"], irb:null, page:"#rasched-stacked"},
   {researcher:"Martinez, Sammy", study:"Broker 2", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
   {researcher:"Wiltermuth, Scott", study:"Sammy Dissertation Study 2", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"200", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:"Depends on Sammy Dissertation Study 1", stackable:"maybe", irb:null},
   {researcher:"Wakslak, Cheryl", study:"Organizational Statements", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"500", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", irb:null},
@@ -5314,7 +6131,7 @@ var allStudies = [
   {researcher:"Martinez, Sammy", study:"Broker 3", week:"Mar 22", dateSort:"2026-03-22", dateLabel:"Week of Mar 22", n:"400", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
   {researcher:"Anicich, Eric", study:"Work Recovery Perceptions — Part 2", week:"Mar 22", dateSort:"2026-03-22", dateLabel:"Week of Mar 22", n:"200–400", dur:"2-part", format:"Online", cr:"0.50", facility:null, notes:"2-part study: Part 2 after Spring Recess", tag:"2-Part", irb:null},
   {researcher:"Berry, Zachariah", study:"MAC 1", week:"Mar 29", dateSort:"2026-03-29", dateLabel:"Week of Mar 29", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, irb:null},
-  {researcher:"Ferragamo, Alys", study:"In-Person Study – Brainstorming with a Partner", dateSort:"2026-02-10", dateLabel:"Feb 10 – Mar 14", n:"150", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-110", notes:"Paused week of Feb 22", completed:191, link:"https://marshall-mor.sona-systems.com/exp_info.aspx?experiment_id=1014", coPIs:["Wakslak, Cheryl"], irb:null, page:"#rasched-ferragamo"},
+  {researcher:"Ferragamo, Alys", study:"In-Person Study – Brainstorming with a Partner", dateSort:"2026-02-10", dateLabel:"Feb 10 – Feb 28 (on hold)", n:"150", dur:"30 min", format:"In-Person", cr:"0.50", facility:"LL-110", notes:"On hold as of Mar 1, 2026. Paused week of Feb 22", completed:191, link:"https://marshall-mor.sona-systems.com/exp_info.aspx?experiment_id=1014", coPIs:["Wakslak, Cheryl"], irb:null, page:"#rasched-ferragamo"},
   {researcher:"Berry, Zachariah", study:"Org Change", dateSort:"2026-03-01", dateLabel:"Mar 1 – Apr 4", n:"200", dur:"15 min", format:"In-Person", cr:"0.25", facility:"LL-112 + LL-110", notes:"Week 1 in LL-110; LL-112 ongoing", irb:null, page:"#rasched-berry-org"},
   {researcher:"Ferragamo, Alys", study:"AI Task", dateSort:"2026-03-01", dateLabel:"Mar 1 – Mar 28", n:"400", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL102", notes:null, irb:null},
   {researcher:"Lee, Elena", study:"AI Interaction for Persuasion", dateSort:"2026-03-22", dateLabel:"Mar 22 – Apr 18", n:"300", dur:"30 min", format:"Hybrid", cr:"0.50", facility:"LL102", notes:null, irb:null},
@@ -5356,16 +6173,14 @@ var facilityUsage = {
     '112': []
   },
   mar1: {
-    '110': [{study:'In-Person Study – Brainstorming with a Partner', researcher:'Ferragamo', rooms:['110-b','110-c','110-d']},
-            {study:'TBD (Wed Mar 4–Fri Mar 6)', researcher:'Fox', rooms:['110-f','110-g'], badge:'tentative'},
+    '110': [{study:'TBD (Wed Mar 4–Fri Mar 6)', researcher:'Fox', rooms:['110-f','110-g'], badge:'tentative'},
             {study:'Org Change', researcher:'Berry', rooms:['110-b','110-c','110-d','110-e','110-f','110-g'], badge:'start'}],
     '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e'], badge:'start'},
             {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g'], badge:'start'}],
     '102': [{study:'AI Task', researcher:'Ferragamo', badge:'start'}, {study:'Stacked Lab Session (Pilot) · Mar 5–6', researcher:'Berry / Wiltermuth / Wakslak', badge:'pilot'}]
   },
   mar8: {
-    '110': [{study:'In-Person Study – Brainstorming with a Partner', researcher:'Ferragamo', rooms:['110-b','110-c','110-d'], badge:'end'},
-            {study:'TBD (Mon Mar 9–Fri Mar 13)', researcher:'Fox', rooms:['110-f','110-g'], badge:'tentative'}],
+    '110': [{study:'TBD (Mon Mar 9–Fri Mar 13)', researcher:'Fox', rooms:['110-f','110-g'], badge:'tentative'}],
     '112': [{study:'Org Change', researcher:'Berry', rooms:['112-a','112-d','112-e']},
             {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g']}],
     '102': [{study:'AI Task', researcher:'Ferragamo'}, {study:'Stacked Lab Session (Pilot) · Mar 12–13', researcher:'Berry / Wiltermuth / Wakslak', badge:'pilot'}]
@@ -5625,6 +6440,10 @@ function handleStudyDeepLink() {
 }
 
 function switchTab(tabId, updateHash) {
+  // Clear week meter viewing state when leaving calendar
+  if (tabId !== 'calendar') {
+    document.querySelectorAll('.sem-ticker-seg.viewing').forEach(function(el) { el.classList.remove('viewing'); });
+  }
   if (updateHash !== false) {
     try { history.replaceState(null, '', '#' + tabId); } catch(e) { /* sandboxed iframe */ }
   }
@@ -5644,6 +6463,23 @@ function switchTab(tabId, updateHash) {
   }
   var section = document.getElementById(tabId);
   if (section) section.classList.add('active');
+
+  // Update breadcrumb
+  var bcBar = document.getElementById('section-breadcrumb');
+  var bcName = document.getElementById('breadcrumb-name');
+  if (bcBar && bcName) {
+    if (tabId === 'home') {
+      bcBar.style.display = 'none';
+    } else {
+      var bcLabels = {
+        myschedule: 'My Schedule', studies: 'All Studies', stacking: 'Stacked Sessions',
+        calendar: 'Calendar', facilities: 'Facilities', directory: 'Directory',
+        rahandbook: 'RA Handbook', rasched: 'Study Pages'
+      };
+      bcName.textContent = bcLabels[tabId] || tabId;
+      bcBar.style.display = 'flex';
+    }
+  }
 
   // Carry researcher context from My Schedule to All Studies
   if (tabId === 'studies') {
@@ -5676,13 +6512,15 @@ function switchTab(tabId, updateHash) {
     }
     applyCalResearcherFilter();
     setTimeout(function() {
-      var currentRow = document.querySelector('#cal-body tr.current-week-row');
+      var currentRow = document.querySelector('#cal-grid-container .current-week-block');
       if (currentRow) currentRow.scrollIntoView({behavior: 'smooth', block: 'center'});
     }, 100);
   } else {
     // Reset calendar opacity when leaving
-    document.querySelectorAll('#cal-body tr').forEach(function(row) { row.style.opacity = '1'; });
+    document.querySelectorAll('#cal-grid-container .cal-chip').forEach(function(chip) { chip.style.opacity = ''; });
   }
+  // Update reset button visibility based on current tab
+  if (typeof updateResetBtn === 'function') updateResetBtn();
 }
 
 function toggleWeek(header) {
@@ -5704,10 +6542,10 @@ function highlightCurrentWeek() {
       }
     }
   });
-  document.querySelectorAll('#cal-body tr').forEach(function(row) {
+  document.querySelectorAll('#cal-grid-container .cal-week-block').forEach(function(row) {
     if (row.dataset && row.dataset.weekStart) {
       if (TODAY >= row.dataset.weekStart && TODAY <= row.dataset.weekEnd) {
-        row.classList.add('current-week-row');
+        row.classList.add('current-week-block');
       }
     }
   });
@@ -5734,39 +6572,55 @@ function parseCreditAllocation(cr, nStr) {
 // RA schedule data for My Schedule view
 var raShiftData = {
   monday: {label:"Monday, March 2", blocks:[
-    {type:"setup",ra:"Joshi, Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
+    {type:"setup",ra:"Joshi, Mayank",start:"12:30 PM",end:"1:00 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Joshi, Mayank",start:"1:00 PM",end:"2:00 PM",count:2},
+    {type:"pair",ra:"Joshi, Mayank",start:"2:00 PM",end:"3:00 PM",count:2},
     {type:"setup",ra:"Ren, Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
-    {type:"pair",ra:"Ren, Steve",start:"3:30 PM",end:"5:30 PM",count:4}
+    {type:"pair",ra:"Ren, Steve",start:"3:30 PM",end:"4:30 PM",count:2},
+    {type:"pair",ra:"Ren, Steve",start:"4:30 PM",end:"5:30 PM",count:2}
   ]},
   tuesday: {label:"Tuesday, March 3", blocks:[
     {type:"setup",ra:"Ren, Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
     {type:"pair",ra:"Ren, Steve",start:"9:00 AM",end:"10:00 AM",count:2},
     {type:"setup",ra:"Mariani, Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
-    {type:"pair",ra:"Mariani, Jake",start:"2:00 PM",end:"5:00 PM",count:6}
+    {type:"pair",ra:"Mariani, Jake",start:"2:00 PM",end:"3:00 PM",count:2},
+    {type:"pair",ra:"Mariani, Jake",start:"3:00 PM",end:"4:00 PM",count:2},
+    {type:"pair",ra:"Mariani, Jake",start:"4:00 PM",end:"5:00 PM",count:2}
   ]},
   wednesday: {label:"Wednesday, March 4", blocks:[
     {type:"setup",ra:"Joshi, Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"3:00 PM",count:10},
+    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"10:00 AM",count:2},
+    {type:"pair",ra:"Joshi, Mayank",start:"10:00 AM",end:"11:00 AM",count:2},
+    {type:"pair",ra:"Joshi, Mayank",start:"11:00 AM",end:"12:00 PM",count:2},
+    {type:"setup",ra:"Joshi, Mayank",start:"12:30 PM",end:"1:00 PM",note:"30 min Setup"},
+    {type:"pair",ra:"Joshi, Mayank",start:"1:00 PM",end:"2:00 PM",count:2},
+    {type:"pair",ra:"Joshi, Mayank",start:"2:00 PM",end:"3:00 PM",count:2},
     {type:"setup",ra:"Ren, Steve",start:"3:00 PM",end:"3:30 PM",note:"Handoff — 30 min Setup"},
-    {type:"pair",ra:"Ren, Steve",start:"3:30 PM",end:"5:30 PM",count:4}
+    {type:"pair",ra:"Ren, Steve",start:"3:30 PM",end:"4:30 PM",count:2},
+    {type:"pair",ra:"Ren, Steve",start:"4:30 PM",end:"5:30 PM",count:2}
   ]},
   thursday: {label:"Thursday, March 5", blocks:[
     {type:"setup",ra:"Ren, Steve",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
     {type:"pair",ra:"Ren, Steve",start:"9:00 AM",end:"10:00 AM",count:2},
     {type:"setup",ra:"Mariani, Jake",start:"1:30 PM",end:"2:00 PM",note:"30 min Setup"},
-    {type:"pair",ra:"Mariani, Jake",start:"2:00 PM",end:"5:00 PM",count:6}
+    {type:"pair",ra:"Mariani, Jake",start:"2:00 PM",end:"3:00 PM",count:2},
+    {type:"pair",ra:"Mariani, Jake",start:"3:00 PM",end:"4:00 PM",count:2},
+    {type:"pair",ra:"Mariani, Jake",start:"4:00 PM",end:"5:00 PM",count:2}
   ]},
   friday: {label:"Friday, March 6", blocks:[
     {type:"setup",ra:"Joshi, Mayank",start:"8:30 AM",end:"9:00 AM",note:"30 min Setup"},
-    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"12:00 PM",count:6},
+    {type:"pair",ra:"Joshi, Mayank",start:"9:00 AM",end:"10:00 AM",count:2},
+    {type:"pair",ra:"Joshi, Mayank",start:"10:00 AM",end:"11:00 AM",count:2},
+    {type:"pair",ra:"Joshi, Mayank",start:"11:00 AM",end:"12:00 PM",count:2},
     {type:"setup",ra:"Mariani, Jake",start:"12:00 PM",end:"12:30 PM",note:"Handoff — 30 min Setup"},
-    {type:"pair",ra:"Mariani, Jake",start:"12:30 PM",end:"2:30 PM",count:4},
+    {type:"pair",ra:"Mariani, Jake",start:"12:30 PM",end:"1:30 PM",count:2},
+    {type:"pair",ra:"Mariani, Jake",start:"1:30 PM",end:"2:30 PM",count:2},
     {type:"setup",ra:"Mariani, Jake",start:"3:00 PM",end:"3:30 PM",note:"30 min Setup"},
-    {type:"pair",ra:"Mariani, Jake",start:"3:30 PM",end:"5:30 PM",count:4}
+    {type:"pair",ra:"Mariani, Jake",start:"3:30 PM",end:"4:30 PM",count:2},
+    {type:"pair",ra:"Mariani, Jake",start:"4:30 PM",end:"5:30 PM",count:2}
   ]}
 };
-var raWeeklyTotals = {"Joshi, Mayank": {sessions:26, participants:52}, "Ren, Steve": {sessions:12, participants:24}, "Mariani, Jake": {sessions:20, participants:40}};
+var raWeeklyTotals = {"Joshi, Mayank": {sessions:20, participants:40}, "Ren, Steve": {sessions:12, participants:24}, "Mariani, Jake": {sessions:20, participants:40}};
 
 function renderRAMySchedule(raName) {
   var html = '';
@@ -5848,9 +6702,10 @@ function renderRAMySchedule(raName) {
         html += '<span>⚙️</span><span style="font-weight:600;text-transform:uppercase;letter-spacing:0.3px">Setup</span><span>' + b.start + ' – ' + b.end + '</span><span style="margin-left:auto;font-size:10px">' + b.note + '</span></div>';
       } else {
         html += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:' + bgColor + ';border-left:4px solid ' + color + ';border-radius:6px;margin-bottom:3px">';
-        html += '<span style="font-size:14px;font-weight:600;color:var(--text-secondary)">' + b.start + ' – ' + b.end + '</span>';
-        html += '<span style="font-size:13px;font-weight:700;color:var(--text)">' + b.count + ' sessions</span>';
-        html += '<span style="font-size:13px;color:var(--text-muted)">' + (b.count * 2) + ' participants · Rooms B &amp; C, F &amp; G</span>';
+        html += '<span style="font-size:14px;font-weight:600;color:var(--text-secondary);min-width:145px">' + b.start + ' – ' + b.end + '</span>';
+        html += '<span style="font-size:12px;font-weight:700;color:' + color + ';background:' + color + '18;padding:2px 8px;border-radius:4px">' + b.count + ' sessions</span>';
+        html += '<span style="font-size:13px;color:var(--text-muted)">' + (b.count * 2) + ' participants</span>';
+        html += '<span style="font-size:12px;color:var(--text-muted);margin-left:auto">B &amp; C, F &amp; G</span>';
         html += '</div>';
       }
     });
@@ -6287,9 +7142,10 @@ function renderMySchedule() {
 
     // Week header — show just date range, not redundant "Week of X" + dates
     var weekTitle = wg.calDates || wg.dateLabel;
-    html += '<div class="rc-week-header">';
+    html += '<div class="rc-week-header"' + (wg.status === 'past' ? ' onclick="this.parentElement.classList.toggle(\'rc-week-expanded\')"' : '') + '>';
     html += '<div class="rc-week-header-left">';
     html += '<span class="rc-week-title">' + weekTitle + '</span>';
+    if (wg.status === 'past') html += '<span class="rc-week-toggle">▶</span>';
     html += '</div>';
     html += '<div class="rc-week-header-right">';
     html += '<span class="rc-week-stat"><strong>' + wg.studies.length + '</strong> ' + (wg.studies.length === 1 ? 'study' : 'studies') + '</span>';
@@ -6381,19 +7237,19 @@ function renderMySchedule() {
       facilities.forEach(function(fac) {
         if (fac === 'LL102') {
           html += '<div class="rc-minimap rc-minimap-102">';
-          html += '<div class="rc-minimap-header"><span class="rc-minimap-title">LL102 Computer Lab</span><span class="rc-minimap-sub">16 Stations · Proctored Studies · Stacked Sessions</span></div>';
+          html += '<div class="rc-minimap-header"><span class="rc-minimap-title">LL102</span></div>';
           html += buildMinimap102(rColor);
           html += '</div>';
         } else if (fac === 'LL-112' || fac.includes('112')) {
           var rooms112 = rooms.filter(function(r) { return r.startsWith('112'); });
           html += '<div class="rc-minimap rc-minimap-suite rc-minimap-112">';
-          html += '<div class="rc-minimap-header"><span class="rc-minimap-title">LL-112 Suite</span><span class="rc-minimap-sub">Audio/Video Recording · NOLDUS</span></div>';
+          html += '<div class="rc-minimap-header"><span class="rc-minimap-title">LL-112</span></div>';
           html += buildMinimap('112', rooms112, rColor);
           html += '</div>';
         } else if (fac === 'LL-110' || fac.includes('110')) {
           var rooms110 = rooms.filter(function(r) { return r.startsWith('110'); });
           html += '<div class="rc-minimap rc-minimap-suite rc-minimap-110">';
-          html += '<div class="rc-minimap-header"><span class="rc-minimap-title">LL-110 Eyetracking Psychophysio</span><span class="rc-minimap-sub">TOBII · BIOPAC · NOLDUS</span></div>';
+          html += '<div class="rc-minimap-header"><span class="rc-minimap-title">LL-110</span></div>';
           html += buildMinimap('110', rooms110, rColor);
           html += '</div>';
         }
@@ -6573,7 +7429,7 @@ function runStudiesFilter() {
   noResults.style.display = (hasFilter && visible === 0) ? 'block' : 'none';
 
   // Also filter calendar rows
-  document.querySelectorAll('#cal-body tr').forEach(function(row) {
+  document.querySelectorAll('#cal-grid-container .cal-week-block').forEach(function(row) {
     var text = row.textContent.toLowerCase();
     row.classList.toggle('filter-hidden', researcher && !text.includes(researcher.toLowerCase()));
   });
@@ -6840,6 +7696,57 @@ raNames.forEach(function(ra) {
 });
 mySelect.appendChild(raOptgroup);
 
+// Populate home-find-select with same options
+(function() {
+  var homeSel = document.getElementById('home-find-select');
+  var homeStudy = document.getElementById('home-find-study');
+  if (!homeSel) return;
+  var rg = document.createElement('optgroup');
+  rg.label = 'Researchers';
+  researcherNames.forEach(function(name) {
+    var o = document.createElement('option'); o.value = name; o.textContent = name; rg.appendChild(o);
+  });
+  homeSel.appendChild(rg);
+  var rag = document.createElement('optgroup');
+  rag.label = 'Research Assistants';
+  raNames.forEach(function(ra) {
+    var o = document.createElement('option'); o.value = ra.value; o.textContent = ra.label; rag.appendChild(o);
+  });
+  homeSel.appendChild(rag);
+  // Study picker populated after studyNames is built
+  window._homeSelAddStudies = function() {
+    if (!homeStudy) return;
+    studyNames.forEach(function(s) {
+      var o = document.createElement('option'); o.value = s.name; o.textContent = s.name; homeStudy.appendChild(o);
+    });
+  };
+  homeSel.addEventListener('change', function() {
+    if (!homeSel.value) return;
+    if (homeStudy) homeStudy.value = '';
+    mySelect.value = homeSel.value;
+    mySelect.dispatchEvent(new Event('change'));
+    switchTab('myschedule');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+  if (homeStudy) {
+    homeStudy.addEventListener('change', function() {
+      if (!homeStudy.value) return;
+      homeSel.value = '';
+      var sName = homeStudy.value;
+      if (studyToResearcher[sName]) {
+        mySelect.value = studyToResearcher[sName];
+        myStudySelect.value = sName;
+        mySelect.classList.add('picker-active');
+        myStudySelect.classList.add('picker-active');
+        renderMySchedule();
+        switchTab('myschedule');
+        updateResetBtn();
+      }
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  }
+})();
+
 // Populate My Schedule landing tiles
 (function() {
   var raTilesEl = document.getElementById('ms-ra-tiles');
@@ -6902,6 +7809,7 @@ studyNames.forEach(function(s) {
   o2.textContent = s.name;
   myStudySelect.appendChild(o2);
 });
+if (window._homeSelAddStudies) window._homeSelAddStudies();
 
 // Render calendar table
 // Helper: map calData week key to facilityUsage key
@@ -7003,89 +7911,197 @@ function findCoPIs(lineText) {
   return null;
 }
 
-document.getElementById('cal-body').innerHTML = calData.map(function(f) {
-  var rowStyle = f.note && f.note.includes('Spring Recess') ? ' style="background:#FAFAFA"' : '';
-  var facKey = calWeekToFacKey(f.wk);
-  var weekUsage = facilityUsage[facKey] || {};
+// ═══ Day-of-week map for in-person studies ═══
+// Keys are substrings matched against calData lines; values are arrays of day indices (1=Mon..5=Fri)
+var studyDayMap = {
+  'Brainstorming with a Partner': [2,3,4,5],
+  'Org Change': [2,3,4,5],
+  'AI-Assisted Negotiation': [1,2,3,4,5],
+  'AI Task': [1,2,3,4,5],
+  'Stacked Lab Session': [4,5],
+  'Fox': [3,4,5],
+  'AI Interviews': [2,3,4,5],
+  'Broker – In-Person': [2,3,4,5],
+  'AI Interaction for Persuasion': [1,2,3,4,5],
+  'Survey About Your USC Marshall': [1,2,3,4,5],
+  'Intrapersonal Loyalty Effect': [2,3,4,5],
+  'Team AI Use and Leadership': [1,2,3,4,5]
+};
+function getDaysForStudy(lineText) {
+  var keys = Object.keys(studyDayMap);
+  for (var i = 0; i < keys.length; i++) {
+    if (lineText.indexOf(keys[i]) !== -1) return studyDayMap[keys[i]];
+  }
+  return [1,2,3,4,5];
+}
 
-  var fmtFac = function(v, suiteKey) {
-    var suiteEntries = weekUsage[suiteKey] || [];
-    return (v||'—').split('\n').map(function(l) {
-      if (l === '—') return '<div class="cal-empty">—</div>';
-      var isOngoing = l.includes('ongoing') || l.includes('overflow');
-      var isStacked = l.includes('Stacked') || l.includes('📦');
+// ═══ Build calendar grid ═══
+function parseCalLine(l) {
+  if (!l || l === '—') return null;
+  var isPending = l.indexOf('⏳') !== -1;
+  var isPaused = l.indexOf('paused') !== -1;
+  var isStacked = l.indexOf('Stacked') !== -1 || l.indexOf('📦') !== -1;
+  var isStart = l.indexOf('(starts)') !== -1;
+  var isFinal = l.indexOf('(final)') !== -1;
+  var is2Part = l.indexOf('(2-part)') !== -1;
+  var is2Wave = l.indexOf('(2-wave)') !== -1;
+  // Extract researcher name (before the colon)
+  var researcher = '';
+  var study = l;
+  var colonIdx = l.indexOf(':');
+  if (colonIdx > -1) {
+    researcher = l.substring(0, colonIdx).replace(/⏳\s*/, '').trim();
+    study = l.substring(colonIdx + 1).replace(/In-Person Study\s*[–—-]\s*/i, '').trim();
+  }
+  // Clean study name
+  study = study.replace(/\(starts\)|\(final\)|\(ongoing\)|\(overflow\)|\(paused[^)]*\)|\(2-part\)|\(2-wave\)|\(tentative[^)]*\)/g, '').trim();
+  // Remove stacked detail text after ·
+  if (isStacked && study.indexOf('·') > -1) study = study.substring(0, study.indexOf('·')).trim();
+  if (isStacked) study = study.replace(/:\s*Mar.*$/, '').replace(/📦\s*/, '').trim();
+  return {raw: l, researcher: researcher, study: study, isPending: isPending, isPaused: isPaused, isStacked: isStacked, isStart: isStart, isFinal: isFinal, is2Part: is2Part, is2Wave: is2Wave};
+}
 
-      // Expanded stacked session card
-      if (isStacked) {
-        var card = '<div class="cal-stacked-expanded">';
-        card += '<div class="stack-callout-title">📦 Stacked Lab Session (Pilot)</div>';
-        card += buildStackedBarHTML({compact: true});
-        card += '</div>';
-        return card;
+function buildCalChip(entry, type) {
+  var cls = 'cal-chip cal-chip-' + type;
+  if (entry.isPending) cls += ' cal-chip-pending';
+  if (entry.isPaused) cls += ' cal-chip-paused';
+  if (entry.isStacked) cls = 'cal-chip cal-chip-stacked';
+  var escapedName = entry.researcher.replace(/'/g, "\\'");
+  var badges = '';
+  if (entry.isStart) badges += ' <span class="badge-start">Start</span>';
+  if (entry.isFinal) badges += ' <span class="badge-end">End</span>';
+  if (entry.is2Part) badges += ' <span class="badge-2part">2-Part</span>';
+  if (entry.is2Wave) badges += ' <span class="badge-2part">2-Wave</span>';
+  var label = entry.study;
+  if (entry.isStacked) label = '📦 Stacked Session';
+  var html = '<div class="' + cls + '" onclick="crosslinkResearcher(\'' + escapedName + '\')" title="' + entry.researcher + ': ' + entry.study + '">';
+  html += '<strong>' + entry.researcher.split(',')[0] + '</strong> ' + label + badges;
+  html += '</div>';
+  return html;
+}
+
+var dayLabels = ['Mon','Tue','Wed','Thu','Fri'];
+var facilities = [
+  {key:'online', label:'Online', field:'online', cssClass:'fac-online'},
+  {key:'ll102', label:'LL102', field:'ll102', cssClass:'fac-ll102'},
+  {key:'ll110', label:'LL-110', field:'ll110', cssClass:'fac-ll110'},
+  {key:'ll112', label:'LL-112', field:'ll112', cssClass:'fac-ll112'}
+];
+
+var calContainer = document.getElementById('cal-grid-container');
+calContainer.innerHTML = calData.map(function(f, wkIdx) {
+  var isCurrent = TODAY >= f.weekStart && TODAY <= f.weekEnd;
+  var isPast = TODAY > f.weekEnd;
+  var blockCls = 'cal-week-block';
+  if (isCurrent) blockCls += ' current-week-block';
+  if (isPast) blockCls += ' collapsed';
+
+  // Count studies for collapsed summary
+  var allLines = [f.online, f.ll102, f.ll110, f.ll112].join('\n').split('\n').filter(function(l) {
+    return l.trim() && l !== '—' && l.indexOf('📦') === -1;
+  });
+  var studyCount = allLines.length;
+  var summaryText = studyCount === 0 ? 'No studies' : studyCount + (studyCount === 1 ? ' study' : ' studies');
+
+  var html = '<div class="' + blockCls + '" data-week-start="' + f.weekStart + '" data-week-end="' + f.weekEnd + '" data-week-idx="' + wkIdx + '">';
+
+  // Week header (clickable to toggle)
+  html += '<div class="cal-week-header" onclick="toggleCalWeek(this)">';
+  html += '<div class="cal-week-header-left">';
+  html += '<span class="cal-week-header-title">Week of ' + f.wk + '</span>';
+  html += '<span class="cal-week-header-dates">' + f.dates + '</span>';
+  if (isCurrent) html += ' <span class="badge-current-week">Current</span>';
+  if (isPast) html += '<span class="cal-week-header-summary">' + summaryText + '</span>';
+  html += '</div>';
+  if (f.note) html += '<span class="cal-week-header-note">' + f.note + '</span>';
+  html += '<span class="cal-week-toggle">▼</span>';
+  html += '</div>';
+
+  // Grid
+  html += '<div class="cal-grid">';
+
+  // Header row
+  html += '<div class="cal-grid-head">';
+  html += '<div class="cal-grid-head-cell">Facility</div>';
+  dayLabels.forEach(function(d) { html += '<div class="cal-grid-head-cell">' + d + '</div>'; });
+  html += '</div>';
+
+  // Facility rows
+  facilities.forEach(function(fac, facIdx) {
+    var rawText = f[fac.field] || '—';
+    var lines = rawText.split('\n').filter(function(l) { return l.trim() && l !== '—'; });
+    var entries = [];
+    lines.forEach(function(l) {
+      var e = parseCalLine(l);
+      if (e) entries.push(e);
+    });
+
+    html += '<div class="cal-grid-row">';
+
+    // Facility label
+    html += '<div class="cal-grid-fac ' + fac.cssClass + '">' + fac.label + '</div>';
+
+    if (fac.key === 'online') {
+      // Online studies span all 5 day columns
+      html += '<div class="cal-grid-online-span">';
+      if (entries.length) {
+        entries.forEach(function(e) { html += buildCalChip(e, 'online'); });
+      } else {
+        html += '<span class="cal-day-empty">—</span>';
       }
-
-      var cls = 'cal-study cal-inperson';
-      if (isOngoing) cls += ' cal-ongoing';
-      var html = l.replace(/^([^:]+):/, function(match, name) {
-        var escapedName = name.replace(/⏳\s*/, '').trim().replace(/'/g, "\\'");
-        return '<strong class="crosslink" onclick="event.stopPropagation();crosslinkResearcher(\'' + escapedName + '\')" title="View schedule for ' + escapedName + '">' + name + '</strong>:';
+      html += '</div>';
+    } else {
+      // In-person: place studies in their day columns
+      // Build day buckets
+      var dayBuckets = {1:[], 2:[], 3:[], 4:[], 5:[]};
+      entries.forEach(function(e) {
+        var days = getDaysForStudy(e.raw);
+        days.forEach(function(d) { dayBuckets[d].push(e); });
       });
-      html = html.replace(/\(2-part\)/g, '<span class="badge-2part">2-Part</span>');
-      html = html.replace(/\(2-wave\)/g, '<span class="badge-2part">2-Wave</span>');
-      html = html.replace(/\(starts\)/g, '<span class="badge-start">Start</span>');
-      html = html.replace(/\(final\)/g, '<span class="badge-end">End</span>');
-      html = html.replace(/\(ongoing\)/g, '').replace(/\(overflow\)/g, '');
-      var roomStr = '';
-      if (suiteKey && suiteEntries.length) {
-        suiteEntries.forEach(function(entry) {
-          if (l.includes(entry.researcher) && entry.rooms && entry.rooms.length) {
-            var roomLinks = entry.rooms.map(function(rid) {
-              var letter = rid.split('-').pop().toUpperCase();
-              var suite = rid.split('-')[0];
-              return '<span class="crosslink" onclick="event.stopPropagation();crosslinkFacilityRoom(\'' + suite + '\',\'' + letter.toLowerCase() + '\')" title="View room in floor plan" style="font-weight:500">' + letter + '</span>';
-            });
-            roomStr = '<div class="cal-rooms">Rooms: ' + roomLinks.join(', ') + '</div>';
-          }
-        });
+
+      for (var d = 1; d <= 5; d++) {
+        html += '<div class="cal-grid-day">';
+        if (dayBuckets[d].length) {
+          dayBuckets[d].forEach(function(e) {
+            var type = e.raw.indexOf('Hybrid') !== -1 ? 'hybrid' : 'inperson';
+            html += buildCalChip(e, type);
+          });
+        }
+        html += '</div>';
       }
-      // Append co-PI names if not already in the line
-      var coPIs = findCoPIs(l);
-      var copiStr = '';
-      if (coPIs) {
-        var missing = coPIs.filter(function(c) { return !l.includes(c.split(',')[0]); });
-        if (missing.length) copiStr = '<div class="cal-rooms">with ' + missing.map(function(n) { return '<span class="crosslink" onclick="event.stopPropagation();crosslinkResearcher(\'' + n.replace(/'/g, "\\'") + '\')" style="font-weight:500">' + n + '</span>'; }).join(', ') + '</div>';
-      }
-      return '<div class="' + cls + '">' + html.trim() + studyPageLinkForText(l) + roomStr + copiStr + '</div>';
-    }).join('');
-  };
-  var fmtOnline = function(v) {
-    return (v||'—').split('\n').map(function(l) {
-      if (l === '—') return '<div class="cal-empty">—</div>';
-      var isStacked = l.includes('Stacked') || l.includes('📦');
-      var cls = 'cal-study cal-online';
-      if (isStacked) cls += ' cal-stacked';
-      var html = l.replace(/^([^:]+):/, function(match, name) {
-        var escapedName = name.replace(/⏳\s*/, '').trim().replace(/'/g, "\\'");
-        return '<strong class="crosslink" onclick="event.stopPropagation();crosslinkResearcher(\'' + escapedName + '\')" title="View schedule for ' + escapedName + '">' + name + '</strong>:';
-      });
-      html = html.replace(/\(2-part\)/g, '<span class="badge-2part">2-Part</span>');
-      html = html.replace(/\(2-wave\)/g, '<span class="badge-2part">2-Wave</span>');
-      // Append co-PI names if not already in the line
-      var coPIs = findCoPIs(l);
-      var copiStr = '';
-      if (coPIs) {
-        var missing = coPIs.filter(function(c) { return !l.includes(c.split(',')[0]); });
-        if (missing.length) copiStr = '<div class="cal-rooms">with ' + missing.map(function(n) { return '<span class="crosslink" onclick="event.stopPropagation();crosslinkResearcher(\'' + n.replace(/'/g, "\\'") + '\')" style="font-weight:500">' + n + '</span>'; }).join(', ') + '</div>';
-      }
-      return '<div class="' + cls + '">' + html.trim() + studyPageLinkForText(l) + copiStr + '</div>';
-    }).join('');
-  };
-  var noteHtml = f.note ? '<div class="cal-week-note">' + f.note + '</div>' : '';
-  return '<tr data-week-start="' + f.weekStart + '" data-week-end="' + f.weekEnd + '"' + rowStyle + '>' +
-    '<td><div class="cal-week-label">Week of ' + f.wk + '</div><div class="cal-week-dates">' + f.dates + '</div>' + noteHtml + '</td>' +
-    '<td>' + fmtOnline(f.online) + '</td><td>' + fmtFac(f.ll102, '102') + '</td>' +
-    '<td>' + fmtFac(f.ll110, '110') + '</td><td>' + fmtFac(f.ll112, '112') + '</td></tr>';
+    }
+
+    html += '</div>'; // close row
+  });
+
+  html += '</div>'; // close grid
+  html += '</div>'; // close block
+  return html;
 }).join('');
+
+// Toggle collapsed state for calendar week blocks
+function toggleCalWeek(headerEl) {
+  var block = headerEl.parentElement;
+  block.classList.toggle('collapsed');
+}
+
+// Expand or collapse all past weeks
+function togglePastWeeks() {
+  var blocks = document.querySelectorAll('#cal-grid-container .cal-week-block');
+  var btn = document.getElementById('cal-toggle-past');
+  // Check if any past weeks are currently collapsed
+  var anyCollapsed = false;
+  blocks.forEach(function(b) {
+    if (b.dataset.weekEnd && TODAY > b.dataset.weekEnd && b.classList.contains('collapsed')) anyCollapsed = true;
+  });
+  blocks.forEach(function(b) {
+    if (b.dataset.weekEnd && TODAY > b.dataset.weekEnd) {
+      if (anyCollapsed) b.classList.remove('collapsed');
+      else b.classList.add('collapsed');
+    }
+  });
+  if (btn) btn.textContent = anyCollapsed ? 'Collapse Past' : 'Expand Past';
+}
 
 // ═══════════════════════════════════════════════
 // 5. EVENT LISTENERS
@@ -7141,7 +8157,7 @@ document.querySelectorAll('.nav-submenu-item').forEach(function(item) {
           var todayBtn = document.getElementById('cal-today');
           if (todayBtn) todayBtn.click();
           setTimeout(function() {
-            var currentRow = document.querySelector('#cal-body tr.current-week-row');
+            var currentRow = document.querySelector('#cal-grid-container .current-week-block');
             if (currentRow) currentRow.scrollIntoView({behavior:'smooth', block:'center'});
           }, 150);
         } else {
@@ -7149,7 +8165,7 @@ document.querySelectorAll('.nav-submenu-item').forEach(function(item) {
           var showAll = document.getElementById('cal-show-all');
           if (showAll) showAll.click();
           setTimeout(function() {
-            var rows = document.querySelectorAll('#cal-body tr[data-week-start]');
+            var rows = document.querySelectorAll('#cal-grid-container .cal-week-block[data-week-start]');
             var targetRow = null;
             rows.forEach(function(row) {
               var ws = row.dataset.weekStart;
@@ -7270,6 +8286,14 @@ document.getElementById('studies-clear-filters').addEventListener('click', funct
   runStudiesFilter();
 });
 
+// Legend toggle
+document.getElementById('studies-legend-btn').addEventListener('click', function() {
+  var panel = document.getElementById('studies-legend-panel');
+  var btn = this;
+  panel.classList.toggle('open');
+  btn.classList.toggle('active');
+});
+
 
 // ═══════════════════════════════════════════════
 // 6. INITIALIZATION + NEW FEATURES
@@ -7294,8 +8318,15 @@ darkToggle.addEventListener('click', function() { applyDarkMode(!document.body.c
 
 // --- Back to top ---
 var backToTopBtn = document.getElementById('back-to-top');
+var studiesToolbar = document.querySelector('.studies-toolbar');
 window.addEventListener('scroll', function() {
   backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+  // Sticky toolbar shadow when stuck
+  if (studiesToolbar) {
+    var rect = studiesToolbar.getBoundingClientRect();
+    var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h') || '110');
+    studiesToolbar.classList.toggle('stuck', rect.top <= headerH + 12);
+  }
 });
 backToTopBtn.addEventListener('click', function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -7335,7 +8366,8 @@ var calRows;
 // Build week sub-menu pills
 function buildCalWeekMenu() {
   var menu = document.getElementById('cal-week-menu');
-  var html = '<div class="cal-week-menu-label">Jump to Week</div>';
+  var html = '<div class="cal-week-menu-label" onclick="this.parentElement.classList.toggle(\'collapsed\')">Jump to Week <span class="cal-toggle-arrow">▼</span></div>';
+  html += '<div class="cal-week-menu-pills">';
   html += '<button class="cal-week-pill active" data-cal-idx="-1" onclick="calJumpTo(-1)">All Weeks</button>';
   calData.forEach(function(w, i) {
     var isCurrent = TODAY >= w.weekStart && TODAY <= w.weekEnd;
@@ -7347,16 +8379,26 @@ function buildCalWeekMenu() {
       (isRecess ? '' : ' onclick="calJumpTo(' + i + ')"') + '>' +
       w.wk + '<span class="cal-week-pill-date">' + w.dates + '</span></button>';
   });
+  html += '</div>';
   menu.innerHTML = html;
+  menu.classList.add('collapsed');
 }
 
 function calJumpTo(idx) {
   calWeekIdx = idx;
+  var menu = document.getElementById('cal-week-menu');
+  if (idx !== -1 && menu) menu.classList.remove('collapsed');
   updateCalNav();
+  // Sync header week meter
+  document.querySelectorAll('.sem-ticker-seg').forEach(function(el) { el.classList.remove('viewing'); });
+  if (idx >= 0) {
+    var wk = document.querySelector('.sem-ticker-seg[data-cal-idx="' + idx + '"]');
+    if (wk) wk.classList.add('viewing');
+  }
 }
 
 function initCalNav() {
-  calRows = Array.from(document.querySelectorAll('#cal-body tr'));
+  calRows = Array.from(document.querySelectorAll('#cal-grid-container .cal-week-block'));
   buildCalWeekMenu();
   updateCalNav();
 }
@@ -7372,7 +8414,7 @@ function updateCalNav() {
   } else {
     calRows.forEach(function(r, i) { r.style.display = i === calWeekIdx ? '' : 'none'; });
     var vis = calRows[calWeekIdx];
-    label.textContent = vis ? vis.querySelector('td').textContent.split('\n')[0].trim() : '';
+    label.textContent = vis ? (vis.querySelector('.cal-week-header-title') || {textContent:''}).textContent + ' · ' + (vis.querySelector('.cal-week-header-dates') || {textContent:''}).textContent : '';
     prevBtn.disabled = calWeekIdx <= 0;
     nextBtn.disabled = calWeekIdx >= calRows.length - 1;
   }
@@ -7408,7 +8450,7 @@ document.getElementById('cal-today').addEventListener('click', function() {
   // Fallback: show all and scroll
   calWeekIdx = -1;
   updateCalNav();
-  var currentRow = document.querySelector('#cal-body tr.current-week-row');
+  var currentRow = document.querySelector('#cal-grid-container .current-week-block');
   if (currentRow) currentRow.scrollIntoView({behavior: 'smooth', block: 'center'});
 });
 
@@ -7603,7 +8645,11 @@ myStudySelect.addEventListener('change', function() {
 var headerResetBtn = document.getElementById('header-reset');
 function updateResetBtn() {
   var hasSelection = mySelect.value || researcherSelect.value;
-  headerResetBtn.classList.toggle('visible', !!hasSelection);
+  var activeTab = document.querySelector('.nav-tab.active');
+  var tabId = activeTab ? activeTab.dataset.tab : '';
+  var onRelevantTab = tabId === 'myschedule' || tabId === 'studies' || tabId === 'home';
+  headerResetBtn.classList.toggle('visible', !!hasSelection && onRelevantTab);
+  headerResetBtn.title = mySelect.value ? 'Clear "' + (mySelect.options[mySelect.selectedIndex] || {}).text + '" selection' : 'Clear researcher filter';
 }
 headerResetBtn.addEventListener('click', function() {
   // Clear My Schedule picker
@@ -7628,7 +8674,7 @@ headerResetBtn.addEventListener('click', function() {
 });
 
 
-// --- Stacking Planner ---
+// --- Stacked Sessions ---
 (function() {
   var planner = document.getElementById('stack-planner');
   var content = document.getElementById('stack-planner-content');
@@ -7697,8 +8743,11 @@ headerResetBtn.addEventListener('click', function() {
       }
     });
 
-    // Render
-    html += '<div class="sp-weeks">';
+    // Color palette for timeline bars
+    var barColors = ['#2D6A4F','#E67E22','#5B7BB5','#7B1FA2','#C0392B','#1ABC9C'];
+
+    // Render grid
+    html += '<div class="sp-weeks" id="sp-grid">';
 
     weeks.forEach(function(wk, i) {
       var isBest = i === bestIdx && wk.studies.length >= 2;
@@ -7707,47 +8756,59 @@ headerResetBtn.addEventListener('click', function() {
       if (isBest) cls += ' sp-best';
       if (isSlim) cls += ' sp-week-slim';
 
-      html += '<div class="' + cls + '">';
+      html += '<div class="' + cls + '" data-sp-idx="' + i + '" onclick="spShowDetail(' + i + ')">';
 
       // Header
       html += '<div class="sp-week-header">';
+      html += '<div class="sp-week-top">';
       html += '<span class="sp-week-date">' + wk.label + '</span>';
+      if (isBest) html += '<span class="sp-best-tag">Best Combo</span>';
+      if (isSlim) html += '<span style="font-size:10px;color:var(--text-muted);font-style:italic">1 study</span>';
+      html += '</div>';
       html += '<div class="sp-week-stats">';
       html += '<span class="sp-week-stat"><strong>' + wk.studies.length + '</strong> studies</span>';
-      html += '<span class="sp-week-stat"><strong>' + wk.totalDur + '</strong> min total</span>';
+      html += '<span class="sp-week-stat"><strong>' + wk.totalDur + '</strong> min</span>';
       html += '<span class="sp-week-stat"><strong>' + wk.totalCr.toFixed(2) + '</strong> CR</span>';
-      if (isBest) html += '<span class="sp-best-tag">Best Combo</span>';
-      if (isSlim) html += '<span style="font-size:13px;color:var(--text-muted);font-style:italic">Not enough to stack alone</span>';
-      html += '</div></div>';
-
-      // Studies
-      html += '<div class="sp-week-studies">';
-      wk.studies.forEach(function(s) {
-        html += '<div class="sp-study">';
-        html += '<span class="sp-study-status ' + (s.confirmed ? 'confirmed' : 'maybe') + '">' + (s.confirmed ? '✓ Yes' : '? Maybe') + '</span>';
-        html += '<span class="sp-study-name">' + s.name + '</span>';
-        html += '<span class="sp-study-researcher">' + s.researcher + '</span>';
-        html += '<span class="sp-study-dur">' + s.durLabel + ' · ' + s.cr.toFixed(2) + ' CR</span>';
-        html += '</div>';
-      });
+      // LL102 dot inline
+      var ll102Busy = ll102Usage[wk.date];
+      html += '<span class="sp-ll102-dot ' + (ll102Busy ? 'sp-ll102-busy' : 'sp-ll102-free') + '" title="' + (ll102Busy ? 'LL102 in use' : 'LL102 available') + '"></span>';
       html += '</div>';
 
-      // LL102 status
-      var ll102Busy = ll102Usage[wk.date];
-      html += '<div class="sp-ll102">';
-      if (ll102Busy) {
-        html += '<span class="sp-ll102-dot sp-ll102-busy"></span> LL102 in use: ' + ll102Busy.join(', ');
-        html += ' <span style="font-style:italic;margin-left:4px">— would need to coordinate timeslots</span>';
-      } else {
-        html += '<span class="sp-ll102-dot sp-ll102-free"></span> LL102 available this week';
+      // Mini duration bar
+      if (!isSlim) {
+        html += '<div class="sp-mini-bar">';
+        wk.studies.forEach(function(s, si) {
+          var pct = (s.dur / 60) * 100;
+          html += '<div class="sp-mini-bar-seg" style="width:' + pct + '%;background:' + barColors[si % barColors.length] + '"></div>';
+        });
+        html += '</div>';
       }
+      html += '</div>';
+
+      // Study pills
+      if (!isSlim) {
+        html += '<div class="sp-card-studies">';
+        wk.studies.forEach(function(s) {
+          html += '<span class="sp-card-pill ' + (s.confirmed ? 'confirmed' : 'maybe') + '">' + s.name + ' (' + s.dur + 'm)</span>';
+        });
+        html += '</div>';
+      }
+
+      // LL102 footer
+      html += '<div class="sp-card-ll102">';
+      html += '<span class="sp-ll102-dot ' + (ll102Busy ? 'sp-ll102-busy' : 'sp-ll102-free') + '"></span>';
+      html += ll102Busy ? 'LL102 busy — coordinate slots' : 'LL102 available';
       html += '</div>';
 
       html += '</div>';
     });
 
-    // Summary
     html += '</div>';
+
+    // Detail panel placeholder
+    html += '<div id="sp-detail-container"></div>';
+
+    // Summary
     html += '<div style="padding:12px 16px;font-size:13px;color:var(--text-muted);border-top:1px solid var(--border-light)">';
     html += '<strong>Recommendation:</strong> ';
     if (bestIdx >= 0 && weeks[bestIdx].studies.length >= 2) {
@@ -7763,7 +8824,144 @@ headerResetBtn.addEventListener('click', function() {
     html += '</div>';
 
     content.innerHTML = html;
+
+    // Store data for detail view
+    window._spWeeks = weeks;
+    window._spLL102 = ll102Usage;
+    window._spColors = barColors;
   }
+
+  // Detail view function
+  window.spShowDetail = function(idx) {
+    var weeks = window._spWeeks;
+    var ll102Usage = window._spLL102;
+    var barColors = window._spColors;
+    if (!weeks || !weeks[idx]) return;
+    var wk = weeks[idx];
+
+    // Toggle active card
+    document.querySelectorAll('.sp-week').forEach(function(el) { el.classList.remove('sp-active'); });
+    var card = document.querySelector('.sp-week[data-sp-idx="' + idx + '"]');
+    if (card) card.classList.add('sp-active');
+
+    // Build session days
+    var weekStart = new Date(wk.date);
+    var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var monthNames = ['Jan','Feb','Mar','Apr','May'];
+    var sessionDays = [];
+
+    var isPilotWeek = wk.date === '2026-03-01';
+    if (isPilotWeek) {
+      sessionDays = [
+        {label: 'Thu, Mar 5', date: '2026-03-05'},
+        {label: 'Fri, Mar 6', date: '2026-03-06'},
+        {label: 'Thu, Mar 12', date: '2026-03-12'},
+        {label: 'Fri, Mar 13', date: '2026-03-13'}
+      ];
+    } else {
+      for (var d = 1; d <= 5; d++) {
+        var day = new Date(weekStart);
+        day.setDate(day.getDate() + d);
+        sessionDays.push({
+          label: dayNames[day.getDay()] + ', ' + monthNames[day.getMonth()] + ' ' + day.getDate(),
+          date: day.toISOString().split('T')[0]
+        });
+      }
+    }
+
+    var html = '<div class="sp-detail">';
+    html += '<div class="sp-detail-header">';
+    html += '<div>';
+    html += '<div class="sp-detail-title">' + wk.label + ' — Session Planner</div>';
+    html += '<div style="font-size:12px;color:var(--text-muted);margin-top:2px">' + wk.studies.length + ' studies · ' + wk.totalDur + ' min total · ' + wk.totalCr.toFixed(2) + ' CR</div>';
+    html += '</div>';
+    html += '<button class="sp-detail-close" onclick="spCloseDetail()">✕ Close</button>';
+    html += '</div>';
+
+    // Day tabs
+    html += '<div class="sp-detail-days">';
+    html += '<div class="sp-detail-day-tab active" onclick="spSwitchDay(this,\x27all\x27,' + idx + ')">All Days</div>';
+    sessionDays.forEach(function(sd) {
+      html += '<div class="sp-detail-day-tab" onclick="spSwitchDay(this,\x27' + sd.date + '\x27,' + idx + ')">' + sd.label + '</div>';
+    });
+    html += '</div>';
+
+    html += '<div class="sp-detail-content" id="sp-detail-body">';
+    html += spBuildDayContent(wk, 'all', barColors);
+    html += '</div>';
+
+    html += '</div>';
+
+    var container = document.getElementById('sp-detail-container');
+    container.innerHTML = html;
+    container.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  };
+
+  window.spBuildDayContent = function(wk, day, barColors) {
+    var html = '';
+    var totalDur = wk.totalDur;
+    var cap = 60;
+
+    // Timeline bar
+    html += '<div class="sp-detail-bar">';
+    wk.studies.forEach(function(s, si) {
+      var pct = (s.dur / cap) * 100;
+      html += '<div class="sp-detail-bar-seg" style="width:' + pct + '%;background:' + barColors[si % barColors.length] + '">' + s.name + ' (' + s.dur + 'm)</div>';
+    });
+    var bufferPct = ((cap - totalDur) / cap) * 100;
+    if (bufferPct > 0) {
+      html += '<div class="sp-detail-bar-seg sp-detail-bar-buffer" style="width:' + bufferPct + '%">' + (cap - totalDur) + 'min buffer</div>';
+    }
+    html += '</div>';
+    html += '<div class="sp-detail-bar-labels"><span>0 min</span><span>' + totalDur + ' min</span><span>' + cap + ' min cap</span></div>';
+
+    if (day !== 'all') {
+      var d = new Date(day);
+      var dn = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var mn = ['January','February','March','April','May'];
+      html += '<div style="padding:8px 12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;margin-bottom:12px;font-size:13px;color:#92400E">';
+      html += '📅 <strong>' + dn[d.getDay()] + ', ' + mn[d.getMonth()] + ' ' + d.getDate() + '</strong> — ';
+      html += 'LL102 · 16 stations · ' + wk.studies.length + ' studies back-to-back · ~' + totalDur + ' min per participant';
+      html += '</div>';
+    }
+
+    // Study rows
+    wk.studies.forEach(function(s, si) {
+      html += '<div class="sp-detail-study">';
+      html += '<div style="width:4px;height:24px;border-radius:2px;background:' + barColors[si % barColors.length] + ';flex-shrink:0"></div>';
+      html += '<span class="sp-study-status ' + (s.confirmed ? 'confirmed' : 'maybe') + '">' + (s.confirmed ? '✓ Confirmed' : '? Awaiting') + '</span>';
+      html += '<span class="sp-study-name">' + s.name + '</span>';
+      html += '<span class="sp-study-researcher">' + s.researcher + '</span>';
+      html += '<span class="sp-study-dur">' + s.durLabel + ' · ' + s.cr.toFixed(2) + ' CR</span>';
+      html += '</div>';
+    });
+
+    // LL102 status
+    var ll102Busy = window._spLL102[wk.date];
+    html += '<div class="sp-detail-ll102">';
+    html += '<span class="sp-ll102-dot ' + (ll102Busy ? 'sp-ll102-busy' : 'sp-ll102-free') + '"></span>';
+    if (ll102Busy) {
+      html += '<span>LL102 in use: ' + ll102Busy.join(', ') + ' — <em>coordinate timeslots</em></span>';
+    } else {
+      html += '<span>LL102 available this week</span>';
+    }
+    html += '</div>';
+
+    return html;
+  };
+
+  window.spSwitchDay = function(tab, day, idx) {
+    document.querySelectorAll('.sp-detail-day-tab').forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    var wk = window._spWeeks[idx];
+    document.getElementById('sp-detail-body').innerHTML = spBuildDayContent(wk, day, window._spColors);
+  };
+
+  window.spCloseDetail = function() {
+    document.querySelectorAll('.sp-week').forEach(function(el) { el.classList.remove('sp-active'); });
+    var container = document.getElementById('sp-detail-container');
+    if (container) container.innerHTML = '';
+  };
 
   // Expose for tab switching
   window.ensureStackRendered = ensureRendered;
@@ -7821,7 +9019,6 @@ function buildHomeDashboard() {
       if (i + 1 < calData.length) nextWeek = calData[i + 1];
       break;
     }
-    // If we're between weeks, show the next one
     if (i + 1 < calData.length && TODAY < calData[i + 1].weekStart && TODAY > calData[i].weekEnd) {
       currentWeek = calData[i + 1];
       if (i + 2 < calData.length) nextWeek = calData[i + 2];
@@ -7829,65 +9026,130 @@ function buildHomeDashboard() {
     }
   }
 
-  // Parse study lines from a calData field
   function parseStudies(text) {
-    if (!text || text === '—') return [];
+    if (!text || text === '\u2014') return [];
     return text.split('\n').filter(function(l) {
-      return l.trim() && l !== '—' && !l.includes('📦');
+      return l.trim() && l !== '\u2014' && !l.includes('\ud83d\udce6');
     }).map(function(l) {
       var clean = l.replace(/\(starts\)|\(final\)|\(ongoing\)|\(overflow\)|\(2-part\)|\(2-wave\)|\(paused[^)]*\)/g, '').trim();
       var parts = clean.split(':');
-      var researcher = parts[0].replace(/⏳\s*/, '').trim();
-      var study = parts.slice(1).join(':').replace(/In-Person Study\s*[–—-]\s*/i, '').trim();
-      var isPending = l.includes('⏳');
+      var researcher = parts[0].replace(/\u23f3\s*/, '').trim();
+      var study = parts.slice(1).join(':').replace(/In-Person Study\s*[\u2013\u2014-]\s*/i, '').trim();
+      var isPending = l.includes('\u23f3');
       var isStart = l.includes('(starts)');
       var isFinal = l.includes('(final)');
       return { researcher: researcher, study: study, isPending: isPending, isStart: isStart, isFinal: isFinal, raw: l };
     });
   }
 
-  var html = '';
+  // Count this-week studies
+  var twCount = 0;
+  if (currentWeek) {
+    [currentWeek.online, currentWeek.ll102, currentWeek.ll110, currentWeek.ll112].forEach(function(t) {
+      twCount += parseStudies(t).length;
+    });
+  }
 
-  // Card 1: This Week
-  html += '<div class="home-dash-card">';
-  html += '<div class="home-dash-card-header"><span class="dash-icon">📅</span>This Week';
-  if (currentWeek) html += ' · ' + currentWeek.dates;
+  // Count milestones
+  var milestones = [];
+  calData.forEach(function(w) {
+    if (w.weekStart < TODAY) return;
+    [w.online, w.ll102, w.ll110, w.ll112].forEach(function(text) {
+      parseStudies(text).forEach(function(s) {
+        if (s.isStart || s.isFinal) {
+          milestones.push({ dates: w.dates, wk: w.wk, study: s.study, researcher: s.researcher, isStart: s.isStart, isFinal: s.isFinal });
+        }
+      });
+    });
+  });
+
+  var html = '<div class="home-dash-card">';
+
+  // Tab bar
+  html += '<div class="home-dash-tabs">';
+  html += '<button class="home-dash-tab active" onclick="window.switchDashTab(\'thisweek\')" data-pane="thisweek">';
+  html += '<span class="dash-icon">\ud83d\udcc5</span>This Week';
+  if (currentWeek) html += ' \u00b7 ' + currentWeek.dates;
+  html += '<span class="home-dash-tab-count">' + twCount + '</span>';
+  html += '</button>';
+  html += '<button class="home-dash-tab" onclick="window.switchDashTab(\'comingup\')" data-pane="comingup">';
+  html += '<span class="dash-icon">\ud83d\udcc5</span>Coming Up';
+  html += '<span class="home-dash-tab-count">' + milestones.length + '</span>';
+  html += '</button>';
   html += '</div>';
   html += '<div class="home-dash-gold-bar"></div>';
-  html += '<div class="home-dash-card-body">';
 
+  // Pane 1: This Week (two-column: online | in-person)
+  html += '<div class="home-dash-pane active" id="dash-pane-thisweek">';
+  html += '<div class="home-dash-card-body">';
   if (currentWeek) {
-    var allThisWeek = [];
-    // Collect studies from all facilities
     var sources = [
       { text: currentWeek.online, facility: 'Online' },
       { text: currentWeek.ll102, facility: 'LL102' },
       { text: currentWeek.ll110, facility: 'LL-110' },
       { text: currentWeek.ll112, facility: 'LL-112' }
     ];
+    var onlineStudies = [];
+    var labGroups = {};
     sources.forEach(function(src) {
-      parseStudies(src.text).forEach(function(s) {
-        s.facility = src.facility;
-        allThisWeek.push(s);
-      });
+      var studies = parseStudies(src.text);
+      studies.forEach(function(s) { s.facility = src.facility; });
+      if (src.facility === 'Online') {
+        onlineStudies = studies;
+      } else if (studies.length) {
+        labGroups[src.facility] = studies;
+      }
     });
 
-    if (allThisWeek.length) {
-      allThisWeek.forEach(function(s) {
-        var badges = '';
-        if (s.isStart) badges += '<span class="badge-start" style="font-size:10px;margin-left:4px">Start</span>';
-        if (s.isFinal) badges += '<span class="badge-end" style="font-size:10px;margin-left:4px">End</span>';
-        if (s.isPending) badges += '<span class="badge-pending" style="font-size:10px;margin-left:4px">Pending</span>';
-        var facilityBadge = s.facility === 'Online'
-          ? '<span class="badge badge-online" style="font-size:10px">Online</span>'
-          : '<span class="badge badge-inperson" style="font-size:10px">' + s.facility + '</span>';
-        html += '<div class="home-dash-study" onclick="crosslinkResearcher(\'' + s.researcher.replace(/'/g, "\\'") + '\')">';
-        html += '<div class="home-dash-study-badge">' + facilityBadge + '</div>';
-        html += '<div class="home-dash-study-name">' + s.study + badges + '</div>';
-        html += '<div class="home-dash-study-detail">' + s.researcher.split(',')[0] + '</div>';
-        html += '<div class="home-dash-study-arrow">→</div>';
-        html += '</div>';
+    var hasAny = onlineStudies.length || Object.keys(labGroups).length;
+    if (hasAny) {
+      html += '<div class="home-tw-cols">';
+
+      // Left: Online
+      html += '<div class="home-tw-col">';
+      html += '<div class="home-tw-col-header"><span class="badge badge-online" style="font-size:11px;padding:2px 8px">Online</span> <span class="home-tw-col-count">' + onlineStudies.length + ' studies</span></div>';
+      if (onlineStudies.length) {
+        onlineStudies.forEach(function(s) {
+          var badges = '';
+          if (s.isStart) badges += ' <span class="badge-start" style="font-size:9px">Start</span>';
+          if (s.isFinal) badges += ' <span class="badge-end" style="font-size:9px">End</span>';
+          html += '<div class="home-tw-item" onclick="crosslinkResearcher(\'' + s.researcher.replace(/'/g, "\\'") + '\')">';
+          html += '<span class="home-tw-name">' + s.study + badges + '</span>';
+          html += '<span class="home-tw-who">' + s.researcher.split(',')[0] + '</span>';
+          html += '</div>';
+        });
+      } else {
+        html += '<div class="home-tw-none">No online studies</div>';
+      }
+      html += '</div>';
+
+      // Right: In-Person (grouped by facility)
+      html += '<div class="home-tw-col">';
+      var labCount = Object.keys(labGroups).reduce(function(n,k){ return n + labGroups[k].length; }, 0);
+      html += '<div class="home-tw-col-header"><span class="badge badge-inperson" style="font-size:11px;padding:2px 8px">In-Person</span> <span class="home-tw-col-count">' + labCount + ' sessions</span></div>';
+      var labOrder = ['LL102', 'LL-110', 'LL-112'];
+      var hasLab = false;
+      labOrder.forEach(function(fac) {
+        if (!labGroups[fac]) return;
+        hasLab = true;
+        html += '<div class="home-tw-fac">' + fac + '</div>';
+        labGroups[fac].forEach(function(s) {
+          var badges = '';
+          if (s.isStart) badges += ' <span class="badge-start" style="font-size:9px">Start</span>';
+          if (s.isFinal) badges += ' <span class="badge-end" style="font-size:9px">End</span>';
+          if (s.isPending) badges += ' <span class="badge-pending" style="font-size:9px">Pending</span>';
+          html += '<div class="home-tw-item home-tw-lab" onclick="crosslinkResearcher(\'' + s.researcher.replace(/'/g, "\\'") + '\')">';
+          html += '<span class="home-tw-name">' + s.study + badges + '</span>';
+          html += '<span class="home-tw-who">' + s.researcher.split(',')[0] + '</span>';
+          html += '</div>';
+        });
       });
+      if (!hasLab) {
+        html += '<div class="home-tw-none">No in-person sessions</div>';
+      }
+      html += '</div>';
+
+      html += '</div>'; // close cols
     } else {
       html += '<div class="home-dash-empty">No studies scheduled this week</div>';
     }
@@ -7899,46 +9161,45 @@ function buildHomeDashboard() {
   }
   html += '</div></div>';
 
-  // Card 2: Upcoming Milestones
-  html += '<div class="home-dash-card">';
-  html += '<div class="home-dash-card-header"><span class="dash-icon">🗓️</span>Upcoming Milestones</div>';
-  html += '<div class="home-dash-gold-bar"></div>';
+  // Pane 2: Coming Up
+  html += '<div class="home-dash-pane" id="dash-pane-comingup">';
   html += '<div class="home-dash-card-body">';
-
-  // Collect upcoming starts and finals from all weeks
-  var milestones = [];
-  calData.forEach(function(w) {
-    if (w.weekStart < TODAY) return; // skip past weeks, but include current
-    var fields = [w.online, w.ll102, w.ll110, w.ll112];
-    fields.forEach(function(text) {
-      parseStudies(text).forEach(function(s) {
-        if (s.isStart || s.isFinal) {
-          milestones.push({ dates: w.dates, wk: w.wk, study: s.study, researcher: s.researcher, isStart: s.isStart, isFinal: s.isFinal });
-        }
-      });
-    });
-  });
-
-  // Show up to 6 milestones
-  var shown = milestones.slice(0, 6);
+  var shown = milestones.slice(0, 10);
   if (shown.length) {
+    var lastWk = '';
     shown.forEach(function(m) {
       var icon = m.isStart ? '<span class="badge-start" style="font-size:10px">Start</span>' : '<span class="badge-end" style="font-size:10px">End</span>';
+      if (m.wk !== lastWk) {
+        if (lastWk) html += '</div>';
+        html += '<div class="home-dash-wk-group">';
+        html += '<div class="home-dash-wk-label">Week of ' + m.wk + '</div>';
+        lastWk = m.wk;
+      }
       html += '<div class="home-dash-event">';
-      html += '<div class="home-dash-event-date">' + m.wk + '</div>';
-      html += '<div class="home-dash-event-text"><strong>' + m.study + '</strong> · ' + m.researcher.split(',')[0] + ' ' + icon + '</div>';
+      html += '<div class="home-dash-event-text"><strong>' + m.study + '</strong> \u00b7 ' + m.researcher.split(',')[0] + ' ' + icon + '</div>';
       html += '</div>';
     });
-    if (milestones.length > 6) {
-      html += '<div style="text-align:center;padding:8px 0;font-size:13px"><span class="crosslink" onclick="switchTab(\'calendar\')">View full calendar →</span></div>';
+    html += '</div>';
+    if (milestones.length > 10) {
+      html += '<div style="text-align:center;padding:8px 0;font-size:13px"><span class="crosslink" onclick="switchTab(\'calendar\')">View full calendar \u2192</span></div>';
     }
   } else {
-    html += '<div class="home-dash-empty">No upcoming milestones</div>';
+    html += '<div class="home-dash-empty">No upcoming changes</div>';
   }
   html += '</div></div>';
 
+  html += '</div>'; // close card
   dash.innerHTML = html;
 }
+
+window.switchDashTab = function(pane) {
+  document.querySelectorAll('.home-dash-tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.pane === pane);
+  });
+  document.querySelectorAll('.home-dash-pane').forEach(function(p) {
+    p.classList.toggle('active', p.id === 'dash-pane-' + pane);
+  });
+};
 
 // --- Cross-linking functions ---
 function crosslinkResearcher(name) {
@@ -8007,14 +9268,14 @@ populateCalResearcherFilter();
 function applyCalResearcherFilter() {
   var calFilter = document.getElementById('cal-researcher-filter');
   var selected = calFilter ? calFilter.value : '';
-  document.querySelectorAll('#cal-body tr').forEach(function(row) {
-    if (selected) {
-      var text = row.textContent.toLowerCase();
-      var match = text.includes(selected.split(',')[0].toLowerCase());
-      row.style.opacity = match ? '1' : '0.35';
-      row.style.transition = 'opacity 0.2s';
+  var searchStr = selected ? selected.split(',')[0].toLowerCase() : '';
+  document.querySelectorAll('#cal-grid-container .cal-chip').forEach(function(chip) {
+    if (searchStr) {
+      var match = (chip.getAttribute('title') || '').toLowerCase().indexOf(searchStr) !== -1;
+      chip.style.opacity = match ? '1' : '0.15';
+      chip.style.transition = 'opacity 0.2s';
     } else {
-      row.style.opacity = '1';
+      chip.style.opacity = '';
     }
   });
   if (calFilter) calFilter.classList.toggle('has-selection', !!selected);
@@ -8122,37 +9383,47 @@ updateResearcherNav();
   }, 30000);
 })();
 
-// Semester week meter
+// Semester ticker — segmented
 (function() {
-  var weeks = [
-    {num:1, start:'2026-02-08', end:'2026-02-14', label:'Feb 8'},
-    {num:2, start:'2026-02-15', end:'2026-02-21'},
-    {num:3, start:'2026-02-22', end:'2026-02-28'},
-    {num:4, start:'2026-03-01', end:'2026-03-07', label:'Mar 1'},
-    {num:5, start:'2026-03-08', end:'2026-03-14'},
-    {num:6, start:'2026-03-15', end:'2026-03-21', label:'Break', isBreak:true},
-    {num:7, start:'2026-03-22', end:'2026-03-28'},
-    {num:8, start:'2026-03-29', end:'2026-04-04', label:'Apr'},
-    {num:9, start:'2026-04-05', end:'2026-04-11'},
-    {num:10, start:'2026-04-12', end:'2026-04-18'},
-    {num:11, start:'2026-04-19', end:'2026-04-25'},
-    {num:12, start:'2026-04-26', end:'2026-05-01', label:'May 1'}
-  ];
   var now = new Date(TODAY);
-  var container = document.getElementById('sem-weeks');
-  weeks.forEach(function(w) {
+
+  var weeks = [
+    {num:1, label:'Feb 8–14', start:'2026-02-08', end:'2026-02-14'},
+    {num:2, label:'Feb 15–21', start:'2026-02-15', end:'2026-02-21'},
+    {num:3, label:'Feb 22–28', start:'2026-02-22', end:'2026-02-28'},
+    {num:4, label:'Mar 1–7', start:'2026-03-01', end:'2026-03-07'},
+    {num:5, label:'Mar 8–14', start:'2026-03-08', end:'2026-03-14'},
+    {num:0, label:'Spring Recess', start:'2026-03-15', end:'2026-03-21', isBreak:true},
+    {num:7, label:'Mar 22–28', start:'2026-03-22', end:'2026-03-28'},
+    {num:8, label:'Mar 29–Apr 4', start:'2026-03-29', end:'2026-04-04'},
+    {num:9, label:'Apr 5–11', start:'2026-04-05', end:'2026-04-11'},
+    {num:10, label:'Apr 12–18', start:'2026-04-12', end:'2026-04-18'},
+    {num:11, label:'Apr 19–25', start:'2026-04-19', end:'2026-04-25'},
+    {num:12, label:'Apr 26–May 1', start:'2026-04-26', end:'2026-05-01'}
+  ];
+
+  var tickerLabel = '';
+  var segHtml = '';
+  weeks.forEach(function(w, i) {
     var ws = new Date(w.start), we = new Date(w.end);
     we.setHours(23,59,59);
-    var isCurrent = now >= ws && now <= we;
     var isPast = now > we;
-    var el = document.createElement('div');
-    el.className = 'sem-week' + (isCurrent ? ' current' : '') + (isPast ? ' past' : '') + (w.isBreak ? ' break' : '');
-    el.innerHTML = '<div class="sem-week-tooltip">Wk ' + w.num + (w.isBreak ? ' · Spring Break' : '') + ' · ' + w.start.slice(5).replace('-','/') + '</div>';
-    if (w.label || isCurrent) {
-      el.innerHTML += '<div class="sem-week-label">' + (isCurrent ? 'Wk ' + w.num : w.label) + '</div>';
-    }
-    container.appendChild(el);
+    var isCurrent = now >= ws && now <= we;
+    if (isCurrent) tickerLabel = w.isBreak ? 'Spring Recess' : 'Week ' + w.num + ' of 12';
+
+    var cls = 'sem-ticker-seg';
+    if (isPast) cls += ' seg-past';
+    if (isCurrent) cls += ' seg-current';
+    if (w.isBreak) cls += ' seg-break';
+
+    var tooltip = w.isBreak ? 'Spring Recess' : 'Wk ' + w.num + ' · ' + w.label;
+    segHtml += '<div class="' + cls + '" data-cal-idx="' + i + '" onclick="switchTab(\'calendar\');calJumpTo(' + i + ')" title="' + tooltip + '">';
+    segHtml += '<span class="seg-tooltip">' + tooltip + '</span>';
+    segHtml += '</div>';
   });
+
+  document.getElementById('sem-ticker-segments').innerHTML = segHtml;
+  document.getElementById('sem-ticker-label').textContent = tickerLabel;
 })();
 
 // Relative "updated" time
@@ -8167,7 +9438,7 @@ updateResearcherNav();
   else if (diffDays < 7) relText = diffDays + ' days ago';
   else if (diffDays < 14) relText = '1 week ago';
   else relText = Math.floor(diffDays / 7) + ' weeks ago';
-  updEl.textContent = 'Updated Feb 28, 2026 · ' + relText;
+  updEl.textContent = 'Updated Mar 1, 2026 · ' + relText;
 })();
 
 // #4: URL parameter for researcher pre-selection
@@ -8226,36 +9497,23 @@ mySelect.addEventListener('change', function() {
     monday: {
       label: "Monday, March 2",
       blocks: [
-        { type: "setup", ra: "Joshi, Mayank", start: "8:30 AM", end: "9:00 AM", note: "30 min Setup" },
-        { type: "pair", ra: "Joshi, Mayank", start: "9:00 AM", end: "10:00 AM", sessions: [
+        { type: "setup", ra: "Joshi, Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
+        { type: "pair", ra: "Joshi, Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
           { num: 1, group: "G1", rooms: "B & C" },
           { num: 2, group: "G2", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Joshi, Mayank", start: "10:00 AM", end: "11:00 AM", sessions: [
+        { type: "pair", ra: "Joshi, Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
           { num: 3, group: "G3", rooms: "B & C" },
           { num: 4, group: "G4", rooms: "F & G" }
         ]},
-        { type: "pair", ra: "Joshi, Mayank", start: "11:00 AM", end: "12:00 PM", sessions: [
-          { num: 5, group: "G5", rooms: "B & C" },
-          { num: 6, group: "G6", rooms: "F & G" }
-        ]},
-        { type: "setup", ra: "Joshi, Mayank", start: "12:30 PM", end: "1:00 PM", note: "30 min Setup" },
-        { type: "pair", ra: "Joshi, Mayank", start: "1:00 PM", end: "2:00 PM", sessions: [
-          { num: 7, group: "G1", rooms: "B & C" },
-          { num: 8, group: "G2", rooms: "F & G" }
-        ]},
-        { type: "pair", ra: "Joshi, Mayank", start: "2:00 PM", end: "3:00 PM", sessions: [
-          { num: 9, group: "G3", rooms: "B & C" },
-          { num: 10, group: "G4", rooms: "F & G" }
-        ]},
         { type: "setup", ra: "Ren, Steve", start: "3:00 PM", end: "3:30 PM", note: "Handoff — 30 min Setup" },
         { type: "pair", ra: "Ren, Steve", start: "3:30 PM", end: "4:30 PM", sessions: [
-          { num: 11, group: "G1", rooms: "B & C" },
-          { num: 12, group: "G2", rooms: "F & G" }
+          { num: 5, group: "G1", rooms: "B & C" },
+          { num: 6, group: "G2", rooms: "F & G" }
         ]},
         { type: "pair", ra: "Ren, Steve", start: "4:30 PM", end: "5:30 PM", sessions: [
-          { num: 13, group: "G3", rooms: "B & C" },
-          { num: 14, group: "G4", rooms: "F & G" }
+          { num: 7, group: "G3", rooms: "B & C" },
+          { num: 8, group: "G4", rooms: "F & G" }
         ]}
       ]
     },
@@ -8507,7 +9765,7 @@ mySelect.addEventListener('change', function() {
           S(2,'Ketan, Saumya','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
           S(3,'Ketan, Saumya','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
           S(4,'Ketan, Saumya','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
-          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff — 30 min Setup'),
           S(5,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
           S(6,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
           S(7,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
@@ -8524,7 +9782,7 @@ mySelect.addEventListener('change', function() {
           S(12,'Solomon, Joseph','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
           S(13,'Solomon, Joseph','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
           S(14,'Solomon, Joseph','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
-          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff — 30 min Setup'),
           S(15,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
           S(16,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
           S(17,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
@@ -8547,7 +9805,7 @@ mySelect.addEventListener('change', function() {
     },
     week2: {
       label:'Week 2', dateRange:'February 17\u201320, 2026',
-      holiday:'No studies Monday, Feb 16 \u2014 President\u2019s Day',
+      holiday:'No studies Monday, Feb 16 — President\u2019s Day',
       days: {
         tuesday: {tabLabel:'Tue',tabDate:'Feb 17',label:'Tuesday, February 17',blocks:[
           Setup('Solomon, Joseph','9:30 AM','10:00 AM','30 min Setup'),
@@ -8555,7 +9813,7 @@ mySelect.addEventListener('change', function() {
           S(2,'Solomon, Joseph','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
           S(3,'Solomon, Joseph','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
           S(4,'Solomon, Joseph','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
-          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff — 30 min Setup'),
           S(5,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
           S(6,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
           S(7,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
@@ -8572,7 +9830,7 @@ mySelect.addEventListener('change', function() {
           S(12,'Ketan, Saumya','11:00 AM','12:00 PM','11:00\u201311:30 AM','11:15\u201311:45 AM','11:30\u201312:00 PM'),
           S(13,'Ketan, Saumya','12:00 PM','1:00 PM','12:00\u201312:30 PM','12:15\u201312:45 PM','12:30\u20131:00 PM'),
           S(14,'Ketan, Saumya','1:00 PM','2:00 PM','1:00\u20131:30 PM','1:15\u20131:45 PM','1:30\u20132:00 PM'),
-          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff \u2014 30 min Setup'),
+          Setup('Ren, Steve','3:30 PM','4:00 PM','Handoff — 30 min Setup'),
           S(15,'Ren, Steve','4:00 PM','5:00 PM','4:00\u20134:30 PM','4:15\u20134:45 PM','4:30\u20135:00 PM'),
           S(16,'Ren, Steve','5:00 PM','6:00 PM','5:00\u20135:30 PM','5:15\u20135:45 PM','5:30\u20136:00 PM'),
           S(17,'Ren, Steve','6:00 PM','7:00 PM','6:00\u20136:30 PM','6:15\u20136:45 PM','6:30\u20137:00 PM')
@@ -8720,11 +9978,13 @@ mySelect.addEventListener('change', function() {
 (function() {
   var directoryData = [
     // Lab Staff
-    {name:'Huh, Brian N.', first:'Brian', role:'staff', roleLabel:'Lab Manager', email:'huhb@marshall.usc.edu', phone:'213-821-9746', studies:null, location:'VPD LL102'},
+    {name:'Huh, Brian N.', first:'Brian', role:'staff', roleLabel:'Lab Manager', email:'huhb@marshall.usc.edu', phone:'213-821-9746', studies:null, location:'VPD LL-110 / LL-112'},
+    {name:'Tran, Bri', first:'Bri', role:'staff', roleLabel:'Lab Staff', email:'bnt@marshall.usc.edu', studies:null, location:'VPD LL-110 / LL-112'},
+    {name:'Weng, Derek', first:'Derek', role:'staff', roleLabel:'Lab Staff', email:'wangdere@marshall.usc.edu', studies:null, location:'VPD LL-110 / LL-112'},
 
     // Researchers
     {name:'Anicich, Eric', first:'Eric', role:'researcher', roleLabel:'Researcher', email:'anicich@marshall.usc.edu', studies:['Work Recovery Perceptions — Part 1','Work Recovery Perceptions — Part 2']},
-    {name:'Berry, Zachariah', first:'Zachariah', role:'researcher', roleLabel:'Researcher', email:'zberry@marshall.usc.edu', studies:['TED Judges','Org Change','Intrapersonal Loyalty Effect']},
+    {name:'Berry, Zachariah', first:'Zachariah', role:'researcher', roleLabel:'Researcher', email:'zberry@marshall.usc.edu', studies:['TED Judges','Org Change','Intrapersonal Loyalty Effect','Hierarchy and Corruption','MAC 1']},
     {name:'Brouwers, Jeslyn', first:'Jeslyn', role:'researcher', roleLabel:'Researcher', email:'brouwers@marshall.usc.edu', studies:['Achievement and Ambition in the Age of AI']},
     {name:'Dittmann, Andrea', first:'Andrea', role:'researcher', roleLabel:'Researcher', email:'dittmann@marshall.usc.edu', studies:['Survey About Your USC Marshall Experiences']},
     {name:'Fast, Nate', first:'Nate', role:'researcher', roleLabel:'Researcher', email:'fast@marshall.usc.edu', studies:['Team AI Use and Leadership Emergence']},
@@ -8732,14 +9992,14 @@ mySelect.addEventListener('change', function() {
     {name:'Fox, Glenn', first:'Glenn', role:'researcher', roleLabel:'Researcher', email:'gfox@marshall.usc.edu', studies:['TBD']},
     {name:'Hale, James', first:'James', role:'researcher', roleLabel:'Researcher', email:'jhale@marshall.usc.edu', studies:['KODISV – Collecting Dyadic Videos of Disputes']},
     {name:'Kwon, Brian', first:'Brian', role:'researcher', roleLabel:'Researcher', email:'bkwon@marshall.usc.edu', studies:['AI-Assisted Negotiation Study']},
-    {name:'Lee, Elena', first:'Elena', role:'researcher', roleLabel:'Researcher', email:'elee@marshall.usc.edu', studies:['AI-Assisted Negotiation Study','AI Interaction for Persuasion']},
-    {name:'Martinez, Sammy', first:'Sammy', role:'researcher', roleLabel:'Researcher', email:'smartin@marshall.usc.edu', studies:['I Can Introduce You to Someone...','Making Introductions','Broker – In-Person Option']},
-    {name:'Wakslak, Cheryl', first:'Cheryl', role:'researcher', roleLabel:'Researcher', email:'wakslak@marshall.usc.edu', studies:['Thinking About Others','Brainstorming with a Partner','TBD (Fox)']},
-    {name:'Wiltermuth, Scott', first:'Scott', role:'researcher', roleLabel:'Researcher', email:'wiltermuth@marshall.usc.edu', studies:['Sammy Dissertation Study 1']},
+    {name:'Lee, Elena', first:'Elena', role:'researcher', roleLabel:'Researcher', email:'elee@marshall.usc.edu', studies:['AI-Assisted Negotiation Study','AI Interaction for Persuasion','Strategic Decision with AI']},
+    {name:'Martinez, Sammy', first:'Sammy', role:'researcher', roleLabel:'Researcher', email:'smartin@marshall.usc.edu', studies:['I Can Introduce You to Someone...','Making Introductions','Broker – In-Person Option','Broker 1','Broker 2','Broker 3']},
+    {name:'Wakslak, Cheryl', first:'Cheryl', role:'researcher', roleLabel:'Researcher', email:'wakslak@marshall.usc.edu', studies:['Thinking About Others','Brainstorming with a Partner','TBD (Fox)','Organizational Statements']},
+    {name:'Wiltermuth, Scott', first:'Scott', role:'researcher', roleLabel:'Researcher', email:'wiltermuth@marshall.usc.edu', studies:['Sammy Dissertation Study 1','Sammy Dissertation Study 2']},
 
     // Co-PIs
     {name:'Gratch, Jonathan', first:'Jonathan', role:'copi', roleLabel:'Collaborator', email:'gratch@ict.usc.edu', studies:['AI-Assisted Negotiation Study'], note:'USC ICT'},
-    {name:'Kim, Peter', first:'Peter', role:'researcher', roleLabel:'PI', email:'pkim@marshall.usc.edu', studies:['AI-Assisted Negotiation Study','KODISV – Collecting Dyadic Videos of Disputes']},
+    {name:'Kim, Peter', first:'Peter', role:'researcher', roleLabel:'Researcher', email:'pkim@marshall.usc.edu', studies:['AI-Assisted Negotiation Study','KODISV – Collecting Dyadic Videos of Disputes']},
     {name:'Truong, Mindy', first:'Mindy', role:'copi', roleLabel:'Collaborator', email:'truong@marshall.usc.edu', studies:['Survey About Your USC Marshall Experiences']},
     {name:'Yu, Siyu', first:'Siyu', role:'copi', roleLabel:'Collaborator', email:'syu@marshall.usc.edu', studies:['Team AI Use and Leadership Emergence']},
 
