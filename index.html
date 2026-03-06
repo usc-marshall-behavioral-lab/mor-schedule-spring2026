@@ -4366,13 +4366,33 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
     <div class="header-stats" style="display:none">
     </div>
     <div class="header-badge" style="position:relative">
-      <div class="updated" id="updated-date" data-date="2026-03-01">Updated Mar 1, 2026</div>
+      <div class="updated" id="updated-date" data-date="2026-03-06">Updated Mar 6, 2026</div>
       <span class="whats-new-dot" id="whats-new-dot" title="Schedule updated since your last visit" style="display:none">●</span>
       <button class="changelog-trigger" id="changelog-trigger"><span class="cl-dot"></span> What's New</button>
       <div class="changelog-panel" id="changelog-panel">
         <div class="changelog-panel-header">
           <span>What's Changed</span>
           <button class="changelog-dismiss" id="changelog-dismiss">Dismiss</button>
+        </div>
+        <div class="changelog-entry">
+          <div class="changelog-entry-date">Mar 6, 2026</div>
+          <ul class="changelog-entry-items">
+            <li>Stacked Sessions finalized: 8 studies in roster (E, A, B, C, D, F, G, H), 4 sessions/day, 56 participants/day</li>
+            <li>New stacked session researchers: Yin (Dani), Roberson (Jacob), Berry (Zachariah) added to roster</li>
+            <li>Stacked Sessions details now link to dedicated page at mor-stacked-sessions</li>
+            <li>Calendar and facility data updated for all stacked session weeks</li>
+          </ul>
+        </div>
+        <div class="changelog-entry">
+          <div class="changelog-entry-date">Mar 4, 2026</div>
+          <ul class="changelog-entry-items">
+            <li>Stacked Sessions section fully built out — 12 session dates, 4 studies (A–D), roster table, composition bar, collection schedule</li>
+            <li>Frydman "TBD" added (FBE Compensated Pool, LL102, Mar 6 + Mar 10) — RA: Saumya Ketan</li>
+            <li>Org Judgement Study Week 2 schedule added — Diana (Wed Mar 11) + Lissa (Fri Mar 13)</li>
+            <li>RA reassignments: Bri Tran (Tue 2 PM), Steve Ren replaces Jake Mariani (Tue–Fri PM)</li>
+            <li>Calendar day-of-week accuracy fixed for AI-Assisted Negotiation (Mon–Thu) and Stacked Sessions</li>
+            <li>Study count updated to 32 studies / 18 researchers</li>
+          </ul>
         </div>
         <div class="changelog-entry">
           <div class="changelog-entry-date">Mar 1, 2026</div>
@@ -4480,11 +4500,7 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
         <span class="nav-tab-chevron">▶</span>
       </button>
       <div class="nav-submenu">
-        <button class="nav-submenu-item" data-sub="stack-overview" data-parent="stacking" onclick="switchTab('stacking')">Overview &amp; Schedule</button>
-        <button class="nav-submenu-item" data-sub="stack-a" data-parent="stacking" onclick="switchTab('stacking')">Study A — Wakslak</button>
-        <button class="nav-submenu-item" data-sub="stack-b" data-parent="stacking" onclick="switchTab('stacking')">Study B — Wakslak</button>
-        <button class="nav-submenu-item" data-sub="stack-c" data-parent="stacking" onclick="switchTab('stacking')">Study C — Wakslak</button>
-        <button class="nav-submenu-item" data-sub="stack-d" data-parent="stacking" onclick="switchTab('stacking')">Study D — Dittmann</button>
+        <button class="nav-submenu-item" data-sub="stack-overview" data-parent="stacking">Overview &amp; Dates</button>
       </div>
     </div>
 
@@ -4528,6 +4544,7 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
         <button class="nav-submenu-item" data-sub="berry-org" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('berry-org')">Organizational Judgement Study — Berry</button>
         <button class="nav-submenu-item" data-sub="stacked" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('stacked')">Stacked Sessions — LL102</button>
         <button class="nav-submenu-item" data-sub="fox" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('fox')">TBD — Fox</button>
+        <button class="nav-submenu-item" data-sub="frydman" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('frydman')">TBD — Frydman (FBE)</button>
         <button class="nav-submenu-item" data-sub="fast" data-parent="rasched" onclick="switchTab('rasched');switchStudyPage('fast')">Team AI &amp; Leadership — Fast</button>
       </div>
     </div>
@@ -4546,7 +4563,7 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
 <div class="section active" id="home" role="tabpanel" aria-labelledby="tab-home">
 
   <div class="home-intro">
-    <p class="home-intro-lead">This is the central scheduling hub for the <strong>MOR Subject Pool</strong> at the Marshall Behavioral Research Lab. It covers all 30 studies running this semester across 17 researchers, with approximately 6,900–7,300 participant slots in online, in-person, and hybrid formats.</p>
+    <p class="home-intro-lead">This is the central scheduling hub for the <strong>MOR Subject Pool</strong> at the Marshall Behavioral Research Lab. It covers all 32 studies running this semester across 20 researchers, with approximately 6,900–7,300 participant slots in online, in-person, and hybrid formats.</p>
 
     <div class="home-intro-pickers">
       <div class="home-intro-picker">
@@ -4730,25 +4747,16 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
     <div style="padding:16px 20px;border-bottom:1px solid var(--border)">
       <div style="font-size:14px;font-weight:700;color:var(--text)">How it works</div>
-      <div style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:4px">Multiple short Qualtrics studies run back-to-back in LL102. Participants complete each study at individual workstations under RA supervision, with study order counterbalanced across days. Participants sign up for a fixed time slot and must remain for its full duration. Credit is based on total session time: <strong>0.5</strong> (≤30 min), <strong>0.75</strong> (31–45 min), or <strong>1.0</strong> (46–60 min).</div>
+      <div style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:4px">Multiple short Qualtrics studies run back-to-back in LL102. Participants complete each study at individual workstations under RA supervision, with study order counterbalanced across days. Participants sign up for a fixed time slot and must remain for its full duration — everyone in the room starts and finishes together. Credit is based on total session time: <strong>0.5</strong> (≤30 min), <strong>0.75</strong> (31–45 min), or <strong>1.0</strong> (46–60 min).</div>
     </div>
-    <!-- Stats row -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)">
-      <div style="padding:14px 16px;text-align:center;border-right:1px solid var(--border)">
-        <div style="font-size:24px;font-weight:900;color:var(--cardinal)">12</div>
-        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Session Days</div>
-      </div>
-      <div style="padding:14px 16px;text-align:center;border-right:1px solid var(--border)">
-        <div style="font-size:24px;font-weight:900;color:var(--cardinal)">6</div>
-        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Sessions/Day</div>
-      </div>
-      <div style="padding:14px 16px;text-align:center;border-right:1px solid var(--border)">
-        <div style="font-size:24px;font-weight:900;color:var(--cardinal)">16</div>
-        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Seats/Session</div>
-      </div>
-      <div style="padding:14px 16px;text-align:center">
-        <div style="font-size:24px;font-weight:900;color:var(--gold-dark, #B8860B)">84</div>
-        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Participants/Day</div>
+    <!-- General schedule info -->
+    <div style="padding:14px 20px;border-bottom:1px solid var(--border)">
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px">Schedule</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px;color:var(--text-muted);line-height:1.5">
+        <span style="font-weight:600;color:var(--text)">Facility:</span><span>LL102 Computer Lab (16 stations)</span>
+        <span style="font-weight:600;color:var(--text)">Sessions/Day:</span><span>4 sessions per day, ~56 participants/day</span>
+        <span style="font-weight:600;color:var(--text)">Session Cap:</span><span>60 minutes</span>
+        <span style="font-weight:600;color:var(--text)">Studies:</span><span>8 studies currently in roster</span>
       </div>
     </div>
     <!-- Session dates -->
@@ -4770,192 +4778,12 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
     </div>
   </div>
 
-  <!-- Study Roster -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
-    <div style="padding:14px 20px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text)">Session Roster</div>
-    <div style="padding:0">
-      <table style="width:100%;border-collapse:collapse;font-size:13px">
-        <thead>
-          <tr style="background:var(--bg)">
-            <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border);width:32px"></th>
-            <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Study</th>
-            <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Researcher</th>
-            <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Duration</th>
-            <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Target N</th>
-            <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Status</th>
-            <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Session Days</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:10px 12px"><span style="display:inline-block;width:18px;height:18px;border-radius:3px;background:#FCA5A5;text-align:center;line-height:18px;font-size:10px;font-weight:700;color:#7F1D1D">A</span></td>
-            <td style="padding:10px 12px;font-weight:600">Study A</td>
-            <td style="padding:10px 12px;color:var(--text-muted)">Wakslak, Cheryl</td>
-            <td style="padding:10px 12px;text-align:center">7 min</td>
-            <td style="padding:10px 12px;text-align:center">250</td>
-            <td style="padding:10px 12px;text-align:center"><span style="background:#ECFDF5;color:#065F46;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px">Collecting</span></td>
-            <td style="padding:10px 12px;font-size:12px;color:var(--text-muted)">Mar 6, 12, 13</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
-            <td style="padding:10px 12px"><span style="display:inline-block;width:18px;height:18px;border-radius:3px;background:#FCD34D;text-align:center;line-height:18px;font-size:10px;font-weight:700;color:#78350F">B</span></td>
-            <td style="padding:10px 12px;font-weight:600">Study B</td>
-            <td style="padding:10px 12px;color:var(--text-muted)">Wakslak, Cheryl</td>
-            <td style="padding:10px 12px;text-align:center">2 min</td>
-            <td style="padding:10px 12px;text-align:center">400</td>
-            <td style="padding:10px 12px;text-align:center"><span style="background:#ECFDF5;color:#065F46;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px">Collecting</span></td>
-            <td style="padding:10px 12px;font-size:12px;color:var(--text-muted)">Mar 6, 12, 13, 23, 24</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:10px 12px"><span style="display:inline-block;width:18px;height:18px;border-radius:3px;background:#93C5FD;text-align:center;line-height:18px;font-size:10px;font-weight:700;color:#1E3A5F">C</span></td>
-            <td style="padding:10px 12px;font-weight:600">Study C</td>
-            <td style="padding:10px 12px;color:var(--text-muted)">Wakslak, Cheryl</td>
-            <td style="padding:10px 12px;text-align:center">5 min</td>
-            <td style="padding:10px 12px;text-align:center">250</td>
-            <td style="padding:10px 12px;text-align:center"><span style="background:#FFFBEB;color:#92400E;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px">Pending</span></td>
-            <td style="padding:10px 12px;font-size:12px;color:var(--text-muted)">Mar 6, 12, 13</td>
-          </tr>
-          <tr>
-            <td style="padding:10px 12px"><span style="display:inline-block;width:18px;height:18px;border-radius:3px;background:#C4B5FD;text-align:center;line-height:18px;font-size:10px;font-weight:700;color:#3B0764">D</span></td>
-            <td style="padding:10px 12px;font-weight:600">Study D</td>
-            <td style="padding:10px 12px;color:var(--text-muted)">Dittmann, Andrea</td>
-            <td style="padding:10px 12px;text-align:center">15 min</td>
-            <td style="padding:10px 12px;text-align:center">200</td>
-            <td style="padding:10px 12px;text-align:center"><span style="background:#FFFBEB;color:#92400E;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px">Pending</span></td>
-            <td style="padding:10px 12px;font-size:12px;color:var(--text-muted)">Mar 6, 12, 13</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- Session composition bar -->
-    <div style="padding:14px 20px;border-top:1px solid var(--border);background:var(--bg)">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:8px">Session Composition · Days 1–3 (all studies active)</div>
-      <div style="display:flex;height:22px;border-radius:4px;overflow:hidden;background:var(--border)">
-        <div style="width:8.3%;background:#8C8C8C;opacity:0.6" title="Check-in: 5 min"></div>
-        <div style="width:11.7%;background:#FCA5A5" title="A: Study A (7 min)"></div>
-        <div style="width:3.3%;background:#FCD34D" title="B: Study B (2 min)"></div>
-        <div style="width:8.3%;background:#93C5FD" title="C: Study C (5 min)"></div>
-        <div style="width:25%;background:#C4B5FD" title="D: Study D (15 min)"></div>
-        <div style="width:5%;background:#8C8C8C;opacity:0.4" title="Transitions: 3 min"></div>
-        <div style="width:8.3%;background:#8C8C8C;opacity:0.6" title="Check-out: 5 min"></div>
-        <div style="width:30%;background:#16A34A;opacity:0.2" title="Open: 18 min"></div>
-      </div>
-      <div style="display:flex;gap:12px;margin-top:6px;font-size:11px;color:var(--text-muted);flex-wrap:wrap">
-        <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#FCA5A5;margin-right:3px"></span>A: 7m</span>
-        <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#FCD34D;margin-right:3px"></span>B: 2m</span>
-        <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#93C5FD;margin-right:3px"></span>C: 5m</span>
-        <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#C4B5FD;margin-right:3px"></span>D: 15m</span>
-        <span style="color:var(--text-muted)">·</span>
-        <span>Overhead: 13m</span>
-        <span style="color:var(--text-muted)">·</span>
-        <span style="color:#16A34A;font-weight:600">18m open</span>
-        <span style="color:var(--text-muted)">·</span>
-        <span style="font-weight:600">0.50 credit/participant</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Schedule Grid -->
+  <!-- CTA link -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-    <div style="padding:14px 20px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text)">Collection Schedule</div>
-    <div style="overflow-x:auto">
-      <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:520px">
-        <thead>
-          <tr style="background:var(--bg)">
-            <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Day</th>
-            <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Date</th>
-            <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Studies</th>
-            <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Duration</th>
-            <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Participants</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px 12px;font-weight:600">1</td>
-            <td style="padding:8px 12px">Fri, Mar 6</td>
-            <td style="padding:8px 12px;text-align:center"><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCA5A5;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#7F1D1D;margin:0 1px">A</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCD34D;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#78350F;margin:0 1px">B</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#93C5FD;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#1E3A5F;margin:0 1px">C</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#C4B5FD;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#3B0764;margin:0 1px">D</span></td>
-            <td style="padding:8px 12px;text-align:center">29 min</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
-            <td style="padding:8px 12px;font-weight:600">2</td>
-            <td style="padding:8px 12px">Thu, Mar 12</td>
-            <td style="padding:8px 12px;text-align:center"><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCA5A5;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#7F1D1D;margin:0 1px">A</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCD34D;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#78350F;margin:0 1px">B</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#93C5FD;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#1E3A5F;margin:0 1px">C</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#C4B5FD;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#3B0764;margin:0 1px">D</span></td>
-            <td style="padding:8px 12px;text-align:center">29 min</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px 12px;font-weight:600">3</td>
-            <td style="padding:8px 12px">Fri, Mar 13</td>
-            <td style="padding:8px 12px;text-align:center"><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCA5A5;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#7F1D1D;margin:0 1px">A</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCD34D;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#78350F;margin:0 1px">B</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#93C5FD;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#1E3A5F;margin:0 1px">C</span><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#C4B5FD;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#3B0764;margin:0 1px">D</span></td>
-            <td style="padding:8px 12px;text-align:center">29 min</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)"><td colspan="5" style="padding:6px 12px;font-size:11px;font-style:italic;color:var(--text-muted);text-align:center;background:var(--border);opacity:0.6">Spring Recess · Mar 16–20</td></tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
-            <td style="padding:8px 12px;font-weight:600">4</td>
-            <td style="padding:8px 12px">Mon, Mar 23</td>
-            <td style="padding:8px 12px;text-align:center"><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCD34D;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#78350F;margin:0 1px">B</span></td>
-            <td style="padding:8px 12px;text-align:center">2 min</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px 12px;font-weight:600">5</td>
-            <td style="padding:8px 12px">Tue, Mar 24</td>
-            <td style="padding:8px 12px;text-align:center"><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#FCD34D;text-align:center;line-height:16px;font-size:9px;font-weight:700;color:#78350F;margin:0 1px">B</span></td>
-            <td style="padding:8px 12px;text-align:center">2 min</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
-            <td style="padding:8px 12px;font-weight:600">6</td>
-            <td style="padding:8px 12px">Wed, Mar 25</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px 12px;font-weight:600">7</td>
-            <td style="padding:8px 12px">Fri, Mar 27</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
-            <td style="padding:8px 12px;font-weight:600">8</td>
-            <td style="padding:8px 12px">Mon, Mar 30</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px 12px;font-weight:600">9</td>
-            <td style="padding:8px 12px">Tue, Mar 31</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
-            <td style="padding:8px 12px;font-weight:600">10</td>
-            <td style="padding:8px 12px">Wed, Apr 1</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px 12px;font-weight:600">11</td>
-            <td style="padding:8px 12px">Thu, Apr 2</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 12px;font-weight:600">12</td>
-            <td style="padding:8px 12px">Fri, Apr 3</td>
-            <td style="padding:8px 12px;text-align:center;font-size:11px;color:var(--text-muted);font-style:italic">Open</td>
-            <td style="padding:8px 12px;text-align:center">—</td>
-            <td style="padding:8px 12px;text-align:center">84</td>
-          </tr>
-        </tbody>
-      </table>
+    <div style="padding:24px 20px;text-align:center">
+      <div style="font-size:15px;color:var(--text);line-height:1.6;max-width:520px;margin:0 auto 16px">For the full session roster, study details, capacity planner, collection schedule, and information on how to enlist your study in a stacked session, visit the dedicated page:</div>
+      <a href="https://usc-marshall-behavioral-lab.github.io/mor-stacked-sessions/" target="_blank" rel="noopener" style="display:inline-block;background:var(--cardinal);color:white;padding:12px 28px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.3px">📦 Stacked Sessions — Full Details &amp; Sign-Up →</a>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-muted)">usc-marshall-behavioral-lab.github.io/mor-stacked-sessions</div>
     </div>
   </div>
 </div>
@@ -5508,6 +5336,20 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
         <div class="sp-tile-arrow">→</div>
       </button>
 
+      <button class="sp-tile" onclick="switchStudyPage('frydman')">
+        <div class="sp-tile-icon">🔬</div>
+        <div class="sp-tile-body">
+          <div class="sp-tile-title">TBD <span style="font-family:'Source Sans 3',sans-serif;font-size:10px;font-weight:700;background:#FFFBEB;color:#92400E;padding:2px 6px;border-radius:3px;vertical-align:middle;margin-left:4px">FBE</span></div>
+          <div class="sp-tile-researcher">Frydman</div>
+          <div class="sp-tile-details">
+            <span class="sp-tile-tag sp-tile-tag-facility">LL102</span>
+            <span class="sp-tile-tag sp-tile-tag-date">Mar 6, 10</span>
+            <span class="sp-tile-tag sp-tile-tag-n">80 · 16/slot</span>
+          </div>
+        </div>
+        <div class="sp-tile-arrow">→</div>
+      </button>
+
       <button class="sp-tile" onclick="switchStudyPage('martinez')">
         <div class="sp-tile-icon">🔗</div>
         <div class="sp-tile-body">
@@ -5526,11 +5368,10 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
         <div class="sp-tile-icon">📦</div>
         <div class="sp-tile-body">
           <div class="sp-tile-title">Stacked Lab Sessions</div>
-          <div class="sp-tile-researcher">Wakslak · Dittmann</div>
+          <div class="sp-tile-researcher">LL102 · 8 Studies</div>
           <div class="sp-tile-details">
             <span class="sp-tile-tag sp-tile-tag-facility">LL102</span>
             <span class="sp-tile-tag sp-tile-tag-date">Mar 6 – Apr 3 (12 days)</span>
-            <span class="sp-tile-tag sp-tile-tag-n">84/day · 4 studies</span>
           </div>
         </div>
         <div class="sp-tile-arrow">→</div>
@@ -5719,7 +5560,7 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
       <div class="ra-sched-header-eyebrow">Marshall Behavioral Research Lab</div>
       <div class="ra-sched-title">Organizational Judgement Study — RA Schedule</div>
       <div class="ra-sched-meta">Researcher: Zachariah Berry<br>VPD Lower Level, Suite LL-110 (Week of Mar 1) · Suite LL-112 (ongoing)</div>
-      <div class="ra-sched-header-badge">Week 1</div>
+      <div class="ra-sched-header-badge">Weeks 1–2</div>
     </div>
     <div class="ra-sched-gold-bar"></div>
     <div class="ra-sched-layout">
@@ -5736,6 +5577,14 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
           </div>
         </div>
 
+        <!-- Week selector -->
+        <div class="ra-sched-day-tabs" id="berryOrgWeekTabs" style="margin-bottom:12px">
+          <button class="ra-sched-day-tab active" onclick="switchBerryOrgWeek(1,this)">Week 1<span class="ra-sched-tab-date">Mar 3–6</span></button>
+          <button class="ra-sched-day-tab" onclick="switchBerryOrgWeek(2,this)">Week 2<span class="ra-sched-tab-date">Mar 11, 13</span></button>
+        </div>
+
+        <!-- ═══ WEEK 1 ═══ -->
+        <div id="berry-org-wk1">
         <!-- RA Legend -->
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:13px">
           <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border-radius:50%;background:#7B1FA2"></div><strong>Carpio, Diana</strong></div>
@@ -5840,6 +5689,86 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
           • <strong>Tuesday morning</strong> (9:00 AM – 3:30 PM) — second RA for 6-room morning shift<br>
           • <strong>Thursday &amp; Friday</strong> — full-day RA coverage (rooms reserved, RA to be assigned)</div>
         </div>
+        </div><!-- /berry-org-wk1 -->
+
+        <!-- ═══ WEEK 2 ═══ -->
+        <div id="berry-org-wk2" style="display:none">
+        <!-- RA Legend -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:13px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border-radius:50%;background:#7B1FA2"></div><strong>Carpio, Diana</strong> <span style="color:var(--text-muted);font-size:11px">(Wed)</span></div>
+          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border-radius:50%;background:#E91E63"></div><strong>Fredrickson, Lissa</strong> <span style="color:var(--text-muted);font-size:11px">(Fri)</span></div>
+          <div style="display:flex;align-items:center;gap:5px;color:var(--text-muted)"><span style="font-size:11px">☕</span> = break</div>
+        </div>
+
+        <!-- Day tabs -->
+        <div class="ra-sched-day-tabs" id="berryOrgDayTabs2">
+          <button class="ra-sched-day-tab active" data-day="berry-w2-wed" onclick="showBerryOrgDay2('berry-w2-wed',this)">Wed<span class="ra-sched-tab-date">Mar 11</span></button>
+          <button class="ra-sched-day-tab" data-day="berry-w2-fri" onclick="showBerryOrgDay2('berry-w2-fri',this)">Fri<span class="ra-sched-tab-date">Mar 13</span></button>
+        </div>
+
+        <!-- WEDNESDAY Mar 11 -->
+        <div id="berry-w2-wed" class="berry-org-day2">
+          <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:var(--text-primary)">Wednesday, March 11 <span style="font-weight:400;font-size:12px;color:var(--text-muted)">— Diana · 9 sessions · 9:00 AM – 12:55 PM</span></div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead><tr style="background:var(--surface);border-bottom:2px solid var(--border)">
+              <th style="padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">#</th>
+              <th style="padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Time</th>
+              <th style="padding:8px 10px;text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Group</th>
+              <th style="padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Activity</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);background:#F3E5F5"><td style="padding:6px 10px;font-weight:600">⚙️</td><td style="padding:6px 10px;font-weight:600">9:00 – 9:15 AM</td><td style="padding:6px 10px;text-align:center">—</td><td style="padding:6px 10px;font-weight:600;color:#7B1FA2">Setup</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">1</td><td style="padding:6px 10px">9:15 – 9:30 AM</td><td style="padding:6px 10px;text-align:center">G1</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">2</td><td style="padding:6px 10px">9:40 – 9:55 AM</td><td style="padding:6px 10px;text-align:center">G2</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">3</td><td style="padding:6px 10px">10:05 – 10:20 AM</td><td style="padding:6px 10px;text-align:center">G3</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">4</td><td style="padding:6px 10px">10:30 – 10:45 AM</td><td style="padding:6px 10px;text-align:center">G4</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:#FFF9E6"><td style="padding:6px 10px">☕</td><td style="padding:6px 10px;font-weight:600">10:45 – 11:00 AM</td><td style="padding:6px 10px;text-align:center">—</td><td style="padding:6px 10px;font-weight:600;color:#8D6E00">15 min break</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">5</td><td style="padding:6px 10px">11:00 – 11:15 AM</td><td style="padding:6px 10px;text-align:center">G1</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">6</td><td style="padding:6px 10px">11:25 – 11:40 AM</td><td style="padding:6px 10px;text-align:center">G2</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">7</td><td style="padding:6px 10px">11:50 AM – 12:05 PM</td><td style="padding:6px 10px;text-align:center">G3</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">8</td><td style="padding:6px 10px">12:15 – 12:30 PM</td><td style="padding:6px 10px;text-align:center">G4</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+              <tr><td style="padding:6px 10px">9</td><td style="padding:6px 10px">12:40 – 12:55 PM</td><td style="padding:6px 10px;text-align:center">G5</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7B1FA2;margin-right:6px"></span>Session</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- FRIDAY Mar 13 -->
+        <div id="berry-w2-fri" class="berry-org-day2" style="display:none">
+          <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:var(--text-primary)">Friday, March 13 <span style="font-weight:400;font-size:12px;color:var(--text-muted)">— Lissa · 18 sessions · 10:00 AM – 6:05 PM</span></div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead><tr style="background:var(--surface);border-bottom:2px solid var(--border)">
+              <th style="padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">#</th>
+              <th style="padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Time</th>
+              <th style="padding:8px 10px;text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Group</th>
+              <th style="padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Activity</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);background:#FCE4EC"><td style="padding:6px 10px;font-weight:600">⚙️</td><td style="padding:6px 10px;font-weight:600">10:00 – 10:15 AM</td><td style="padding:6px 10px;text-align:center">—</td><td style="padding:6px 10px;font-weight:600;color:#E91E63">Setup</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">1</td><td style="padding:6px 10px">10:15 – 10:30 AM</td><td style="padding:6px 10px;text-align:center">G1</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">2</td><td style="padding:6px 10px">10:40 – 10:55 AM</td><td style="padding:6px 10px;text-align:center">G2</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">3</td><td style="padding:6px 10px">11:05 – 11:20 AM</td><td style="padding:6px 10px;text-align:center">G3</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">4</td><td style="padding:6px 10px">11:30 – 11:45 AM</td><td style="padding:6px 10px;text-align:center">G4</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">5</td><td style="padding:6px 10px">11:55 AM – 12:10 PM</td><td style="padding:6px 10px;text-align:center">G5</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:#FFF9E6"><td style="padding:6px 10px">☕</td><td style="padding:6px 10px;font-weight:600">12:10 – 12:25 PM</td><td style="padding:6px 10px;text-align:center">—</td><td style="padding:6px 10px;font-weight:600;color:#8D6E00">15 min break</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">6</td><td style="padding:6px 10px">12:25 – 12:40 PM</td><td style="padding:6px 10px;text-align:center">G1</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">7</td><td style="padding:6px 10px">12:50 – 1:05 PM</td><td style="padding:6px 10px;text-align:center">G2</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">8</td><td style="padding:6px 10px">1:15 – 1:30 PM</td><td style="padding:6px 10px;text-align:center">G3</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">9</td><td style="padding:6px 10px">1:40 – 1:55 PM</td><td style="padding:6px 10px;text-align:center">G4</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:#FFF3E0"><td style="padding:6px 10px">🍽️</td><td style="padding:6px 10px;font-weight:600">1:55 – 2:25 PM</td><td style="padding:6px 10px;text-align:center">—</td><td style="padding:6px 10px;font-weight:600;color:#E65100">30 min lunch break</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">10</td><td style="padding:6px 10px">2:25 – 2:40 PM</td><td style="padding:6px 10px;text-align:center">G1</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">11</td><td style="padding:6px 10px">2:50 – 3:05 PM</td><td style="padding:6px 10px;text-align:center">G2</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">12</td><td style="padding:6px 10px">3:15 – 3:30 PM</td><td style="padding:6px 10px;text-align:center">G3</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">13</td><td style="padding:6px 10px">3:40 – 3:55 PM</td><td style="padding:6px 10px;text-align:center">G4</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">14</td><td style="padding:6px 10px">4:05 – 4:20 PM</td><td style="padding:6px 10px;text-align:center">G5</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:#FFF9E6"><td style="padding:6px 10px">☕</td><td style="padding:6px 10px;font-weight:600">4:20 – 4:35 PM</td><td style="padding:6px 10px;text-align:center">—</td><td style="padding:6px 10px;font-weight:600;color:#8D6E00">15 min break</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">15</td><td style="padding:6px 10px">4:35 – 4:50 PM</td><td style="padding:6px 10px;text-align:center">G1</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">16</td><td style="padding:6px 10px">5:00 – 5:15 PM</td><td style="padding:6px 10px;text-align:center">G2</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px">17</td><td style="padding:6px 10px">5:25 – 5:40 PM</td><td style="padding:6px 10px;text-align:center">G3</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+              <tr><td style="padding:6px 10px">18</td><td style="padding:6px 10px">5:50 – 6:05 PM</td><td style="padding:6px 10px;text-align:center">G4</td><td style="padding:6px 10px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E91E63;margin-right:6px"></span>Session</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div><!-- /berry-org-wk2 -->
       </div>
 
       <div class="ra-sched-sidebar">
@@ -5872,17 +5801,22 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
         <div class="ra-sched-card">
           <div class="ra-sched-card-title">RA Assignments</div>
           <div class="ra-sched-ra-summary">
-            <div class="ra-sched-ra-row"><div class="ra-sched-avatar" style="background:#7B1FA2;color:#fff">DC</div><div><div class="ra-sched-ra-name">Carpio, Diana</div><div class="ra-sched-ra-detail">26 waves · 120 participants</div></div></div>
+            <div class="ra-sched-ra-row"><div class="ra-sched-avatar" style="background:#7B1FA2;color:#fff">DC</div><div><div class="ra-sched-ra-name">Carpio, Diana</div><div class="ra-sched-ra-detail">Wk 1: 26 waves · Wk 2: 9 sessions (Wed)</div></div></div>
+            <div class="ra-sched-ra-row" style="margin-top:6px"><div class="ra-sched-avatar" style="background:#E91E63;color:#fff">LF</div><div><div class="ra-sched-ra-name">Fredrickson, Lissa</div><div class="ra-sched-ra-detail">Wk 2: 18 sessions (Fri)</div></div></div>
           </div>
           <div style="margin-top:8px;font-size:11px;color:var(--text-muted)">
+            <div style="font-weight:600;margin-bottom:2px">Week 1 (Mar 3–6)</div>
             <div>Tue: 3:30–6:45 PM (8 waves × 6 rooms = 48)</div>
             <div>Fri: 9:00 AM–4:30 PM (18 waves × 4 rooms = 72)</div>
+            <div style="font-weight:600;margin-top:6px;margin-bottom:2px">Week 2 (Mar 11, 13)</div>
+            <div>Wed Mar 11: 9:00 AM–12:55 PM · Diana · 9 sessions</div>
+            <div>Fri Mar 13: 10:00 AM–6:05 PM · Lissa · 18 sessions</div>
           </div>
           <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#283593;font-weight:600"><span style="font-size:14px">📅</span> Reserved — RA TBA</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#283593;font-weight:600"><span style="font-size:14px">📅</span> Wk 1 Reserved — RA TBA</div>
             <div style="margin-top:4px;font-size:11px;color:var(--text-muted)">
-              <div>Wed: 4 rooms · 13 waves · 52 participants</div>
-              <div>Thu: 4 rooms · 9 waves · 36 participants</div>
+              <div>Wed Mar 4: 4 rooms · 13 waves · 52 participants</div>
+              <div>Thu Mar 5: 4 rooms · 9 waves · 36 participants</div>
             </div>
           </div>
         </div>
@@ -5895,7 +5829,7 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
         <span class="hb-placeholder-text">Any additional procedures specific to the Organizational Judgement Study study (beyond the general RA Handbook) will be added here.</span>
       </div>
     </div>
-    <div class="note-bar"><strong>Study contact:</strong> Zachariah Berry · Rooms LL-110-B, C, D, E (+ F, G on Tue)<br><strong>RA:</strong> Diana Carpio · dcarpio@marshall.usc.edu<br><strong>SONA page:</strong> <a href="#" style="color:var(--cardinal);font-weight:600">Link to be added</a></div>
+    <div class="note-bar"><strong>Study contact:</strong> Zachariah Berry · Rooms LL-110-B, C, D, E (+ F, G on Tue)<br><strong>RAs:</strong> Diana Carpio (Wk 1 + Wk 2 Wed) · Lissa Fredrickson (Wk 2 Fri)<br><strong>SONA page:</strong> <a href="#" style="color:var(--cardinal);font-weight:600">Link to be added</a></div>
   </div>
 
   <!-- ═══ BERRY — INTRAPERSONAL LOYALTY EFFECT ═══ -->
@@ -6109,6 +6043,119 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
     <div class="note-bar"><strong>Study contact:</strong> Glenn Fox · LL-110 · All details pending<br><strong>SONA page:</strong> <a href="#" style="color:var(--cardinal);font-weight:600">Link to be added</a></div>
   </div>
 
+  <!-- ═══ FRYDMAN — TBD ═══ -->
+  <div id="studyPage-frydman" class="study-page-content" style="display:none">
+    <div class="ra-sched-header-card">
+      <div class="ra-sched-header-eyebrow">Marshall Behavioral Research Lab</div>
+      <div class="ra-sched-title">TBD — Frydman — Study Page</div>
+      <div class="ra-sched-meta">Researcher: Cary Frydman · <span style="background:#FFFBEB;color:#92400E;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-left:2px">FBE Compensated Pool · LL102 Facility Booking</span><br>VPD Lower Level, LL102 Computer Lab</div>
+    </div>
+    <div class="ra-sched-gold-bar"></div>
+    <div class="ra-sched-layout">
+      <div class="ra-sched-main">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:14px">
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Session Dates</span>Fri Mar 6 · Tue Mar 10</div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Format</span><span style="background:var(--inperson);color:var(--inperson-text);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600">In-Person</span></div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Participants (N)</span>80 (16 per slot × 5 slots)</div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Duration</span>60 min</div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Compensation</span>Paid (not SONA credit)</div>
+            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Facility</span>LL102</div>
+          </div>
+        </div>
+        <!-- Session schedule -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+          <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text)">Session Schedule</div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+              <tr style="background:var(--bg)">
+                <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Date</th>
+                <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Time</th>
+                <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Slot</th>
+                <th style="padding:8px 12px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">Participants</th>
+                <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border)">RA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:600" rowspan="2">Fri, Mar 6</td>
+                <td style="padding:8px 12px">2:00 – 3:00 PM</td>
+                <td style="padding:8px 12px;text-align:center">1</td>
+                <td style="padding:8px 12px;text-align:center">16</td>
+                <td style="padding:8px 12px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ra-saumya, #2E7D32);margin-right:4px"></span>Ketan, Saumya</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+                <td style="padding:8px 12px">3:00 – 4:00 PM</td>
+                <td style="padding:8px 12px;text-align:center">2</td>
+                <td style="padding:8px 12px;text-align:center">16</td>
+                <td style="padding:8px 12px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ra-saumya, #2E7D32);margin-right:4px"></span>Ketan, Saumya</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:600" rowspan="3">Tue, Mar 10</td>
+                <td style="padding:8px 12px">2:30 – 3:30 PM</td>
+                <td style="padding:8px 12px;text-align:center">3</td>
+                <td style="padding:8px 12px;text-align:center">16</td>
+                <td style="padding:8px 12px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ra-saumya, #2E7D32);margin-right:4px"></span>Ketan, Saumya</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+                <td style="padding:8px 12px">3:30 – 4:30 PM</td>
+                <td style="padding:8px 12px;text-align:center">4</td>
+                <td style="padding:8px 12px;text-align:center">16</td>
+                <td style="padding:8px 12px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ra-saumya, #2E7D32);margin-right:4px"></span>Ketan, Saumya</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px">4:30 – 5:30 PM</td>
+                <td style="padding:8px 12px;text-align:center">5</td>
+                <td style="padding:8px 12px;text-align:center">16</td>
+                <td style="padding:8px 12px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ra-saumya, #2E7D32);margin-right:4px"></span>Ketan, Saumya</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="padding:10px 16px;border-top:1px solid var(--border);background:var(--bg);font-size:12px;color:var(--text-muted);display:flex;justify-content:space-between">
+            <span><strong>Total:</strong> 5 slots · 80 participants</span>
+            <span>Compensation only (no SONA credit)</span>
+          </div>
+        </div>
+        <div style="background:#FFF9E6;border:1px solid #E6B800;border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary)">
+          <span style="font-size:20px">📋</span>
+          <div><strong>FBE Compensated Subjects Pool — facility booking only.</strong> This study is not part of the MOR subject pool. Participants are recruited and compensated through the FBE compensated pool. Listed here for LL102 scheduling awareness only.</div>
+        </div>
+      </div>
+      <div class="ra-sched-sidebar">
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">LL102</div>
+          <div style="background:var(--bg);border-radius:6px;padding:12px;font-size:12px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px">
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 1</div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 2</div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 3</div>
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 4</div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:var(--text-muted)">16 stations total · 16 participants/slot</div>
+          </div>
+        </div>
+        <div class="ra-sched-card">
+          <div class="ra-sched-card-title">Study Overview</div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Session Days</span><span class="ra-sched-stat-value">2 days</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Total Slots</span><span class="ra-sched-stat-value">5</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Participants / Slot</span><span class="ra-sched-stat-value">16</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Target N</span><span class="ra-sched-stat-value">80</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">RA</span><span class="ra-sched-stat-value">Ketan, Saumya</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Compensation</span><span class="ra-sched-stat-value">Paid (FBE)</span></div>
+          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Pool</span><span class="ra-sched-stat-value" style="color:#92400E">Not MOR</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sp-procedures">
+      <div class="sp-procedures-header">📋 Study-Specific Procedures</div>
+      <div class="sp-procedures-body">
+        <span class="hb-placeholder-icon">📝</span>
+        <span class="hb-placeholder-text">Study-specific procedures will be added once study details are confirmed.</span>
+      </div>
+    </div>
+    <div class="note-bar"><strong>FBE Compensated Pool — facility booking only</strong> · Cary Frydman · LL102 · Fri Mar 6 (2–4 PM) + Tue Mar 10 (2:30–5:30 PM) · RA: Saumya Ketan · Not part of MOR subject pool · No SONA credit</div>
+  </div>
+
   <!-- ═══ MARTINEZ — BROKER IN-PERSON ═══ -->
   <div id="studyPage-martinez" class="study-page-content" style="display:none">
     <div class="ra-sched-header-card">
@@ -6177,67 +6224,15 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
   <div id="studyPage-stacked" class="study-page-content" style="display:none">
     <div class="ra-sched-header-card">
       <div class="ra-sched-header-eyebrow">Marshall Behavioral Research Lab</div>
-      <div class="ra-sched-title">Stacked Lab Sessions — Study Page</div>
-      <div class="ra-sched-meta">Researchers: Wakslak (Studies A, B, C) · Dittmann (Study D)<br>VPD Lower Level, LL102 Computer Lab</div>
+      <div class="ra-sched-title">Stacked Lab Sessions</div>
+      <div class="ra-sched-meta">LL102 Computer Lab · 8 studies · Wakslak, Dittmann, Yin, Roberson, Berry<br>12 session days: Mar 6 – Apr 3 · 4 sessions/day · 16 seats/session · ~56 participants/day</div>
     </div>
     <div class="ra-sched-gold-bar"></div>
-    <div class="ra-sched-layout">
-      <div class="ra-sched-main">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:14px">
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Session Dates</span>12 days: Mar 6, 12, 13, 23–25, 27, 30–31, Apr 1–3</div>
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Format</span><span style="background:var(--inperson);color:var(--inperson-text);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600">In-Person</span></div>
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Sessions / Day</span>6 (16 seats each, ~14 effective)</div>
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Session Cap</span>60 min</div>
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Credits</span>0.50 (≤30m) · 0.75 (31–45m) · 1.0 (46–60m)</div>
-            <div><span style="font-weight:700;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px">Facility</span>LL102</div>
-          </div>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:10px">Session Roster (4 studies)</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#FEF2F2;border-radius:6px;border-left:3px solid #FCA5A5"><span style="display:inline-block;width:22px;height:22px;border-radius:4px;background:#FCA5A5;text-align:center;line-height:22px;font-size:11px;font-weight:700;color:#7F1D1D">A</span><div><div style="font-weight:600;font-size:14px">Study A</div><div style="font-size:12px;color:var(--text-secondary)">Wakslak, Cheryl · 7 min · N=250 · Days 1–3</div></div></div>
-            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#FFFBEB;border-radius:6px;border-left:3px solid #FCD34D"><span style="display:inline-block;width:22px;height:22px;border-radius:4px;background:#FCD34D;text-align:center;line-height:22px;font-size:11px;font-weight:700;color:#78350F">B</span><div><div style="font-weight:600;font-size:14px">Study B</div><div style="font-size:12px;color:var(--text-secondary)">Wakslak, Cheryl · 2 min · N=400 · Days 1–5</div></div></div>
-            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#EFF6FF;border-radius:6px;border-left:3px solid #93C5FD"><span style="display:inline-block;width:22px;height:22px;border-radius:4px;background:#93C5FD;text-align:center;line-height:22px;font-size:11px;font-weight:700;color:#1E3A5F">C</span><div><div style="font-weight:600;font-size:14px">Study C</div><div style="font-size:12px;color:var(--text-secondary)">Wakslak, Cheryl · 5 min · N=250 · Days 1–3</div></div></div>
-            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#F5F3FF;border-radius:6px;border-left:3px solid #C4B5FD"><span style="display:inline-block;width:22px;height:22px;border-radius:4px;background:#C4B5FD;text-align:center;line-height:22px;font-size:11px;font-weight:700;color:#3B0764">D</span><div><div style="font-weight:600;font-size:14px">Study D</div><div style="font-size:12px;color:var(--text-secondary)">Dittmann, Andrea · 15 min · N=200 · Days 1–3</div></div></div>
-          </div>
-        </div>
-        <div style="background:#EFF6FF;border:1px solid #93C5FD;border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary)">
-          <span style="font-size:20px">📦</span>
-          <div><strong>Stacked format.</strong> Participants complete all active studies back-to-back in a single proctored session. Study order is counterbalanced across days. Credit is awarded per session based on total time, not per study.</div>
-        </div>
-      </div>
-      <div class="ra-sched-sidebar">
-        <div class="ra-sched-card">
-          <div class="ra-sched-card-title">LL102</div>
-          <div style="background:var(--bg);border-radius:6px;padding:12px;font-size:12px">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px">
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 1</div>
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 2</div>
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 3</div>
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-align:center;font-size:10px">🖥️ Stn 4</div>
-            </div>
-            <div style="text-align:center;font-size:10px;color:var(--text-muted)">16 stations total · up to 16 participants/session</div>
-          </div>
-        </div>
-        <div class="ra-sched-card">
-          <div class="ra-sched-card-title">Session Overview</div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Session Days</span><span class="ra-sched-stat-value">12 days</span></div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Sessions / Day</span><span class="ra-sched-stat-value">6</span></div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Participants / Day</span><span class="ra-sched-stat-value">~84</span></div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Studies in Roster</span><span class="ra-sched-stat-value">4</span></div>
-          <div class="ra-sched-stat-row"><span class="ra-sched-stat-label">Session Cap</span><span class="ra-sched-stat-value">60 min</span></div>
-        </div>
-      </div>
+    <div style="padding:24px 20px;text-align:center">
+      <div style="font-size:14px;color:var(--text);line-height:1.6;max-width:520px;margin:0 auto 16px">The full session roster, study details, capacity planner, collection schedule, and researcher sign-up form are on the dedicated stacked sessions page.</div>
+      <a href="https://usc-marshall-behavioral-lab.github.io/mor-stacked-sessions/" target="_blank" rel="noopener" style="display:inline-block;background:var(--cardinal);color:white;padding:12px 28px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:700">📦 View Full Details &amp; Sign Up →</a>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-muted)">usc-marshall-behavioral-lab.github.io/mor-stacked-sessions</div>
     </div>
-    <div class="sp-procedures">
-      <div class="sp-procedures-header">📋 Study-Specific Procedures</div>
-      <div class="sp-procedures-body">
-        <span class="hb-placeholder-icon">📝</span>
-        <span class="hb-placeholder-text">Proctoring procedures for stacked lab sessions — check-in flow, Qualtrics redirect chain, study order counterbalancing, dismissal protocol, LL102 computer station management — will be added here.</span>
-      </div>
-    </div>
-    <div class="note-bar"><strong>Roster:</strong> Wakslak – Study A (7m) + Study B (2m) + Study C (5m) · Dittmann – Study D (15m) · LL102 Computer Lab · 16 stations<br><strong>SONA page:</strong> <a href="#" style="color:var(--cardinal);font-weight:600">Link to be added</a></div>
   </div>
 
 </div>
@@ -6280,8 +6275,10 @@ body.dark [style*="E8EAF6"] { background: #1a1a2e !important; border-color: #394
 // ═══════════════════════════════════════════════
 // 1. CONSTANTS & DOM REFERENCES
 // ═══════════════════════════════════════════════
-var TODAY = new Date().toISOString().split('T')[0];
-var TODAY_DISPLAY = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+// Use real date if within semester; otherwise default to schedule reference date
+var _realDate = new Date().toISOString().split('T')[0];
+var TODAY = (_realDate >= '2026-02-01' && _realDate <= '2026-05-15') ? _realDate : '2026-03-06';
+var TODAY_DISPLAY = new Date(TODAY + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
 // Study page link helper — builds lookup from allStudies and generates link HTML
 var studyPageMap = {}; // populated after allStudies is defined
@@ -6345,18 +6342,18 @@ var calData = [
     ll102:"—",ll110:"Ferragamo, Alys: In-Person Study – Brainstorming with a Partner (paused this week)",ll112:"—"},
   {wk:"Mar 1",dates:"Mar 1–7",weekStart:"2026-03-01",weekEnd:"2026-03-07",note:"",
     online:"Berry, Zachariah: TED Judges\nHale, James: Practice your negotiation skills over video!\nHale, James: Practice your negotiation skills over video! (Mandarin Speakers Only)\nWakslak, Cheryl: Thinking About Others\nWiltermuth, Scott: Sammy Dissertation Study 1",
-    ll102:"Ferragamo, Alys: AI Task (starts)\n📦 Stacked Sessions: Mar 6 · Wakslak (A+B+C) + Dittmann (D)",ll110:"Berry, Zachariah: Organizational Judgement Study (starts)\nFox, Glenn: TBD (tentative, Wed–Fri)",ll112:"Berry, Zachariah: Organizational Judgement Study (starts)\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (starts)"},
+    ll102:"Ferragamo, Alys: AI Task (starts)\n📦 Stacked Sessions: Mar 6 · 8 studies (Wakslak, Dittmann, Yin, Roberson, Berry)\nFrydman, Cary: TBD (FBE Study, Fri 2–4 PM)",ll110:"Berry, Zachariah: Organizational Judgement Study (starts)\nFox, Glenn: TBD (tentative, Wed–Fri)",ll112:"Berry, Zachariah: Organizational Judgement Study (starts)\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (starts)"},
   {wk:"Mar 8",dates:"Mar 8–14",weekStart:"2026-03-08",weekEnd:"2026-03-14",note:"",
     online:"Anicich, Eric: Work Recovery Perceptions Pt 1 (2-part)\nMartinez, Sammy: Broker 2\nWakslak, Cheryl: Organizational Statements\nWiltermuth, Scott: Sammy Dissertation Study 2",
-    ll102:"Ferragamo, Alys: AI Task\n📦 Stacked Sessions: Mar 12–13 · Wakslak (A+B+C) + Dittmann (D)",ll110:"Fox, Glenn: TBD (tentative)",ll112:"Berry, Zachariah: Organizational Judgement Study\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study"},
+    ll102:"Ferragamo, Alys: AI Task\n📦 Stacked Sessions: Mar 12–13 · 8 studies (Wakslak, Dittmann, Yin, Roberson, Berry)\nFrydman, Cary: TBD (FBE Study, Tue 2:30–5:30 PM)",ll110:"Fox, Glenn: TBD (tentative)",ll112:"Berry, Zachariah: Organizational Judgement Study\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study"},
   {wk:"Mar 15",dates:"Mar 15–21",weekStart:"2026-03-15",weekEnd:"2026-03-21",note:"Spring Recess — online only",
     online:"Lee, Elena: Strategic Decision with AI",ll102:"—",ll110:"—",ll112:"—"},
   {wk:"Mar 22",dates:"Mar 22–28",weekStart:"2026-03-22",weekEnd:"2026-03-28",note:"",
     online:"Anicich, Eric: Work Recovery Perceptions Pt 2 (2-part)\nMartinez, Sammy: Broker 3",
-    ll102:"Ferragamo, Alys: AI Task (final)\n📦 Stacked Sessions: Mar 23–25, 27 · Wakslak (B) + open slots\nLee, Elena: AI Interaction for Persuasion (starts)",ll110:"Martinez, Sammy: Broker – In-Person Option TBD (starts)",ll112:"Berry, Zachariah: Organizational Judgement Study\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (final)\nFerragamo, Alys: AI Interviews (starts)"},
+    ll102:"Ferragamo, Alys: AI Task (final)\n📦 Stacked Sessions: Mar 23–25, 27 · see schedule on stacked sessions site\nLee, Elena: AI Interaction for Persuasion (starts)",ll110:"Martinez, Sammy: Broker – In-Person Option TBD (starts)",ll112:"Berry, Zachariah: Organizational Judgement Study\nKwon, Brian & Lee, Elena: AI-Assisted Negotiation Study (final)\nFerragamo, Alys: AI Interviews (starts)"},
   {wk:"Mar 29",dates:"Mar 29–Apr 4",weekStart:"2026-03-29",weekEnd:"2026-04-04",note:"",
     online:"Berry, Zachariah: MAC 1",
-    ll102:"📦 Stacked Sessions: Mar 30–31, Apr 1–3 · open slots\nDittmann, Andrea: Survey About Your USC Marshall Experiences T1 (2-wave)\nLee, Elena: AI Interaction for Persuasion",ll110:"Martinez, Sammy: Broker – In-Person Option TBD",ll112:"Berry, Zachariah: Organizational Judgement Study (final)\nBerry, Zachariah: Intrapersonal Loyalty Effect (starts)\nFerragamo, Alys: AI Interviews"},
+    ll102:"📦 Stacked Sessions: Mar 30–31, Apr 1–3 · see schedule on stacked sessions site\nDittmann, Andrea: Survey About Your USC Marshall Experiences T1 (2-wave)\nLee, Elena: AI Interaction for Persuasion",ll110:"Martinez, Sammy: Broker – In-Person Option TBD",ll112:"Berry, Zachariah: Organizational Judgement Study (final)\nBerry, Zachariah: Intrapersonal Loyalty Effect (starts)\nFerragamo, Alys: AI Interviews"},
   {wk:"Apr 5",dates:"Apr 5–11",weekStart:"2026-04-05",weekEnd:"2026-04-11",note:"",
     online:"—",ll102:"Lee, Elena: AI Interaction for Persuasion",ll110:"Martinez, Sammy: Broker – In-Person Option TBD\nBerry, Zachariah: Intrapersonal Loyalty Effect",ll112:"Berry, Zachariah: Intrapersonal Loyalty Effect\nFast, Nate & Yu, Siyu: Team AI Use and Leadership Emergence (starts)\nFerragamo, Alys: AI Interviews"},
   {wk:"Apr 12",dates:"Apr 12–18",weekStart:"2026-04-12",weekEnd:"2026-04-18",note:"",
@@ -6378,7 +6375,7 @@ var allStudies = [
   {researcher:"Berry, Zachariah", study:"TED Judges", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:true, stacked:"mar1", irb:null},
   {researcher:"Wiltermuth, Scott", study:"Sammy Dissertation Study 1", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"250", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", stacked:"mar1", irb:null},
   {researcher:"Wakslak, Cheryl", study:"Thinking About Others", week:"Mar 1", dateSort:"2026-03-01", dateLabel:"Week of Mar 1", n:"400", dur:"10 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", stacked:"mar1", irb:null},
-  {researcher:"Stacked Sessions", study:"Stacked Lab Sessions — LL102", week:"Mar 1", dateSort:"2026-03-06", dateLabel:"Mar 6 – Apr 3 (12 days)", n:"84/day", dur:"29–60 min", format:"In-Person", cr:"0.50", facility:"LL102", notes:"Wakslak: Study A (7m) + Study B (2m) + Study C (5m) · Dittmann: Study D (15m) · 6 sessions/day, 16 seats/session · 12 session dates", isStackedSession:true, stackedComponents:["Study A","Study B","Study C","Study D"], stackedResearchers:["Wakslak, Cheryl","Dittmann, Andrea"], irb:null, page:"#stacking"},
+  {researcher:"Stacked Sessions", study:"Stacked Lab Sessions — LL102", week:"Mar 1", dateSort:"2026-03-06", dateLabel:"Mar 6 – Apr 3 (12 days)", n:"56/day", dur:"51 min", format:"In-Person", cr:"0.75", facility:"LL102", notes:"LL102 Computer Lab · 4 sessions/day, 16 seats/session · 8 studies in roster · 12 session dates · See full details at mor-stacked-sessions site", isStackedSession:true, stackedComponents:["Study A","Study B","Study C","Study D","Study E","Study F","Study G","Study H"], stackedResearchers:["Wakslak, Cheryl","Dittmann, Andrea","Yin, Dani","Roberson, Jacob","Berry, Zachariah"], irb:null, page:"https://usc-marshall-behavioral-lab.github.io/mor-stacked-sessions/"},
   {researcher:"Martinez, Sammy", study:"Broker 2", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"200", dur:"5 min", format:"Online", cr:"0.25", facility:null, notes:null, irb:null},
   {researcher:"Wiltermuth, Scott", study:"Sammy Dissertation Study 2", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"200", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:"Depends on Sammy Dissertation Study 1", stackable:"maybe", irb:null},
   {researcher:"Wakslak, Cheryl", study:"Organizational Statements", week:"Mar 8", dateSort:"2026-03-08", dateLabel:"Week of Mar 8", n:"500", dur:"15 min", format:"Online", cr:"0.25", facility:null, notes:null, stackable:"maybe", irb:null},
@@ -6398,6 +6395,7 @@ var allStudies = [
   {researcher:"Berry, Zachariah", study:"Intrapersonal Loyalty Effect", dateSort:"2026-03-29", dateLabel:"Mar 29 – Apr 25", n:"150", dur:"10 min", format:"In-Person", cr:"0.25", facility:"LL-112 + LL-110", notes:"Dyads required — start together, then separate rooms", irb:null, page:"#rasched-berry-loyalty"},
   {researcher:"Fast, Nate", study:"Team AI Use and Leadership Emergence", dateSort:"2026-04-05", dateLabel:"Apr 5 – May 1", n:"800", dur:"60–90 min", format:"In-Person", cr:"1.00", facility:"LL-112", notes:null, coPIs:["Yu, Siyu"], irb:null, page:"#rasched-fast"},
   {researcher:"Fox, Glenn", study:"TBD", dateSort:"2026-01-01", dateLabel:"TBD", n:"TBD", dur:"TBD", format:"In-Person", cr:"TBD", facility:"LL-110", notes:"Details pending", coPIs:["Wakslak, Cheryl"], irb:null, page:"#rasched-fox"},
+  {researcher:"Frydman, Cary", study:"TBD", dateSort:"2026-03-06", dateLabel:"Mar 6, 10", n:"80", dur:"60 min", format:"In-Person", cr:"—", facility:"LL102", notes:"FBE Compensated Subjects Pool (not MOR) · Compensation only, no SONA credit · RA: Ketan, Saumya · Fri Mar 6: 2:00–4:00 PM (2 slots) · Tue Mar 10: 2:30–5:30 PM (3 slots) · 16 participants/slot · 5 slots total · LL102 facility booking only", irb:null, page:"#rasched-frydman"},
   {researcher:"Dittmann, Andrea", study:"Survey About Your USC Marshall Experiences — T2", dateSort:"2026-04-19", dateLabel:"Apr 19 – Apr 25", n:"100+", dur:"7 min", format:"Hybrid", cr:"0.25", facility:"LL102", notes:null, tag:"2-Wave", coPIs:["Truong, Mindy"], irb:null},
 ];
 buildStudyPageMap();
@@ -6408,12 +6406,15 @@ var RC = {
   'Martinez':  {bg:'#FEF5E0', bd:'#CC8800', tx:'#8A5C00'},
   'Fast':      {bg:'#E8F8EE', bd:'#1E8449', tx:'#145A32'},
   'Fox':       {bg:'#FFF3E0', bd:'#E65100', tx:'#BF360C'},
+  'Frydman':   {bg:'#E8F5E9', bd:'#2E7D32', tx:'#1B5E20'},
   'Dittmann':  {bg:'#F3E8FD', bd:'#8E44AD', tx:'#6C3483'},
   'Lee':       {bg:'#E0F5F2', bd:'#00897B', tx:'#00695C'},
   'Hale':      {bg:'#FAF0E6', bd:'#A0522D', tx:'#6E3A1F'},
   'Kwon':      {bg:'#E8EAF6', bd:'#283593', tx:'#1A237E'},
   'Berry / Wiltermuth / Wakslak': {bg:'#F0E8FD', bd:'#6C3483', tx:'#4A235A'},
   'Wakslak / Dittmann': {bg:'#F0E8FD', bd:'#6C3483', tx:'#4A235A'},
+  'Wakslak + 4 others': {bg:'#F0E8FD', bd:'#6C3483', tx:'#4A235A'},
+  'Wakslak + others': {bg:'#F0E8FD', bd:'#6C3483', tx:'#4A235A'},
   '(open)': {bg:'#F0FFF0', bd:'#16A34A', tx:'#065F46'},
 };
 
@@ -6435,27 +6436,27 @@ var facilityUsage = {
             {study:'Organizational Judgement Study', researcher:'Berry', rooms:['110-b','110-c','110-d','110-e','110-f','110-g'], badge:'start'}],
     '112': [{study:'Organizational Judgement Study', researcher:'Berry', rooms:['112-a','112-d','112-e'], badge:'start'},
             {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g'], badge:'start'}],
-    '102': [{study:'AI Task', researcher:'Ferragamo', badge:'start'}, {study:'📦 Stacked Sessions · Mar 6', researcher:'Wakslak / Dittmann', badge:'start'}]
+    '102': [{study:'AI Task', researcher:'Ferragamo', badge:'start'}, {study:'📦 Stacked Sessions · Mar 6', researcher:'Wakslak + 4 others', badge:'start'}, {study:'TBD · FBE Study (Fri 2–4 PM)', researcher:'Frydman'}]
   },
   mar8: {
     '110': [{study:'TBD (Mon Mar 9–Fri Mar 13)', researcher:'Fox', rooms:['110-f','110-g'], badge:'tentative'}],
     '112': [{study:'Organizational Judgement Study', researcher:'Berry', rooms:['112-a','112-d','112-e']},
             {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g']}],
-    '102': [{study:'AI Task', researcher:'Ferragamo'}, {study:'📦 Stacked Sessions · Mar 12–13', researcher:'Wakslak / Dittmann'}]
+    '102': [{study:'AI Task', researcher:'Ferragamo'}, {study:'📦 Stacked Sessions · Mar 12–13', researcher:'Wakslak + 4 others'}, {study:'TBD · FBE Study (Tue 2:30–5:30 PM)', researcher:'Frydman'}]
   },
   mar22: {
     '110': [{study:'Broker – In-Person Option (TBD)', researcher:'Martinez', rooms:['110-b','110-c','110-d','110-e','110-f','110-g'], badge:'start'}],
     '112': [{study:'Organizational Judgement Study', researcher:'Berry', rooms:['112-a','112-d','112-e']},
             {study:'AI-Assisted Negotiation Study', researcher:'Kwon', rooms:['112-b','112-c','112-f','112-g'], badge:'end'},
             {study:'AI Interviews', researcher:'Ferragamo', rooms:['112-f','112-g'], badge:'start'}],
-    '102': [{study:'AI Task', researcher:'Ferragamo', badge:'end'}, {study:'📦 Stacked Sessions · Mar 23–25, 27', researcher:'Wakslak'}, {study:'AI Interaction for Persuasion', researcher:'Lee', badge:'start'}]
+    '102': [{study:'AI Task', researcher:'Ferragamo', badge:'end'}, {study:'📦 Stacked Sessions · Mar 23–25, 27', researcher:'Wakslak + others'}, {study:'AI Interaction for Persuasion', researcher:'Lee', badge:'start'}]
   },
   mar29: {
     '110': [{study:'Broker – In-Person Option (TBD)', researcher:'Martinez', rooms:['110-b','110-c','110-d','110-e','110-f','110-g']}],
     '112': [{study:'Organizational Judgement Study', researcher:'Berry', rooms:['112-a','112-d','112-e'], badge:'end'},
             {study:'Intrapersonal Loyalty Effect', researcher:'Berry', rooms:['112-b','112-c'], badge:'start'},
             {study:'AI Interviews', researcher:'Ferragamo', rooms:['112-f','112-g']}],
-    '102': [{study:'📦 Stacked Sessions · Mar 30–31, Apr 1–3', researcher:'(open)', badge:'end'}, {study:'Survey About Your USC Marshall Experiences — T1', researcher:'Dittmann'}, {study:'AI Interaction for Persuasion', researcher:'Lee'}]
+    '102': [{study:'📦 Stacked Sessions · Mar 30–31, Apr 1–3', researcher:'Wakslak + others', badge:'end'}, {study:'Survey About Your USC Marshall Experiences — T1', researcher:'Dittmann'}, {study:'AI Interaction for Persuasion', researcher:'Lee'}]
   },
   apr5: {
     '110': [{study:'Broker – In-Person Option (TBD)', researcher:'Martinez', rooms:['110-f','110-g']},
@@ -8080,13 +8081,17 @@ function getRoomLabel(rid) { return rid.split('-').pop().toUpperCase(); }
 // ═══ Shared Stacked Session Bar Builder ═══
 var STACKED_PILOT = {
   title: 'Stacked Lab Sessions — Mar 6 – Apr 3 (12 days)',
-  subtitle: 'LL102 · 16 stations · 6 sessions/day · 84 participants/day',
+  subtitle: 'LL102 · 16 stations · 4 sessions/day · 56 participants/day',
   cap: 60,
   studies: [
-    {name:'Study A', researcher:'Wakslak, Cheryl', dur:7, color:'#FCA5A5', status:'confirmed'},
+    {name:'Study E', researcher:'Wakslak, Cheryl', dur:5, color:'#6EE7B7', status:'confirmed'},
+    {name:'Study A', researcher:'Wakslak, Cheryl', dur:4, color:'#FCA5A5', status:'confirmed'},
     {name:'Study B', researcher:'Wakslak, Cheryl', dur:2, color:'#FCD34D', status:'confirmed'},
-    {name:'Study C', researcher:'Wakslak, Cheryl', dur:5, color:'#93C5FD', status:'pending'},
-    {name:'Study D', researcher:'Dittmann, Andrea', dur:15, color:'#C4B5FD', status:'pending'}
+    {name:'Study C', researcher:'Yin, Dani', dur:7, color:'#93C5FD', status:'confirmed'},
+    {name:'Study D', researcher:'Dittmann, Andrea', dur:15, color:'#C4B5FD', status:'confirmed'},
+    {name:'Study F', researcher:'Wakslak, Cheryl', dur:5, color:'#F9A8D4', status:'confirmed'},
+    {name:'Study G', researcher:'Roberson, Jacob', dur:8, color:'#FDE68A', status:'confirmed'},
+    {name:'Study H', researcher:'Berry, Zachariah', dur:5, color:'#67E8F9', status:'confirmed'}
   ]
 };
 STACKED_PILOT.totalDur = STACKED_PILOT.studies.reduce(function(s,x){return s+x.dur;},0);
@@ -8176,9 +8181,8 @@ function findCoPIs(lineText) {
 var studyDayMap = {
   'Brainstorming with a Partner': [2,3,4,5],
   'Organizational Judgement Study': [2,3,4,5],
-  'AI-Assisted Negotiation': [1,2,3,4,5],
+  'AI-Assisted Negotiation': [1,2,3,4],
   'AI Task': [1,2,3,4,5],
-  'Stacked Lab Sessions': [4,5,6,7,8],
   'Fox': [3,4,5],
   'AI Interviews': [2,3,4,5],
   'Broker – In-Person': [2,3,4,5],
@@ -8191,6 +8195,55 @@ function getDaysForStudy(lineText) {
   var keys = Object.keys(studyDayMap);
   for (var i = 0; i < keys.length; i++) {
     if (lineText.indexOf(keys[i]) !== -1) return studyDayMap[keys[i]];
+  }
+
+  // For stacked sessions or entries with specific dates, parse dates to day-of-week
+  if (lineText.indexOf('Stacked') !== -1 || lineText.indexOf('📦') !== -1) {
+    // Spring 2026 date-to-DOW lookup (1=Mon..5=Fri)
+    var dateDow = {
+      '3-2':1,'3-3':2,'3-4':3,'3-5':4,'3-6':5,
+      '3-9':1,'3-10':2,'3-11':3,'3-12':4,'3-13':5,
+      '3-23':1,'3-24':2,'3-25':3,'3-26':4,'3-27':5,
+      '3-30':1,'3-31':2,
+      '4-1':3,'4-2':4,'4-3':5
+    };
+    // Extract all date numbers grouped by month
+    var found = [];
+    var monthBlocks = lineText.match(/(Mar|Apr)\s+[\d,–\-\s]+/g);
+    if (monthBlocks) {
+      monthBlocks.forEach(function(block) {
+        var monthNum = block.indexOf('Mar') !== -1 ? 3 : 4;
+        // Extract all numbers (handles "23–25, 27" → 23,24,25,27)
+        var nums = [];
+        // First expand ranges
+        var expanded = block.replace(/(\d+)\s*[–-]\s*(\d+)/g, function(m, a, b) {
+          var result = [];
+          for (var n = parseInt(a); n <= parseInt(b); n++) result.push(n);
+          return result.join(',');
+        });
+        // Then extract all numbers
+        var numMatches = expanded.match(/\d+/g);
+        if (numMatches) {
+          numMatches.forEach(function(n) {
+            var key = monthNum + '-' + parseInt(n);
+            if (dateDow[key] && found.indexOf(dateDow[key]) === -1) found.push(dateDow[key]);
+          });
+        }
+      });
+    }
+    if (found.length) { found.sort(); return found; }
+  }
+
+  // Fallback: parse day abbreviations from parenthetical text like "(Fri 2–4 PM)"
+  var dayAbbrevMap = {'Mon':1,'Tue':2,'Wed':3,'Thu':4,'Fri':5};
+  var parenMatch = lineText.match(/\(([^)]+)\)/);
+  if (parenMatch) {
+    var inner = parenMatch[1];
+    var found2 = [];
+    Object.keys(dayAbbrevMap).forEach(function(abbr) {
+      if (inner.indexOf(abbr) !== -1) found2.push(dayAbbrevMap[abbr]);
+    });
+    if (found2.length) return found2;
   }
   return [1,2,3,4,5];
 }
@@ -8447,6 +8500,14 @@ document.querySelectorAll('.nav-submenu-item').forEach(function(item) {
         var target = document.getElementById(item.dataset.scrollTo);
         if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
       }, 100);
+    }
+
+    // --- Stacked Sessions: switch to stacking tab ---
+    if (parent === 'stacking') {
+      switchTab('stacking');
+      setTimeout(function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
     }
 
     closeSidebarMobile();
@@ -9713,7 +9774,8 @@ updateResearcherNav();
   else if (diffDays < 7) relText = diffDays + ' days ago';
   else if (diffDays < 14) relText = '1 week ago';
   else relText = Math.floor(diffDays / 7) + ' weeks ago';
-  updEl.textContent = 'Updated Mar 1, 2026 · ' + relText;
+  var dateLabel = updDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  updEl.textContent = 'Updated ' + dateLabel + ' · ' + relText;
 })();
 
 // #4: URL parameter for researcher pre-selection
@@ -10003,11 +10065,19 @@ mySelect.addEventListener('change', function() {
 
   // Auto-select today's day if within the week
   var dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
-  var todayDay = dayNames[new Date().getDay()];
+  var todayDate = new Date(TODAY + 'T12:00:00');
+  var todayDay = dayNames[todayDate.getDay()];
   if (raSchedule[todayDay]) {
     raSwitchDay(todayDay);
   } else {
-    raRenderDay('monday');
+    // If today isn't in the schedule (e.g. weekend), find next upcoming day
+    var dayOrder = ['monday','tuesday','wednesday','thursday','friday'];
+    var todayIdx = dayOrder.indexOf(todayDay);
+    var found = false;
+    for (var di = Math.max(0, todayIdx); di < dayOrder.length; di++) {
+      if (raSchedule[dayOrder[di]]) { raSwitchDay(dayOrder[di]); found = true; break; }
+    }
+    if (!found) raRenderDay('monday');
   }
 })();
 
@@ -10259,18 +10329,21 @@ mySelect.addEventListener('change', function() {
 
     // Researchers
     {name:'Anicich, Eric', first:'Eric', role:'researcher', roleLabel:'Researcher', email:'anicich@marshall.usc.edu', studies:['Work Recovery Perceptions — Part 1','Work Recovery Perceptions — Part 2']},
-    {name:'Berry, Zachariah', first:'Zachariah', role:'researcher', roleLabel:'Researcher', email:'zberry@marshall.usc.edu', studies:['TED Judges','Organizational Judgement Study','Intrapersonal Loyalty Effect','Hierarchy and Corruption','MAC 1']},
+    {name:'Berry, Zachariah', first:'Zachariah', role:'researcher', roleLabel:'Researcher', email:'zberry@marshall.usc.edu', studies:['TED Judges','Organizational Judgement Study','Intrapersonal Loyalty Effect','Hierarchy and Corruption','MAC 1','Stacked: TBD (H)']},
     {name:'Brouwers, Jeslyn', first:'Jeslyn', role:'researcher', roleLabel:'Researcher', email:'brouwers@marshall.usc.edu', studies:['Achievement and Ambition in the Age of AI']},
-    {name:'Dittmann, Andrea', first:'Andrea', role:'researcher', roleLabel:'Researcher', email:'dittmann@marshall.usc.edu', studies:['Survey About Your USC Marshall Experiences','Study D (Stacked)']},
+    {name:'Dittmann, Andrea', first:'Andrea', role:'researcher', roleLabel:'Researcher', email:'dittmann@marshall.usc.edu', studies:['Survey About Your USC Marshall Experiences','Stacked: Perceptions of Voice (D)']},
     {name:'Fast, Nate', first:'Nate', role:'researcher', roleLabel:'Researcher', email:'fast@marshall.usc.edu', studies:['Team AI Use and Leadership Emergence']},
     {name:'Ferragamo, Alys', first:'Alys', role:'researcher', roleLabel:'Researcher', email:'ferragam@marshall.usc.edu', studies:['Brainstorming with a Partner','AI Task','AI Interviews']},
     {name:'Fox, Glenn', first:'Glenn', role:'researcher', roleLabel:'Researcher', email:'gfox@marshall.usc.edu', studies:['TBD']},
+    {name:'Frydman, Cary', first:'Cary', role:'researcher', roleLabel:'Researcher (FBE)', email:'frydman@marshall.usc.edu', studies:['TBD (Compensated Subjects Pool)']},
     {name:'Hale, James', first:'James', role:'researcher', roleLabel:'Researcher', email:'jhale@marshall.usc.edu', studies:['Practice your negotiation skills over video!','Practice your negotiation skills over video! (Mandarin Speakers Only)']},
     {name:'Kwon, Brian', first:'Brian', role:'researcher', roleLabel:'Researcher', email:'bkwon@marshall.usc.edu', studies:['AI-Assisted Negotiation Study']},
     {name:'Lee, Elena', first:'Elena', role:'researcher', roleLabel:'Researcher', email:'elee@marshall.usc.edu', studies:['AI-Assisted Negotiation Study','AI Interaction for Persuasion','Strategic Decision with AI']},
     {name:'Martinez, Sammy', first:'Sammy', role:'researcher', roleLabel:'Researcher', email:'smartin@marshall.usc.edu', studies:['I Can Introduce You to Someone...','Making Introductions','Broker – In-Person Option','Broker 1','Broker 2','Broker 3']},
-    {name:'Wakslak, Cheryl', first:'Cheryl', role:'researcher', roleLabel:'Researcher', email:'wakslak@marshall.usc.edu', studies:['Thinking About Others','Brainstorming with a Partner','TBD (Fox)','Organizational Statements','Study A (Stacked)','Study B (Stacked)','Study C (Stacked)']},
+    {name:'Roberson, Jacob', first:'Jacob', role:'researcher', roleLabel:'Researcher', email:'roberson@marshall.usc.edu', studies:['Stacked: Entitlement 2026 (G)']},
+    {name:'Wakslak, Cheryl', first:'Cheryl', role:'researcher', roleLabel:'Researcher', email:'wakslak@marshall.usc.edu', studies:['Thinking About Others','Brainstorming with a Partner','TBD (Fox)','Organizational Statements','Stacked: Pragmatics (E)','Stacked: Productivity Perceptions (A)','Stacked: AI Receptivity (B)','Stacked: Org Statements (F)']},
     {name:'Wiltermuth, Scott', first:'Scott', role:'researcher', roleLabel:'Researcher', email:'wiltermuth@marshall.usc.edu', studies:['Sammy Dissertation Study 1','Sammy Dissertation Study 2']},
+    {name:'Yin, Dani', first:'Dani', role:'researcher', roleLabel:'Researcher', email:'yin@marshall.usc.edu', studies:['Stacked: Serendipity Study Pool (C)']},
 
     // Co-PIs
     {name:'Gratch, Jonathan', first:'Jonathan', role:'copi', roleLabel:'Collaborator', email:'gratch@ict.usc.edu', studies:['AI-Assisted Negotiation Study'], note:'USC ICT'},
@@ -10282,7 +10355,7 @@ mySelect.addEventListener('change', function() {
     {name:'Mariani, Jake', first:'Jake', role:'ra', roleLabel:'Research Assistant', email:'mariani@usc.edu', studies:['AI-Assisted Negotiation Study'], supervisor:'Kwon'},
     {name:'Joshi, Mayank', first:'Mayank', role:'ra', roleLabel:'Research Assistant', email:'mjoshi@usc.edu', studies:['AI-Assisted Negotiation Study'], supervisor:'Kwon'},
     {name:'Ren, Steve', first:'Steve', role:'ra', roleLabel:'Research Assistant', email:'sren@usc.edu', studies:['AI-Assisted Negotiation Study','Brainstorming with a Partner'], supervisor:'Kwon & Ferragamo'},
-    {name:'Ketan, Saumya', first:'Saumya', role:'ra', roleLabel:'Research Assistant', email:'ketan@usc.edu', studies:['Brainstorming with a Partner'], supervisor:'Ferragamo'},
+    {name:'Ketan, Saumya', first:'Saumya', role:'ra', roleLabel:'Research Assistant', email:'ketan@usc.edu', studies:['Brainstorming with a Partner','TBD (Frydman, FBE)'], supervisor:'Ferragamo'},
     {name:'Yen, Leia', first:'Leia', role:'ra', roleLabel:'Research Assistant', email:'lyen@usc.edu', studies:['Brainstorming with a Partner'], supervisor:'Ferragamo'},
     {name:'Solomon, Joseph', first:'Joseph', role:'ra', roleLabel:'Research Assistant', email:'jsolomon@usc.edu', studies:['Brainstorming with a Partner'], supervisor:'Ferragamo'},
     {name:'Fredrickson, Lissa', first:'Lissa', role:'ra', roleLabel:'Research Assistant', email:'fredrick@usc.edu', studies:['Brainstorming with a Partner'], supervisor:'Ferragamo'},
@@ -10373,6 +10446,49 @@ function showBerryOrgDay(dayId, btn) {
   document.querySelectorAll('#berryOrgDayTabs .ra-sched-day-tab').forEach(function(t) { t.classList.remove('active'); });
   if (btn) btn.classList.add('active');
 }
+function showBerryOrgDay2(dayId, btn) {
+  document.querySelectorAll('.berry-org-day2').forEach(function(d) { d.style.display = 'none'; });
+  var el = document.getElementById(dayId);
+  if (el) el.style.display = 'block';
+  document.querySelectorAll('#berryOrgDayTabs2 .ra-sched-day-tab').forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+function switchBerryOrgWeek(wk, btn) {
+  document.getElementById('berry-org-wk1').style.display = wk === 1 ? 'block' : 'none';
+  document.getElementById('berry-org-wk2').style.display = wk === 2 ? 'block' : 'none';
+  document.querySelectorAll('#berryOrgWeekTabs .ra-sched-day-tab').forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+// Auto-select Berry Org week and day based on TODAY
+(function() {
+  // Week 1: Mar 3–6, Week 2: Mar 11, 13
+  var berryDayMap = {
+    '2026-03-03': {wk:1, day:'berry-tue', tabs:'berryOrgDayTabs', fn:'showBerryOrgDay'},
+    '2026-03-04': {wk:1, day:'berry-wed', tabs:'berryOrgDayTabs', fn:'showBerryOrgDay'},
+    '2026-03-05': {wk:1, day:'berry-thu', tabs:'berryOrgDayTabs', fn:'showBerryOrgDay'},
+    '2026-03-06': {wk:1, day:'berry-fri', tabs:'berryOrgDayTabs', fn:'showBerryOrgDay'},
+    '2026-03-11': {wk:2, day:'berry-w2-wed', tabs:'berryOrgDayTabs2', fn:'showBerryOrgDay2'},
+    '2026-03-13': {wk:2, day:'berry-w2-fri', tabs:'berryOrgDayTabs2', fn:'showBerryOrgDay2'}
+  };
+  // Find today or next upcoming session day
+  var target = berryDayMap[TODAY];
+  if (!target) {
+    var allDates = Object.keys(berryDayMap).sort();
+    for (var i = 0; i < allDates.length; i++) {
+      if (allDates[i] >= TODAY) { target = berryDayMap[allDates[i]]; break; }
+    }
+  }
+  if (target) {
+    // Switch to correct week
+    var wkBtn = document.querySelectorAll('#berryOrgWeekTabs .ra-sched-day-tab')[target.wk - 1];
+    switchBerryOrgWeek(target.wk, wkBtn);
+    // Switch to correct day within that week
+    var dayBtn = document.querySelector('#' + target.tabs + ' [data-day="' + target.day + '"]');
+    if (target.fn === 'showBerryOrgDay') showBerryOrgDay(target.day, dayBtn);
+    else showBerryOrgDay2(target.day, dayBtn);
+  }
+})();
 
 function switchStudyPage(pageKey) {
   var homeEl = document.getElementById('studyPages-home');
